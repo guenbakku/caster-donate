@@ -1,0 +1,359 @@
+﻿# A5:ER FORMAT:11
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/
+
+[Manager]
+ProjectName=Caster Donate
+Author=
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",7,"A2Landscape",$E8E8E8
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=7
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Times New Roman
+FontSize=12
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=5
+RDBMSTypeName=MySQL
+CommonField="Thời điểm tạo record","created","DATETIME","NOT NULL",,"","",$FFFFFFFF
+CommonField="Thời điểm thay đổi record","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Relation]
+Entity1=users
+Entity2=fee_percentages
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,8205,5800,691,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20170910224547
+LineMode=0
+Bar1=820
+Bar2=580
+Bar3=69
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=users
+Entity2=donate_infos
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=receiver_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2778,5497,7888,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20170910224411
+LineMode=0
+Bar1=278
+Bar2=550
+Bar3=789
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=donate_methods
+Entity2=donate_infos
+RelationType1=2
+RelationType2=1
+Fields1=id
+Fields2=donate_method_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,1178,6138,4598,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20170910224151
+LineMode=0
+Bar1=118
+Bar2=614
+Bar3=460
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=users
+Entity2=caster_infos
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,1992,6089,691,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20170910224041
+LineMode=0
+Bar1=199
+Bar2=609
+Bar3=69
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=users
+Entity2=user_infos
+RelationType1=2
+RelationType2=2
+Fields1=id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,704,7114,670,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20170910224049
+LineMode=0
+Bar1=70
+Bar2=711
+Bar3=67
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=users
+Entity2=caster_tag
+RelationType1=1
+RelationType2=3
+Fields1=id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3089,6911,3154,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20170910223800
+LineMode=0
+Bar1=309
+Bar2=691
+Bar3=315
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=cast_tags
+Entity2=caster_tag
+RelationType1=1
+RelationType2=3
+Fields1=id
+Fields2=tag_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2913,7087,3116,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20170910223736
+LineMode=0
+Bar1=291
+Bar2=709
+Bar3=312
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=donate_methods
+LName=Phương thức donate
+Comment=
+TableOption=
+Page=MAIN
+Left=2850
+Top=700
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Tên phương thức donate","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170910225036
+Position="MAIN",2850,700
+
+[Entity]
+PName=users
+LName=Thông tin đăng nhập
+Comment=
+TableOption=
+Page=MAIN
+Left=1350
+Top=200
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Tên đăng nhập","username","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Địa chỉ email","email","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Mật khẩu","password","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Token","token","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Thời gian hết hạn token","token_expires","DATETIME",,,"NULL","",$FFFFFFFF,""
+Field="Api token","api_token","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Thời điểm kích hoạt tài khoản","activation_date","DATETIME",,,"NULL","",$FFFFFFFF,""
+Field="Thời điểm đồng ý tos","tos_date","DATETIME",,,"NULL","tos = Term of service",$FFFFFFFF,""
+Field="Đã kích hoạt","active","BOOLEAN",,,"0","",$FFFFFFFF,""
+Field="Có phải là super user","is_superuser","BOOLEAN",,,"0","",$FFFFFFFF,""
+Field="Phân quyền","role","VARCHAR(255)",,,"user","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170910215705
+Position="MAIN",1350,200,1225,624
+
+[Entity]
+PName=fee_percentages
+LName=Phần trăm phí dịch vụ ngoại lệ
+Comment=
+TableOption=
+Page=MAIN
+Left=2800
+Top=950
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Phần trăm phí thu","percentage","INT(11)","NOT NULL",,"","phần trăm",$FFFFFFFF,""
+Field="Ngày bắt đầu","start","DATETIME",,,"NULL","",$FFFFFFFF,""
+Field="Ngày kết thúc","end","DATETIME",,,"NULL","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170910224823
+Position="MAIN",2800,950,1203,280
+
+[Entity]
+PName=caster_tag
+LName=Liên kết LiveStreamer với Tag
+Comment=
+TableOption=
+Page=MAIN
+Left=1500
+Top=1000
+Field="Khóa chính của bảng","id","CHAR(36)",,,"","",$FFFFFFFF,""
+Field="Id thành viên","user_id","CHAR(36)",,,"","",$FFFFFFFF,""
+Field="Id tag","tag_id","CHAR(36)",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170910213703
+Position="MAIN",1500,1000,1016,164
+
+[Entity]
+PName=cast_tags
+LName=Thể loại LiveStream
+Comment=
+TableOption=
+Page=MAIN
+Left=1850
+Top=1400
+Field="Khóa chính cả bảng","id","CHAR(36)",,0,"","",$FFFFFFFF,""
+Field="Tên tag","name","VARCHAR(255)",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170910213713
+Position="MAIN",1850,1400,812,114
+
+[Entity]
+PName=donate_infos
+LName=Thông tin lượt donate
+Comment=
+TableOption=
+Page=MAIN
+Left=2700
+Top=50
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Thời điểm donate","donated","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Id người donate","sender_id","CHAR(36)",,,"","",$FFFFFFFF,""
+Field="Tên người donate","sender_name","VARCHAR(255)",,,"","",$FFFFFFFF,""
+Field="Id người nhận donate","receiver_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Số tiền","amount","INT(11)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Phương thức donate","donate_method_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thông điệp","message","TINYTEXT",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170910224558
+Position="MAIN",2700,50,1080,415
+
+[Entity]
+PName=caster_infos
+LName=Thông tin LiveStreamer
+Comment=
+TableOption=
+Page=MAIN
+Left=50
+Top=1000
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Path ảnh CMND 1","identify_card_1","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Path ảnh CMND 2","identify_card_2","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Path hợp đồng","contract","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Link donate","donate_link","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Path ảnh donate","donate_image","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Path audio donate","donate_audio","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Tên ngân hàng","bank_name","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Chi nhánh","bank_branch","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Số tài khoản","bank_account_number","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Tên chủ tài khoản","bank_account_holder","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Index==0,donate_link
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170910213650
+Position="MAIN",50,1000,1109,639
+
+[Entity]
+PName=user_infos
+LName=Profile thành viên
+Comment=
+TableOption=
+Page=MAIN
+Left=50
+Top=100
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên thường gọi","nickname","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Tên","firstname","VARCHAR(100)",,,"NULL","",$FFFFFFFF,""
+Field="Họ","lastname","VARCHAR(100)",,,"NULL","",$FFFFFFFF,""
+Field="Ngày sinh","birthday","DATE",,,"NULL","",$FFFFFFFF,""
+Field="Facebook","facebook","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Công khai facebook","facebook_public","BOOLEAN",,,"0","0:không công khai",$FFFFFFFF,""
+Field="Zalo","zalo","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Công khai zalo","zalo_public","BOOLEAN",,,"0","0:không công khai",$FFFFFFFF,""
+Field="Số điện thoại","phone","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Công khai sđt","phone_public","BOOLEAN",,,"0","0:không công khai",$FFFFFFFF,""
+Field="Lời giới thiệu","introduction","TINYTEXT",,,"NULL","",$FFFFFFFF,""
+Field="Path ảnh đại diện","avatar","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Index=user_id=1,user_id
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170910224712
+Position="MAIN",50,100,1032,745
