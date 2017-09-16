@@ -1,57 +1,46 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
-?>
 <!DOCTYPE html>
-<html>
+<html lang="<?= Cake\Core\Configure::read('System.iso-language') ?>">
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
-
+    <title><?= Cake\Core\Configure::read('System.sitename') ?></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <?= $this->fetch('meta') ?>
+    <?= $this->Html->css('/packages/bootstrap/css/bootstrap.min.css') ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <?= $this->Html->css('/packages/AdminLTE/css/AdminLTE.min.css') ?>
+    <?= $this->Html->css('/packages/AdminLTE/css/skins/skin-red-light.min.css') ?>
     <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
-            </ul>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-red-light layout-top-nav">
+    <div class="wrapper">
+        <?= $this->element('Layout/main-header') ?>
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <?= $this->element('Layout/content-header') ?>
+                <section class="content">
+                    <?= $this->Flash->render() ?>
+                    <?= $this->fetch('content') ?>
+                </section>
+            </div>
         </div>
-    </nav>
-    <?= $this->Flash->render() ?>
-    <div class="container clearfix">
-        <?= $this->fetch('content') ?>
+        <?= $this->element('Layout/footer') ?>
     </div>
-    <footer>
-    </footer>
+    <?= $this->Html->script('/packages/jquery/jquery-2.2.4.min.js') ?>
+    <?= $this->Html->script('/packages/bootstrap/js/bootstrap.min.js') ?>
+    <?= $this->Html->script('/packages/slimScroll/jquery.slimscroll.min.js') ?>
+    <?= $this->Html->script('/packages/fastclick/fastclick.js') ?>
+    <?= $this->Html->script('/packages/AdminLTE/js/app.min.js') ?>
+    <?= $this->Html->script('/packages/AdminLTE/js/demo.js') ?>
+    <?= $this->fetch('script') ?>
 </body>
 </html>

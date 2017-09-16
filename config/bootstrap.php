@@ -231,3 +231,8 @@ Plugin::load('CakeDC/Users', ['routes' => true, 'bootstrap' => true]);
  * Load Migrations
  */
 Plugin::load('Migrations');
+
+/*
+ * Load config of system
+ */
+ Configure::load('system', 'default');
