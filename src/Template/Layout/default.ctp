@@ -40,7 +40,6 @@
     <?= $this->Html->script('/packages/slimScroll/jquery.slimscroll.min.js') ?>
     <?= $this->Html->script('/packages/fastclick/fastclick.js') ?>
     <?= $this->Html->script('/packages/AdminLTE/js/app.min.js') ?>
-    <?= $this->Html->script('/packages/AdminLTE/js/demo.js') ?>
     <?= $this->fetch('script') ?>
 </body>
 </html>
