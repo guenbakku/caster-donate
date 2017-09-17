@@ -1,0 +1,29 @@
+msgid "Username or password is incorrect"
+msgstr "Tên đăng nhập hoặc mật khẩu không chính xác"
+
+msgid "You've successfully logged out"
+msgstr "Đăng xuất thành công"
+
+msgid "Sign in to start your session"
+msgstr "Đăng nhập"
+
+msgid "Username"
+msgstr "Tên đăng nhập"
+
+msgid "Password"
+msgstr "Mật khẩu"
+
+msgid "Remember me"
+msgstr "Nhớ mật khẩu"
+
+msgid "Login"
+msgstr "Đăng nhập"
+
+msgid "Logout"
+msgstr "Đăng xuất"
+
+msgid "Register"
+msgstr "Đăng ký thành viên"
+
+msgid "Reset Password"
+msgstr "Khôi phục mật khẩu"

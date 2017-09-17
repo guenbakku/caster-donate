@@ -10,6 +10,7 @@
     <?= $this->Html->css('/packages/bootstrap/css/bootstrap.min.css') ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <?= $this->Html->css('/packages/iCheck/square/blue.css') ?>
     <?= $this->Html->css('/packages/AdminLTE/css/AdminLTE.min.css') ?>
     <?= $this->Html->css('/packages/AdminLTE/css/skins/skin-red-light.min.css') ?>
     <?= $this->fetch('css') ?>
@@ -39,7 +40,9 @@
     <?= $this->Html->script('/packages/bootstrap/js/bootstrap.min.js') ?>
     <?= $this->Html->script('/packages/slimScroll/jquery.slimscroll.min.js') ?>
     <?= $this->Html->script('/packages/fastclick/fastclick.js') ?>
+    <?= $this->Html->script('/packages/iCheck/icheck.min.js') ?>
     <?= $this->Html->script('/packages/AdminLTE/js/app.min.js') ?>
+    <?= $this->Html->script('app.settings.js') ?>
     <?= $this->fetch('script') ?>
 </body>
 </html>
