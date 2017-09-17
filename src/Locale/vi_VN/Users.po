@@ -99,3 +99,9 @@ msgstr "Tên đăng nhập đã tồn tại"
 
 msgid "Email already exists"
 msgstr "Địa chỉ email đã tồn tại"
+
+msgid "User was not found"
+msgstr "Không tìm thấy thông tin tài khoản"
+
+msgid "You are not authorized to access that location."
+msgstr "Bạn không có quyền truy cập"
