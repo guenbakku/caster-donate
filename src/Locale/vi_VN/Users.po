@@ -8,6 +8,12 @@ msgstr "Đăng nhập | Đăng ký"
 msgid "Register new user"
 msgstr "Đăng ký thành viên"
 
+msgid "Profile"
+msgstr "Trang cá nhân"
+
+msgid "User profile picture"
+msgstr "Ảnh thành viên"
+
 # Plugin original fields
 
 msgid "Username or password is incorrect"
@@ -102,6 +108,3 @@ msgstr "Địa chỉ email đã tồn tại"
 
 msgid "User was not found"
 msgstr "Không tìm thấy thông tin tài khoản"
-
-msgid "You are not authorized to access that location."
-msgstr "Bạn không có quyền truy cập"

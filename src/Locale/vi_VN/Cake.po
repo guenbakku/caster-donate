@@ -1,0 +1,2 @@
+msgid "You are not authorized to access that location."
+msgstr "Bạn không có quyền truy cập thông tin này"
