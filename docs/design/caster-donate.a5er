@@ -40,41 +40,82 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
-Entity1=users
-Entity2=roles
+Entity1=social_providers
+Entity2=user_social_accounts
 RelationType1=2
 RelationType2=2
 Fields1=id
-Fields2=id
+Fields2=provider_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,9152,7244,881,R,R
+Position="MAIN",0,1855,8145,6051,R,R
 Dependence=0
 Caption=
 PName=
-ModifiedDateTime=20170911092501
+ModifiedDateTime=20170917192325
 LineMode=0
-Bar1=915
-Bar2=724
+Bar1=186
+Bar2=814
+Bar3=605
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=social_providers
+LName=Thông tin nhà cung cấp mạng xã hội
+Comment=
+TableOption=
+Page=MAIN
+Left=1900
+Top=1100
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Nhà cung cấp","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20170917192425
+Position="MAIN",1900,1100
+
+[Relation]
+Entity1=users
+Entity2=user_social_accounts
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2949,1936,881,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20170917191924
+LineMode=0
+Bar1=295
+Bar2=194
 Bar3=88
 TermPos1=R
 TermPos2=R
 
 [Entity]
-PName=roles
-LName=Phân quyền
+PName=user_social_accounts
+LName=Thông tin tài khoản mạng xã hội
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=50
-Top=1950
-Field="Khóa chính cả bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
-Field="Tên role","name","VARCHAR(255)","NOT NULL",,"","User bình thường hay là caster",$FFFFFFFF,""
+Top=950
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Id nhà cung cấp","provider_id","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
+Field="Tài khoản","reference","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Công khai hay không","public","BOOLEAN",,,"FALSE","",$FFFFFFFF,""
+Index=user_id=1,user_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170911092603
-Position="Main",50,1950,1100,102
+ModifiedDateTime=20170917192330
+Position="MAIN",50,950,1110,254
 
 [Relation]
 Entity1=users
@@ -148,13 +189,13 @@ Fields1=id
 Fields2=user_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,1992,6089,691,R,R
+Position="MAIN",0,4548,6089,691,R,R
 Dependence=0
 Caption=
 PName=
-ModifiedDateTime=20170910224041
+ModifiedDateTime=20170917191940
 LineMode=0
-Bar1=199
+Bar1=455
 Bar2=609
 Bar3=69
 TermPos1=R
@@ -230,14 +271,14 @@ Comment=
 TableOption=
 Page=MAIN
 Left=4600
-Top=250
+Top=300
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên phương thức donate","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20170910225036
-Position="MAIN",4600,250
+Position="MAIN",4600,300
 
 [Entity]
 PName=users
@@ -258,11 +299,11 @@ Field="Thời điểm kích hoạt tài khoản","activation_date","DATETIME",,,
 Field="Thời điểm đồng ý tos","tos_date","DATETIME",,,"NULL","tos = Term of service",$FFFFFFFF,""
 Field="Đã kích hoạt","active","BOOLEAN",,,"0","",$FFFFFFFF,""
 Field="Có phải là super user","is_superuser","BOOLEAN",,,"0","",$FFFFFFFF,""
-Field="Id phân quyền","role_id","CHAR(36)","NOT NULL",,"NULL","",$FFFFFFFF,""
+Field="Phân quyền","role","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170911092523
+ModifiedDateTime=20170917191645
 Position="MAIN",1900,200,1225,624
 
 [Entity]
@@ -323,8 +364,8 @@ LName=Thông tin lượt donate
 Comment=
 TableOption=
 Page=MAIN
-Left=3450
-Top=50
+Left=3400
+Top=100
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Thời điểm donate","donated","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id người donate","sender_id","CHAR(36)",,,"","",$FFFFFFFF,""
@@ -337,7 +378,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20170911091936
-Position="MAIN",3450,50,1080,415
+Position="MAIN",3400,100,1080,415
 
 [Entity]
 PName=caster_infos
@@ -346,15 +387,15 @@ Comment=
 TableOption=
 Page=MAIN
 Left=50
-Top=1000
+Top=1300
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Path ảnh CMND 1","identify_card_1","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
-Field="Path ảnh CMND 2","identify_card_2","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Path ảnh CMND","identify_card","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Path hợp đồng","contract","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Link donate","donate_link","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Path ảnh donate","donate_image","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Path audio donate","donate_audio","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Số điện thoại","phone","VARCHAR(60)",,,"NULL","",$FFFFFFFF,""
 Field="Tên ngân hàng","bank_name","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Chi nhánh","bank_branch","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Số tài khoản","bank_account_number","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
@@ -362,8 +403,8 @@ Field="Tên chủ tài khoản","bank_account_holder","VARCHAR(255)",,,"NULL",""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170911092213
-Position="MAIN",50,1000,1109,639
+ModifiedDateTime=20170917191506
+Position="MAIN",50,1300,1109,639
 
 [Entity]
 PName=user_infos
