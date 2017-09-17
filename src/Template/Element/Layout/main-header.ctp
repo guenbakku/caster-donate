@@ -32,13 +32,18 @@
                 </form>
             </div>
             <!-- /.navbar-collapse -->
-            <?php 
-                if (empty($Auth->user())) {
-                    echo $this->cell('GuestWidget');
-                } else {
-                    echo $this->cell('MemberWidget');
-                }
-            ?>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <?php 
+                        if (empty($Auth->user())) {
+                            echo $this->cell('GuestMenu');
+                        } else {
+                            echo $this->cell('NotificationsMenu');
+                            echo $this->cell('MemberMenu');
+                        }
+                    ?>
+                </ul>
+            </div>
         </div>
         <!-- /.container-fluid -->
     </nav>

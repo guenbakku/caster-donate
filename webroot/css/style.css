@@ -1,3 +1,15 @@
+.login-box, 
+.register-box {
+    width: 500px;
+}
+
+@media (max-width: 768px) {
+    .login-box, 
+    .register-box {
+        width: 100%;
+    }
+}
+
 .login-box-msg {
     font-weight: bold;
 }
