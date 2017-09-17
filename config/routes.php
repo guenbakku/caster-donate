@@ -52,6 +52,16 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/', ['controller' => 'Home', 'action' => 'index']);
 
     /**
+     * Connect all paths that are not relative with CakeDC/Users to 
+     * our own UsersController
+     */
+    $routes->connect(
+        '/users/:action/*', 
+        ['plugin' => null, 'controller' => 'Users'],
+        ['action' => '((?!users).)*']
+    );
+
+    /**
      * Connect catchall routes for all controllers.
      *
      * Using the argument `DashedRoute`, the `fallbacks` method is a shortcut for
