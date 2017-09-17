@@ -1,0 +1,13 @@
+.login-box-msg {
+    font-weight: bold;
+}
+
+.error input,
+.error select,
+.error textarea {
+    border-color: #dd4b39;
+}
+
+.error-message {
+    color: #dd4b39;
+}

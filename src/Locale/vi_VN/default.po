@@ -29,6 +29,6 @@ msgstr "Chú ý"
 msgid "Back"
 msgstr "Quay lại"
 
-
-
+msgid "Submit"
+msgstr "Gửi"
 

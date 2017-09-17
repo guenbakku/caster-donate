@@ -1,3 +1,5 @@
+# Vietnamese translation of CakeDC/Users plugin
+
 msgid "Username or password is incorrect"
 msgstr "Tên đăng nhập hoặc mật khẩu không chính xác"
 
@@ -13,6 +15,12 @@ msgstr "Tên đăng nhập"
 msgid "Password"
 msgstr "Mật khẩu"
 
+msgid "Confirm password"
+msgstr "Nhập lại mật khẩu"
+
+msgid "New password"
+msgstr "Mật khẩu mới"
+
 msgid "Remember me"
 msgstr "Nhớ mật khẩu"
 
@@ -23,7 +31,64 @@ msgid "Logout"
 msgstr "Đăng xuất"
 
 msgid "Register"
+msgstr "Đăng ký"
+
+msgid "Change password"
+msgstr "Thay đổi mật khẩu"
+
+msgid "Please enter the new password"
+msgstr "Vui lòng nhập mật khẩu mới"
+
+msgid "Reset password"
+msgstr "Khôi phục mật khẩu"
+
+msgid "Forgot password?"
+msgstr "Quên mật khẩu?"
+
+msgid "Register new user"
 msgstr "Đăng ký thành viên"
 
-msgid "Reset Password"
-msgstr "Khôi phục mật khẩu"
+msgid "Accept TOS conditions"
+msgstr "Đồng ký điều khoản sử dụng"
+
+msgid "Please validate your account before log in"
+msgstr "Vui lòng kiểm tra email và kích hoạt tài khoản trước khi đăng nhập"
+
+msgid "User account validated successfully"
+msgstr "Kích hoạt tài khoản thành công"
+
+msgid "Please enter your email to reset your password"
+msgstr "Vui lòng nhập địa chỉ email để khôi phục mật khẩu"
+
+msgid "Please check your email to continue with password reset process"
+msgstr "Vui lòng kiểm tra email để hoàn thành khôi phục mật khẩu"
+
+msgid "Reset password token was validated successfully"
+msgstr "Mã xác nhận khôi phục mật khẩu hợp lệ"
+
+msgid "Password has been changed successfully"
+msgstr "Khôi phục mật khẩu thành công"
+
+msgid "Invalid token or user account already validated"
+msgstr "Mã xác nhận không hợp lệ hoặc tài khoản đã được kích hoạt"
+
+msgid "You are already logged in"
+msgstr "Bạn đang đăng nhập"
+
+msgid "Password could not be changed"
+msgstr "Không thể đổi mật khẩu"
+
+msgid "Your password does not match your confirm password. Please try again"
+msgstr "Mật khẩu và xác nhận mật khẩu không khớp. Vui lòng thử lại"
+
+msgid "This field cannot be left empty"
+msgstr "Ô này không thể để trống"
+
+msgid "The user could not be saved"
+msgstr "Không thể tạo tài khoản"
+
+msgid "Username already exists"
+msgstr "Tên đăng nhập đã tồn tại"
+
+msgid "Email already exists"
+msgstr "Địa chỉ email đã tồn tại"
