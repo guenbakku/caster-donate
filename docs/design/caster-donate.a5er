@@ -70,10 +70,11 @@ Left=1900
 Top=1100
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Nhà cung cấp","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170917192425
+ModifiedDateTime=20170917222233
 Position="MAIN",1900,1100
 
 [Relation]
@@ -252,7 +253,7 @@ Fields1=id
 Fields2=tag_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,2913,7087,3061,R,R
+Position="MAIN",0,2913,7087,3002,R,R
 Dependence=0
 Caption=
 PName=
@@ -260,7 +261,7 @@ ModifiedDateTime=20170910223736
 LineMode=0
 Bar1=291
 Bar2=709
-Bar3=306
+Bar3=300
 TermPos1=R
 TermPos2=R
 
@@ -274,10 +275,11 @@ Left=4600
 Top=300
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên phương thức donate","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170910225036
+ModifiedDateTime=20170917222334
 Position="MAIN",4600,300
 
 [Entity]
@@ -352,11 +354,12 @@ Left=4750
 Top=1150
 Field="Khóa chính cả bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên tag","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170911092029
-Position="MAIN",4750,1150,812,114
+ModifiedDateTime=20170917222308
+Position="MAIN",4750,1150,812,169
 
 [Entity]
 PName=donate_transactions
