@@ -1,5 +1,6 @@
 <?php
 use Migrations\AbstractMigration;
+use Cake\Utility\Text;
 
 class CreateSocialProvidersTable extends AbstractMigration
 {
@@ -21,6 +22,9 @@ class CreateSocialProvidersTable extends AbstractMigration
                 'limit' => 255,
                 'null' => false,
             ])
+            ->addColumn('order_no', 'integer', [
+                'null' => true,
+            ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
             ])
@@ -28,5 +32,23 @@ class CreateSocialProvidersTable extends AbstractMigration
                 'null' => false,
             ])
             ->create();
+
+        $rows = [
+            [
+                'id' => Text::uuid(),
+                'name' => 'Facebook',
+                'order_no' => 1,
+                'created' => date('Y-m-d H:i:s'),
+                'modified' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'id' => Text::uuid(),
+                'name' => 'Zalo',
+                'order_no' => 2,
+                'created' => date('Y-m-d H:i:s'),
+                'modified' => date('Y-m-d H:i:s'),
+            ],
+        ];
+        $table->insert($rows)->saveData();
     }
 }
