@@ -64,13 +64,13 @@ return [
         ],
         'loginRedirect' => [
             'plugin' => null,
-            'controller' => 'Pages',
-            'action' => 'display',
+            'controller' => 'Home',
+            'action' => 'index',
         ],
         'logoutRedirect' => [
             'plugin' => null,
-            'controller' => 'Pages',
-            'action' => 'display',
+            'controller' => 'Home',
+            'action' => 'index',
         ]
     ],
 ];
