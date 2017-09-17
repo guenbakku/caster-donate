@@ -1,5 +1,15 @@
 # Vietnamese translation of CakeDC/Users plugin
 
+# Customize fields
+
+msgid "Login | Register"
+msgstr "Đăng nhập | Đăng ký"
+
+msgid "Register new user"
+msgstr "Đăng ký thành viên"
+
+# Plugin original fields
+
 msgid "Username or password is incorrect"
 msgstr "Tên đăng nhập hoặc mật khẩu không chính xác"
 
@@ -44,9 +54,6 @@ msgstr "Khôi phục mật khẩu"
 
 msgid "Forgot password?"
 msgstr "Quên mật khẩu?"
-
-msgid "Register new user"
-msgstr "Đăng ký thành viên"
 
 msgid "Accept TOS conditions"
 msgstr "Đồng ký điều khoản sử dụng"
