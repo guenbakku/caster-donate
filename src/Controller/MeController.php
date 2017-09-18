@@ -11,6 +11,7 @@ use Cake\Event\Event;
 class MeController extends AppController
 {
     public function index() {
+        $this->ContentHeader->title('Trang cá nhân');
         $user_id = $this->Auth->user('id');
     }
 }

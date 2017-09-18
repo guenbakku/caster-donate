@@ -51,7 +51,15 @@ class AppController extends Controller
         $this->loadComponent('Security');
         $this->loadComponent('Csrf');
 
+        /*
+         * Manage user register, login, logout...
+         */
         $this->loadComponent('CakeDC/Users.UsersAuth');
+
+        /*
+         * System's original components
+         */
+        $this->loadComponent('ContentHeader');
     }
 
     /**
