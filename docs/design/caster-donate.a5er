@@ -109,13 +109,13 @@ Top=950
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id nhà cung cấp","provider_id","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
-Field="Tài khoản","reference","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Link tài khoản","reference","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Công khai hay không","public","BOOLEAN",,,"FALSE","",$FFFFFFFF,""
 Index=user_id=1,user_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170917192330
+ModifiedDateTime=20170924212425
 Position="MAIN",50,950,1110,254
 
 [Relation]
