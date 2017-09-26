@@ -261,52 +261,104 @@
                 </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="settings">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-danger">Submit</button>
-                            </div>
-                        </div>
-                    </form>
+
+                    <?=$this->Form->create($profile, ['url' => 'me/editprofile/'.$profile['user_id'],'type' => 'file','class' => 'form-horizontal','id' => 'settings']);?>
+
+                        <?php $this->Form->setTemplates([
+                            'inputContainer' => '<div class="form-group">{{content}}</div>',
+                            'input' => '<div class="col-sm-10"><input type="{{type}}" name="{{name}}" {{attrs}} /></div>',
+                            'dateWidget' => '<div class="col-sm-10">Ngày{{day}} Tháng{{month}} Năm{{year}}</div>',
+                            'textarea' => '<div class="col-sm-10"><textarea name="{{name}}"{{attrs}}>{{value}}</textarea></div>',
+                            'button' => '<div class="col-sm-10"><button name="{{name}}"{{attrs}}>{{text}}</button></div>',
+                            'label' => '<label class="col-sm-2 control-label" {{attrs}}>{{text}}</label>',
+                        ]);?>
+                        
+                        <?= $this->Form->control('avatar', [
+                                'templates' => [
+                                    'inputContainer' => '<div class="form-group">{{content}}</div>',
+                                    'file' => '<div class="col-sm-10"><input type="{{type}}" name="{{name}}" {{attrs}} /></div>'
+                                ],
+                                'class' => 'form-control',
+                                'templateVars' => [
+                                    'type' => 'file'
+                                ],
+                                'type' => 'file',
+                                'label' => [
+                                    'text' =>  __('Ảnh đại diện')
+                                ],
+                            ]);
+                        ?>
+
+                        <?= $this->Form->control('nickname', [
+                                'class' => 'form-control',
+                                'label' => [
+                                    'text' => __('Biệt danh')
+                                ],
+                            ]);
+                        ?>
+
+                        <?= $this->Form->control('firstname', [
+                                'class' => 'form-control',
+                                'label' => [
+                                    'text' =>  __('Họ và tên đệm')
+                                ],
+                            ]);
+                        ?>
+
+                        <?= $this->Form->control('lastname', [
+                                'class' => 'form-control',
+                                'label' => [
+                                    'text' =>  __('Tên')
+                                ],
+                            ]);
+                        ?>
+
+                        <?= $this->Form->control('birthday', [
+                                'class' => 'form-control',
+                                'type'  => 'date',
+                                'label' => [
+                                    'text' =>  __('Ngày sinh')
+                                ],
+                                'empty' => true,
+                                'minYear' => 1950,
+                                'maxYear' => date('Y'),
+                                'monthNames' =>[
+                                    '01' => 'Một',
+                                    '02' => 'Hai',
+                                    '03' => 'Ba',
+                                    '04' => 'Bốn',
+                                    '05' => 'Năm',
+                                    '06' => 'Sáu',
+                                    '07' => 'Bảy',
+                                    '08' => 'Tám',
+                                    '09' => 'Chín',
+                                    '10' => 'Mười',
+                                    '11' => 'Mười một',
+                                    '12' => 'Mười hai', 
+                                ],
+                            ]);
+                        ?>
+
+
+                        <?= $this->Form->control('introduction', [
+                                'class' => 'form-control',
+                                'type'  => 'textarea',
+                                'label' => [
+                                    'text' =>  __('Lời giới thiệu')
+                                ],
+                            ]);
+                        ?>
+                      
+                        <?= $this->Form->button( __('Cập nhật thông tin'),[
+                                'class' => 'btn btn-danger pull-right',
+                                'label' => [
+                                    'text' => ''
+                                ],
+                                'type' => 'submit'
+                            ]);
+                        ?>
+                        
+                    <?= $this->Form->end() ?>
                 </div>
                 <!-- /.tab-pane -->
             </div>
