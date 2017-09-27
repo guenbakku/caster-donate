@@ -43,6 +43,8 @@
     <?= $this->Html->script('/packages/fastclick/fastclick.js') ?>
     <?= $this->Html->script('/packages/iCheck/icheck.min.js') ?>
     <?= $this->Html->script('/packages/AdminLTE/js/app.min.js') ?>
+    <?= $this->Html->script('/packages/KendoUI/js/kendo.core.js') ?>
+    <?= $this->Html->script('/packages/KendoUI/js/kendo.dateinput.js') ?>
     <?= $this->Html->script('app.settings.js') ?>
     <?= $this->fetch('script') ?>
 </body>
