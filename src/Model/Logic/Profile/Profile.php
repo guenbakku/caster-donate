@@ -10,42 +10,29 @@ class Profile
         $this->UserInfos = TableRegistry::get('UserInfos');
     }
 
-    public function view($user_id)
+    public function get($user_id)
     {
-       
-        $userinfo = $this->UserInfos->find()
-                            ->where(['user_id' => $user_id])
-                            ->first();
-        return $userinfo;
+        $user_info = $this->UserInfos->findByUserId($user_id)->first();
+        return $user_info;
     }
 
-    public function add($user_id, array $newuserinfo)
+    public function edit($user_id, array $new_user_info)
     {
-       
-        $userinfo = $this->UserInfos->newEntity();
-        $this->UserInfos->patchEntity($userinfo, $newuserinfo);
-        $userinfo->user_id = $user_id;
-        if($this->UserInfos->save($userinfo))
+        $user_info = $this->UserInfos->findByUserId($user_id)->first();
+        if ($user_info === null) 
         {
-            return true;
+            $user_info = $this->UserInfos->newEntity();
+            $user_info->user_id = $user_id;
         }
-        return false;
-    }
 
-    public function edit($user_id, array $newuserinfo)
-    {
+        $this->UserInfos->patchEntity($user_info, $new_user_info);
         
-        $userinfo = $this->UserInfos->find()
-                                    ->where(['user_id' => $user_id])
-                                    ->first();
-        $this->UserInfos->patchEntity($userinfo, $newuserinfo);
-        debug($newuserinfo);
-        debug($userinfo);
-        if($this->UserInfos->save($userinfo))
+        if($this->UserInfos->save($user_info))
         {
             return true;
         }
-        return false;
+
+        return $user_info;
     }
 }
 ?>
