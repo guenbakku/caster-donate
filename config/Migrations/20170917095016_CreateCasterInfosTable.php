@@ -22,19 +22,23 @@ class CreateCasterInfosTable extends AbstractMigration
             ])
             ->addColumn('identify_card', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 128,
             ])
             ->addColumn('contract', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 128,
             ])
             ->addColumn('donate_image', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 128,
             ])
             ->addColumn('donate_audio', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 128,
+            ])
+            ->addColumn('donate_link', 'string', [
+                'null' => true,
+                'limit' => 128,
             ])
             ->addColumn('phone', 'string', [
                 'null' => true,

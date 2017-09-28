@@ -24,7 +24,7 @@ class CreateCasterTagsTable extends AbstractMigration
             ])
             ->addColumn('image', 'string', [
                 'null' => true,
-                'limit' => 64,
+                'limit' => 128,
             ])
             ->addColumn('order_no', 'integer',[
                 'null' => true,
