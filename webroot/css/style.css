@@ -23,3 +23,8 @@
 .error-message {
     color: #dd4b39;
 }
+
+input.k-textbox {
+    height: 34px;
+    padding: 6px 8px;
+}

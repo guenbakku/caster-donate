@@ -55,27 +55,10 @@
     ?>
 
     <?= $this->Form->control('birthday', [
-            'class' => 'form-control',
-            'type'  => 'date',
+            'class' => 'form-control dateinput',
+            'type'  => 'text',
             'label' => [
                 'text' =>  __('Ngày sinh')
-            ],
-            'empty' => true,
-            'minYear' => 1950,
-            'maxYear' => date('Y'),
-            'monthNames' =>[
-                '01' => 'Một',
-                '02' => 'Hai',
-                '03' => 'Ba',
-                '04' => 'Bốn',
-                '05' => 'Năm',
-                '06' => 'Sáu',
-                '07' => 'Bảy',
-                '08' => 'Tám',
-                '09' => 'Chín',
-                '10' => 'Mười',
-                '11' => 'Mười một',
-                '12' => 'Mười hai', 
             ],
         ]);
     ?>

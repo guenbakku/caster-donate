@@ -1,3 +1,4 @@
+
 $(function () {
     $('input').iCheck({
         checkboxClass: 'icheckbox_square-blue',
@@ -5,3 +6,8 @@ $(function () {
         increaseArea: '20%' // optional
     });
 });
+
+$(function () {
+    kendo.culture("vi-VN");
+    $('.dateinput').kendoDateInput();
+})
