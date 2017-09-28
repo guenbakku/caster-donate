@@ -225,7 +225,7 @@ TermPos2=R
 
 [Relation]
 Entity1=users
-Entity2=casters_tags
+Entity2=users_caster_tags
 RelationType1=1
 RelationType2=3
 Fields1=id
@@ -246,7 +246,7 @@ TermPos2=R
 
 [Relation]
 Entity1=caster_tags
-Entity2=casters_tags
+Entity2=users_caster_tags
 RelationType1=1
 RelationType2=3
 Fields1=id
@@ -328,7 +328,7 @@ ModifiedDateTime=20170910224823
 Position="MAIN",3450,700,1085,280
 
 [Entity]
-PName=casters_tags
+PName=users_caster_tags
 LName=Liên kết LiveStreamer với Tag
 Comment=
 TableOption=
@@ -341,7 +341,7 @@ Field="Id tag","tag_id","CHAR(36)",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170911091656
+ModifiedDateTime=20170928220100
 Position="MAIN",3450,1150,1085,164
 
 [Entity]
