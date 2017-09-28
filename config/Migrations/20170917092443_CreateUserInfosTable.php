@@ -33,22 +33,6 @@ class CreateUserInfosTable extends AbstractMigration
                 'null' => true,
                 'limit' => 255,
             ])
-            ->addColumn('facebook', 'string', [
-                'null' => true,
-                'limit' => 255,
-            ])
-            ->addColumn('facebook_public', 'boolean', [
-                'null' => true,
-                'default' => false,
-            ])
-            ->addColumn('zalo', 'string', [
-                'null' => true,
-                'limit' => 255,
-            ])
-            ->addColumn('zalo_public', 'boolean', [
-                'null' => true,
-                'default' => false,
-            ])
             ->addColumn('birthday', 'date', [
                 'null' => true,
             ])

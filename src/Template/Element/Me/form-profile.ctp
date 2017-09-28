@@ -80,38 +80,6 @@
         ]);
     ?>
 
-    <?= $this->Form->control('facebook', [
-            'class' => 'form-control',
-            'label' => [
-                'text' =>  __('Facebook')
-            ],
-        ]);
-    ?>
-
-    <?= $this->Form->control('facebook_public', [
-            'class' => 'form-control',
-            'label' => [
-                'text' =>  __('Công khai Facebook')
-            ],
-        ]);
-    ?>
-
-    <?= $this->Form->control('zalo', [
-            'class' => 'form-control',
-            'label' => [
-                'text' =>  __('Zalo')
-            ],
-        ]);
-    ?>
-    
-    <?= $this->Form->control('zalo_public', [
-            'class' => 'form-control',
-            'label' => [
-                'text' =>  __('Công khai Zalo')
-            ],
-        ]);
-    ?>
-
     <?= $this->Form->control('introduction', [
             'class' => 'form-control',
             'type'  => 'textarea',

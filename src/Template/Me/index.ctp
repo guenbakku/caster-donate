@@ -8,7 +8,7 @@
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
                 <h3 class="profile-username text-center"><?=($profile['nickname'] != null)?$profile['nickname']:(__('Chưa thiết lập nickname'))?></h3>
-                <p class="text-muted text-center"><?=__('')?></p>
+                <p class="text-muted text-center"><?=__('Ngày tham gia')?> : <?=$this->Time->format($profile['created'], 'd-m-Y');?></p>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
                         <b><?=__('Ngày sinh')?></b> <a class="pull-right"><?=$profile['birthday']?></a>
