@@ -236,3 +236,4 @@ Plugin::load('Migrations');
  * Load config of system
  */
  Configure::load('system', 'default');
+ Configure::load('vcv', 'default');
