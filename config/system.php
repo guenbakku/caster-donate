@@ -8,5 +8,9 @@ return [
         'sitename' => 'Caster Donate',
         'version' => '0.0.1',
         'iso-language' => 'vi',
+        
+        'paths' => [
+            'avatar' => WWW_ROOT.'img'.DS.'avatar'.DS,
+        ],
     ],
 ];
