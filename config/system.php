@@ -9,7 +9,7 @@ return [
         'version' => '0.0.1',
         'iso-language' => 'vi',
         
-        'paths' => [
+        'Paths' => [
             'avatar' => WWW_ROOT.'img'.DS.'avatar'.DS,
         ],
     ],

@@ -18,10 +18,10 @@ class MkdirShell extends Shell
      */
     public function main()
     {
-        $paths = Configure::read('System.paths');
+        $paths = Configure::read('System.Paths');
 
         if (empty($paths)) {
-            $this->warn(__('System.paths is empty. Nothing to do!'));
+            $this->warn(__('System.Paths is empty. Nothing to do!'));
             return;
         }
 
