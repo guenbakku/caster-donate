@@ -19,6 +19,7 @@ class Profile
     public function edit($user_id, array $new_user_info)
     {
         $user_info = $this->UserInfos->findByUserId($user_id)->first();
+
         if ($user_info === null) 
         {
             $user_info = $this->UserInfos->newEntity();
@@ -26,10 +27,10 @@ class Profile
         }
 
         $this->UserInfos->patchEntity($user_info, $new_user_info);
-        
-        if($this->UserInfos->save($user_info))
+
+        if(!$user_info->errors())
         {
-            return true;
+            $this->UserInfos->save($user_info);
         }
 
         return $user_info;
