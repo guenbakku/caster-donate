@@ -1,6 +1,7 @@
 <?php $this->Form->setTemplates([
     'inputContainer' => '<div class="form-group">{{content}}</div>',
     'input' => '<div class="col-sm-10"><input type="{{type}}" name="{{name}}" {{attrs}} /></div>',
+    'file' => '<div class="col-sm-10"><input type="{{type}}" name="{{name}}" {{attrs}} /></div>',
     'dateWidget' => '<div class="col-sm-10">Ngày{{day}} Tháng{{month}} Năm{{year}}</div>',
     'textarea' => '<div class="col-sm-10"><textarea name="{{name}}"{{attrs}}>{{value}}</textarea></div>',
     'button' => '<div class="form-group"><div class="col-sm-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div>',
@@ -15,10 +16,6 @@
     'class' => 'form-horizontal',
 ]);?>
     <?= $this->Form->control('avatar', [
-            'templates' => [
-                'inputContainer' => '<div class="form-group">{{content}}</div>',
-                'file' => '<div class="col-sm-10"><input type="{{type}}" name="{{name}}" {{attrs}} /></div>'
-            ],
             'class' => 'form-control',
             'templateVars' => [
                 'type' => 'file'
