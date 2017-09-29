@@ -10,7 +10,6 @@ use Cake\Event\Event;
 use App\Model\Logic\Profile\Profile;
 use Cake\ORM\TableRegistry;
 use App\Controller\Component\UploadFileComponentComponent;
-use RuntimeException;
 
 class MeController extends AppController
 {
@@ -34,12 +33,14 @@ class MeController extends AppController
             {
                 //lưu file
                 $this->UploadFile = $this->loadComponent('UploadFileComponent');
-                $dir = realpath(WWW_ROOT.'/img/avatars');
+
+                $allowed_file_type = ['jpg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif',];
+                $dir = '/img/avatars';
                 $limitFileSize = 1024 * 1024;
-                $upload_result = $this->UploadFile->uploadFile($this->request->data['avatar'], $dir, $limitFileSize);
+                $upload_result = $this->UploadFile->uploadFile($this->request->data['avatar'], $dir, $limitFileSize, $allowed_file_type);
                 if(!$upload_result['error']) 
                 {
-                    $this->request->data['avatar'] =  $upload_result['file_path'];
+                    $this->request->data['avatar'] =  'avatars/'.$upload_result['file_name'];
                 }else 
                 {
                     $this->Flash->error(!$upload_result['error_message']);
@@ -48,7 +49,6 @@ class MeController extends AppController
 
             $this->Profile = new Profile();
             $new_user_info = $this->request->getData();
-            debug($new_user_info);
             //
             $profile = $this->Profile->edit($user_id, $new_user_info);
             if(!$profile->errors())

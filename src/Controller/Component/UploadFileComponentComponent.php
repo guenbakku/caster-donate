@@ -20,17 +20,19 @@ class UploadFileComponentComponent extends Component
     protected $_defaultConfig = [];
 
 
-    public function uploadFile ($file = null, $dir = null, $limitFileSize = null){
+    public function uploadFile ($file = null, $relative_dir = null, $limitFileSize = null, $allowFileTypes = []){
         $result_array = [
             'error' => true,
             'error_message' => __('Lỗi chưa xác định'),
             'file_name' => '',
-            'file_path' => ''
+            'file_absolute_path' => '',
+            'file_relative_path' => '',
         ];
         // kiểm tra folder lưu file
-        if ($dir != null)
+        if ($relative_dir != null)
         {
-            if(!file_exists($dir))
+            $absolute_dir = realpath(WWW_ROOT.$relative_dir);
+            if(!file_exists($absolute_dir))
             {
                 $result_array['error_message'] = __('Folder không tồn tại');
                 return $result_array;
@@ -75,26 +77,27 @@ class UploadFileComponentComponent extends Component
         }
 
         // Kiểm tra type file
-        if (false === $ext = array_search($fileInfo->mime(),
-                                          ['jpg' => 'image/jpeg',
-                                           'png' => 'image/png',
-                                           'gif' => 'image/gif',],
-                                          true))
+        if(!empty($allowFileTypes))
         {
-            $result_array['error_message'] = __('File sai địng dạng.');
-            return $result_array;
+            if (false === $ext = array_search($fileInfo->mime(), $allowFileTypes, true))
+            {
+                $result_array['error_message'] = __('File sai định dạng.');
+                return $result_array;
+            }
         }
+        
 
         //Tạo và lưu file
         $uploadFile = sha1_file($file["tmp_name"]) . "." . $ext;
-        if (!@move_uploaded_file($file["tmp_name"], $dir . "/" . $uploadFile)){
+        if (!@move_uploaded_file($file["tmp_name"], $absolute_dir . "/" . $uploadFile)){
             $result_array['error_message'] = __('Không thể chuyển file đến nơi chỉ định.');
             return $result_array;
         }
 
         $result_array['error'] = false;
         $result_array['file_name'] = $uploadFile;
-        $result_array['file_path'] = $dir.'/'.$uploadFile;
+        $result_array['file_absolute_path'] = $absolute_dir.'/'.$uploadFile;
+        $result_array['file_relative_path'] = $relative_dir.'/'.$uploadFile;
         return $result_array;
     }
 }
