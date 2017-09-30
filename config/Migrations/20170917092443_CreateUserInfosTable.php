@@ -36,9 +36,9 @@ class CreateUserInfosTable extends AbstractMigration
             ->addColumn('birthday', 'date', [
                 'null' => true,
             ])
-            ->addColumn('introduction', 'text', [
+            ->addColumn('introduction', 'string', [
                 'null' => true,
-                'limit' => MysqlAdapter::TEXT_TINY,
+                'limit' => 512,
             ])
             ->addColumn('avatar', 'string', [
                 'null' => true,

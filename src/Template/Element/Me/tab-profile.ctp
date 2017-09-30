@@ -61,6 +61,7 @@
         <?= $this->Form->control('introduction', [
                 'class' => 'form-control',
                 'type'  => 'textarea',
+                'rows'   => 3,
                 'label' => [
                     'text' =>  __('Lời giới thiệu')
                 ],
