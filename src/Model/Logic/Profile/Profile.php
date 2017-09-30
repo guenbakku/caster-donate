@@ -13,6 +13,10 @@ class Profile
     public function get($user_id)
     {
         $user_info = $this->UserInfos->findByUserId($user_id)->first();
+        if(!$user_info)
+        {
+            return $this->UserInfos->newEntity();
+        }
         return $user_info;
     }
 
