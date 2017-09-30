@@ -4,9 +4,11 @@
  * Validate control values
  */
 return [
-    'AllowFileTypes' => [
-        'image' => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'],
-        'pdf'   => ['application/pdf'],
+    'vcv' => [
+        'AllowFileTypes' => [
+            'image' => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'],
+            'pdf'   => ['application/pdf'],
+        ],
+        'uploadFileSize' => '5MB',
     ],
-    'uploadFileSize' => '5MB',
 ];

@@ -4,6 +4,7 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
+use Cake\Core\Configure;
 
 class UserInfosTable extends AppTable
 {
@@ -39,7 +40,24 @@ class UserInfosTable extends AppTable
             ->allowEmpty('introduction');
 
         $validator
-            ->allowEmpty('avatar');
+            ->allowEmpty('avatar')
+            ->add('avatar', [
+                'uploadError' => [
+                    'rule' => 'uploadError',
+                    'message' => 'Có lỗi xảy ra trong quá trình tải file.',
+                    'allowEmpty' => TRUE,
+                ],
+                'mimeType' => [
+                    'rule' => array('mimeType', Configure::read('vcv.AllowFileTypes.image')),
+                    'message' => __('File tải lên có định dạng không hợp lệ.'),
+                    'allowEmpty' => TRUE,
+                ],
+                'fileSize' => [
+                    'rule' => array('fileSize', '<=', Configure::read('vcv.uploadFileSize')),
+                    'message' => __('File tải lên phải có kích cỡ nhỏ hơn {0}.', Configure::read('vcv.uploadFileSize')),
+                    'allowEmpty' => TRUE,
+                ],
+            ]);
 
         return $validator;
     }

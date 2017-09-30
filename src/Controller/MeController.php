@@ -49,25 +49,6 @@ class MeController extends AppController
         
         if($this->request->is(['patch','post','put']))
         {
-            //Nếu có file upload
-            if($this->request->data['avatar']['error'] == false)
-            {
-                //lưu file
-                $this->UploadFile = $this->loadComponent('UploadFileComponent');
-
-                $allowed_file_type = ['jpg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif',];
-                $dir = '/img/avatars';
-                $limitFileSize = 1024 * 1024;
-                $upload_result = $this->UploadFile->uploadFile($this->request->data['avatar'], $dir, $limitFileSize, $allowed_file_type);
-                if(!$upload_result['error']) 
-                {
-                    $this->request->data['avatar'] =  'avatars/'.$upload_result['file_name'];
-                }else 
-                {
-                    $this->Flash->error(!$upload_result['error_message']);
-                }
-            }
-
             $this->Profile = new Profile();
             $new_user_info = $this->request->getData();
             $profile = $this->Profile->edit($user_id, $new_user_info);
@@ -78,7 +59,7 @@ class MeController extends AppController
             }
             else
             {
-                $this->Flash->error(__('Vui lòng kiểm tra thông tin đã điền.'));
+                $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập.'));
             }
         }
 
