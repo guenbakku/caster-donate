@@ -70,23 +70,19 @@ class MeController extends AppController
 
             $this->Profile = new Profile();
             $new_user_info = $this->request->getData();
-            //
             $profile = $this->Profile->edit($user_id, $new_user_info);
+            
             if(!$profile->errors())
             {
                 $this->Flash->success(__('Thay đổi thông tin cá nhân thành công.'));
             }
             else
             {
-                if ($profile->errors()){
-                    $this->Flash->error(__('Vui lòng kiểm tra thông tin đã điền.'));                    
-                }else
-                {
-                    $this->Flash->error(__('Không thể cập nhật thông tin.'));                    
-                }
+                $this->Flash->error(__('Vui lòng kiểm tra thông tin đã điền.'));
             }
         }
 
+        $this->set(compact('profile'));
         $this->render('/Me/index');
     }
 

@@ -8,7 +8,7 @@
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
                 <h3 class="profile-username text-center"><?= $profile->nickname != null ?: $Auth->user('username') ?></h3>
-                <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $profile->created->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
+                <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
                         <b><?=__('Ngày sinh')?></b> <span class="pull-right"><?= $profile->birthday ?></span>

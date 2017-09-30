@@ -9,10 +9,6 @@
         'label' => '<label class="col-sm-2 control-label" {{attrs}}>{{text}}</label>',
     ]);?>
     <?=$this->Form->create($profile, [
-        'url' => [
-            'controller' => 'Me',
-            'action' => 'editProfile',
-        ],
         'type' => 'file',
         'class' => 'form-horizontal',
     ]);?>
@@ -57,6 +53,15 @@
                 'type'  => 'text',
                 'label' => [
                     'text' =>  __('Ngày sinh')
+                ],
+            ]);
+        ?>
+
+        <?= $this->Form->control('location', [
+                'class' => 'form-control',
+                'type'  => 'text',
+                'label' => [
+                    'text' =>  __('Nơi ở')
                 ],
             ]);
         ?>
