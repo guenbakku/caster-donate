@@ -7,20 +7,20 @@
                     'class' => 'profile-user-img img-responsive img-circle', 
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
-                <h3 class="profile-username text-center"><?= $profile['nickname'] != null ?: $Auth->user('username') ?></h3>
-                <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $profile['created']->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
+                <h3 class="profile-username text-center"><?= $profile->nickname != null ?: $Auth->user('username') ?></h3>
+                <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $profile->created->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <b><?=__('Ngày sinh')?></b> <a class="pull-right"><?=$profile['birthday']?></a>
+                        <b><?=__('Ngày sinh')?></b> <span class="pull-right"><?= $profile->birthday ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b><?=__('Nơi ở hiện tại')?></b> <a class="pull-right">Đà Nẵng - Việt Nam</a>
+                        <b><?=__('Nơi ở hiện tại')?></b> <span class="pull-right"><?= $profile->location ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Facebook</b> <a class="pull-right"><?=($profile['facebook_public'] == true) ? $profile['facebook'] : ''?></a>
+                        <b>Facebook</b> <span class="pull-right"><?= $profile->facebook ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Zalo</b> <a class="pull-right"><?=($profile['zalo_public'] == true) ? $profile['zalo'] : ''?></a>
+                        <b>Zalo</b> <span class="pull-right"><?= $profile->zalo_public ?></span>
                     </li>
                 </ul>
                 <a href="#" class="btn btn-primary btn-block"><b><?=__('Theo dõi')?></b></a>
@@ -37,7 +37,7 @@
             <div class="box-body">
                 <strong><i class="fa fa-book margin-r-5"></i> <?=__('Lời giới thiệu')?></strong>
                 <p class="text-muted">
-                    <?=$profile['introduction']?>
+                    <?= $profile->introduction ?>
                 </p>
                 <hr>
                 <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag Live Stream')?></strong>
