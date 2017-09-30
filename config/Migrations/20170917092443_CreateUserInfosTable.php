@@ -23,15 +23,15 @@ class CreateUserInfosTable extends AbstractMigration
             ])
             ->addColumn('nickname', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 50,
             ])
             ->addColumn('firstname', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 50,
             ])
             ->addColumn('lastname', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 50,
             ])
             ->addColumn('birthday', 'date', [
                 'null' => true,

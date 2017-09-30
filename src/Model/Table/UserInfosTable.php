@@ -21,23 +21,47 @@ class UserInfosTable extends AppTable
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->uuid('id')
+            ->uuid('id', __('ID không hợp lệ'))
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('nickname');
+            ->allowEmpty('nickname')
+            ->add('nickname', [
+                'maxLength' => [
+                    'rule' => ['maxLength', $this->columnLength('nickname')],
+                    'message' => __('Không được nhập quá {0} ký tự.', $this->columnLength('nickname')),
+                ],
+            ]);
 
         $validator
-            ->allowEmpty('firstname');
+            ->allowEmpty('firstname')
+            ->add('firstname', [
+                'maxLength' => [
+                    'rule' => ['maxLength', $this->columnLength('firstname')],
+                    'message' => __('Không được nhập quá {0} ký tự.', $this->columnLength('firstname')),
+                ],
+            ]);
 
         $validator
-            ->allowEmpty('lastname');
+            ->allowEmpty('lastname')
+            ->add('lastname', [
+                'maxLength' => [
+                    'rule' => ['maxLength', $this->columnLength('lastname')],
+                    'message' => __('Không được nhập quá {0} ký tự.', $this->columnLength('lastname')),
+                ],
+            ]);
 
         $validator
             ->allowEmpty('birthday');
 
         $validator
-            ->allowEmpty('introduction');
+            ->allowEmpty('introduction')
+            ->add('introduction', [
+                'maxLength' => [
+                    'rule' => ['maxLength', $this->columnLength('introduction')],
+                    'message' => __('Không được nhập quá {0} ký tự.', $this->columnLength('introduction')),
+                ],
+            ]);
 
         $validator
             ->allowEmpty('avatar')
@@ -62,17 +86,17 @@ class UserInfosTable extends AppTable
         return $validator;
     }
 
-     /**
+    /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-     public function buildRules(RulesChecker $rules)
-     {
-         $rules->add($rules->existsIn(['user_id'], 'Users'));
- 
-         return $rules;
-     }
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+
+        return $rules;
+    }
 }
