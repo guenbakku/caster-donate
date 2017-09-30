@@ -7,7 +7,7 @@
                     'class' => 'profile-user-img img-responsive img-circle', 
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
-                <h3 class="profile-username text-center"><?= $profile->nickname != null ?: $Auth->user('username') ?></h3>
+                <h3 class="profile-username text-center"><?= $profile->nickname?: $Auth->user('username') ?></h3>
                 <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
