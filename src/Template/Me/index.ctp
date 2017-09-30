@@ -3,7 +3,7 @@
         <!-- Profile Image -->
         <div class="box box-primary">
             <div class="box-body box-profile">
-                <?= $this->Html->image($profile['avatar'], [
+                <?= $this->Html->image($profile->avatar, [
                     'class' => 'profile-user-img img-responsive img-circle', 
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
