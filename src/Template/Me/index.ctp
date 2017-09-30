@@ -59,7 +59,7 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="<?= $this->request->action == 'statistics'? 'active' : null ?>">
-                    <?= $this->Html->link(__('Thông kê thu nhập'), [
+                    <?= $this->Html->link(__('Thống kê thu nhập'), [
                         'action' => 'statistics',
                     ]) ?>
                 </li>
