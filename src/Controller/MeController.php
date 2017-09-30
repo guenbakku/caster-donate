@@ -7,26 +7,47 @@ use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
-use App\Model\Logic\Profile\Profile;
 use Cake\ORM\TableRegistry;
+use App\Model\Logic\Profile\Profile;
 use App\Controller\Component\UploadFileComponentComponent;
 
 class MeController extends AppController
 {
     public function index() 
     {
+        return $this->redirect(['action' => 'statistics']);
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
         $this->ContentHeader->title('Trang cá nhân');
+
+        // Set default render setting
         $user_id = $this->Auth->user('id');
-        $this->Profile = new Profile();
-        $profile = $this->Profile->get($user_id);
+        if ($this->request->is('get'))
+        {
+            $this->Profile = new Profile();
+            $profile = $this->Profile->get($user_id);
+        }
         $this->set(compact('profile'));
     }
 
-    public function editProfile()
+    public function statistics()
+    {
+        $this->render('/Me/index');
+    }
+
+    public function schedule() 
+    {
+        $this->render('/Me/index');
+    }
+
+    public function profile()
     {
         $user_id = $this->Auth->user('id');
         
-        if($this->request->is(['PATCH','POST','PUT']))
+        if($this->request->is(['patch','post','put']))
         {
             //Nếu có file upload
             if($this->request->data['avatar']['error'] == false)
@@ -65,7 +86,7 @@ class MeController extends AppController
                 }
             }
         }
-        $this->set('profile',$profile);
+
         $this->render('/Me/index');
     }
 
