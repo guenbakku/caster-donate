@@ -237,3 +237,4 @@ Plugin::load('Migrations');
  */
  Configure::load('system', 'default');
  Configure::load('vcv', 'default');
+ Configure::load('form_templates', 'default');

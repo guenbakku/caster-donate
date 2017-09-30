@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Core\Configure;
 
 /**
  * Application Controller
@@ -80,5 +81,6 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
         $this->set('Auth', $this->Auth);
+        $this->set('FormTemplates', Configure::read('FormTemplates'));
     }
 }
