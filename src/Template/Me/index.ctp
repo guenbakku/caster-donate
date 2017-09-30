@@ -11,16 +11,16 @@
                 <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <b><?=__('Ngày sinh')?></b> <span class="pull-right"><?= $profile->birthday ?></span>
+                        <b><?=__('Ngày sinh')?></b> <span class="pull-right"><?= h($profile->birthday) ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b><?=__('Nơi ở hiện tại')?></b> <span class="pull-right"><?= $profile->location ?></span>
+                        <b><?=__('Nơi ở hiện tại')?></b> <span class="pull-right"><?= h($profile->location) ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Facebook</b> <span class="pull-right"><?= $profile->facebook ?></span>
+                        <b>Facebook</b> <span class="pull-right"><?= h($profile->facebook) ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Zalo</b> <span class="pull-right"><?= $profile->zalo_public ?></span>
+                        <b>Zalo</b> <span class="pull-right"><?= h($profile->zalo) ?></span>
                     </li>
                 </ul>
                 <a href="#" class="btn btn-primary btn-block"><b><?=__('Theo dõi')?></b></a>
@@ -37,7 +37,7 @@
             <div class="box-body">
                 <strong><i class="fa fa-book margin-r-5"></i> <?=__('Lời giới thiệu')?></strong>
                 <p class="text-muted">
-                    <?= $profile->introduction ?>
+                    <?= nl2br(h($profile->introduction)) ?>
                 </p>
                 <hr>
                 <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag Live Stream')?></strong>
