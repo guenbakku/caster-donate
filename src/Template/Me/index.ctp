@@ -7,8 +7,8 @@
                     'class' => 'profile-user-img img-responsive img-circle', 
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
-                <h3 class="profile-username text-center"><?=($profile['nickname'] != null)?$profile['nickname']:(__('Chưa thiết lập nickname'))?></h3>
-                <p class="text-muted text-center"><?=__('Ngày tham gia')?> : <?=$this->Time->format($profile['created'], 'd-m-Y');?></p>
+                <h3 class="profile-username text-center"><?= $profile['nickname'] != null ?: $Auth->user('username') ?></h3>
+                <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $profile['created']->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
                         <b><?=__('Ngày sinh')?></b> <a class="pull-right"><?=$profile['birthday']?></a>
