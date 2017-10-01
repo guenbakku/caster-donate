@@ -2,6 +2,8 @@
 
 /**
  * Define templates for form
+ *
+ * @package: App
  */
 return [
     'FormTemplates' => [

@@ -238,3 +238,13 @@ Plugin::load('Migrations');
  Configure::load('system', 'default');
  Configure::load('vcv', 'default');
  Configure::load('form_templates', 'default');
+ Configure::load('events', 'default');
+
+/*
+ * Event register
+ */
+use Cake\Event\EventManager;
+use App\Event\UpdateUser;
+
+EventManager::instance()->attach(new UpdateUser());
+

@@ -23,13 +23,8 @@ class Profile
 
     public function edit($user_id, array $new_user_info)
     {
-        $user_info = $this->UserInfos->findByUserId($user_id)->first();
-
-        if ($user_info === null) 
-        {
-            $user_info = $this->UserInfos->newEntity();
-            $user_info->user_id = $user_id;
-        }
+        $user_info = $this->get($user_id);
+        $user_info->user_id = $user_id;
 
         // Don't update excepted columns, eg: avatar
         $this->UserInfos->patchEntity($user_info, $new_user_info, [
@@ -48,6 +43,9 @@ class Profile
                 'to' => Configure::read('System.Paths.avatar'),
                 'field' => 'avatar',
             ]);
+
+            // Get new info from database
+            $user_info = $this->get($user_id);
         }
 
         return $user_info;

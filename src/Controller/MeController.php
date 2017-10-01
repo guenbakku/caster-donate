@@ -54,7 +54,13 @@ class MeController extends AppController
             $profile = $this->Profile->edit($user_id, $new_user_info);
             
             if(!$profile->errors())
-            {
+            {   
+                // Trigger event after edited profile
+                $this->dispatchEvent(
+                    Configure::read('Events.Controller.Me.AfterEditProfile'), 
+                    ['profile' => $profile]
+                );
+                
                 $this->Flash->success(__('Thay đổi thông tin cá nhân thành công.'));
             }
             else

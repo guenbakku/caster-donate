@@ -3,7 +3,7 @@
         <!-- Profile Image -->
         <div class="box box-primary">
             <div class="box-body box-profile">
-                <?= $this->Html->image($profile->avatar, [
+                <?= $this->Html->image($Auth->user('avatar_url'), [
                     'class' => 'profile-user-img img-responsive img-circle', 
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
@@ -46,9 +46,6 @@
                     <span class="label label-success">Lol</span>
                     <span class="label label-info">Học tiếng Nhật</span>
                 </p>
-                <hr>
-                <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
             </div>
             <!-- /.box-body -->
         </div>

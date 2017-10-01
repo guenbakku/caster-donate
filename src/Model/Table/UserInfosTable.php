@@ -27,9 +27,13 @@ class UserInfosTable extends AppTable
         $validator
             ->allowEmpty('nickname')
             ->add('nickname', [
+                'minLength' => [
+                    'rule' => ['minLength', 3],
+                    'message' => __('Không được ngắn hơn {0} ký tự.', 3),
+                ],
                 'maxLength' => [
                     'rule' => ['maxLength', $this->columnLength('nickname')],
-                    'message' => __('Không được nhập quá {0} ký tự.', $this->columnLength('nickname')),
+                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('nickname')),
                 ],
             ]);
 
@@ -38,7 +42,7 @@ class UserInfosTable extends AppTable
             ->add('firstname', [
                 'maxLength' => [
                     'rule' => ['maxLength', $this->columnLength('firstname')],
-                    'message' => __('Không được nhập quá {0} ký tự.', $this->columnLength('firstname')),
+                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('firstname')),
                 ],
             ]);
 
@@ -47,7 +51,7 @@ class UserInfosTable extends AppTable
             ->add('lastname', [
                 'maxLength' => [
                     'rule' => ['maxLength', $this->columnLength('lastname')],
-                    'message' => __('Không được nhập quá {0} ký tự.', $this->columnLength('lastname')),
+                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('lastname')),
                 ],
             ]);
 
@@ -59,7 +63,7 @@ class UserInfosTable extends AppTable
             ->add('introduction', [
                 'maxLength' => [
                     'rule' => ['maxLength', $this->columnLength('introduction')],
-                    'message' => __('Không được nhập quá {0} ký tự.', $this->columnLength('introduction')),
+                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('introduction')),
                 ],
             ]);
 

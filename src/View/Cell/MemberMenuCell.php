@@ -6,8 +6,8 @@ use Cake\Core\Configure;
 
 class MemberMenuCell extends Cell
 {
-    public function display()
+    public function display($Auth)
     {
-        
+        $this->set(compact('Auth'));
     }
 }
