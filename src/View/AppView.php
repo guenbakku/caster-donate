@@ -37,5 +37,6 @@ class AppView extends View
     public function initialize()
     {
         $this->loadHelper('ContentHeader');
+        $this->loadHelper('JQueryInputMask');
     }
 }
