@@ -14,6 +14,7 @@ class UpdateUser implements EventListenerInterface
     public function implementedEvents() {
         return [
             UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateSessionAfterUserLogin',
+            UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
             Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateSessionAfterEditUserProfile',
         ];
     }
@@ -31,9 +32,16 @@ class UpdateUser implements EventListenerInterface
         $Controller->Auth->setUser($user);
     }
 
-    public function fillSubTableAfterUserRegister($event, $entity)
+    public function fillSubTablesAfterUserRegister($event, $entity)
     {
+        $Controller = $event->subject();
+        $user = $Controller->Auth->user();
 
+        // Insert empty row to user_infos table
+        $UserInfos = TableRegistry::get('UserInfos');
+        $userInfo = $UserInfos->newEntity();
+        $userInfo->user_id = $entity->id;
+        $UserInfos->save($userInfo);
     }
 
     public function updateSessionAfterEditUserProfile($event, $entity)

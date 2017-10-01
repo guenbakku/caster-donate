@@ -5,14 +5,16 @@
         <!-- The user image in the navbar-->
         <?= $this->Html->image($Auth->user('avatar_url'), ['class' => 'user-image', 'alt' => __('User profile picture')]) ?>
         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-        <span class="hidden-xs"><?= $Auth->user('nickname') ?: $Auth->user('username') ?></span>
+        <span class="hidden-xs">
+            <?= h($Auth->user('nickname') ?: $Auth->user('username')) ?>
+        </span>
     </a>
     <ul class="dropdown-menu">
         <!-- The user image in the menu -->
         <li class="user-header">
             <?= $this->Html->image($Auth->user('avatar_url'), ['class' => 'img-circle', 'alt' => __('User profile picture')]) ?>
             <p>
-                <?= $Auth->user('nickname') ?: $Auth->user('username') ?>
+                <?= h($Auth->user('nickname') ?: $Auth->user('username')) ?>
                 <small><?=__('Tham gia từ')?> : <?= $Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></small>
             </p>
         </li>

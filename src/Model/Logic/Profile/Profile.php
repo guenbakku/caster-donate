@@ -13,42 +13,42 @@ class Profile
 
     public function get($user_id)
     {
-        $user_info = $this->UserInfos->findByUserId($user_id)->first();
-        if(!$user_info)
+        $userInfo = $this->UserInfos->findByUserId($user_id)->first();
+        if(!$userInfo)
         {
             return $this->UserInfos->newEntity();
         }
-        return $user_info;
+        return $userInfo;
     }
 
     public function edit($user_id, array $new_user_info)
     {
-        $user_info = $this->get($user_id);
-        $user_info->user_id = $user_id;
+        $userInfo = $this->get($user_id);
+        $userInfo->user_id = $user_id;
 
         // Don't update excepted columns, eg: avatar
-        $this->UserInfos->patchEntity($user_info, $new_user_info, [
+        $this->UserInfos->patchEntity($userInfo, $new_user_info, [
             'fieldList' => $this->UserInfos->columnsExcept(['avatar']),
         ]);
 
-        if(!$user_info->errors())
+        if(!$userInfo->errors())
         {
-            $this->UserInfos->save($user_info);
+            $this->UserInfos->save($userInfo);
 
             // Move uploaded file and save filename to database
             $this->UserInfos->addBehavior('Upload');
             $this->UserInfos->moveUploadedFileAndSave([
-                'id' => $user_info->id,
+                'id' => $userInfo->id,
                 'uploaded' => $new_user_info['avatar'],
                 'to' => Configure::read('System.Paths.avatar'),
                 'field' => 'avatar',
             ]);
 
             // Get new info from database
-            $user_info = $this->get($user_id);
+            $userInfo = $this->get($user_id);
         }
 
-        return $user_info;
+        return $userInfo;
     }
 }
 ?>
