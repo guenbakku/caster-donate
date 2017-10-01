@@ -41,9 +41,7 @@
         ?>
 
         <?= $this->Form->control('birthday', [
-                'class' => 'form-control',
-                'data-inputmask' => __("'alias': ''{0}''", $this->JQueryInputMask->date()),
-                'data-mask' => '',
+                'class' => 'form-control dateinput',
                 'type'  => 'text',
                 'label' => [
                     'text' =>  __('Ngày sinh')

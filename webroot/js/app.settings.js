@@ -5,12 +5,11 @@ $(function () {
         radioClass: 'iradio_square-blue',
         increaseArea: '20%' // optional
     });
-
-    $(':input').inputmask();
 });
 
 $(function () {
     kendo.culture("vi-VN");
+    $('.dateinput').kendoDateInput();    
 })
 
 function addNew(widgetId, value) {

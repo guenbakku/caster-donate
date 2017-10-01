@@ -43,12 +43,10 @@
     <?= $this->Html->script('/packages/slimScroll/jquery.slimscroll.min.js') ?>
     <?= $this->Html->script('/packages/fastclick/fastclick.js') ?>
     <?= $this->Html->script('/packages/iCheck/icheck.min.js') ?>
-    <?= $this->Html->script('/packages/input-mask/jquery.inputmask.js') ?>
-    <?= $this->Html->script('/packages/input-mask/jquery.inputmask.date.extensions.js') ?>
-    <?= $this->Html->script('/packages/input-mask/jquery.inputmask.extensions.js') ?>
     <?= $this->Html->script('/packages/AdminLTE/js/app.min.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.core.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.data.js') ?>
+    <?= $this->Html->script('/packages/KendoUI/js/kendo.dateinput.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.popup.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.list.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.multiselect.js') ?>
