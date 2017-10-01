@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateUserSocialAccountsTable extends AbstractMigration
+class CreateUserInfosSocialProvidersTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,12 +12,12 @@ class CreateUserSocialAccountsTable extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('user_social_accounts', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('user_infos_social_providers', ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('user_id', 'uuid', [
+            ->addColumn('user_info_id', 'uuid', [
                 'null' => false,
             ])
             ->addColumn('provider_id', 'uuid', [
