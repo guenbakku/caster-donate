@@ -1,4 +1,8 @@
 <?php
+/**
+ * NOTE: hiện tại chưa có chỗ nào dùng helper này
+ * Nhưng có thể code sẽ dùng được ở đâu đó sau này, nên để lại.
+ */
 namespace App\View\Helper;
 
 use Cake\View\Helper;

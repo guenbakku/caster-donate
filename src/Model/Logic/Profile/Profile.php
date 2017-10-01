@@ -8,8 +8,8 @@ class Profile
 {
     public function get($user_id)
     {
-        $UserInfos = TableRegistry::get('UserInfos');
-        $query = $UserInfos->findByUserId($user_id);
+        $userInfos = TableRegistry::get('UserInfos');
+        $query = $userInfos->findByUserId($user_id);
         $query->contain(['SocialProviders']);
         
         $userInfo = $query->first();
@@ -19,29 +19,30 @@ class Profile
 
         if(!$userInfo)
         {
-            return $UserInfos->newEntity();
+            return $userInfos->newEntity();
         }
         return $userInfo;
     }
 
     public function edit($user_id, array $new_user_info)
     {
-        $UserInfos = TableRegistry::get('UserInfos');
+        $userInfos = TableRegistry::get('UserInfos');
         $userInfo = $this->get($user_id);
         $userInfo->user_id = $user_id;
 
         // Don't update excepted columns, eg: avatar
-        $UserInfos->patchEntity($userInfo, $new_user_info, [
-            'fieldList' => $UserInfos->columnsExcept(['avatar']),
+        $userInfos->patchEntity($userInfo, $new_user_info, [
+            'fieldList' => $userInfos->columnsExcept(['avatar']),
+            'associated' => ['SocialProviders._joinData'],
         ]);
 
         if(!$userInfo->errors())
         {
-            $UserInfos->save($userInfo);
+            $userInfos->save($userInfo);
 
             // Move uploaded file and save filename to database
-            $UserInfos->addBehavior('Upload');
-            $UserInfos->moveUploadedFileAndSave([
+            $userInfos->addBehavior('Upload');
+            $userInfos->moveUploadedFileAndSave([
                 'id' => $userInfo->id,
                 'uploaded' => $new_user_info['avatar'],
                 'to' => Configure::read('System.Paths.avatar'),

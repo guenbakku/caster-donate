@@ -19,8 +19,19 @@
 
                     <?php foreach ($profile->social_providers as $socialProvider): ?>
                     <li class="list-group-item">
-                        <b><?= $socialProvider->name ?></b> 
-                        <span class="pull-right"><?= h($socialProvider->_joinData->reference) ?></span>
+                        <b><?= $socialProvider->name ?></b>
+                        <?php if (!empty($socialProvider->_joinData->reference)) {
+                            echo $this->Html->link(
+                                $this->Text->truncate(h($socialProvider->_joinData->reference), 30), 
+                                $socialProvider->_joinData->reference,
+                                [
+                                    'class' => 'pull-right',
+                                    'escape' => false,
+                                    'title' => $socialProvider->_joinData->reference,
+                                    'target' => '_blank',
+                                ]
+                            ); 
+                        } ?>
                     </li>
                     <?php endforeach ?>
 
