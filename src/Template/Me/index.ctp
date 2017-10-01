@@ -16,12 +16,14 @@
                     <li class="list-group-item">
                         <b><?=__('Nơi ở hiện tại')?></b> <span class="pull-right"><?= h($profile->location) ?></span>
                     </li>
+
+                    <?php foreach ($profile->social_providers as $socialProvider): ?>
                     <li class="list-group-item">
-                        <b>Facebook</b> <span class="pull-right"><?= h($profile->facebook) ?></span>
+                        <b><?= $socialProvider->name ?></b> 
+                        <span class="pull-right"><?= h($socialProvider->_joinData->reference) ?></span>
                     </li>
-                    <li class="list-group-item">
-                        <b>Zalo</b> <span class="pull-right"><?= h($profile->zalo) ?></span>
-                    </li>
+                    <?php endforeach ?>
+
                     <li class="list-group-item">
                         <strong><i class="fa fa-book margin-r-5"></i> <?=__('Lời giới thiệu')?></strong>
                         <div class="text-muted">

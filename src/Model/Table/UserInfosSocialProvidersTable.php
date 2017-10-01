@@ -12,6 +12,11 @@ class UserInfosSocialProvidersTable extends AppTable
     {
         parent::initialize($config);
 
+        $this->addBehavior('Replete', [
+            'belongsTo' => 'SocialProviders',
+            'sort' => 'order_no',
+        ]);
+
         $this->belongsTo('UserInfos', [
             'foreignKey' => 'user_info_id',
         ]);

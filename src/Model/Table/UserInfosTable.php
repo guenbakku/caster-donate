@@ -17,6 +17,7 @@ class UserInfosTable extends AppTable
         ]);
         $this->belongsToMany('SocialProviders', [
             'joinTable' => 'user_infos_social_providers',
+            'sort' => ['SocialProviders.order_no'],
         ]);
     }
 
