@@ -40,6 +40,44 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
+Entity1=sexes
+Entity2=user_infos
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=sex_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3593,6407,3158,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20171002005040
+LineMode=0
+Bar1=359
+Bar2=641
+Bar3=316
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=sexes
+LName=Giới tính
+Comment=
+TableOption=
+Page=MAIN
+Left=2850
+Top=1200
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Tên","name","VARCHAR(30)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20171002005137
+Position="MAIN",2850,1200,849,167
+
+[Relation]
 Entity1=caster_infos
 Entity2=caster_infos_caster_tags
 RelationType1=2
@@ -133,11 +171,12 @@ Left=1550
 Top=2400
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Nhà cung cấp","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Địa chỉ truy cập","access","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170917222233
+ModifiedDateTime=20171002005323
 Position="MAIN",1550,2400
 
 [Entity]
@@ -420,9 +459,10 @@ Left=1550
 Top=1200
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Tên thường gọi","nickname","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Nickname","nickname","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Tên","firstname","VARCHAR(100)",,,"NULL","",$FFFFFFFF,""
 Field="Họ","lastname","VARCHAR(100)",,,"NULL","",$FFFFFFFF,""
+Field="Id giới tính","sex_id","CHAR(36)",,,"NULL","",$FFFFFFFF,""
 Field="Ngày sinh","birthday","DATE",,,"NULL","",$FFFFFFFF,""
 Field="Nơi ở","location","VARCHAR(100)",,,"","",$FFFFFFFF,""
 Field="Lời giới thiệu","introduction","TINYTEXT",,,"NULL","",$FFFFFFFF,""
@@ -431,5 +471,5 @@ Index=user_id=1,user_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170930094440
-Position="MAIN",1550,1200,1115,470
+ModifiedDateTime=20171002004747
+Position="MAIN",1550,1200,1115,521
