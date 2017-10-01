@@ -5,7 +5,8 @@ use Cake\Core\Configure;
 
 class UserInfo extends AppEntity
 {
-    protected function _getAvatarUrl() {
+    protected function _getAvatarUrl()
+    {
         $avatar = $this->_properties['avatar'];
         if (!empty($avatar)) {
             return 'avatar/'.$avatar;

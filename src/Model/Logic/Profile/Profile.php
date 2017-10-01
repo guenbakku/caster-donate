@@ -10,18 +10,13 @@ class Profile
     {
         $UserInfos = TableRegistry::get('UserInfos');
         $query = $UserInfos->findByUserId($user_id);
-        $query->contain([
-            'SocialProviders' => [
-                'sort' => ['order_no'],
-            ]
-        ]);
+        $query->contain(['SocialProviders']);
         
         $userInfo = $query->first();
         
-        // $SocialProviders = TableRegistry::get('SocialProviders');
-        // debug($SocialProviders->providers());
-        // debug($userInfo);
-        
+        $UISPs = TableRegistry::get('UserInfosSocialProviders');
+        $userInfo->social_providers = $UISPs->repleteEntities($userInfo->social_providers);
+
         if(!$userInfo)
         {
             return $UserInfos->newEntity();
