@@ -14,12 +14,13 @@ class UpdateUser implements EventListenerInterface
     public function implementedEvents() {
         return [
             UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateSessionAfterUserLogin',
+            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateSessionAfterUserLogin',
             UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
             Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateSessionAfterEditUserProfile',
         ];
     }
 
-    public function updateSessionAfterUserLogin($event, $entity)
+    public function updateSessionAfterUserLogin($event)
     {
         $Controller = $event->subject();
         $user = $Controller->Auth->user();
@@ -32,7 +33,7 @@ class UpdateUser implements EventListenerInterface
         $Controller->Auth->setUser($user);
     }
 
-    public function fillSubTablesAfterUserRegister($event, $entity)
+    public function fillSubTablesAfterUserRegister($event)
     {
         $Controller = $event->subject();
         $user = $Controller->Auth->user();
