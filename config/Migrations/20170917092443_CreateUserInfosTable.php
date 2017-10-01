@@ -36,6 +36,10 @@ class CreateUserInfosTable extends AbstractMigration
             ->addColumn('birthday', 'date', [
                 'null' => true,
             ])
+            ->addColumn('location', 'string', [
+                'null' => true,
+                'limit' => 100,
+            ])
             ->addColumn('introduction', 'string', [
                 'null' => true,
                 'limit' => 512,

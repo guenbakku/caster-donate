@@ -31,7 +31,20 @@
                         </div>
                     </li>
                     <li class="list-group-item">
-                        <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag Live Stream')?></strong>
+                        <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag nội dung Live Stream')?></strong>
+                        <?=$this->Form->create($profile)?>
+                        <div class="input-group input-group-sm">
+                            <?=$this->Form->input('tag_name',[
+                                'type' => 'text',
+                                'class' => 'form-control ',
+                                'id' => 'products',
+                                'label' => false
+                            ])?>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-flat"><?=__('Thêm Tag')?></button>
+                            </span>
+                        </div>
+                        <?=$this->Form->end()?>
                         <div>
                             <span class="label label-danger">Dota 2</span>
                             <span class="label label-success">Lol</span>

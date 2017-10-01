@@ -15,7 +15,6 @@
     <?= $this->Html->css('/packages/AdminLTE/css/AdminLTE.min.css') ?>
     <?= $this->Html->css('/packages/AdminLTE/css/skins/skin-red-light.min.css') ?>
     <?= $this->Html->css('style.css') ?>
-    <?= $this->Html->css('jquery-ui.min.css') ?>
     <?= $this->fetch('css') ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,9 +46,12 @@
     <?= $this->Html->script('/packages/AdminLTE/js/app.min.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.core.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.dateinput.js') ?>
+    <?= $this->Html->script('/packages/KendoUI/js/kendo.data.js') ?>
+    <?= $this->Html->script('/packages/KendoUI/js/kendo.popup.js') ?>
+    <?= $this->Html->script('/packages/KendoUI/js/kendo.list.js') ?>
+    <?= $this->Html->script('/packages/KendoUI/js/kendo.multiselect.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/cultures/kendo.culture.vi-VN.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/messages/kendo.messages.vi-VN.js') ?>
-    <?= $this->Html->script('jquery-ui.min.js') ?>
     <?= $this->Html->script('app.settings.js') ?>
     <?= $this->fetch('script') ?>
 </body>
