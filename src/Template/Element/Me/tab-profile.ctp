@@ -19,7 +19,7 @@
         <?= $this->Form->control('nickname', [
                 'class' => 'form-control',
                 'label' => [
-                    'text' => __('Biệt danh')
+                    'text' => __('Nickname')
                 ],
             ]);
         ?>

@@ -2,6 +2,8 @@
 
 /**
  * Settings for this system
+ *
+ * @package: App
  */
 return [
     'System' => [

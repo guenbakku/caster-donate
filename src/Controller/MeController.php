@@ -3,13 +3,9 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
-use Cake\Network\Exception\ForbiddenException;
-use Cake\Network\Exception\NotFoundException;
-use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use App\Model\Logic\Profile\Profile;
-use App\Controller\Component\UploadFileComponentComponent;
 
 class MeController extends AppController
 {
@@ -54,7 +50,13 @@ class MeController extends AppController
             $profile = $this->Profile->edit($user_id, $new_user_info);
             
             if(!$profile->errors())
-            {
+            {   
+                // Trigger event after edited profile
+                $this->dispatchEvent(
+                    Configure::read('Events.Controller.Me.AfterEditProfile'), 
+                    ['profile' => $profile]
+                );
+                
                 $this->Flash->success(__('Thay đổi thông tin cá nhân thành công.'));
             }
             else

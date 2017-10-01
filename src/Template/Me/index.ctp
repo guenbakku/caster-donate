@@ -3,7 +3,7 @@
         <!-- Profile Image -->
         <div class="box box-primary">
             <div class="box-body box-profile">
-                <?= $this->Html->image($profile->avatar, [
+                <?= $this->Html->image($Auth->user('avatar_url'), [
                     'class' => 'profile-user-img img-responsive img-circle', 
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
@@ -22,33 +22,21 @@
                     <li class="list-group-item">
                         <b>Zalo</b> <span class="pull-right"><?= h($profile->zalo) ?></span>
                     </li>
+                    <li class="list-group-item">
+                        <strong><i class="fa fa-book margin-r-5"></i> <?=__('Lời giới thiệu')?></strong>
+                        <div class="text-muted">
+                            <?= nl2br(h($profile->introduction)) ?>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag Live Stream')?></strong>
+                        <div>
+                            <span class="label label-danger">Dota 2</span>
+                            <span class="label label-success">Lol</span>
+                            <span class="label label-info">Học tiếng Nhật</span>
+                        </div>
+                    </li>
                 </ul>
-                <a href="#" class="btn btn-primary btn-block"><b><?=__('Theo dõi')?></b></a>
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-        <!-- About Me Box -->
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title"><?=__('Về tôi')?></h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <strong><i class="fa fa-book margin-r-5"></i> <?=__('Lời giới thiệu')?></strong>
-                <p class="text-muted">
-                    <?= nl2br(h($profile->introduction)) ?>
-                </p>
-                <hr>
-                <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag Live Stream')?></strong>
-                <p>
-                    <span class="label label-danger">Dota 2</span>
-                    <span class="label label-success">Lol</span>
-                    <span class="label label-info">Học tiếng Nhật</span>
-                </p>
-                <hr>
-                <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
             </div>
             <!-- /.box-body -->
         </div>
