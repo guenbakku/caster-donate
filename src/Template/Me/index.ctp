@@ -45,6 +45,17 @@
                             </span>
                         </div>
                         <?=$this->Form->end()?>
+                        
+                        <script id="noDataTemplate" type="text/x-kendo-tmpl">
+                            <div>
+                                 <?=__('Không tìm thấy tag, bạn có muốn tạo tag mới không ?:')?>- '#: instance.input.val() #' ?
+                            </div>
+                            <br />
+                            <button class="k-button" onclick="addNew('#: instance.element[0].id #', '#: instance.input.val() #')"><?=__('Tạo tag mới')?></button>
+                        </script>
+                        
+
+
                         <div>
                             <span class="label label-danger">Dota 2</span>
                             <span class="label label-success">Lol</span>

@@ -25,14 +25,37 @@ class TagsController extends AppController
         // Format của dữ liệu trả về tham khảo tại: 
         // http://demos.telerik.com/kendo-ui/multiselect/serverfiltering
         $array = [
-            ['name' => 'name1',
-            'id' => 'id1'],
-            ['name' => 'name2',
-            'id' => 'id2'],
-            ['name' => 'name3',
-            'id' => 'id3'],
+            [
+                'id' => '1',
+                'name' => 'id1',
+            ],
+            [
+                'id' => '2',
+                'name' => 'id2',
+            ],
+            [
+                'id' => '3',
+                'name' => 'id3',
+            ],
+            [
+                'id' => '4',
+                'name' => 'dota',
+            ],
+            [
+                'id' => '5',
+                'name' => 'asd',
+            ],
+            [
+                'id' => '6',
+                'name' => 'uyiu',
+            ],
+            [
+                'id' => '7',
+                'name' => 'mn,',
+            ],
         ];
-        echo json_encode($array);
+        $this->response->body(json_encode($array));
+        return;
     }
 
     public function search($keyword)
