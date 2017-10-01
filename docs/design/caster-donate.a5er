@@ -108,7 +108,7 @@ Entity2=user_infos_social_providers
 RelationType1=2
 RelationType2=3
 Fields1=id
-Fields2=provider_id
+Fields2=social_provider_id
 Cardinarity1=
 Cardinarity2=
 Position="MAIN",0,1855,8145,1682,R,R
@@ -150,14 +150,14 @@ Left=1550
 Top=1900
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thông tin thành viên","user_info_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Id nhà cung cấp","provider_id","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
+Field="Id nhà cung cấp","social_provider_id","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
 Field="Link tài khoản","reference","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Công khai hay không","public","BOOLEAN",,,"FALSE","",$FFFFFFFF,""
 Index=user_id=1,user_info_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171001130304
+ModifiedDateTime=20171001132232
 Position="MAIN",1550,1900,1110,254
 
 [Relation]
