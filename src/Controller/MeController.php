@@ -3,13 +3,9 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
-use Cake\Network\Exception\ForbiddenException;
-use Cake\Network\Exception\NotFoundException;
-use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use App\Model\Logic\Profile\Profile;
-use App\Controller\Component\UploadFileComponentComponent;
 
 class MeController extends AppController
 {

@@ -15,6 +15,7 @@ class UserInfosTable extends AppTable
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
         ]);
+        $this->belongsToMany('SocialProviders');
     }
 
     public function validationDefault(Validator $validator)
