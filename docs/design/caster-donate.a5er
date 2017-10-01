@@ -40,23 +40,86 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
-Entity1=social_providers
-Entity2=user_social_accounts
+Entity1=caster_infos
+Entity2=caster_infos_caster_tags
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=caster_info_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4786,5520,4033,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20171001125620
+LineMode=0
+Bar1=479
+Bar2=552
+Bar3=403
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=user_infos
+Entity2=user_infos_social_providers
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=user_info_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,1621,5501,1628,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20171001125244
+LineMode=0
+Bar1=162
+Bar2=550
+Bar3=163
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=users
+Entity2=user_infos
 RelationType1=2
 RelationType2=2
+Fields1=id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2460,6056,2316,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20171001125223
+LineMode=0
+Bar1=246
+Bar2=606
+Bar3=232
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=social_providers
+Entity2=user_infos_social_providers
+RelationType1=2
+RelationType2=3
 Fields1=id
 Fields2=provider_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,1855,8145,6051,R,R
+Position="MAIN",0,1855,8145,1682,R,R
 Dependence=0
 Caption=
 PName=
-ModifiedDateTime=20170917192325
+ModifiedDateTime=20171001124740
 LineMode=0
 Bar1=186
 Bar2=814
-Bar3=605
+Bar3=168
 TermPos1=R
 TermPos2=R
 
@@ -66,8 +129,8 @@ LName=Thông tin nhà cung cấp mạng xã hội
 Comment=
 TableOption=
 Page=MAIN
-Left=1900
-Top=1100
+Left=1550
+Top=2400
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Nhà cung cấp","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
@@ -75,48 +138,27 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20170917222233
-Position="MAIN",1900,1100
-
-[Relation]
-Entity1=users
-Entity2=user_social_accounts
-RelationType1=2
-RelationType2=3
-Fields1=id
-Fields2=user_id
-Cardinarity1=
-Cardinarity2=
-Position="MAIN",0,2949,1936,881,R,R
-Dependence=0
-Caption=
-PName=
-ModifiedDateTime=20170917191924
-LineMode=0
-Bar1=295
-Bar2=194
-Bar3=88
-TermPos1=R
-TermPos2=R
+Position="MAIN",1550,2400
 
 [Entity]
-PName=user_social_accounts
+PName=user_infos_social_providers
 LName=Thông tin tài khoản mạng xã hội
 Comment=
 TableOption=
 Page=MAIN
-Left=50
-Top=950
+Left=1550
+Top=1900
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
-Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Id thông tin thành viên","user_info_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id nhà cung cấp","provider_id","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
 Field="Link tài khoản","reference","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Công khai hay không","public","BOOLEAN",,,"FALSE","",$FFFFFFFF,""
-Index=user_id=1,user_id
+Index=user_id=1,user_info_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170924212425
-Position="MAIN",50,950,1110,254
+ModifiedDateTime=20171001130304
+Position="MAIN",1550,1900,1110,254
 
 [Relation]
 Entity1=users
@@ -203,57 +245,15 @@ TermPos1=R
 TermPos2=R
 
 [Relation]
-Entity1=users
-Entity2=user_infos
-RelationType1=2
-RelationType2=2
-Fields1=id
-Fields2=user_id
-Cardinarity1=
-Cardinarity2=
-Position="MAIN",0,704,7114,670,R,R
-Dependence=0
-Caption=
-PName=
-ModifiedDateTime=20170910224049
-LineMode=0
-Bar1=70
-Bar2=711
-Bar3=67
-TermPos1=R
-TermPos2=R
-
-[Relation]
-Entity1=users
-Entity2=users_caster_tags
-RelationType1=1
-RelationType2=3
-Fields1=id
-Fields2=user_id
-Cardinarity1=
-Cardinarity2=
-Position="MAIN",0,10000,4418,3154,R,R
-Dependence=0
-Caption=
-PName=
-ModifiedDateTime=20170910223800
-LineMode=0
-Bar1=1000
-Bar2=442
-Bar3=315
-TermPos1=R
-TermPos2=R
-
-[Relation]
 Entity1=caster_tags
-Entity2=users_caster_tags
+Entity2=caster_infos_caster_tags
 RelationType1=1
 RelationType2=3
 Fields1=id
 Fields2=tag_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,2913,7087,3126,R,R
+Position="MAIN",0,2913,7087,3121,R,R
 Dependence=0
 Caption=
 PName=
@@ -261,7 +261,7 @@ ModifiedDateTime=20170910223736
 LineMode=0
 Bar1=291
 Bar2=709
-Bar3=313
+Bar3=312
 TermPos1=R
 TermPos2=R
 
@@ -328,21 +328,21 @@ ModifiedDateTime=20170910224823
 Position="MAIN",3450,700,1085,280
 
 [Entity]
-PName=users_caster_tags
+PName=caster_infos_caster_tags
 LName=Liên kết LiveStreamer với Tag
 Comment=
 TableOption=
 Page=MAIN
-Left=3450
-Top=1150
-Field="Khóa chính của bảng","id","CHAR(36)",,,"","",$FFFFFFFF,""
-Field="Id thành viên","user_id","CHAR(36)",,,"","",$FFFFFFFF,""
-Field="Id tag","tag_id","CHAR(36)",,,"","",$FFFFFFFF,""
+Left=100
+Top=1200
+Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Id thành viên","caster_info_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Id tag","tag_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170928220100
-Position="MAIN",3450,1150,1085,164
+ModifiedDateTime=20171001130226
+Position="MAIN",100,1200,1085,164
 
 [Entity]
 PName=caster_tags
@@ -350,8 +350,8 @@ LName=Thể loại LiveStream
 Comment=
 TableOption=
 Page=MAIN
-Left=4750
-Top=1150
+Left=150
+Top=1600
 Field="Khóa chính cả bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên tag","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên file ảnh của tag","image","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
@@ -360,7 +360,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20170928221727
-Position="MAIN",4750,1150,881,220
+Position="MAIN",150,1600,881,220
 
 [Entity]
 PName=donate_transactions
@@ -390,8 +390,8 @@ LName=Thông tin caster
 Comment=
 TableOption=
 Page=MAIN
-Left=50
-Top=1300
+Left=100
+Top=200
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên file ảnh CMND","identify_card","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
@@ -408,7 +408,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20170928221718
-Position="MAIN",50,1300,1109,639
+Position="MAIN",100,200,1109,639
 
 [Entity]
 PName=user_infos
@@ -416,8 +416,8 @@ LName=Thông tin thành viên
 Comment=
 TableOption=
 Page=MAIN
-Left=50
-Top=100
+Left=1550
+Top=1200
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên thường gọi","nickname","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
@@ -432,4 +432,4 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20170930094440
-Position="MAIN",50,100,1115,745
+Position="MAIN",1550,1200,1115,470
