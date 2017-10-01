@@ -12,16 +12,22 @@ $(function () {
     $('.dateinput').kendoDateInput();
 })
 
-$( function() {
-    $( "#tags_autocomplete" ).autocomplete({
-        source: function( request, response ) {
-            $.ajax( {
-                url: "http://caster-donate.cnmp7.vagrant/ajax-listener/auto-complete-tag/" + $('#tags_autocomplete').val(),
-                success: function( data ) {
-                    response( data.tag_name_array );
+$(function() {
+    $("#products").kendoMultiSelect({
+        placeholder: "Select products...",
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        autoBind: false,
+        dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "/api/v1/tags/",
                 }
-            } );
+            }
         },
-        minLength: 2
+        dataTextField: "name",
+        dataValueField: "id"
     });
 });
