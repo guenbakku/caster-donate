@@ -12,6 +12,19 @@ class SocialProvidersTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->belongsToMany('UserInfos');
+        $this->belongsToMany('UserInfos', [
+            'joinTable' => 'user_infos_social_providers',
+        ]);
+    }
+
+    /**
+     * Return all social providers
+     *
+     * @param   void
+     * @return  array
+     */
+    public function providers()
+    {
+        return $this->find('all')->order('order_no')->toArray();
     }
 }

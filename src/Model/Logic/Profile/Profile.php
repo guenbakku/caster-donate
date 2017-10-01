@@ -6,38 +6,47 @@ use Cake\Core\Configure;
 
 class Profile
 {
-    public function __construct ()
-    {
-        $this->UserInfos = TableRegistry::get('UserInfos');
-    }
-
     public function get($user_id)
     {
-        $userInfo = $this->UserInfos->findByUserId($user_id)->first();
+        $UserInfos = TableRegistry::get('UserInfos');
+        $query = $UserInfos->findByUserId($user_id);
+        $query->contain([
+            'SocialProviders' => [
+                'sort' => ['order_no'],
+            ]
+        ]);
+        
+        $userInfo = $query->first();
+        
+        // $SocialProviders = TableRegistry::get('SocialProviders');
+        // debug($SocialProviders->providers());
+        // debug($userInfo);
+        
         if(!$userInfo)
         {
-            return $this->UserInfos->newEntity();
+            return $UserInfos->newEntity();
         }
         return $userInfo;
     }
 
     public function edit($user_id, array $new_user_info)
     {
+        $UserInfos = TableRegistry::get('UserInfos');
         $userInfo = $this->get($user_id);
         $userInfo->user_id = $user_id;
 
         // Don't update excepted columns, eg: avatar
-        $this->UserInfos->patchEntity($userInfo, $new_user_info, [
-            'fieldList' => $this->UserInfos->columnsExcept(['avatar']),
+        $UserInfos->patchEntity($userInfo, $new_user_info, [
+            'fieldList' => $UserInfos->columnsExcept(['avatar']),
         ]);
 
         if(!$userInfo->errors())
         {
-            $this->UserInfos->save($userInfo);
+            $UserInfos->save($userInfo);
 
             // Move uploaded file and save filename to database
-            $this->UserInfos->addBehavior('Upload');
-            $this->UserInfos->moveUploadedFileAndSave([
+            $UserInfos->addBehavior('Upload');
+            $UserInfos->moveUploadedFileAndSave([
                 'id' => $userInfo->id,
                 'uploaded' => $new_user_info['avatar'],
                 'to' => Configure::read('System.Paths.avatar'),

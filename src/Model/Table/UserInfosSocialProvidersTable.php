@@ -6,7 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
 
-class UserSocialAccountsTable extends AppTable
+class UserInfosSocialProvidersTable extends AppTable
 {
     public function initialize(array $config)
     {
