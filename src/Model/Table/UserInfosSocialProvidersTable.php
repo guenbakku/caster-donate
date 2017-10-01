@@ -14,7 +14,7 @@ class UserInfosSocialProvidersTable extends AppTable
 
         $this->addBehavior('Replete', [
             'belongsTo' => 'SocialProviders',
-            'sort' => 'order_no',
+            'sort' => ['order_no'],
         ]);
 
         $this->belongsTo('UserInfos', [
