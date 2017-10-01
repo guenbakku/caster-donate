@@ -16,7 +16,7 @@ class UserInfosTable extends AppTable
             'foreignKey' => 'user_id',
         ]);
         $this->belongsToMany('SocialProviders', [
-            'joinTable' => 'user_infos_social_providers',
+            'through' => 'UserInfosSocialProviders',
             'sort' => ['SocialProviders.order_no'],
         ]);
     }
