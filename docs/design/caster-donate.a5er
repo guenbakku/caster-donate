@@ -152,12 +152,12 @@ Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,"
 Field="Id thông tin thành viên","user_info_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id nhà cung cấp","social_provider_id","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
 Field="Link tài khoản","reference","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
-Field="Công khai hay không","public","BOOLEAN",,,"FALSE","",$FFFFFFFF,""
+Field="Công khai hay không","public","BOOLEAN","NOT NULL",,"FALSE","",$FFFFFFFF,""
 Index=user_id=1,user_info_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171001132232
+ModifiedDateTime=20171001200919
 Position="MAIN",1550,1900,1110,254
 
 [Relation]
