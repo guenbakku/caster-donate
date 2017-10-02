@@ -13,7 +13,7 @@ class SocialProvidersTable extends AppTable
         parent::initialize($config);
 
         $this->belongsToMany('UserInfos', [
-            'joinTable' => 'user_infos_social_providers',
+            'through' => 'UserInfosSocialProviders',
         ]);
     }
 
