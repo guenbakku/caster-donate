@@ -20,7 +20,15 @@ class CreateCasterInfosTable extends AbstractMigration
             ->addColumn('user_id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('identify_card', 'string', [
+            ->addColumn('status', 'integer', [
+                'null' => true,
+                'limit' => 1,
+            ])
+            ->addColumn('identify_card_front', 'string', [
+                'null' => true,
+                'limit' => 128,
+            ])
+            ->addColumn('identify_card_end', 'string', [
                 'null' => true,
                 'limit' => 128,
             ])
