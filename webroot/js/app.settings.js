@@ -18,16 +18,15 @@ function addNew(widgetId, value) {
 
     if (confirm("Bạn muốn tạo tag mới ?")) {
         dataSource.add({
-            id: 0,
-            name: value
+            order_id: 0,
+            data_current_length: dataSource.data().length,//gửi số thứ tự
+            tag_name: value
         });
-
         dataSource.one("requestEnd", function(args) {
             if (args.type !== "create") {
                 return;
             }
-
-            var newValue = args.response[0].ProductID;
+            var newValue = args.response[0].order_id;
 
             dataSource.one("sync", function() {
                 widget.value(widget.value().concat([newValue]));
@@ -38,30 +37,29 @@ function addNew(widgetId, value) {
     }
 }
 $(document).ready(function() {
-    var crudServiceBaseUrl = "http://caster-donate.cnmp7.vagrant/api/v1/tags";
+    var crudServiceBaseUrl = "/api/v1/tags";
     var dataSource = new kendo.data.DataSource({
         batch: true,
         transport: {
             read:  {
-                url: crudServiceBaseUrl,
+                url: crudServiceBaseUrl +'/kendo-get-all',
             },
             create: {
-               /*  url: "https://demos.telerik.com/kendo-ui/service/Products/Create",
-                dataType: "jsonp", */
-                url: crudServiceBaseUrl + "/create",
+                url: crudServiceBaseUrl + "/kendo-create",
             },
             parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
+                    //trao array {model: (obj)[name:""] } cho bên nhận create
                     return {models: kendo.stringify(options.models)};
                 }
             }
         },
         schema: {
             model: {
-                id: "ProductID",
+                id: "order_id",
                 fields: {
-                    ProductID: { type: "number" },
-                    ProductName: { type: "string" }
+                    order_id: { type: "number" },
+                    tag_name: { type: "string" }
                 }
             }
         }
@@ -69,8 +67,9 @@ $(document).ready(function() {
 
     $("#products").kendoMultiSelect({
         filter: "contains",//tìm trong nội dung, ngoài ra còn có "equal" và "startswith"
-        dataTextField: "name",
-        dataValueField: "id",
+        autoBind: false,
+        dataTextField: "tag_name",
+        dataValueField: "order_id",
         dataSource: dataSource,
         noDataTemplate: $("#noDataTemplate").html()
     });

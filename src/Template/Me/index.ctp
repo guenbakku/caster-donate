@@ -53,8 +53,6 @@
                             <br />
                             <button class="k-button" onclick="addNew('#: instance.element[0].id #', '#: instance.input.val() #')"><?=__('Tạo tag mới')?></button>
                         </script>
-                        
-
 
                         <div>
                             <span class="label label-danger">Dota 2</span>
