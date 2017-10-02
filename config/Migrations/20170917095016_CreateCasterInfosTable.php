@@ -28,7 +28,7 @@ class CreateCasterInfosTable extends AbstractMigration
                 'null' => true,
                 'limit' => 128,
             ])
-            ->addColumn('identify_card_end', 'string', [
+            ->addColumn('identify_card_back', 'string', [
                 'null' => true,
                 'limit' => 128,
             ])
