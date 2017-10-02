@@ -14,6 +14,10 @@ class CreateUsersTable extends AbstractMigration
                 'limit' => 255,
                 'null' => false,
             ])
+            ->addColumn('status', 'integer', [
+                'limit' => 1,
+                'null' => true,
+            ])
             ->addColumn('email', 'string', [
                 'default' => null,
                 'limit' => 255,
