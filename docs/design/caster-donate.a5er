@@ -331,6 +331,7 @@ Left=1900
 Top=200
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên đăng nhập","username","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Trạng thái tài khoản","status","INT(0)",,,"","[0|NULL]Bình thường [1]:Khóa",$FFFFFFFF,""
 Field="Địa chỉ email","email","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Mật khẩu","password","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Token","token","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
@@ -344,7 +345,7 @@ Field="Phân quyền","role","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170917191645
+ModifiedDateTime=20171002211734
 Position="MAIN",1900,200,1225,624
 
 [Entity]
@@ -433,7 +434,9 @@ Left=100
 Top=200
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Tên file ảnh CMND","identify_card","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
+Field="Trạng thái chức năng caster","status","INT(1)",,,"NULL","[0|NULL]:Chờ duyệt [1]:Được kích hoạt [2]Khóa",$FFFFFFFF,""
+Field="Tên file ảnh CMND mặt trước","identify_card_front","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
+Field="Tên file ảnh CMND mặt sau","identify_card_back","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
 Field="Tên file hợp đồng","contract","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
 Field="Tên file ảnh donate","donate_image","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
 Field="Tên file audio donate","donate_audio","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
@@ -446,7 +449,7 @@ Field="Tên chủ tài khoản","bank_account_holder","VARCHAR(255)",,,"NULL",""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20170928221718
+ModifiedDateTime=20171002211625
 Position="MAIN",100,200,1109,639
 
 [Entity]
