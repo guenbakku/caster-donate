@@ -47,7 +47,7 @@
                         <div class="input-group input-group-sm">
                             <?=$this->Form->input('tag_name',[
                                 'type' => 'text',
-                                'class' => 'form-control ',
+                                'class' => '',
                                 'id' => 'products',
                                 'label' => false
                             ])?>

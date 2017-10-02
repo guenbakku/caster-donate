@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <?= $this->Html->css('/packages/iCheck/square/blue.css') ?>
     <?= $this->Html->css('/packages/KendoUI/styles/web/kendo.common.core.css') ?>
+    <?= $this->Html->css('/packages/KendoUI/styles/web/kendo.silver.css') ?>
     <?= $this->Html->css('/packages/AdminLTE/css/AdminLTE.min.css') ?>
     <?= $this->Html->css('/packages/AdminLTE/css/skins/skin-red-light.min.css') ?>
     <?= $this->Html->css('style.css') ?>
