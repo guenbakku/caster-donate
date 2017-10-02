@@ -43,7 +43,7 @@
                     </li>
                     <li class="list-group-item">
                         <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag nội dung Live Stream')?></strong>
-                        <?=$this->Form->create($profile)?>
+                        <?=$this->Form->create()?>
                         <div class="input-group input-group-sm">
                             <?=$this->Form->input('tag_name',[
                                 'type' => 'text',
