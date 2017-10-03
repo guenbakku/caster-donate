@@ -14,6 +14,11 @@ class UsersTable extends AppTable
         $this->hasMany('UserInfos', [
             'foreignKey' => 'user_id'
         ]);
+
+        $this->belongsToMany('CasterTagsTable',[
+            'through' => 'UserInfosCasterTags',
+            'sort' => ['CasterTagsTable.order_no']
+        ]);
     }
 
     public function validationDefault(Validator $validator)

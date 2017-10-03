@@ -40,10 +40,8 @@ class CasterTagsTableTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsToMany('CasterInfos', [
-            'foreignKey' => 'caster_tags_table_id',
-            'targetForeignKey' => 'caster_info_id',
-            'joinTable' => 'caster_infos_caster_tags_table'
+        $this->belongsToMany('UserInfos', [
+            'through' => 'UserInfosCasterTags',
         ]);
     }
 
