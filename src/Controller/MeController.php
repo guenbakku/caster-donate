@@ -25,10 +25,7 @@ class MeController extends AppController
     {
         // Set default render setting
         $user_id = $this->Auth->user('id');
-        if ($this->request->is('get'))
-        {
-            $profile = $this->Profile->get($user_id);
-        }
+        $profile = $this->Profile->get($user_id);
         $this->set(compact('profile'));
     }
 

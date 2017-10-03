@@ -15,8 +15,8 @@ class Profile
         $userInfo = $query->first();
         if($userInfo)
         {
-            $UISPs = TableRegistry::get('UserInfosSocialProviders');
-            $userInfo->social_providers = $UISPs->repleteEntities($userInfo->social_providers);
+            $UsersSocialProviders = TableRegistry::get('UsersSocialProviders');
+            $userInfo->social_providers = $UsersSocialProviders->repleteEntities($userInfo->social_providers);
         }
         else
         {

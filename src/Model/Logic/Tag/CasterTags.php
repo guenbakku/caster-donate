@@ -7,12 +7,12 @@ class CasterTags
 {
     public function __construct ()
     {
-        $this->CasterTagsTable = TableRegistry::get('CasterTagsTable');
+        $this->CasterTags = TableRegistry::get('CasterTags');
     }
 
     public function searchTagByKeyword($keyword)
     {
-        $tags = $this->CasterTagsTable->find()
+        $tags = $this->CasterTags->find()
                 ->where(['CasterTags.name LIKE' => '%'.$keyword.'%'])
                 ->all();
         
@@ -24,30 +24,30 @@ class CasterTags
 
     }
     
-    public function deleteTagRelatedWithUser($user_id, $tag_id)
+    public function deleteTagRelatedWithUser($user_id, $caster_tag_id)
     {
 
     }
 
-    public function addTagRelatedWithUser($user_id, $tag_id)
+    public function addTagRelatedWithUser($user_id, $caster_tag_id)
     {
 
     }
     
     public function getAllTag()
     {
-        return  $this->CasterTagsTable->find()->all();
+        return  $this->CasterTags->find()->all();
     }
 
     public function createNew($tag_name = null)
     {
         if($tag_name != null)
         {
-            $newRecord = $this->CasterTagsTable->newEntity();
+            $newRecord = $this->CasterTags->newEntity();
             $newRecord->name = $tag_name;
-            if($this->CasterTagsTable->save($newRecord))
+            if($this->CasterTags->save($newRecord))
             {
-                return $this->CasterTagsTable->findByName($tag_name)->first();
+                return $this->CasterTags->findByName($tag_name)->first();
             }
         }
         
@@ -59,12 +59,12 @@ class CasterTags
 
     }
 
-    public function delete($tag_id)
+    public function delete($caster_tag_id)
     {
         
     }   
 
-    public function add($tag_name)
+    public function add($caster_tag_name)
     {
 
     }

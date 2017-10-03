@@ -15,15 +15,17 @@ class UserInfosTable extends AppTable
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
         ]);
-        
         $this->belongsToMany('SocialProviders', [
-            'through' => 'UserInfosSocialProviders',
+            'through' => 'UsersSocialProviders',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
             'sort' => ['SocialProviders.order_no'],
         ]);
-        
-        $this->belongsToMany('CasterTagsTable',[
-            'through' => 'UserInfosCasterTags',
-            'sort' => ['CasterTagsTable.order_no']
+        $this->belongsToMany('CasterTags',[
+            'through' => 'UsersCasterTags',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
+            'sort' => ['CasterTags.order_no']
         ]);
     }
 

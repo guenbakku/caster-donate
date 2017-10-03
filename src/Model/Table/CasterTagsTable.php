@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class CasterTagsTableTable extends Table
+class CasterTagsTable extends Table
 {
 
     /**
@@ -34,14 +34,18 @@ class CasterTagsTableTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('caster_tags_table');
-        $this->setDisplayField('name');
-        $this->setPrimaryKey('id');
-
-        $this->addBehavior('Timestamp');
-
+        $this->belongsToMany('User', [
+            'through' => 'UsersCasterTags',
+        ]);
         $this->belongsToMany('UserInfos', [
-            'through' => 'UserInfosCasterTags',
+            'through' => 'UsersCasterTags',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
+        ]);
+        $this->belongsToMany('CasterInfos', [
+            'through' => 'UsersCasterTags',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
         ]);
     }
 

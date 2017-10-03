@@ -12,8 +12,18 @@ class SocialProvidersTable extends AppTable
     {
         parent::initialize($config);
 
+        $this->belongsToMany('User', [
+            'through' => 'UsersSocialProviders',
+        ]);
         $this->belongsToMany('UserInfos', [
-            'through' => 'UserInfosSocialProviders',
+            'through' => 'UsersSocialProviders',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
+        ]);
+        $this->belongsToMany('CasterInfos', [
+            'through' => 'UsersSocialProviders',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
         ]);
     }
 

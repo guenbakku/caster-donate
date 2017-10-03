@@ -2,7 +2,7 @@
 use Migrations\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class CreateUserInfosCasterTagsTable extends AbstractMigration
+class CreateUsersCasterTagsTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -13,15 +13,15 @@ class CreateUserInfosCasterTagsTable extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('user_infos_caster_tags', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('users_caster_tags', ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id','uuid',[
                 'null' => false,
             ])
-            ->addColumn('user_info_id','uuid',[
+            ->addColumn('user_id','uuid',[
                 'null' => false,
             ])
-            ->addColumn('tag_id','uuid',[
+            ->addColumn('caster_tag_id','uuid',[
                 'null' => false,
             ])
             ->addColumn('created','datetime',[

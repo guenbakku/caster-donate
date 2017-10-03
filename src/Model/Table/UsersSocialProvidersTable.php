@@ -6,7 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
 
-class UserInfosSocialProvidersTable extends AppTable
+class UsersSocialProvidersTable extends AppTable
 {
     public function initialize(array $config)
     {
@@ -17,11 +17,15 @@ class UserInfosSocialProvidersTable extends AppTable
             'sort' => ['order_no'],
         ]);
 
+        $this->belongsTo('Users');
         $this->belongsTo('UserInfos', [
-            'foreignKey' => 'user_info_id',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id' // Bind với cột user_id trên bảng UserInfos
         ]);
-        $this->belongsTo('SocialProviders', [
-            'foreignKey' => 'social_provider_id',
+        $this->belongsTo('CasterInfos', [
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id', // Bind với cột user_id trên bảng CasterInfos
         ]);
+        $this->belongsTo('SocialProviders');
     }
 }
