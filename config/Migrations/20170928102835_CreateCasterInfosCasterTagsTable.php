@@ -13,12 +13,15 @@ class CreateCasterInfosCasterTagsTable extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('caster_infos_caster_tags_table', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('users_caster_tags', ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id','uuid',[
                 'null' => false,
             ])
-            ->addColumn('caster_info_id','uuid',[
+            ->addColumn('user_id','uuid',[
+                'null' => false,
+            ])
+            ->addColumn('tag_id','uuid',[
                 'null' => false,
             ])
             ->addColumn('created','datetime',[
