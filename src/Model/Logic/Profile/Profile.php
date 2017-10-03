@@ -11,13 +11,13 @@ class Profile
         $userInfos = TableRegistry::get('UserInfos');
         $query = $userInfos->findByUserId($user_id);
         $query->contain(['SocialProviders']);
-        
-        $userInfo = $query->first();
-        
-        $UISPs = TableRegistry::get('UserInfosSocialProviders');
-        $userInfo->social_providers = $UISPs->repleteEntities($userInfo->social_providers);
 
-        if(!$userInfo)
+        $userInfo = $query->first();
+        if($userInfo){
+            $UISPs = TableRegistry::get('UserInfosSocialProviders');
+            $userInfo->social_providers = $UISPs->repleteEntities($userInfo->social_providers);
+        }
+        else
         {
             return $userInfos->newEntity();
         }

@@ -18,7 +18,10 @@ class MeController extends AppController
     {
         parent::beforeFilter($event);
         $this->ContentHeader->title('Trang cá nhân');
+    }
 
+    public function beforeRender(Event $event)
+    {
         // Set default render setting
         $user_id = $this->Auth->user('id');
         if ($this->request->is('get'))

@@ -28,8 +28,11 @@ class UpdateUser implements EventListenerInterface
         $UserInfos = TableRegistry::get('UserInfos');
         $entity = $UserInfos->findByUserId($user['id'])->first();
 
-        $user['avatar_url'] = $entity->avatar_url;
-        $user['nickname'] = $entity->nickname;
+        if($entity)
+        {
+            $user['avatar_url'] = $entity->avatar_url;
+            $user['nickname'] = $entity->nickname;
+        }
         $Controller->Auth->setUser($user);
     }
 
