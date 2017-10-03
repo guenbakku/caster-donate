@@ -41,7 +41,7 @@ ShowCommonAttributes=0
 
 [Relation]
 Entity1=user_infos
-Entity2=user_caster_tags
+Entity2=user_infos_caster_tags
 RelationType1=2
 RelationType2=3
 Fields1=user_id
@@ -292,7 +292,7 @@ TermPos2=R
 
 [Relation]
 Entity1=caster_tags
-Entity2=user_caster_tags
+Entity2=user_infos_caster_tags
 RelationType1=1
 RelationType2=3
 Fields1=id
@@ -375,7 +375,7 @@ ModifiedDateTime=20170910224823
 Position="MAIN",3000,1350,1085,280
 
 [Entity]
-PName=user_caster_tags
+PName=user_infos_caster_tags
 LName=Liên kết LiveStreamer với Tag
 Comment=
 TableOption=
@@ -388,8 +388,8 @@ Field="Id User Info","user_info_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171003172118
-Position="MAIN",50,1800,917,410
+ModifiedDateTime=20171003173436
+Position="MAIN",50,1800,917,209
 
 [Entity]
 PName=caster_tags
