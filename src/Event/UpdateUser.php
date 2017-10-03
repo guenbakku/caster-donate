@@ -40,11 +40,11 @@ class UpdateUser implements EventListenerInterface
     {
         $Controller = $event->subject();
         $user = $Controller->Auth->user();
-
+        
         // Insert empty row to user_infos table
         $UserInfos = TableRegistry::get('UserInfos');
         $userInfo = $UserInfos->newEntity();
-        $userInfo->user_id = $entity->id;
+        $userInfo->user_id = $event->data['user']->id;
         $UserInfos->save($userInfo);
     }
 

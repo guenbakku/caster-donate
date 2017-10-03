@@ -18,6 +18,7 @@ class MeController extends AppController
     {
         parent::beforeFilter($event);
         $this->ContentHeader->title('Trang cá nhân');
+        $this->Profile = new Profile();
     }
 
     public function beforeRender(Event $event)
@@ -26,7 +27,6 @@ class MeController extends AppController
         $user_id = $this->Auth->user('id');
         if ($this->request->is('get'))
         {
-            $this->Profile = new Profile();
             $profile = $this->Profile->get($user_id);
         }
         $this->set(compact('profile'));
@@ -48,7 +48,6 @@ class MeController extends AppController
         
         if($this->request->is(['patch','post','put']))
         {
-            $this->Profile = new Profile();
             $new_user_info = $this->request->getData();
             $profile = $this->Profile->edit($user_id, $new_user_info);
             
@@ -68,7 +67,6 @@ class MeController extends AppController
             }
         }
 
-        $this->set(compact('profile'));
         $this->render('/Me/index');
     }
 

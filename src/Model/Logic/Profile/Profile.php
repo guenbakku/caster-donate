@@ -13,7 +13,8 @@ class Profile
         $query->contain(['SocialProviders']);
 
         $userInfo = $query->first();
-        if($userInfo){
+        if($userInfo)
+        {
             $UISPs = TableRegistry::get('UserInfosSocialProviders');
             $userInfo->social_providers = $UISPs->repleteEntities($userInfo->social_providers);
         }
