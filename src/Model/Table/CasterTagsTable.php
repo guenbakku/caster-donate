@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class CasterTagsTable extends Table
+class CasterTagsTable extends AppTable
 {
 
     /**
