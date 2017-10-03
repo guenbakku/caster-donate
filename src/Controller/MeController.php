@@ -25,8 +25,11 @@ class MeController extends AppController
     {
         // Set default render setting
         $user_id = $this->Auth->user('id');
-        $profile = $this->Profile->get($user_id);
-        $this->set(compact('profile'));
+        if ($this->request->is('get'))
+        {
+            $profile = $this->Profile->get($user_id);
+            $this->set(compact('profile'));
+        }
     }
 
     public function statistics()
@@ -62,6 +65,9 @@ class MeController extends AppController
             {
                 $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập.'));
             }
+
+            // Cần có để hiện errors ra form
+            $this->set(compact('profile'));
         }
 
         $this->render('/Me/index');

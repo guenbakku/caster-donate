@@ -28,4 +28,18 @@ class UsersSocialProvidersTable extends AppTable
         ]);
         $this->belongsTo('SocialProviders');
     }
+
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->allowEmpty('reference')
+            ->add('reference', [
+                'maxLength' => [
+                    'rule' => ['maxLength', $this->columnLength('reference')],
+                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('reference')),
+                ],
+            ]);
+
+        return $validator;
+    }
 }

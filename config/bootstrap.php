@@ -222,10 +222,11 @@ if (Configure::read('debug')) {
 }
 
 /*
- * Load CakeDC/Users library
+ * Load other plugin
  */
 Configure::write('Users.config', ['users']);
 Plugin::load('CakeDC/Users', ['routes' => true, 'bootstrap' => true]);
+Plugin::load('Josegonzalez/Upload');
 
 /*
  * Load Migrations
@@ -245,6 +246,4 @@ Plugin::load('Migrations');
  */
 use Cake\Event\EventManager;
 use App\Event\UpdateUser;
-
 EventManager::instance()->attach(new UpdateUser());
-

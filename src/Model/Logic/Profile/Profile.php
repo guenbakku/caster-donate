@@ -34,7 +34,9 @@ class Profile
         // Don't update excepted columns, eg: avatar
         $userInfos->patchEntity($userInfo, $new_user_info, [
             'fieldList' => $userInfos->columnsExcept(['avatar']),
-            'associated' => ['SocialProviders._joinData'],
+            'associated' => [
+                'SocialProviders._joinData' => ['validate' => 'default'],
+            ],
         ]);
 
         if(!$userInfo->errors())

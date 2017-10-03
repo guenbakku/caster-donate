@@ -70,6 +70,15 @@ class UserInfosTable extends AppTable
             ->allowEmpty('birthday');
 
         $validator
+            ->allowEmpty('location')
+            ->add('location', [
+                'maxLength' => [
+                    'rule' => ['maxLength', $this->columnLength('location')],
+                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('location')),
+                ],
+            ]);
+
+        $validator
             ->allowEmpty('introduction')
             ->add('introduction', [
                 'maxLength' => [
@@ -82,9 +91,8 @@ class UserInfosTable extends AppTable
             ->allowEmpty('avatar')
             ->add('avatar', [
                 'uploadError' => [
-                    'rule' => 'uploadError',
+                    'rule' => array('uploadError', true),
                     'message' => 'Có lỗi xảy ra trong quá trình tải file.',
-                    'allowEmpty' => TRUE,
                 ],
                 'mimeType' => [
                     'rule' => array('mimeType', Configure::read('vcv.AllowFileTypes.image')),
