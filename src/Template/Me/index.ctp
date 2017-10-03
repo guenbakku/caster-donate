@@ -96,6 +96,11 @@
                         'action' => 'profile',
                     ]) ?>
                 </li>
+                <li class="<?= $this->request->action == 'register'? 'active' : null ?>">
+                    <?= $this->Html->link(__('Đăng ký Lên Sóng'), [
+                        'action' => 'register',
+                    ]) ?>
+                </li>
             </ul>
             <div class="tab-content">
                 <?= $this->element('Me/tab-'.$this->request->action) ?>

@@ -69,4 +69,9 @@ class MeController extends AppController
         $this->render('/Me/index');
     }
 
+    public function register() 
+    {
+        $this->render('/Me/index');
+    }
+
 }
