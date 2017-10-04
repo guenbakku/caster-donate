@@ -5,6 +5,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
+use App\Utility\File;
+use App\Utility\Flysystem;
 
 class UserInfosTable extends AppTable
 {
@@ -26,6 +28,16 @@ class UserInfosTable extends AppTable
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id',
             'sort' => ['CasterTags.order_no']
+        ]);
+
+        // Setup upload file
+        $this->addBehavior('Upload', [
+            'avatar' => [
+                'path' => Configure::read('System.Paths.avatar'),
+                'keepFileOnEdit' => false,
+                'keepFileOnDelete' => false,
+                'resizeTo' => [400, 400],
+            ]
         ]);
     }
 

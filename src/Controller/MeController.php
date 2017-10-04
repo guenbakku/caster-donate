@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use Cake\Core\Configure;
@@ -24,9 +23,9 @@ class MeController extends AppController
     public function beforeRender(Event $event)
     {
         // Set default render setting
-        $user_id = $this->Auth->user('id');
         if ($this->request->is('get'))
         {
+            $user_id = $this->Auth->user('id');
             $profile = $this->Profile->get($user_id);
             $this->set(compact('profile'));
         }

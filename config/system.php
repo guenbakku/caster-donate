@@ -12,7 +12,7 @@ return [
         'iso-language' => 'vi',
         
         'Paths' => [
-            'avatar' => WWW_ROOT.'img'.DS.'avatar'.DS,
+            'avatar' => 'webroot'.DS.'img'.DS.'avatar'.DS,
         ],
     ],
 ];

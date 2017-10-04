@@ -4,92 +4,97 @@ namespace App\Model\Behavior;
 use Cake\ORM\Behavior;
 use Cake\Utility\Text;
 use Cake\Utility\Hash;
-use MimeTyper\Repository\MimeDbRepository;
+use App\Utility\File;
+use App\Utility\Flysystem;
 
 /**
  * Upload behavior.
  * NOTE: this method does not validate input data.
  */
-class UploadBehavior extends Behavior
+class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
 {
     /**
-     * Move upload file to right place
+     * Set default config which fits almost tasks in this current system
      *
-     * @param   array   move info
-     *      [
-     *          'id' => record_id,
-     *          'uploaded' => uploaded file info (php default format)
-     *          'to' => path to move file to,
-     *          'field' => column to save file name to,
-     *      ],...
-     * @return  array|null    new filename if success or null if fail
+     * @param array $config The config for this behavior.
+     * @return void
      */
-    public function moveUploadedFile(array $info)
+    public function initialize(array $config)
     {
-        if (Hash::get($info, 'uploaded.error') !== UPLOAD_ERR_OK) {
-            return null;
-        }
-
-        $from = $info['uploaded']['tmp_name'];
-        $new_file_name = $this->newFileName($from);
-        $to = rtrim($info['to'], DS) . DS . $new_file_name;
-        move_uploaded_file($from, $to);
-        
-        return empty($info['field'])
-                ? [basename($to)]
-                : [$info['field'] => basename($to)];
-    }
-
-    /**
-     * Move upload file to right place and save new file name to database
-     *
-     * @param   array   move info
-     *      [
-     *          'id' => record_id,
-     *          'uploaded' => uploaded file info (php default format)
-     *          'to' => path to move file to,
-     *          'field' => column to save file name to,
-     *      ],...
-     * @return  array|null    new filename if success or null if fail
-     */
-    public function moveUploadedFileAndSave(array $info) {
-        $new_file_name = $this->moveUploadedFile($info);
-
-        if (empty($new_file_name)) {
-            return null;
-        }
-
-        $entity = $this->_table->findById($info['id'])->first();
-        if (empty($entity)) {
-            $entity = $this->_table->newEntity();
-        }
-
-        $old_file_name = $entity->{$info['field']};
-
-        // Update new file name
-        $entity->id = $info['id'];
-        $entity = $this->_table->patchEntity($entity, $new_file_name, ['validate' => false]);
-        $this->_table->save($entity);
-
-        // Delete old file
-        if (!empty($old_file_name)) {
-            $old_file_path = rtrim($info['to'], DS) . DS . $old_file_name;
-            if (is_file($old_file_path)) {
-                unlink($old_file_path);
+        $default = $this->getDefaultConfig();
+        $configs = [];
+        foreach ($config as $field => $settings) {
+            if (is_int($field)) {
+                $configs[$settings] = $default;
+            } else {
+                $settings = array_merge($default, $settings);
+                $configs[$field] = $settings;
             }
         }
 
-        return $new_file_name;
+        parent::initialize($configs);
     }
 
-    protected function newFileName(string $filepath)
-    {
-        $mimeRepository = new MimeDbRepository();
-        
-        $mime_type = mime_content_type($filepath);
-        $ext = $mimeRepository->findExtension($mime_type);
+    /**
+     * Return default config
+     *
+     * @param   void
+     * @return  array
+     */
+    public function getDefaultConfig() {
+        return [
+            'filesystem' => [
+                'adapter' => function () {return Flysystem::getAdapter();},
+            ],
+            // A hack to implement removing old file feature
+            'transformer' =>  function ($table, $entity, $data, $field, $settings) {
+                // Remove old file
+                $settings['editCallback']($table, $entity, $data, $field, $settings);
+                
+                // Resize image
+                $tmp = $settings['resizer']($data['tmp_name'], $settings['resizeTo']);
 
-        $new_file_name = implode('.', array_filter([Text::uuid(), $ext]));
-        return $new_file_name;
+                // Now return the original *and* the thumbnail
+                return [
+                    $tmp => $data['name'],
+                ];
+            },
+            'nameCallback' => function ($data, $settings) {
+                return File::uuidName($data['name']);
+            },
+            'deleteCallback' => function ($path, $entity, $field, $settings) {
+                return [
+                    $path . $entity->{$field},
+                ];
+            },
+            'editCallback' => function ($table, $entity, $data, $field, $settings) {
+                if (!$entity->isNew() && !$settings['keepFileOnEdit']) {
+                    $entity = $table->findById($entity->id)->select($field)->first();
+                    $path = $this->getPathProcessor($entity, $data, $field, $settings);
+                    $old_file_path = $path->basepath().$entity->$field;
+                    if (Flysystem::has($old_file_path)) {
+                        Flysystem::delete($old_file_path);
+                    }
+                }
+            },
+            'resizer' => function ($path, $resizeTo) {
+                $extension = pathinfo(File::uuidName($path), PATHINFO_EXTENSION);
+                $tmp = tempnam(sys_get_temp_dir(), 'upload') . '.' . $extension;
+
+                $size = new \Imagine\Image\Box(...$resizeTo);
+                $mode = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
+                $imagine = new \Imagine\Gd\Imagine();
+
+                // Save that modified file to our temp file
+                $imagine->open($path)
+                    ->thumbnail($size, $mode)
+                    ->save($tmp);
+
+                return $tmp;
+            },
+            'keepFileOnEdit' => true,
+            'keepFilesOnDelete' => true,
+            'resizeTo' => [300, 300],
+        ];
     }
 }
