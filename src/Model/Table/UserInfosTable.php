@@ -5,8 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
-use App\Utility\File;
-use App\Utility\Flysystem;
 
 class UserInfosTable extends AppTable
 {
