@@ -18,7 +18,12 @@ class TagsController extends AppController
         $this->response->type('json');
     }
 
-    public function kendoGetAll()
+    public function index()
+    {
+        return;
+    }
+
+    public function getAll()
     {
         // Trả về tất cả tag đang có trong db
         // Format của dữ liệu trả về tham khảo tại: 
@@ -29,40 +34,23 @@ class TagsController extends AppController
             $CasterTags = new CasterTags();
             $tags = $CasterTags->getAllTag();
 
-            $count = 0;
-            $tagName = [];
+            $tagArray = [];
             foreach($tags as $tag)
             {
-                $tagName[] = [
-                    'order_id' => ++$count,
+                $tagArray[] = [
+                    'number' => preg_replace('/[^0-9]/', '', $tag->id),
                     'tag_id' => $tag->id,
-                    'tag_name' => $tag->name,
+                    'name' => $tag->name,
                     "Discontinued"=> false
                 ];
             }
-            $this->response->body(json_encode($tagName));
+            $this->response->body(json_encode($tagArray));
         }
         return;
     }
 
-    /* public function search($keyword)
-    {
-        $CasterTags = new CasterTags();
-        if ($this->request->is("ajax")) {
-            $tags = $CasterTags->searchTagByKeyword($keyword);
-            foreach($tags as $tag)
-            {
-               $tag_name_array[] = $tag->name;
-            }
-            $this->response->body(json_encode($tag_name_array);
-            return;
-        }else{
-        }
-    } */
-
-    public function kendoCreate()
-    {
-       
+    public function create()
+    {   
         if ($this->request->is("ajax")) 
         {
             //dữ liệu được gửi bằng json qua GET, biến models(array)
@@ -70,7 +58,7 @@ class TagsController extends AppController
             $array = json_decode($array);
 
             $CasterTags = new CasterTags();
-            $newRecord = $CasterTags->createNew($array[0]->tag_name);
+            $newRecord = $CasterTags->createNew($array[0]->name);
             if($newRecord)
             {
                 $new_tag_id = $newRecord->id;
@@ -79,9 +67,9 @@ class TagsController extends AppController
             }
             $data = array(
                 array(
-                    "order_id"=> $array[0]->data_current_length + 1, 
+                    "number"=> $array[0]->data_current_length +1, 
                     "tag_id"=> $new_tag_id, 
-                    "tag_name"=> $array[0]->tag_name, 
+                    "name"=> $array[0]->name, 
                     "Discontinued"=> false //Cho phép CLient tiếp tục điền thêm tag(false) hoặc overwrite lên tag cũ(true)
                 )
             );

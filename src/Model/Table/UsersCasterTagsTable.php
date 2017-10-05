@@ -21,6 +21,8 @@ class UsersCasterTagsTable extends AppTable
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id', // Bind với cột user_id trên bảng CasterInfos
         ]);
-        $this->belongsTo('CasterTags');
+        $this->belongsTo('CasterTags',[
+            'foreignKey' => 'caster_tag_id',
+        ]);
     }
 }

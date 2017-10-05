@@ -43,20 +43,36 @@
                     </li>
                     <li class="list-group-item">
                         <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag nội dung Live Stream')?></strong>
-                        <?=$this->Form->create()?>
+                        <?=$this->Form->create(null,[
+                            'id' => 'edit-tag-form',
+                        ])?>
                         <div class="input-group input-group-sm">
-                            <?=$this->Form->input('tag_name',[
+                            <?=$this->Form->input('multiselectTagData',[
                                 'type' => 'text',
-                                'class' => '',
-                                'id' => 'products',
+                                'class' => 'form-control',
+                                'id' => 'tags',
                                 'label' => false
                             ])?>
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-flat"><?=__('Thêm Tag')?></button>
+                                <button type="submit" class="btn btn-info btn-flat"><?=__('Sửa Tag')?></button>
                             </span>
                         </div>
                         <?=$this->Form->end()?>
-                        
+
+                        <div>
+                            <?php 
+                            $tag_array = array() ;
+                            foreach($profile->caster_tags as $tag)
+                            {
+                                $tag_array[] = [
+                                    "number"  => preg_replace('/[^0-9]/', '', $tag->id),
+                                    "tag_id"  => h($tag->id),
+                                    "name" => h($tag->name),
+                                ];
+                            }
+                            ?>
+                        </div>
+                        <div id="AuthorTags" style="display:none"><?=json_encode($tag_array)?></div>
                         <script id="noDataTemplate" type="text/x-kendo-tmpl">
                             <div>
                                  <?=__('Không tìm thấy tag, bạn có muốn tạo tag mới không ?:')?>- '#: instance.input.val() #' ?
@@ -65,11 +81,6 @@
                             <button class="k-button" onclick="addNew('#: instance.element[0].id #', '#: instance.input.val() #')"><?=__('Tạo tag mới')?></button>
                         </script>
 
-                        <div>
-                            <span class="label label-danger">Dota 2</span>
-                            <span class="label label-success">Lol</span>
-                            <span class="label label-info">Học tiếng Nhật</span>
-                        </div>
                     </li>
                 </ul>
             </div>

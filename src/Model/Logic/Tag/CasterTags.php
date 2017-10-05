@@ -36,7 +36,11 @@ class CasterTags
     
     public function getAllTag()
     {
-        return  $this->CasterTags->find()->all();
+        return  $this->CasterTags  
+                        ->find()
+                        ->order(['name' => 'ASC'])
+                        ->order(['id' => 'ASC'])
+                        ->all();
     }
 
     public function createNew($tag_name = null)

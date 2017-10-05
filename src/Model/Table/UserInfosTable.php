@@ -27,6 +27,10 @@ class UserInfosTable extends AppTable
             'bindingKey' => 'user_id',
             'sort' => ['CasterTags.order_no']
         ]);
+
+        $this->hasMany('UsersCasterTags',[
+            'foreignKey' => 'user_id'
+        ]);
     }
 
     public function validationDefault(Validator $validator)

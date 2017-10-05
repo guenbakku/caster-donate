@@ -15,37 +15,37 @@ $(function () {
 function addNew(widgetId, value) {
     var widget = $("#" + widgetId).getKendoMultiSelect();
     var dataSource = widget.dataSource;
-
+   
     if (confirm("Bạn muốn tạo tag mới ?")) {
         dataSource.add({
-            order_id: 0,
+            number: 0,
             data_current_length: dataSource.data().length,//gửi số thứ tự
-            tag_name: value
-        });
+            name: value,
+        }); 
         dataSource.one("requestEnd", function(args) {
             if (args.type !== "create") {
                 return;
             }
-            var newValue = args.response[0].order_id;
+            var newValue = args.response[0].number;
 
+        $("#test").html(JSON.stringify(args)); 
             dataSource.one("sync", function() {
                 widget.value(widget.value().concat([newValue]));
             });
         });
-
         dataSource.sync();
     }
 }
-$(document).ready(function() {
+$(function() {
     var crudServiceBaseUrl = "/api/v1/tags";
     var dataSource = new kendo.data.DataSource({
         batch: true,
         transport: {
             read:  {
-                url: crudServiceBaseUrl +'/kendo-get-all',
+                url: crudServiceBaseUrl +'/get-all',
             },
             create: {
-                url: crudServiceBaseUrl + "/kendo-create",
+                url: crudServiceBaseUrl + "/create",
             },
             parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
@@ -56,21 +56,32 @@ $(document).ready(function() {
         },
         schema: {
             model: {
-                id: "order_id",
+                id: "number",
                 fields: {
-                    order_id: { type: "number" },
-                    tag_name: { type: "string" }
+                    number: { type: "number" },
+                    tag_id: { type: "string" },
+                    name: { type: "string" }
                 }
             }
         }
     });
 
-    $("#products").kendoMultiSelect({
+    $("#tags").kendoMultiSelect({
         filter: "contains",//tìm trong nội dung, ngoài ra còn có "equal" và "startswith"
         autoBind: false,
-        dataTextField: "tag_name",
-        dataValueField: "order_id",
+        dataTextField: "name",
+        dataValueField: "number",
         dataSource: dataSource,
-        noDataTemplate: $("#noDataTemplate").html()
+        noDataTemplate: $("#noDataTemplate").html(),
+        value: JSON.parse($("#AuthorTags").html())
+    });
+});
+
+$(function(){
+    $('#edit-tag-form').submit(function(eventObj) {
+        $('#edit-tag-form input[name=multiselectTagData]')
+            .attr('value', JSON.stringify($("#tags").data("kendoMultiSelect").dataItems()))
+            .appendTo('#edit-tag-form');
+        return true;
     });
 });

@@ -10,7 +10,7 @@ class Profile
     {
         $userInfos = TableRegistry::get('UserInfos');
         $query = $userInfos->findByUserId($user_id);
-        $query->contain(['SocialProviders']);
+        $query->contain(['SocialProviders','CasterTags']);
 
         $userInfo = $query->first();
         if($userInfo)
@@ -57,6 +57,23 @@ class Profile
         }
 
         return $userInfo;
+    }
+
+    /*
+        $tags là mảng của nhiều mảng có key id của tag ex:[['id'=>'xyz'],['id'=>'abc']]
+    */
+    public function updateTag($user_id, array $tags)
+    {
+        $this->autoRender = false;
+        debug($tags);
+        $userInfos = TableRegistry::get('UserInfos');
+
+        $query = $userInfos->findByUserId($user_id);
+        $query->contain(['CasterTags']);
+        $userInfo = $query->first();
+        
+        $userInfo = $userInfos->patchEntity($userInfo,['caster_tags' => $tags]);
+        $userInfos->save($userInfo);
     }
 }
 ?>

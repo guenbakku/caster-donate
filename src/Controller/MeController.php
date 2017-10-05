@@ -19,6 +19,20 @@ class MeController extends AppController
         parent::beforeFilter($event);
         $this->ContentHeader->title('Trang cá nhân');
         $this->Profile = new Profile();
+
+        //Update Tag
+        if($this->request->data('multiselectTagData'))
+        {
+            $tags = json_decode($this->request->data('multiselectTagData'),true);//true: convert to array
+            foreach($tags as $key=>$tag)
+            {
+                $tag['id'] = $tag['tag_id'];
+                unset($tag['tag_id']);
+                $tags[$key] =  $tag;
+            }
+            $this->Profile->updateTag($this->Auth->user('id'),$tags);
+            return $this->redirect(['controller' => 'Me']);
+        } 
     }
 
     public function beforeRender(Event $event)
