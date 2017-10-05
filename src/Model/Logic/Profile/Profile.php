@@ -33,7 +33,6 @@ class Profile
 
         // Don't update excepted columns, eg: avatar
         $userInfos->patchEntity($userInfo, $new_user_info, [
-            'fieldList' => $userInfos->columnsExcept(['avatar']),
             'associated' => [
                 'SocialProviders._joinData' => ['validate' => 'default'],
             ],
@@ -42,17 +41,6 @@ class Profile
         if(!$userInfo->errors())
         {
             $userInfos->save($userInfo);
-
-            // Move uploaded file and save filename to database
-            $userInfos->addBehavior('Upload');
-            $userInfos->moveUploadedFileAndSave([
-                'id' => $userInfo->id,
-                'uploaded' => $new_user_info['avatar'],
-                'to' => Configure::read('System.Paths.avatar'),
-                'field' => 'avatar',
-            ]);
-
-            // Get new info from database
             $userInfo = $this->get($user_id);
         }
 
