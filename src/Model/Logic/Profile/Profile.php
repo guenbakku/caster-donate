@@ -12,7 +12,7 @@ class Profile
         $query = $userInfos->findByUserId($user_id);
         $query->contain(['SocialProviders','CasterTags','CasterInfos']);
         $userInfo = $query->first();
-        debug($userInfo);
+        // debug($userInfo);
         if($userInfo)
         {
             $UsersSocialProviders = TableRegistry::get('UsersSocialProviders');

@@ -27,5 +27,9 @@ class CasterInfosTable extends AppTable
             'bindingKey' => 'user_id',
             'sort' => ['CasterTags.order_no']
         ]);
+        $this->belongsTo('UserInfos',[
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
+        ]);
     }
 }

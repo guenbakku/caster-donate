@@ -31,6 +31,11 @@ class UserInfosTable extends AppTable
         $this->hasMany('UsersCasterTags',[
             'foreignKey' => 'user_id'
         ]);
+        
+        $this->hasOne('CasterInfos',[
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id'
+        ]);
     }
 
     public function validationDefault(Validator $validator)
