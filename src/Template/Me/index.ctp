@@ -105,9 +105,11 @@
                         'action' => 'profile',
                     ]) ?>
                 </li>
-                <li class="<?= $this->request->action == 'register'? 'active' : null ?>">
-                    <?= $this->Html->link(__('Đăng ký Lên Sóng'), [
-                        'action' => 'register',
+                <li class="<?= $this->request->action == 'casterInfos'? 'active' : null ?>">
+                    <?php
+                    $tab_name = (!$profile->caster_infos) ? __('Đăng ký Lên Sóng') : _("Thông tin Lên Sóng");
+                    echo $this->Html->link($tab_name, [
+                        'action' => 'caster-infos',
                     ]) ?>
                 </li>
             </ul>

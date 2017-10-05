@@ -87,8 +87,9 @@ class MeController extends AppController
         $this->render('/Me/index');
     }
 
-    public function register() 
+    public function casterInfos() 
     {
+
         $this->render('/Me/index');
     }
 

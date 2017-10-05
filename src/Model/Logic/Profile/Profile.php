@@ -10,9 +10,9 @@ class Profile
     {
         $userInfos = TableRegistry::get('UserInfos');
         $query = $userInfos->findByUserId($user_id);
-        $query->contain(['SocialProviders','CasterTags']);
-
+        $query->contain(['SocialProviders','CasterTags','CasterInfos']);
         $userInfo = $query->first();
+        debug($userInfo);
         if($userInfo)
         {
             $UsersSocialProviders = TableRegistry::get('UsersSocialProviders');
