@@ -483,10 +483,10 @@ Field="Id giới tính","sex_id","CHAR(36)",,,"NULL","",$FFFFFFFF,""
 Field="Ngày sinh","birthday","DATE",,,"NULL","",$FFFFFFFF,""
 Field="Nơi ở","location","VARCHAR(100)",,,"","",$FFFFFFFF,""
 Field="Lời giới thiệu","introduction","TINYTEXT",,,"NULL","",$FFFFFFFF,""
-Field="Path ảnh đại diện","avatar","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Path ảnh đại diện","avatar","VARCHAR(50)",,,"NULL","",$FFFFFFFF,""
 Index=user_id=1,user_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171002004747
+ModifiedDateTime=20171006002134
 Position="MAIN",2050,1550,1115,521
