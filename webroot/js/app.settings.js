@@ -68,6 +68,7 @@ $(function() {
 
     $("#tags").kendoMultiSelect({
         filter: "contains",//tìm trong nội dung, ngoài ra còn có "equal" và "startswith"
+        footerTemplate: $("#footerTemplate").html(),
         autoBind: false,
         dataTextField: "name",
         dataValueField: "number",

@@ -74,13 +74,11 @@
                         </div>
                         <div id="AuthorTags" style="display:none"><?=json_encode($tag_array)?></div>
                         <script id="noDataTemplate" type="text/x-kendo-tmpl">
-                            <div>
-                                 <?=__('Không tìm thấy tag, bạn có muốn tạo tag mới không ?:')?>- '#: instance.input.val() #' ?
-                            </div>
-                            <br />
-                            <button class="k-button" onclick="addNew('#: instance.element[0].id #', '#: instance.input.val() #')"><?=__('Tạo tag mới')?></button>
+                            <?=__('Không tìm thấy dữ liệu')?>                            
                         </script>
-
+                        <script id="footerTemplate" type="text/x-kendo-template">
+                            <button class="k-button btn btn-default btn-block" onclick="addNew('#: instance.element[0].id #', '#: instance.input.val() #')"><?=__('Tạo tag ')?> &nbsp;<b>#: instance.input.val() #</b></button>
+                        </script>
                     </li>
                 </ul>
             </div>
