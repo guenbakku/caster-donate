@@ -46,7 +46,7 @@ class CreateUserInfosTable extends AbstractMigration
             ])
             ->addColumn('avatar', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 50,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
