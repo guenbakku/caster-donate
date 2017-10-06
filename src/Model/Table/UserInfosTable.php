@@ -41,7 +41,7 @@ class UserInfosTable extends AppTable
                 'path' => Configure::read('System.Paths.avatar'),
                 'keepFileOnEdit' => false,
                 'keepFileOnDelete' => false,
-                'resizeTo' => [400, 400],
+                'resizeTo' => Configure::read('vcv.minImageSize'),
             ]
         ]);
     }
@@ -108,19 +108,37 @@ class UserInfosTable extends AppTable
             ->allowEmpty('avatar')
             ->add('avatar', [
                 'uploadError' => [
-                    'rule' => array('uploadError', true),
+                    'rule' => ['uploadError', true],
                     'message' => 'Có lỗi xảy ra trong quá trình tải file.',
                 ],
                 'mimeType' => [
-                    'rule' => array('mimeType', Configure::read('vcv.AllowFileTypes.image')),
+                    'rule' => ['mimeType', Configure::read('vcv.AllowFileTypes.image')],
                     'message' => __('File tải lên có định dạng không hợp lệ.'),
-                    'allowEmpty' => TRUE,
+                    'allowEmpty' => true,
+                    'last' => true,
                 ],
                 'fileSize' => [
-                    'rule' => array('fileSize', '<=', Configure::read('vcv.uploadFileSize')),
-                    'message' => __('File tải lên phải có kích cỡ nhỏ hơn {0}.', Configure::read('vcv.uploadFileSize')),
-                    'allowEmpty' => TRUE,
+                    'rule' => ['fileSize', '<=', Configure::read('vcv.uploadFileSize')],
+                    'message' => __(
+                        'File tải lên phải có dung lượng nhỏ hơn {0}.', 
+                        Configure::read('vcv.uploadFileSize')
+                    ),
+                    'allowEmpty' => true,
+                    'last' => true,
                 ],
+                'minImageSize' => [
+                    'rule' => [
+                        'imageSize', 
+                        [
+                            'width' => ['>=', Configure::read('vcv.minImageSize')[0]],
+                            'height' => ['>=', Configure::read('vcv.minImageSize')[1]],
+                        ],
+                    ],
+                    'message' => __(
+                        'File tải lên phải có chiều rộng lớn hơn {0}px và chiều cao lớn hơn {1}px',
+                        Configure::read('vcv.minImageSize')
+                    ),
+                ]
             ]);
 
         return $validator;

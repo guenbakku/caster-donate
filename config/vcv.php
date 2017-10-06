@@ -12,5 +12,6 @@ return [
             'pdf'   => ['application/pdf'],
         ],
         'uploadFileSize' => '5MB',
+        'minImageSize' => [400, 400],
     ],
 ];
