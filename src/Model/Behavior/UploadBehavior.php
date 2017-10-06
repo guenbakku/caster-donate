@@ -59,14 +59,17 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
      * @param   \Cake\ORM\Entity
      * @return  void|false
      */
-    public function deletePreviousOnEdit(Table $table, Entity $new_entity)
+    public function deletePreviousOnEdit(Table $table, Entity $entity)
     {
         foreach ($this->config() as $field => $settings) {
-            if ($settings['keepFileOnEdit'] || $new_entity->isNew()) {
+            if (Hash::get((array)$entity->get($field), 'error') !== UPLOAD_ERR_OK
+                || $entity->isNew()
+                || $settings['keepFileOnEdit']) 
+            {
                 continue;
             }
 
-            $entity = $table->findById($new_entity->id)->first();
+            $entity = $table->findById($entity->id)->first();
 
             $dirField = Hash::get($settings, 'fields.dir', 'dir');
             if ($entity->has($dirField)) {
