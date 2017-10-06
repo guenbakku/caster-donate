@@ -20,7 +20,7 @@ class MeController extends AppController
         $this->Profile = new Profile();
 
         //Update Tag
-        if($this->request->data('multiselectTagData'))
+        if ($this->request->data('multiselectTagData'))
         {
             $tags = json_decode($this->request->data('multiselectTagData'),true);//true: convert to array
             foreach($tags as $key=>$tag)

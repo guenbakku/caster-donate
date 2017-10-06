@@ -46,39 +46,23 @@
                         <?=$this->Form->create(null,[
                             'id' => 'edit-tag-form',
                         ])?>
-                        <div class="input-group input-group-sm">
-                            <?=$this->Form->input('multiselectTagData',[
-                                'type' => 'text',
-                                'class' => 'form-control',
-                                'id' => 'tags',
-                                'label' => false
-                            ])?>
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-info btn-flat"><?=__('Sửa Tag')?></button>
-                            </span>
-                        </div>
-                        <?=$this->Form->end()?>
+                        
+                        <?= $this->cell('MultipleSelect', [
+                            $this,
+                            'options' => [
+                                'readUrl' => $this->Url->build('/api/v1/tags/get-all'),
+                                'createUrl' => $this->Url->build('/api/v1/tags/create'),
+                                'value' => $profile->caster_tags,
+                                ]
+                        ]) ?>
 
-                        <div>
-                            <?php 
-                            $tag_array = array() ;
-                            foreach($profile->caster_tags as $tag)
-                            {
-                                $tag_array[] = [
-                                    "number"  => preg_replace('/[^0-9]/', '', $tag->id),
-                                    "tag_id"  => h($tag->id),
-                                    "name" => h($tag->name),
-                                ];
-                            }
-                            ?>
-                        </div>
-                        <div id="AuthorTags" style="display:none"><?=json_encode($tag_array)?></div>
-                        <script id="noDataTemplate" type="text/x-kendo-tmpl">
-                            <?=__('Không tìm thấy dữ liệu')?>                            
-                        </script>
-                        <script id="footerTemplate" type="text/x-kendo-template">
-                            <button class="k-button btn btn-default btn-block" onclick="addNew('#: instance.element[0].id #', '#: instance.input.val() #')"><?=__('Tạo tag ')?> &nbsp;<b>#: instance.input.val() #</b></button>
-                        </script>
+                        <?= $this->Form->button( __('Gửi'),[
+                            'class' => 'btn btn-primary',
+                            'label' => false,
+                            'type' => 'submit'
+                        ]) ?>
+
+                        <?=$this->Form->end()?>
                     </li>
                 </ul>
             </div>
