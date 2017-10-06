@@ -14,25 +14,6 @@ class Flysystem
     protected static $uses = null;
 
     /**
-     * This magic is used for calling methods of flysystem object
-     */
-    public static function __callStatic($name, $args)
-    {
-        $filesystem = static::getFileSystem();
-        $filesystem->$name(...$args);
-    }
-
-    /**
-     * I don't know why __callStatic isn't invoked for has() method.
-     * so I must create one has() method explicitly here.
-     */
-    public static function has(...$args)
-    {
-        $filesystem = static::getFileSystem();
-        return $filesystem->has(...$args);
-    }
-
-    /**
      * Return filesystem object
      *
      * @param   string|null: name of adapter's group

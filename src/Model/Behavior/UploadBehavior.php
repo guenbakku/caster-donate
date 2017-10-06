@@ -72,8 +72,8 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
                     $entity = $table->findById($entity->id)->select($field)->first();
                     $path = $this->getPathProcessor($entity, $data, $field, $settings);
                     $old_file_path = $path->basepath().$entity->$field;
-                    if (Flysystem::has($old_file_path)) {
-                        Flysystem::delete($old_file_path);
+                    if (Flysystem::getFileSystem()->has($old_file_path)) {
+                        Flysystem::getFileSystem()->delete($old_file_path);
                     }
                 }
             },
