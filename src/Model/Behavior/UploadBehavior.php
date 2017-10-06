@@ -1,9 +1,12 @@
 <?php
 namespace App\Model\Behavior;
 
-use Cake\ORM\Behavior;
-use Cake\Utility\Text;
+use ArrayObject;
+use Cake\Collection\Collection;
+use Cake\ORM\Entity;
+use Cake\ORM\Table;
 use Cake\Utility\Hash;
+use Cake\Event\Event;
 use App\Utility\File;
 use App\Utility\Flysystem;
 
@@ -36,21 +39,68 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
     }
 
     /**
+     * Override parent's method to add feature that remove previous upload item
+     *
+     * @param \Cake\Event\Event $event The beforeSave event that was fired
+     * @param \Cake\ORM\Entity $entity The entity that is going to be saved
+     * @param \ArrayObject $options the options passed to the save method
+     * @return void|false
+     */
+    public function beforeSave(Event $event, Entity $entity, ArrayObject $options)
+    {
+        $this->deletePreviousOnEdit($event->subject(), $entity);
+        return parent::beforeSave($event, $entity, $options);
+    }
+
+    /**
+     * Delete previous previous upload item of field
+     *
+     * @param   \Cake\ORM\Table
+     * @param   \Cake\ORM\Entity
+     * @return  void|false
+     */
+    public function deletePreviousOnEdit(Table $table, Entity $new_entity)
+    {
+        foreach ($this->config() as $field => $settings) {
+            if ($settings['keepFileOnEdit'] || $new_entity->isNew()) {
+                continue;
+            }
+
+            $entity = $table->findById($new_entity->id)->first();
+
+            $dirField = Hash::get($settings, 'fields.dir', 'dir');
+            if ($entity->has($dirField)) {
+                $path = $entity->get($dirField);
+            } else {
+                $path = $this->getPathProcessor($entity, $entity->get($field), $field, $settings)->basepath();
+            }
+
+            $callback = Hash::get($settings, 'editCallback', null);
+            if ($callback && is_callable($callback)) {
+                $files = $callback($path, $entity, $field, $settings);
+            } else {
+                $files = [$path . $entity->get($field)];
+            }
+
+            $writer = $this->getWriter($entity, [], $field, $settings);
+            $success = $writer->delete($files);
+        }
+    }
+
+    /**
      * Return default config
      *
      * @param   void
      * @return  array
      */
-    public function getDefaultConfig() {
+    public function getDefaultConfig()
+    {
         return [
             'filesystem' => [
                 'adapter' => function () {return Flysystem::getAdapter();},
             ],
             // A hack to implement removing old file feature
             'transformer' =>  function ($table, $entity, $data, $field, $settings) {
-                // Remove old file
-                $settings['editCallback']($table, $entity, $data, $field, $settings);
-                
                 // Resize image
                 $tmp = $settings['resizer']($data['tmp_name'], $settings['resizeTo']);
 
@@ -66,16 +116,6 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
                 return [
                     $path . $entity->{$field},
                 ];
-            },
-            'editCallback' => function ($table, $entity, $data, $field, $settings) {
-                if (!$entity->isNew() && !$settings['keepFileOnEdit']) {
-                    $entity = $table->findById($entity->id)->select($field)->first();
-                    $path = $this->getPathProcessor($entity, $data, $field, $settings);
-                    $old_file_path = $path->basepath().$entity->$field;
-                    if (Flysystem::getFileSystem()->has($old_file_path)) {
-                        Flysystem::getFileSystem()->delete($old_file_path);
-                    }
-                }
             },
             'resizer' => function ($path, $resizeTo) {
                 $extension = pathinfo(File::uuidName($path), PATHINFO_EXTENSION);
