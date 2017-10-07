@@ -29,6 +29,7 @@ class TagsController extends AppController
         if ($this->request->is("ajax")) 
         {
             $q = $this->request->getQuery('q');
+            $q = trim($q);
             
             if (empty($q) && $q !== '0') {
                 $this->response->body(json_encode([]));

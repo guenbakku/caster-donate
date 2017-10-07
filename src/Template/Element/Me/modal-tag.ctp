@@ -52,12 +52,11 @@
                                 return {
                                     id: term,
                                     text: term,
-                                    newTag: true // add additional parameters
                                 }
                             },
                             minimumInputLength: 2,
                             tags: true, // Enable dynamic creation
-                            tokenSeparators: [',', ' ']
+                            tokenSeparators: [','],
                         });
                     </script>
 
