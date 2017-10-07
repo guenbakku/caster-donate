@@ -74,13 +74,14 @@ class MeController extends AppController
 
     public function tag()
     {
-        if ($this->request->data('multiselectTagData'))
-        {
-            $tags = json_decode($this->request->data('multiselectTagData'), true); //true: convert to array
-            $this->Profile->updateTag($this->Auth->user('id'), $tags);
-        }
+        // if ($this->request->data('multiselectTagData'))
+        // {
+        //     $tags = json_decode($this->request->data('multiselectTagData'), true); //true: convert to array
+        //     $this->Profile->updateTag($this->Auth->user('id'), $tags);
+        // }
          
-        return $this->redirect($this->referer());
+        // return $this->redirect($this->referer());
+        debug($this->request->data());
     }
 
     public function contact() 

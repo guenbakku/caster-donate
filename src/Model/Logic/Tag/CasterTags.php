@@ -10,13 +10,42 @@ class CasterTags
         $this->CasterTags = TableRegistry::get('CasterTags');
     }
 
-    public function searchTagByKeyword($keyword)
+    /**
+     * Tìm kiếm tag theo tên
+     *
+     * @param   string
+     * @return  array
+     */
+    public function searchByName(string $keyword)
     {
+        $keyword = trim($keyword);
         $tags = $this->CasterTags->find()
                 ->where(['CasterTags.name LIKE' => '%'.$keyword.'%'])
+                ->group('CasterTags.name') // Select unique tag name
                 ->all();
         
         return $tags;    
+    }
+
+    /**
+     * Thêm tag mới chưa có vào bảng caster_tags
+     *
+     * @param   array
+     * @return  bool
+     */
+    public function insert(array $tags)
+    {
+        if($tag_name != null)
+        {
+            $newRecord = $this->CasterTags->newEntity();
+            $newRecord->name = $tag_name;
+            if($this->CasterTags->save($newRecord))
+            {
+                return $this->CasterTags->findByName($tag_name)->first();
+            }
+        }
+        
+        return false;
     }
 
     public function getTagRelatedWithUser($user_id)
@@ -32,40 +61,6 @@ class CasterTags
     public function addTagRelatedWithUser($user_id, $caster_tag_id)
     {
 
-    }
-    
-    public function getAllTag()
-    {
-        return  $this->CasterTags  
-                        ->find()
-                        ->order(['name' => 'ASC'])
-                        ->order(['id' => 'ASC'])
-                        ->all();
-    }
-
-    public function add($tag_name = null)
-    {
-        if($tag_name != null)
-        {
-            $newRecord = $this->CasterTags->newEntity();
-            $newRecord->name = $tag_name;
-            if($this->CasterTags->save($newRecord))
-            {
-                return $this->CasterTags->findByName($tag_name)->first();
-            }
-        }
-        
-        return false;
-    }
-
-    public function edit()
-    {
-
-    }
-
-    public function delete($caster_tag_id)
-    {
-        
     }
 }
 ?>

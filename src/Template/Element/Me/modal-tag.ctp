@@ -1,7 +1,7 @@
-<div class="modal fade" id="caster-tag" role="dialog" aria-labelledby="caster-tag">
+<div class="modal fade" id="caster-tag" tabindex="-1" role="dialog" aria-labelledby="caster-tag">
     <div class="modal-dialog" role="document">
         <?php $this->Form->setTemplates($FormTemplates['tag']); ?>
-        <?=$this->Form->create(null,[
+        <?=$this->Form->create($profile, [
             'id' => 'edit-tag-form',
             'class' => 'modal-content form-vertical',
             'url' => ['action' => 'tag'],
@@ -32,7 +32,33 @@
                     echo $this->fetch('script');
                 ?>
                     <script type="text/javascript">
-                        $('select').select2();
+                        $('#caster-tags').select2({
+                            ajax: {
+                                url: '/api/v1/tags/get',
+                                dataType: 'json',
+                                delay: 250,
+                                processResults: function (data) {
+                                    // Tranforms the top-level key of the response object from 'items' to 'results'
+                                    return {results: data};
+                                },
+                            },
+                            createTag: function (params) {
+                                var term = $.trim(params.term);
+
+                                if (term === '') {
+                                    return null;
+                                }
+                            
+                                return {
+                                    id: term,
+                                    text: term,
+                                    newTag: true // add additional parameters
+                                }
+                            },
+                            minimumInputLength: 2,
+                            tags: true, // Enable dynamic creation
+                            tokenSeparators: [',', ' ']
+                        });
                     </script>
 
                 <?php $this->end() ?>

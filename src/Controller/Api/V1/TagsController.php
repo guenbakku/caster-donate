@@ -2,6 +2,7 @@
 namespace App\Controller\Api\V1;
 
 use Cake\Event\Event;
+use Cake\Collection\Collection;
 use App\Controller\AppController;
 use App\Model\Logic\Tag\CasterTags;
 
@@ -18,38 +19,40 @@ class TagsController extends AppController
         $this->response->type('json');
     }
 
-    public function index()
+    /**
+     * Trả về tất cả tag có tên trùng với string gửi lên từ client
+     * Format của dữ liệu trả về tham khảo tại: 
+     * https://select2.org/data-sources/formats
+     */
+    public function get()
     {
-        return;
-    }
-
-    public function getAll()
-    {
-        // Trả về tất cả tag đang có trong db
-        // Format của dữ liệu trả về tham khảo tại: 
-        // http://demos.telerik.com/kendo-ui/multiselect/serverfiltering
-
-       if ($this->request->is("ajax")) 
-       {
-            $CasterTags = new CasterTags();
-            $tags = $CasterTags->getAllTag();
-
-            $tagArray = [];
-            foreach($tags as $tag)
-            {
-                $tagArray[] = [
-                    'number' => preg_replace('/[^0-9]/', '', $tag->id),
-                    'tag_id' => $tag->id,
-                    'name' => $tag->name,
-                    "Discontinued"=> false
-                ];
+        if ($this->request->is("ajax")) 
+        {
+            $q = $this->request->getQuery('q');
+            
+            if (empty($q) && $q !== '0') {
+                $this->response->body(json_encode([]));
+                return $this->response;
             }
-            $this->response->body(json_encode($tagArray));
+
+            $CasterTags = new CasterTags();
+            $tags = $CasterTags->searchByName($q);
+
+            $collection = new Collection($tags);
+            $collection = $collection->map(function ($val, $key) {
+                return [
+                    'id' => $val->id,
+                    'text' => $val->name,
+                ];
+            });
+            $result = $collection->toArray();
+
+            $this->response->body(json_encode($result));
+            return $this->response;
         }
-        return;
     }
 
-    public function create()
+    public function add()
     {   
         if ($this->request->is("ajax")) 
         {

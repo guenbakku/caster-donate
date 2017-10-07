@@ -32,3 +32,9 @@ input.k-textbox {
 .select2-container {
     width: 100% !important;
 }
+.select2-close-mask{ /* Cần để chạy đúng trên Bootstrap modal */
+    z-index: 4099;
+}
+.select2-dropdown{ /* Cần để chạy đúng trên Bootstrap modal */
+    z-index: 5051;
+}
