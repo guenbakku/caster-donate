@@ -47,10 +47,7 @@
     <?= $this->Html->script('/packages/iCheck/icheck.min.js') ?>
     <?= $this->Html->script('/packages/AdminLTE/js/app.min.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.core.js') ?>
-    <?= $this->Html->script('/packages/KendoUI/js/kendo.data.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.dateinput.js') ?>
-    <?= $this->Html->script('/packages/KendoUI/js/kendo.popup.js') ?>
-    <?= $this->Html->script('/packages/KendoUI/js/kendo.list.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/cultures/kendo.culture.vi-VN.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/messages/kendo.messages.vi-VN.js') ?>
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js') ?>
