@@ -11,6 +11,7 @@ return [
             'inputContainer' => '<div class="form-group">{{content}}</div>',
             'formGroup' => '{{label}}<div class="col-sm-10">{{input}}</div>',
             'input' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
+            'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
             'file' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'dateWidget' => 'Ngày{{day}} Tháng{{month}} Năm{{year}}',
             'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
@@ -26,6 +27,15 @@ return [
             'error' => '<div class="col-sm-offset-2 help-block" style="padding:0 15px">{{content}}</div>',
             'errorList' => '<div>{{content}}</div>',
             'errorItem' => '<div>{{text}}</div>',
+        ],
+
+        'tag' => [
+            'inputContainer' => '<div class="form-group">{{content}}</div>',
+            'formGroup' => '{{label}}{{input}}',
+            'label' => '<label class="control-label" {{attrs}}>{{text}}</label>',
+            'input' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
+            'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+            'button' => '<button name="{{name}}"{{attrs}}>{{text}}</button>',
         ],
 
         'login' => [

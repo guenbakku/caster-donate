@@ -28,3 +28,7 @@ input.k-textbox {
     height: 34px;
     padding: 6px 8px;
 }
+
+.select2-container {
+    width: 100% !important;
+}

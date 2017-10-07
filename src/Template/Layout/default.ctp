@@ -7,9 +7,10 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <?= $this->fetch('meta') ?>
+    <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css') ?>
+    <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css') ?>
+    <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css') ?>
     <?= $this->Html->css('/packages/bootstrap/css/bootstrap.min.css') ?>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <?= $this->Html->css('/packages/iCheck/square/blue.css') ?>
     <?= $this->Html->css('/packages/KendoUI/styles/web/kendo.common.core.css') ?>
     <?= $this->Html->css('/packages/KendoUI/styles/web/kendo.silver.css') ?>
@@ -50,9 +51,9 @@
     <?= $this->Html->script('/packages/KendoUI/js/kendo.dateinput.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.popup.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/kendo.list.js') ?>
-    <?= $this->Html->script('/packages/KendoUI/js/kendo.multiselect.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/cultures/kendo.culture.vi-VN.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/messages/kendo.messages.vi-VN.js') ?>
+    <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js') ?>
     <?= $this->Html->script('app.settings.js') ?>
     <?= $this->fetch('script') ?>
 </body>
