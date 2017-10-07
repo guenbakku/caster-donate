@@ -1,6 +1,7 @@
 <?php 
 use Cake\Core\Configure;
 use Cake\Utility\Hash;
+use Cake\Collection\Collection;
 
 $rootView->start('script');
 echo $rootView->fetch('script');
@@ -14,21 +15,24 @@ echo $rootView->fetch('script');
     
         if (confirm("Bạn muốn tạo tag mới ?")) {
             dataSource.add({
-                number: 0,
-                data_current_length: dataSource.data().length,//gửi số thứ tự
+                id: 0,
                 name: value,
             }); 
+
             dataSource.one("requestEnd", function(args) {
                 if (args.type !== "create") {
                     return;
                 }
-                var newValue = args.response[0].number;
+                
+                var newValue = args.response[0].id;
 
-            $("#test").html(JSON.stringify(args)); 
+                $("#test").html(JSON.stringify(args)); 
+
                 dataSource.one("sync", function() {
                     widget.value(widget.value().concat([newValue]));
                 });
             });
+
             dataSource.sync();
         }
     }
@@ -53,10 +57,9 @@ echo $rootView->fetch('script');
             },
             schema: {
                 model: {
-                    id: "number",
+                    id: "id",
                     fields: {
-                        number: { type: "number" },
-                        tag_id: { type: "string" },
+                        id: { type: "string" },
                         name: { type: "string" }
                     }
                 }
@@ -64,14 +67,14 @@ echo $rootView->fetch('script');
         });
 
         $("#tags").kendoMultiSelect({
-            filter: "contains",//tìm trong nội dung, ngoài ra còn có "equal" và "startswith"
-            footerTemplate: $("#footerTemplate").html(),
+            filter: "contains", //tìm trong nội dung, ngoài ra còn có "equal" và "startswith"
             autoBind: false,
             dataTextField: "name",
-            dataValueField: "number",
+            dataValueField: "id",
             dataSource: dataSource,
+            footerTemplate: $("#footerTemplate").html(),
             noDataTemplate: $("#noDataTemplate").html(),
-            value: JSON.parse($("#AuthorTags").html())
+            value: JSON.parse($("#AuthorTags").html()),
         });
 
         $('#edit-tag-form').submit(function(eventObj) {
@@ -93,22 +96,20 @@ echo $rootView->fetch('script');
     <button class="k-button btn btn-default btn-block" onclick="addNew('#: instance.element[0].id #', '#: instance.input.val() #')"><?=__('Tạo tag ')?> &nbsp;<b>#: instance.input.val() #</b></button>
 </script>
 
-<?=$this->Form->input('multiselectTagData', [
+<?= $this->Form->input('multiselectTagData', [
     'type' => 'text',
     'id' => 'tags',
     'label' => false
-])?>
+]) ?>
 
 <?php 
-    $tag_array = [] ;
-    foreach(Hash::get($options, 'value', []) as $tag)
-    {
-        $tag_array[] = [
-            "number"  => preg_replace('/[^0-9]/', '', $tag->id),
-            "tag_id"  => h($tag->id),
-            "name" => h($tag->name),
+    $Collection = new Collection(Hash::get($options, 'value', []));
+    $tags = $Collection->map(function ($tag, $key) {
+        return [
+            'id' => h($tag->id),
+            'name' => h($tag->name),
         ];
-    }
+    })->toArray();
 ?>
-<div id="AuthorTags" style="display:none"><?=json_encode($tag_array)?></div>
+<div id="AuthorTags" style="display:none"><?=json_encode($tags)?></div>
 

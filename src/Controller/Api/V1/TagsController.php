@@ -58,21 +58,18 @@ class TagsController extends AppController
             $array = json_decode($array);
 
             $CasterTags = new CasterTags();
-            $newRecord = $CasterTags->createNew($array[0]->name);
-            if($newRecord)
-            {
-                $new_tag_id = $newRecord->id;
-            }else{
+            $newRecord = $CasterTags->add($array[0]->name);
+            if (!$newRecord) {
                 return;
             }
-            $data = array(
-                array(
-                    "number"=> $array[0]->data_current_length +1, 
-                    "tag_id"=> $new_tag_id, 
-                    "name"=> $array[0]->name, 
-                    "Discontinued"=> false //Cho phép CLient tiếp tục điền thêm tag(false) hoặc overwrite lên tag cũ(true)
-                )
-            );
+
+            $data = [
+                [
+                    "id" => $newRecord->id, 
+                    "name" =>$newRecord->name, 
+                    "Discontinued" => false //Cho phép CLient tiếp tục điền thêm tag(false) hoặc overwrite lên tag cũ(true)
+                ]
+            ];
             $this->response->body(json_encode($data));            
         }
         return;

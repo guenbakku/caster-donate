@@ -42,27 +42,23 @@
                         </div>
                     </li>
                     <li class="list-group-item">
-                        <strong><i class="fa fa-pencil margin-r-5"></i> <?=__('Tag nội dung Live Stream')?></strong>
-                        <?=$this->Form->create(null,[
-                            'id' => 'edit-tag-form',
-                        ])?>
-                        
-                        <?= $this->cell('MultipleSelect', [
-                            $this,
-                            'options' => [
-                                'readUrl' => $this->Url->build('/api/v1/tags/get-all'),
-                                'createUrl' => $this->Url->build('/api/v1/tags/create'),
-                                'value' => $profile->caster_tags,
-                                ]
-                        ]) ?>
-
-                        <?= $this->Form->button( __('Gửi'),[
-                            'class' => 'btn btn-primary',
-                            'label' => false,
-                            'type' => 'submit'
-                        ]) ?>
-
-                        <?=$this->Form->end()?>
+                        <strong><i class="fa fa-tag margin-r-5"></i> <?=__('Tag nội dung Live Stream')?></strong>
+                        <?= $this->Form->button(
+                            '<i class="fa fa-edit"></i> '.__('Sửa'),
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-default btn-xs pull-right',
+                                'type' => 'button',
+                                'data-toggle' => 'modal',
+                                'data-target' => '#caster-tag'
+                            ]
+                        ) ?>
+                        <div>
+                            <?php foreach ($profile->caster_tags as $tag): ?>
+                                <span class="label label-info"><i class="fa fa-tag"></i><?= h($tag->name) ?></span>    
+                            <?php endforeach ?>
+                        </div>
+                        <?= $this->element('Me/modal-tag') ?>
                     </li>
                 </ul>
             </div>
@@ -89,11 +85,11 @@
                         'action' => 'profile',
                     ]) ?>
                 </li>
-                <li class="<?= $this->request->action == 'casterInfos'? 'active' : null ?>">
+                <li class="<?= $this->request->action == 'contact'? 'active' : null ?>">
                     <?php
                     $tab_name = (!$profile->caster_infos) ? __('Đăng ký Lên Sóng') : _("Thông tin Lên Sóng");
                     echo $this->Html->link($tab_name, [
-                        'action' => 'caster-infos',
+                        'action' => 'contact',
                     ]) ?>
                 </li>
             </ul>

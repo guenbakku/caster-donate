@@ -17,21 +17,7 @@ class MeController extends AppController
     {
         parent::beforeFilter($event);
         $this->ContentHeader->title('Trang cá nhân');
-        $this->Profile = new Profile();
-
-        //Update Tag
-        if ($this->request->data('multiselectTagData'))
-        {
-            $tags = json_decode($this->request->data('multiselectTagData'),true);//true: convert to array
-            foreach($tags as $key=>$tag)
-            {
-                $tag['id'] = $tag['tag_id'];
-                unset($tag['tag_id']);
-                $tags[$key] =  $tag;
-            }
-            $this->Profile->updateTag($this->Auth->user('id'),$tags);
-            return $this->redirect(['controller' => 'Me']);
-        } 
+        $this->Profile = new Profile();        
     }
 
     public function beforeRender(Event $event)
@@ -86,7 +72,18 @@ class MeController extends AppController
         $this->render('/Me/index');
     }
 
-    public function casterInfos() 
+    public function tag()
+    {
+        if ($this->request->data('multiselectTagData'))
+        {
+            $tags = json_decode($this->request->data('multiselectTagData'), true); //true: convert to array
+            $this->Profile->updateTag($this->Auth->user('id'), $tags);
+        }
+         
+        return $this->redirect($this->referer());
+    }
+
+    public function contact() 
     {
 
         $this->render('/Me/index');

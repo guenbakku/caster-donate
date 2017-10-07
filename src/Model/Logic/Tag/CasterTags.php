@@ -43,7 +43,7 @@ class CasterTags
                         ->all();
     }
 
-    public function createNew($tag_name = null)
+    public function add($tag_name = null)
     {
         if($tag_name != null)
         {
@@ -66,12 +66,6 @@ class CasterTags
     public function delete($caster_tag_id)
     {
         
-    }   
-
-    public function add($caster_tag_name)
-    {
-
     }
-
 }
 ?>
