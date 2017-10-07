@@ -54,6 +54,7 @@
     <?= $this->Html->script('/packages/KendoUI/js/cultures/kendo.culture.vi-VN.js') ?>
     <?= $this->Html->script('/packages/KendoUI/js/messages/kendo.messages.vi-VN.js') ?>
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js') ?>
+    <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/i18n/vi.js') ?>
     <?= $this->Html->script('app.settings.js') ?>
     <?= $this->fetch('script') ?>
 </body>

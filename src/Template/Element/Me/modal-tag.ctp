@@ -57,6 +57,7 @@
                             minimumInputLength: 2,
                             tags: true, // Enable dynamic creation
                             tokenSeparators: [','],
+                            language: 'vi',
                         });
                     </script>
 
