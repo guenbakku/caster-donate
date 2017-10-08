@@ -13,63 +13,19 @@
             </div>
             <div class="modal-body">
                 <p class="box-title"><?= __('Nhập tag Live stream bạn muốn theo dõi') ?></p>
-                <?php 
-                //     $this->cell('MultipleSelect', [
-                //     $this,
-                //     'tranport' => [
-                //         'read' => $this->Url->build('/api/v1/tags/get-all'),
-                //         'create' => $this->Url->build('/api/v1/tags/create'),
-                //     ],
-                //     'options' => [
-                //         'value' => $profile->caster_tags,
-                //         'name' => 'caster_tags'
-                //     ]
-                // ]) 
-                ?>
-                
-                <?php 
-                    $this->start('script');
-                    echo $this->fetch('script');
-                ?>
-                    <script type="text/javascript">
-                        $('#caster-tags').select2({
-                            ajax: {
-                                url: '/api/v1/tags/get',
-                                dataType: 'json',
-                                delay: 250,
-                                processResults: function (data) {
-                                    // Tranforms the top-level key of the response object from 'items' to 'results'
-                                    return {results: data};
-                                },
-                            },
-                            createTag: function (params) {
-                                var term = $.trim(params.term);
-
-                                if (term === '') {
-                                    return null;
-                                }
-                            
-                                return {
-                                    id: term,
-                                    text: term,
-                                }
-                            },
-                            minimumInputLength: 2,
-                            tags: true, // Enable dynamic creation
-                            tokenSeparators: [','],
-                            language: 'vi',
-                        });
-                    </script>
-
-                <?php $this->end() ?>
-                
-                <?= $this->Form->control('caster_tags', [
-                    'type' => 'select',
-                    'options' => ['1' => 'test1', '2' => 'test2', '3' => 'test3'],
-                    'class' => 'form-control',
-                    'multiple' => true,
-                    'label' => false,
-                ]) ?>
+                <?= $this->cell('MultipleSelect', [
+                    $this,
+                    'tranport' => [
+                        'read' => $this->Url->build('/api/v1/tags/get-by-name'),
+                        'preSelected' => $this->Url->build('/api/v1/tags/get-by-user-id/'.$Auth->user('id')),
+                    ],
+                    'options' => [
+                        'value' => $profile->caster_tags,
+                        'name' => 'caster_tags',
+                        'class' => 'form-control',
+                        'label' => false,
+                    ]
+                ]) ?> 
 
             </div>
             <div class="modal-footer">

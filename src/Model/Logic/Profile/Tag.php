@@ -16,20 +16,35 @@ class Tag
     }
 
     /**
-     * Tìm kiếm tag theo tên
+     * Tìm kiếm tag theo tên tag
      *
      * @param   string
      * @return  array
      */
     public function searchByName(string $keyword)
     {
-        $keyword = trim($keyword);
         $tags = $this->CasterTags->find()
-                ->where(['CasterTags.name LIKE' => '%'.$keyword.'%'])
-                ->group('CasterTags.name') // Select unique tag name
-                ->all();
+            ->where(['CasterTags.name LIKE' => '%'.$keyword.'%'])
+            ->group('CasterTags.name') // Select unique tag name
+            ->all();
         
         return $tags;    
+    }
+
+    /**
+     * Tìm kiếm tag theo user_id
+     *
+     * @param   string
+     * @return  array
+     */
+    public function searchByUserId(string $user_id)
+    {
+        $tags = $this->UsersCasterTags->find()
+            ->where(['UsersCasterTags.user_id' => $user_id])
+            ->contain(['CasterTags'])
+            ->all();
+        
+        return $tags;
     }
 
     /**

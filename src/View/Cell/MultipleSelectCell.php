@@ -10,12 +10,14 @@ class MultipleSelectCell extends Cell
     {
         $defaultTransport = [
             'read' => null,
+            'preSelected' => null,
         ];
         $defaultInput = [
+            'id' => md5(uniqid()),
             'name' => null,
             'value' => null,
-            'id' => md5(uniqid()),
-            'class' => '',
+            'class' => null,
+            'label' => false,
         ];
         
         $transport = array_merge($defaultTransport, $transport);
