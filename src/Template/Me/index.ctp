@@ -55,7 +55,7 @@
                         ) ?>
                         <div>
                             <?php foreach ($profile->caster_tags as $tag): ?>
-                                <span class="label label-info"><i class="fa fa-tag"></i><?= h($tag->name) ?></span>    
+                                <span class="label label-info"><i class="fa fa-tag"></i> <?= h($tag->name) ?></span>    
                             <?php endforeach ?>
                         </div>
                         <?= $this->element('Me/modal-tag') ?>
