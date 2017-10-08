@@ -1,114 +1,79 @@
 <?php 
 use Cake\Core\Configure;
 use Cake\Utility\Hash;
+use Cake\Collection\Collection;
 
-$rootView->start('script');
-echo $rootView->fetch('script');
+$rootView->append('script');
 ?>
 
 <script type="text/javascript">
+    (function ($) {
+        var elemId = '<?= $input['id'] ?>';
+        var transport = <?= json_encode($transport) ?>;
+        
+        var multipleSelect = $('#'+elemId);
 
-    function addNew(widgetId, value) {
-        var widget = $("#" + widgetId).getKendoMultiSelect();
-        var dataSource = widget.dataSource;
-    
-        if (confirm("Bạn muốn tạo tag mới ?")) {
-            dataSource.add({
-                number: 0,
-                data_current_length: dataSource.data().length,//gửi số thứ tự
-                name: value,
-            }); 
-            dataSource.one("requestEnd", function(args) {
-                if (args.type !== "create") {
-                    return;
+        // Configure select2
+        multipleSelect.select2({
+            ajax: {
+                url: transport['read'],
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    // Tranforms the top-level key of the response object from 'items' to 'results'
+                    return {results: data};
+                },
+            },
+            createTag: function (params) {
+                var term = $.trim(params.term);
+
+                if (term === '') {
+                    return null;
                 }
-                var newValue = args.response[0].number;
-
-            $("#test").html(JSON.stringify(args)); 
-                dataSource.one("sync", function() {
-                    widget.value(widget.value().concat([newValue]));
-                });
-            });
-            dataSource.sync();
-        }
-    }
-
-    $(function() {
-        var crudServiceBaseUrl = "/api/v1/tags";
-        var dataSource = new kendo.data.DataSource({
-            batch: true,
-            transport: {
-                read:  {
-                    url: '<?= Hash::get($options, 'readUrl') ?>',
-                },
-                create: {
-                    url: '<?= Hash::get($options, 'createUrl') ?>',
-                },
-                parameterMap: function(options, operation) {
-                    if (operation !== "read" && options.models) {
-                        //trao array {model: (obj)[name:""] } cho bên nhận create
-                        return {models: kendo.stringify(options.models)};
-                    }
+            
+                return {
+                    id: term,
+                    text: term,
                 }
             },
-            schema: {
-                model: {
-                    id: "number",
-                    fields: {
-                        number: { type: "number" },
-                        tag_id: { type: "string" },
-                        name: { type: "string" }
+            minimumInputLength: 2,
+            tags: true, // Enable dynamic creation
+            tokenSeparators: [','],
+            language: 'vi',
+        });
+
+        // Retrieve pre-selected values
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: transport['preSelected'],
+        }).then(function (data) {
+            $.each(data, function (index, item) {
+                var option = new Option(item.text, item.id, true, true);
+                multipleSelect.append(option).trigger('change');
+            
+                // manually trigger the `select2:select` event
+                multipleSelect.trigger({
+                    type: 'select2:select',
+                    params: {
+                        data: item
                     }
-                }
-            }
+                });
+            });
         });
-
-        $("#tags").kendoMultiSelect({
-            filter: "contains",//tìm trong nội dung, ngoài ra còn có "equal" và "startswith"
-            footerTemplate: $("#footerTemplate").html(),
-            autoBind: false,
-            dataTextField: "name",
-            dataValueField: "number",
-            dataSource: dataSource,
-            noDataTemplate: $("#noDataTemplate").html(),
-            value: JSON.parse($("#AuthorTags").html())
-        });
-
-        $('#edit-tag-form').submit(function(eventObj) {
-            $('#edit-tag-form input[name=multiselectTagData]')
-                .attr('value', JSON.stringify($("#tags").data("kendoMultiSelect").dataItems()))
-                .appendTo('#edit-tag-form');
-            return true;
-        });
-    });
+    })(jQuery);
 
 </script>
-
+                
 <?php $rootView->end() ?>
 
-<script id="noDataTemplate" type="text/x-kendo-tmpl">
-    <?=__('Không tìm thấy dữ liệu')?>                            
-</script>
-<script id="footerTemplate" type="text/x-kendo-template">
-    <button class="k-button btn btn-default btn-block" onclick="addNew('#: instance.element[0].id #', '#: instance.input.val() #')"><?=__('Tạo tag ')?> &nbsp;<b>#: instance.input.val() #</b></button>
-</script>
+<?= $rootView->Form->control($input['name'], [
+    'type' => 'select',
+    'multiple' => true,
+    'id' => $input['id'],
+    'class' => $input['class'],
+    'label' => $input['label'],
+]) ?>
 
-<?=$this->Form->input('multiselectTagData', [
-    'type' => 'text',
-    'id' => 'tags',
-    'label' => false
-])?>
 
-<?php 
-    $tag_array = [] ;
-    foreach(Hash::get($options, 'value', []) as $tag)
-    {
-        $tag_array[] = [
-            "number"  => preg_replace('/[^0-9]/', '', $tag->id),
-            "tag_id"  => h($tag->id),
-            "name" => h($tag->name),
-        ];
-    }
-?>
-<div id="AuthorTags" style="display:none"><?=json_encode($tag_array)?></div>
 

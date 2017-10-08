@@ -81,6 +81,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 });
 
 Router::prefix('api/v1', function ($routes) {
+    $routes->extensions(['json']);
     $routes->fallbacks(DashedRoute::class);
 });
 
