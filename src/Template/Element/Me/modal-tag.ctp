@@ -19,7 +19,7 @@
                         'read' => $this->Url->build('/api/v1/tags/get-by-name'),
                         'preSelected' => $this->Url->build('/api/v1/tags/get-by-user-id/'.$Auth->user('id')),
                     ],
-                    'options' => [
+                    'input' => [
                         'value' => $profile->caster_tags,
                         'name' => 'caster_tags',
                         'class' => 'form-control',
