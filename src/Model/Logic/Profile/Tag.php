@@ -55,7 +55,7 @@ class Tag
             if ($save_data) {
                 $save_data = Hash::insert($save_data, '{n}.user_id', $user_id);
             }
-            
+
             $entities = $this->UsersCasterTags->newEntities($save_data);
             $result = $this->UsersCasterTags->saveMany($entities);
 
@@ -109,7 +109,10 @@ class Tag
         ];
         foreach ($tags as $tag) {
             if (Validation::uuid($tag)) {
-                $classified['old'][] = ['caster_tag_id' => $tag];
+                $exists = $this->CasterTags->exists(['id' => $tag]);
+                if ($exists) {
+                    $classified['old'][] = ['caster_tag_id' => $tag];
+                }
                 continue;
             }
 
