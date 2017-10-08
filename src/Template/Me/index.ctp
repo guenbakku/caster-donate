@@ -53,7 +53,7 @@
                                 'data-target' => '#caster-tag'
                             ]
                         ) ?>
-                        <div>
+                        <div style="margin-top:5px">
                             <?php foreach ($profile->caster_tags as $tag): ?>
                                 <span class="label label-info"><i class="fa fa-tag"></i> <?= h($tag->name) ?></span>    
                             <?php endforeach ?>

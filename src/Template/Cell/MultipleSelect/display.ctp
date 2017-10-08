@@ -8,12 +8,15 @@ $rootView->append('script');
 
 <script type="text/javascript">
     (function ($) {
-        // Get preselected values
-        var multipleSelect = $('#<?= $input['id'] ?>');
+        var elemId = '<?= $input['id'] ?>';
+        var transport = <?= json_encode($transport) ?>;
+        
+        var multipleSelect = $('#'+elemId);
 
+        // Configure select2
         multipleSelect.select2({
             ajax: {
-                url: '<?= $transport['read'] ?>',
+                url: transport['read'],
                 dataType: 'json',
                 delay: 250,
                 processResults: function (data) {
@@ -39,10 +42,11 @@ $rootView->append('script');
             language: 'vi',
         });
 
+        // Retrieve pre-selected values
         $.ajax({
             type: 'GET',
             dataType: 'json',
-            url: '<?= $transport['preSelected'] ?>',
+            url: transport['preSelected'],
         }).then(function (data) {
             $.each(data, function (index, item) {
                 var option = new Option(item.text, item.id, true, true);
