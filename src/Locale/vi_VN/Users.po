@@ -108,3 +108,6 @@ msgstr "Địa chỉ email đã tồn tại"
 
 msgid "User was not found"
 msgstr "Không tìm thấy thông tin tài khoản"
+
+msgid "Invalid reCaptcha"
+msgstr "reCaptcha không hợp lệ"

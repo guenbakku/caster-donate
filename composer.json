@@ -14,7 +14,8 @@
         "adrienrn/php-mimetyper": "^0.2.0",
         "josegonzalez/cakephp-upload": "^3.7",
         "league/flysystem": "^1.0",
-        "imagine/imagine": "^0.7.1"
+        "imagine/imagine": "^0.7.1",
+        "google/recaptcha": "@stable"
     },
     "require-dev": {
         "psy/psysh": "@stable",

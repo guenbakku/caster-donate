@@ -24,6 +24,16 @@ return [
             // default role name used in registration
             'defaultRole' => 'user',
         ],
+        'reCaptcha' => [
+            // reCaptcha key goes here
+            'key' => '6Lc2vTMUAAAAAIab-uUMjRi1ObCoxWGBRqPFR_2o',
+            // reCaptcha secret
+            'secret' => '6Lc2vTMUAAAAAJh-g1WuXzyvpJ93saEzVrqnOwj1',
+            // use reCaptcha in registration
+            'registration' => true,
+            // use reCaptcha in login, valid values are false, true
+            'login' => false,
+        ],
         'Tos' => [
             // determines if the user should include tos accepted
             'required' => true,
@@ -63,12 +73,12 @@ return [
             'CakeDC/Auth.SimpleRbac',
         ],
         'loginRedirect' => [
-            'plugin' => null,
+            'plugin' => false,
             'controller' => 'Home',
             'action' => 'index',
         ],
         'logoutRedirect' => [
-            'plugin' => null,
+            'plugin' => false,
             'controller' => 'Home',
             'action' => 'index',
         ]
