@@ -3,7 +3,6 @@ namespace App\Controller;
 
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use Cake\ORM\TableRegistry;
 use App\Model\Logic\Profile\Profile;
 use App\Model\Logic\Profile\Tag;
 

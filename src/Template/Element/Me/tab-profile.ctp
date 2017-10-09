@@ -37,6 +37,15 @@
             ],
         ]) ?>
 
+        <?= $this->Form->control('sex', [
+            'class' => 'form-control',
+            'empty' => true,
+            'options' => $this->Code->get('sexes'),
+            'label' => [
+                'text' =>  __('Giới tính')
+            ],
+        ]) ?>
+
         <?= $this->Form->control('birthday', [
             'class' => 'form-control dateinput',
             'type'  => 'text',
