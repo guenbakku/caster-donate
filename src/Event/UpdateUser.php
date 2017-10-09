@@ -13,27 +13,11 @@ class UpdateUser implements EventListenerInterface
 {
     public function implementedEvents() {
         return [
-            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateSessionAfterUserLogin',
-            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateSessionAfterUserLogin',
+            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateUserSession',
+            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateUserSession',
             UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
-            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateSessionAfterEditUserProfile',
+            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateUserSession',
         ];
-    }
-
-    public function updateSessionAfterUserLogin($event)
-    {
-        $Controller = $event->subject();
-        $user = $Controller->Auth->user();
-        
-        $UserInfos = TableRegistry::get('UserInfos');
-        $entity = $UserInfos->findByUserId($user['id'])->first();
-
-        if($entity)
-        {
-            $user['avatar_url'] = $entity->avatar_url;
-            $user['nickname'] = $entity->nickname;
-        }
-        $Controller->Auth->setUser($user);
     }
 
     public function fillSubTablesAfterUserRegister($event)
@@ -43,18 +27,23 @@ class UpdateUser implements EventListenerInterface
         
         // Insert empty row to user_infos table
         $UserInfos = TableRegistry::get('UserInfos');
-        $userInfo = $UserInfos->newEntity();
-        $userInfo->user_id = $event->data['user']->id;
+        $userInfo = $UserInfos->newEntity([
+            'user_id' => $event->getData('user')->id,
+        ]);
         $UserInfos->save($userInfo);
     }
 
-    public function updateSessionAfterEditUserProfile($event, $entity)
+    public function updateUserSession($event)
     {
         $Controller = $event->subject();
         $user = $Controller->Auth->user();
-
-        $user['avatar_url'] = $entity->avatar_url;
-        $user['nickname'] = $entity->nickname;
-        $Controller->Auth->setUser($user);
+        
+        if ($user) {
+            $UserInfos = TableRegistry::get('UserInfos');
+            $entity = $UserInfos->findByUserId($user['id'])->first();
+            $user['avatar_url'] = $entity->avatar_url;
+            $user['nickname'] = $entity->nickname;
+            $Controller->Auth->setUser($user);
+        }
     }
 }
