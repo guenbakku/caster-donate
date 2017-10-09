@@ -71,6 +71,10 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
 
             $entity = $table->findById($entity->id)->first();
 
+            if (!$entity->$field) {
+                continue;
+            }
+
             $dirField = Hash::get($settings, 'fields.dir', 'dir');
             if ($entity->has($dirField)) {
                 $path = $entity->get($dirField);
