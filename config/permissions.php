@@ -42,5 +42,16 @@ return [
                 return !empty($user);
             }
         ],
+        // authenticated user is allowed to access api
+        [
+            'role' => '*',
+            'plugin' => false,
+            'prefix' => 'api/v1',
+            'controller' => '*',
+            'action' => '*',
+            'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
+                return !empty($user);
+            }
+        ],
     ]
 ];
