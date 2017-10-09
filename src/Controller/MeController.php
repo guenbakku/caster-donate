@@ -80,7 +80,7 @@ class MeController extends AppController
         return $this->redirect($this->referer());
     }
 
-    public function contact() 
+    public function contract() 
     {
         $this->render('/Me/index');
     }

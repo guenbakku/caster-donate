@@ -85,11 +85,11 @@
                         'action' => 'profile',
                     ]) ?>
                 </li>
-                <li class="<?= $this->request->action == 'contact'? 'active' : null ?>">
+                <li class="<?= $this->request->action == 'contract'? 'active' : null ?>">
                     <?php
                     $tab_name = (!$profile->caster_infos) ? __('Đăng ký Lên Sóng') : _("Thông tin Lên Sóng");
                     echo $this->Html->link($tab_name, [
-                        'action' => 'contact',
+                        'action' => 'contract',
                     ]) ?>
                 </li>
             </ul>
