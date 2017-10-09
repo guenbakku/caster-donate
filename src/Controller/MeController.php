@@ -20,17 +20,6 @@ class MeController extends AppController
         $this->ContentHeader->title('Trang cá nhân');
     }
 
-    public function beforeRender(Event $event)
-    {
-        // Set default render setting
-        if ($this->request->is('get')) {   
-            $Profile = new Profile();
-            $user_id = $this->Auth->user('id');
-            $profile = $Profile->get($user_id);
-            $this->set(compact('profile'));
-        }
-    }
-
     public function statistics()
     {
         $this->render('/Me/index');
@@ -44,9 +33,9 @@ class MeController extends AppController
     public function profile()
     {
         $user_id = $this->Auth->user('id');
+        $Profile = new Profile();
         
         if ($this->request->is(['patch','post','put'])) {
-            $Profile = new Profile();
             $new_user_info = $this->request->getData();
             $profile = $Profile->edit($user_id, $new_user_info);
             
@@ -56,16 +45,15 @@ class MeController extends AppController
                     Configure::read('Events.Controller.Me.AfterEditProfile'), 
                     ['profile' => $profile]
                 );
-                
                 $this->Flash->success(__('Thay đổi thông tin cá nhân thành công.'));
             } else {
                 $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập.'));
             }
-
-            // Cần có để hiện errors ra form
-            $this->set(compact('profile'));
+        } else {
+            $profile = $Profile->get($user_id);
         }
-
+        
+        $this->set(compact('profile'));
         $this->render('/Me/index');
     }
 

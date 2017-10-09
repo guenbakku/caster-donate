@@ -40,9 +40,17 @@ class UpdateUser implements EventListenerInterface
         
         if ($user) {
             $UserInfos = TableRegistry::get('UserInfos');
-            $entity = $UserInfos->findByUserId($user['id'])->first();
-            $user['avatar_url'] = $entity->avatar_url;
-            $user['nickname'] = $entity->nickname;
+            $entity = $UserInfos->findByUserId($user['id'])
+                ->contain(['CasterTags'])
+                ->first();
+            
+            $user['profile'] = [
+                'avatar_url' => $entity->avatar_url,
+                'nickname' => $entity->nickname,
+                'birthday' => $entity->birthday,
+                'location' => $entity->location,
+                'caster_tags' => $entity->caster_tags,
+            ];
             $Controller->Auth->setUser($user);
         }
     }
