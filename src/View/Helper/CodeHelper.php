@@ -25,9 +25,9 @@ class CodeHelper extends Helper
     public function get(string $table, array $options = [])
     {
         $key = $this->hash($table, $options);
-        $result = $this->getCache($key);
+        $result = $this->readCache($key);
         if (!$result) {
-            $result = $this->getDb($table, $options);
+            $result = $this->readDB($table, $options);
             $this->writeCache($key, $result);
         }
 
@@ -41,7 +41,7 @@ class CodeHelper extends Helper
      * @param   array: options
      * @return  array
      */
-    public function getDb(string $table, array $options = [])
+    public function readDB(string $table, array $options = [])
     {
         $table = TableRegistry::get($table);
         $query = $table->find('list', [
@@ -55,6 +55,17 @@ class CodeHelper extends Helper
         }
 
         return $query->toArray();
+    }
+
+    /**
+     * Clear cache (useful when write unit test case)
+     *
+     * @param   void
+     * @return  void
+     */
+    public function clearCache()
+    {
+        static::$cached = [];
     }
 
     /**
@@ -88,7 +99,7 @@ class CodeHelper extends Helper
      * @param   string: key
      * @return  mixed
      */
-    protected function getCache(string $key)
+    protected function readCache(string $key)
     {
         return Hash::get(static::$cached, $key);
     }
