@@ -62,8 +62,14 @@ class MeController extends AppController
         $caster_tags = $this->request->data('caster_tags') ?: [];
         $user_id = $this->Auth->user('id');
         $Tag->save($user_id, $caster_tags);
+
+        // Trigger event after edited tags
+        $this->dispatchEvent(
+            Configure::read('Events.Controller.Me.AfterEditTag')
+        );
+
         $this->Flash->success(__('Thay đổi tag thành công.'));
-         
+
         return $this->redirect($this->referer());
     }
 

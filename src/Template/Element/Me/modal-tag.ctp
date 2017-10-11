@@ -1,7 +1,7 @@
 <div class="modal fade" id="caster-tag" tabindex="-1" role="dialog" aria-labelledby="caster-tag">
     <div class="modal-dialog" role="document">
         <?php $this->Form->setTemplates($FormTemplates['tag']); ?>
-        <?=$this->Form->create($profile, [
+        <?=$this->Form->create(null, [
             'id' => 'edit-tag-form',
             'class' => 'modal-content form-vertical',
             'url' => ['action' => 'tag'],
@@ -20,7 +20,7 @@
                         'preSelected' => $this->Url->build('/api/v1/tags/get-by-user-id/'.$Auth->user('id')),
                     ],
                     'input' => [
-                        'value' => $profile->caster_tags,
+                        'value' => $Auth->user('profile.caster_tags'),
                         'name' => 'caster_tags',
                         'class' => 'form-control',
                         'label' => false,

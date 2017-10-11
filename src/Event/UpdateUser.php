@@ -17,6 +17,7 @@ class UpdateUser implements EventListenerInterface
             UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateUserSession',
             UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
             Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateUserSession',
+            Configure::read('Events.Controller.Me.AfterEditTag') => 'updateUserSession',
         ];
     }
 
