@@ -1,13 +1,11 @@
 <?php
 namespace App\Event;
 
-use Cake\Log\Log;
 use Cake\Core\Configure;
 use Cake\Event\EventListenerInterface;
 use Cake\ORM\TableRegistry;
-use Cake\Controller\Component\AuthComponent;
 use CakeDC\Users\Controller\Component\UsersAuthComponent;
-use App\Model\Logic\Profile\Profile;
+use App\Model\Logic\User\Profile;
 
 class UpdateUser implements EventListenerInterface
 {

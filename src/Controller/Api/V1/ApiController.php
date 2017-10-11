@@ -6,7 +6,7 @@ use Cake\Core\Configure;
 use Cake\Collection\Collection;
 use Cake\Network\Exception\BadRequestException;
 use App\Controller\AppController;
-use App\Model\Logic\Profile\Tag;
+use App\Model\Logic\User\Tag;
 
 class ApiController extends AppController
 {

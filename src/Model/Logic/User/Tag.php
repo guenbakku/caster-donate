@@ -1,5 +1,5 @@
 <?php
-namespace App\Model\Logic\Profile;
+namespace App\Model\Logic\User;
 
 use Cake\Datasource\ConnectionManager;
 use Cake\ORM\TableRegistry;

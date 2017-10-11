@@ -3,8 +3,8 @@ namespace App\Controller;
 
 use Cake\Core\Configure;
 use Cake\Event\Event;
-use App\Model\Logic\Profile\Profile;
-use App\Model\Logic\Profile\Tag;
+use App\Model\Logic\User\Profile;
+use App\Model\Logic\User\Tag;
 
 class MeController extends AppController
 {

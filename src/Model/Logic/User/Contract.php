@@ -1,10 +1,10 @@
 <?php
-namespace App\Model\Logic\Profile;
+namespace App\Model\Logic\User;
 
 use Cake\ORM\TableRegistry;
 use Cake\Core\Configure;
 
-class Profile
+class Contract
 {
     public function get($user_id)
     {
@@ -45,22 +45,6 @@ class Profile
         }
 
         return $userInfo;
-    }
-
-    /**
-     * $tags là mảng của nhiều mảng có key id của tag ex:[['id'=>'xyz'],['id'=>'abc']]
-     */
-    public function updateTag($user_id, array $tags)
-    {
-        $this->autoRender = false;
-        $userInfos = TableRegistry::get('UserInfos');
-
-        $query = $userInfos->findByUserId($user_id);
-        $query->contain(['CasterTags']);
-        $userInfo = $query->first();
-        
-        $userInfo = $userInfos->patchEntity($userInfo,['caster_tags' => $tags]);
-        $userInfos->save($userInfo);
     }
 }
 ?>

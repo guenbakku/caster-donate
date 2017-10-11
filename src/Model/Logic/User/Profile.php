@@ -1,10 +1,10 @@
 <?php
-namespace App\Model\Logic\Profile;
+namespace App\Model\Logic\User;
 
 use Cake\ORM\TableRegistry;
 use Cake\Core\Configure;
 
-class Contract
+class Profile
 {
     public function get($user_id)
     {
@@ -12,14 +12,11 @@ class Contract
         $query = $userInfos->findByUserId($user_id);
         $query->contain(['SocialProviders','CasterTags','CasterInfos']);
         $userInfo = $query->first();
-        // debug($userInfo);
-        if($userInfo)
-        {
+        if ($userInfo) {
             $UsersSocialProviders = TableRegistry::get('UsersSocialProviders');
             $userInfo->social_providers = $UsersSocialProviders->repleteEntities($userInfo->social_providers);
         }
-        else
-        {
+        else {
             return $userInfos->newEntity();
         }
         return $userInfo;
@@ -45,6 +42,22 @@ class Contract
         }
 
         return $userInfo;
+    }
+
+    /**
+     * $tags là mảng của nhiều mảng có key id của tag ex:[['id'=>'xyz'],['id'=>'abc']]
+     */
+    public function updateTag($user_id, array $tags)
+    {
+        $this->autoRender = false;
+        $userInfos = TableRegistry::get('UserInfos');
+
+        $query = $userInfos->findByUserId($user_id);
+        $query->contain(['CasterTags']);
+        $userInfo = $query->first();
+        
+        $userInfo = $userInfos->patchEntity($userInfo,['caster_tags' => $tags]);
+        $userInfos->save($userInfo);
     }
 }
 ?>
