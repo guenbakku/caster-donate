@@ -15,13 +15,16 @@
         "josegonzalez/cakephp-upload": "^3.7",
         "league/flysystem": "^1.0",
         "imagine/imagine": "^0.7.1",
-        "google/recaptcha": "@stable"
+        "google/recaptcha": "@stable",
+        "league/flysystem-aws-s3-v3": "^1.0"
     },
     "require-dev": {
         "psy/psysh": "@stable",
         "cakephp/debug_kit": "~3.2",
         "cakephp/bake": "~1.1",
-        "mikey179/vfsStream": "^1.6"
+        "mikey179/vfsStream": "^1.6",
+        "phpunit/phpunit": "^6.4",
+        "cakephp/cakephp-codesniffer": "^3.0"
     },
     "suggest": {
         "markstory/asset_compress": "An asset compression plugin which provides file concatenation and a flexible filter system for preprocessing and minification.",

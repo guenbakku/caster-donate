@@ -27,6 +27,13 @@ use Cake\View\Exception\MissingTemplateException;
  */
 class PagesControllerTest extends IntegrationTestCase
 {
+    public function setUp()
+    {
+        $this->markTestSkipped(
+            'These test cases for just reference.'
+        );
+    }
+
     /**
      * testMultipleGet method
      *
