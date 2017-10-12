@@ -1,22 +1,22 @@
 <li class="dropdown user user-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <?= $this->Html->image($Auth->user('profile.avatar_url'), [
+        <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
             'class' => 'user-image', 
             'alt' => __('User profile picture')
         ]) ?>
         <span class="hidden-xs">
-            <?= h($Auth->user('nickname') ?: $Auth->user('username')) ?>
+            <?= h($this->Auth->user('nickname') ?: $this->Auth->user('username')) ?>
         </span>
     </a>
     <ul class="dropdown-menu">
         <li class="user-header">
-            <?= $this->Html->image($Auth->user('profile.avatar_url'), [
+            <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
                 'class' => 'img-circle', 
                 'alt' => __('User profile picture')
             ]) ?>
             <p>
-                <?= h($Auth->user('nickname') ?: h($Auth->user('username'))) ?>
-                <small><?=__('Tham gia từ')?> : <?= $Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></small>
+                <?= h($this->Auth->user('nickname') ?: h($this->Auth->user('username'))) ?>
+                <small><?=__('Tham gia từ')?> : <?= $this->Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></small>
             </p>
         </li>
         <li class="user-body">

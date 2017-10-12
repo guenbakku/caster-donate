@@ -2,18 +2,18 @@
     <div class="col-md-3">
         <div class="box box-primary">
             <div class="box-body box-profile">
-                <?= $this->Html->image($Auth->user('profile.avatar_url'), [
+                <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
                     'class' => 'profile-user-img img-responsive img-circle', 
                     'alt' => __d('CakeDC/Users', 'User profile picture')
                 ]) ?>
-                <h3 class="profile-username text-center"><?= h($Auth->user('profile.nickname')) ?: h($Auth->user('username')) ?></h3>
-                <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
+                <h3 class="profile-username text-center"><?= h($this->Auth->user('profile.nickname')) ?: h($this->Auth->user('username')) ?></h3>
+                <p class="text-muted text-center"><?=__('Tham gia từ')?> : <?= $this->Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></p>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <b><?=__('Ngày sinh')?></b> <span class="pull-right"><?= h($Auth->user('profile.birthday')) ?></span>
+                        <b><?=__('Ngày sinh')?></b> <span class="pull-right"><?= h($this->Auth->user('profile.birthday')) ?></span>
                     </li>
                     <li class="list-group-item">
-                        <b><?=__('Nơi ở hiện tại')?></b> <span class="pull-right"><?= h($Auth->user('profile.location')) ?></span>
+                        <b><?=__('Nơi ở hiện tại')?></b> <span class="pull-right"><?= h($this->Auth->user('profile.location')) ?></span>
                     </li>
                     <li class="list-group-item">
                         <b><?=__('Tag nội dung Live Stream')?></b>
@@ -28,7 +28,7 @@
                             ]
                         ) ?>
                         <div style="margin-top:5px">
-                            <?php foreach ($Auth->user('profile.caster_tags') as $tag): ?>
+                            <?php foreach ($this->Auth->user('profile.caster_tags') as $tag): ?>
                                 <span class="label label-info"><i class="fa fa-tag"></i> <?= h($tag->name) ?></span>    
                             <?php endforeach ?>
                         </div>

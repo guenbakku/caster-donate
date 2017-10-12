@@ -1,7 +1,4 @@
 <?php
-/**
- * Test case of src/Utility/Flysytem.php
- */
 
 namespace App\Test\TestCase\Utility;
 
@@ -9,6 +6,9 @@ use Cake\TestSuite\TestCase;
 use Cake\Core\Configure;
 use App\Utility\Flysystem;
 
+/**
+ * Test case of src/Utility/Flysytem.php
+ */
 class FlysystemTest extends TestCase
 {
     public function setUp()
