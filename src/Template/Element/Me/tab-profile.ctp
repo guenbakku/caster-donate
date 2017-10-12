@@ -40,7 +40,7 @@
         <?= $this->Form->control('sex', [
             'class' => 'form-control',
             'empty' => true,
-            'options' => $this->Code->get('sexes'),
+            'options' => $this->Code->getList('sexes'),
             'label' => [
                 'text' =>  __('Giới tính')
             ],

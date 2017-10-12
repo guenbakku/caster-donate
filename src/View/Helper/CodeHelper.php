@@ -19,42 +19,40 @@ class CodeHelper extends Helper
      * https://book.cakephp.org/3.0/ja/orm/retrieving-data-and-resultsets.html#table-find-list
      *
      * @param   string: table name
-     * @param   array: options
+     * @param   array: contains custom keyField and valueField
      * @return  array
      */
-    public function get(string $table, array $options = [])
+    public function getList(string $table, array $options = [])
     {
-        $key = $this->hash($table, $options);
-        $result = $this->readCache($key);
+        $group = 'list';
+        $hash = $this->hash($table, $options);
+        $result = $this->readCache($group, $hash);
         if (!$result) {
-            $result = $this->readDB($table, $options);
-            $this->writeCache($key, $result);
+            $result = $this->readDBForList($table, $options);
+            $this->writeCache($group, $hash, $result);
         }
 
         return $result;
     }
 
     /**
-     * Return data get from database
+     * Return key (id) of specific identify in specific code table
      *
      * @param   string: table name
-     * @param   array: options
-     * @return  array
+     * @param   string: identify
+     * @param   mixed: key of identify
      */
-    public function readDB(string $table, array $options = [])
+    public function getKey(string $table, string $identify, array $options = [])
     {
-        $table = TableRegistry::get($table);
-        $query = $table->find('list', [
-            'keyField' => Hash::get($options, 'keyField', 'id'),
-            'valueField' => Hash::get($options, 'valueField', 'name'),
-        ]);
-
-        $order = Hash::get($options, 'order');
-        if ($order) {
-            $query->order($order);
+        $group = 'key';
+        $hash = $this->hash($table, $options);
+        $result = $this->readCache($group, $hash);
+        if (!$result) {
+            $result = $this->readDBForKey($table, $options);
+            $this->writeCache($group, $hash, $result);
         }
 
-        return $query->toArray();
+        return Hash::get($result, $identify);
     }
 
     /**
@@ -65,7 +63,48 @@ class CodeHelper extends Helper
      */
     public function clearCache()
     {
-        static::$cached = [];
+        return static::$cached = [];
+    }
+
+    /**
+     * Return key of indentify get from database
+     *
+     * @param   string: table name
+     * @param   array: contains custom keyField and identifyField
+     * @return  array
+     */
+    protected function readDBForKey(string $table, array $options = [])
+    {
+        $table = TableRegistry::get($table);
+        $query = $table->find('list', [
+            'keyField' => Hash::get($options, 'keyField', 'id'),
+            'valueField' => Hash::get($options, 'identifyField', 'identify'),
+        ]);
+
+        return array_flip($query->toArray());
+    }
+
+    /**
+     * Return data of code group get from database
+     *
+     * @param   string: table name
+     * @param   array: contains custom keyField and valueField
+     * @return  array
+     */
+    protected function readDBForList(string $table, array $options = [])
+    {
+        $table = TableRegistry::get($table);
+        $query = $table->find('list', [
+            'keyField' => Hash::get($options, 'keyField', 'id'),
+            'valueField' => Hash::get($options, 'valueField', 'name'),
+        ]);
+
+        $order = Hash::get($options, 'order', 'order_no');
+        if ($table->schema()->column($order)) {
+            $query->order($order);
+        }
+
+        return $query->toArray();
     }
 
     /**
@@ -88,9 +127,10 @@ class CodeHelper extends Helper
      * @param   mixed: result
      * @return  void
      */
-    protected function writeCache(string $key, $result)
+    protected function writeCache(string $group, string $key, $result)
     {
-        static::$cached[$key] = $result;
+        $path = $group.'.'.$key;
+        Hash::insert(static::$cached, $path, $result);
     }
 
     /**
@@ -99,8 +139,9 @@ class CodeHelper extends Helper
      * @param   string: key
      * @return  mixed
      */
-    protected function readCache(string $key)
+    protected function readCache(string $group, string $key)
     {
-        return Hash::get(static::$cached, $key);
+        $path = $group.'.'.$key;
+        return Hash::get(static::$cached, $path);
     }
 }

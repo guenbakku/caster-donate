@@ -18,7 +18,7 @@ class CreateSexesTable extends AbstractMigration
                 'null' => false,
                 'limit' => 20,
             ])
-            ->addColumn('key', 'string',[
+            ->addColumn('identify', 'string',[
                 'null' => false,
                 'limit' => 20,
             ])
