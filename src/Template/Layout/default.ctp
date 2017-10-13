@@ -28,17 +28,17 @@
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-red-light layout-top-nav">
     <div class="wrapper">
-        <?= $this->element('Layout/main-header') ?>
+        <?= $this->element('Layout/default/main-header') ?>
         <div class="content-wrapper">
             <div class="container-fluid">
-                <?= $this->element('Layout/content-header') ?>
+                <?= $this->element('Layout/default/content-header') ?>
                 <section class="content">
                     <?= $this->Flash->render() ?>
                     <?= $this->fetch('content') ?>
                 </section>
             </div>
         </div>
-        <?= $this->element('Layout/footer') ?>
+        <?= $this->element('Layout/default/footer') ?>
     </div>
     <?= $this->Html->script('/packages/jquery/jquery-2.2.4.min.js') ?>
     <?= $this->Html->script('/packages/bootstrap/js/bootstrap.min.js') ?>
