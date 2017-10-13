@@ -36,13 +36,13 @@ class CodeHelper extends Helper
     }
 
     /**
-     * Return key (id) of specific identify in specific code table
+     * Return key (id) of specific selector in specific code table
      *
      * @param   string: table name
-     * @param   string: identify
-     * @param   mixed: key of identify
+     * @param   string: selector
+     * @param   mixed: key of selector
      */
-    public function getKey(string $table, string $identify, array $options = [])
+    public function getKey(string $table, string $selector, array $options = [])
     {
         $group = 'key';
         $hash = $this->hash($table, $options);
@@ -52,7 +52,7 @@ class CodeHelper extends Helper
             $this->writeCache($group, $hash, $result);
         }
 
-        return Hash::get($result, $identify);
+        return Hash::get($result, $selector);
     }
 
     /**
@@ -70,7 +70,7 @@ class CodeHelper extends Helper
      * Return key of indentify get from database
      *
      * @param   string: table name
-     * @param   array: contains custom keyField and identifyField
+     * @param   array: contains custom keyField and selectorField
      * @return  array
      */
     protected function readDBForKey(string $table, array $options = [])
@@ -78,7 +78,7 @@ class CodeHelper extends Helper
         $table = TableRegistry::get($table);
         $query = $table->find('list', [
             'keyField' => Hash::get($options, 'keyField', 'id'),
-            'valueField' => Hash::get($options, 'identifyField', 'identify'),
+            'valueField' => Hash::get($options, 'selectorField', 'selector'),
         ]);
 
         return array_flip($query->toArray());

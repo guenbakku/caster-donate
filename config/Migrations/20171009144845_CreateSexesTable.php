@@ -18,7 +18,7 @@ class CreateSexesTable extends AbstractMigration
                 'null' => false,
                 'limit' => 20,
             ])
-            ->addColumn('identify', 'string',[
+            ->addColumn('selector', 'string',[
                 'null' => false,
                 'limit' => 20,
             ])
@@ -37,7 +37,7 @@ class CreateSexesTable extends AbstractMigration
             [
                 'id' => 1,
                 'name' => 'Nam',
-                'key' => 'male',
+                'selector' => 'male',
                 'order_no' => 1,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
@@ -45,7 +45,7 @@ class CreateSexesTable extends AbstractMigration
             [
                 'id' => 2,
                 'name' => 'Nữ',
-                'key' => 'female',
+                'selector' => 'female',
                 'order_no' => 2,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
@@ -53,7 +53,7 @@ class CreateSexesTable extends AbstractMigration
             [
                 'id' => 3,
                 'name' => 'Khác',
-                'key' => 'other',
+                'selector' => 'other',
                 'order_no' => 3,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
