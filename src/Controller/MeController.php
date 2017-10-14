@@ -21,16 +21,17 @@ class MeController extends AppController
 
     public function statistics()
     {
-        $this->render('/Me/index');
+        $this->ContentHeader->title('Thống kê thu nhập');
     }
 
     public function schedule() 
     {
-        $this->render('/Me/index');
+        $this->ContentHeader->title('Lịch LiveStream');
     }
 
     public function profile()
-    {
+    {   
+        $this->ContentHeader->title('Thông tin cá nhân');
         $user_id = $this->Auth->user('id');
         $Profile = new Profile();
         
@@ -53,7 +54,11 @@ class MeController extends AppController
         }
         
         $this->set(compact('profile'));
-        $this->render('/Me/index');
+    }
+
+    public function contract() 
+    {
+        $this->ContentHeader->title('Thông tin Lên Sóng');
     }
 
     public function tag()
@@ -71,11 +76,6 @@ class MeController extends AppController
         $this->Flash->success(__('Thay đổi tag thành công.'));
 
         return $this->redirect($this->referer());
-    }
-
-    public function contract() 
-    {
-        $this->render('/Me/index');
     }
 
 }

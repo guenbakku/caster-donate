@@ -7,7 +7,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <?= $this->fetch('meta') ?>
-    <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css') ?>
+    <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') ?>
     <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css') ?>
     <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css') ?>
     <?= $this->Html->css('/packages/bootstrap/css/bootstrap.min.css') ?>
@@ -15,7 +15,7 @@
     <?= $this->Html->css('/packages/KendoUI/styles/web/kendo.common.core.css') ?>
     <?= $this->Html->css('/packages/KendoUI/styles/web/kendo.silver.css') ?>
     <?= $this->Html->css('/packages/AdminLTE/css/AdminLTE.min.css') ?>
-    <?= $this->Html->css('/packages/AdminLTE/css/skins/skin-red-light.min.css') ?>
+    <?= $this->Html->css('/packages/AdminLTE/css/skins/_all-skins.min.css') ?>
     <?= $this->Html->css('style.css') ?>
     <?= $this->fetch('css') ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -26,9 +26,13 @@
     <![endif]-->
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-red-light layout-top-nav">
-    <div class="wrapper">
+<body class="hold-transition skin-red <?=($Auth->user())?'sidebar-mini':''?> sidebar-collapse">
+    <div class="wrapper" style="height:auto">
         <?= $this->element('Layout/main-header') ?>
+        <?php if ($Auth->user()) {
+            echo $this->element('Layout/main-sidebar');
+        }
+        ?>
         <div class="content-wrapper">
             <div class="container-fluid">
                 <?= $this->element('Layout/content-header') ?>
