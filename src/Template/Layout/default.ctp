@@ -26,7 +26,7 @@
     <![endif]-->
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-red <?=($Auth->user())?'sidebar-mini':''?> sidebar-collapse">
+<body class="hold-transition skin-red <?=($Auth->user())?'sidebar-mini':''?>">
     <div class="wrapper" style="height:auto">
         <?= $this->element('Layout/main-header') ?>
         <?php if ($Auth->user()) {

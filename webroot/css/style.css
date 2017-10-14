@@ -15,6 +15,12 @@
     }
 }
 
+@media (min-width: 768px) {
+    .sidebar-mini.sidebar-collapse .main-header .navbar {
+        margin-left: 0px;
+    }
+}
+
 .login-box-msg {
     font-weight: bold;
 }
@@ -46,4 +52,8 @@ input.k-textbox {
 }
 .select2-dropdown { /* Cần để chạy đúng trên Bootstrap modal */
     z-index: 5051;
+}
+
+.main-header .navbar {
+    margin-left: 0px; 
 }
