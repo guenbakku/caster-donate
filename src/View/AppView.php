@@ -37,6 +37,7 @@ class AppView extends View
     public function initialize()
     {
         $this->loadHelper('Text');
+        $this->loadHelper('Auth');
         $this->loadHelper('ContentHeader');
         $this->loadHelper('Code');
     }

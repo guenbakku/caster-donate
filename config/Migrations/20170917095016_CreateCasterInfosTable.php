@@ -74,6 +74,7 @@ class CreateCasterInfosTable extends AbstractMigration
             ->addColumn('modified', 'datetime', [
                 'null' => false,
             ])
+            ->addForeignKey('user_id', 'users', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
             ->create();
     }
 }

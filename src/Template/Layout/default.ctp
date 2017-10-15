@@ -26,23 +26,23 @@
     <![endif]-->
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-red <?=($Auth->user())?'sidebar-mini':''?>">
+<body class="hold-transition skin-red <?= $this->Auth->user()? 'sidebar-mini' : ''?>">
     <div class="wrapper" style="height:auto">
-        <?= $this->element('Layout/main-header') ?>
-        <?php if ($Auth->user()) {
-            echo $this->element('Layout/main-sidebar');
+        <?= $this->element('Layout/default/main-header') ?>
+        <?php if ($this->Auth->user()) {
+            echo $this->element('Layout/default/main-sidebar');
         }
         ?>
         <div class="content-wrapper">
             <div class="container-fluid">
-                <?= $this->element('Layout/content-header') ?>
+                <?= $this->element('Layout/default/content-header') ?>
                 <section class="content">
                     <?= $this->Flash->render() ?>
                     <?= $this->fetch('content') ?>
                 </section>
             </div>
         </div>
-        <?= $this->element('Layout/footer') ?>
+        <?= $this->element('Layout/default/footer') ?>
     </div>
     <?= $this->Html->script('/packages/jquery/jquery-2.2.4.min.js') ?>
     <?= $this->Html->script('/packages/bootstrap/js/bootstrap.min.js') ?>

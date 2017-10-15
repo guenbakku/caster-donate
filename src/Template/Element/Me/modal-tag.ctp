@@ -17,10 +17,10 @@
                     $this,
                     'tranport' => [
                         'read' => $this->Url->build('/api/v1/tags/get-by-name'),
-                        'preSelected' => $this->Url->build('/api/v1/tags/get-by-user-id/'.$Auth->user('id')),
+                        'preSelected' => $this->Url->build('/api/v1/tags/get-by-user-id/'.$this->Auth->user('id')),
                     ],
                     'input' => [
-                        'value' => $Auth->user('profile.caster_tags'),
+                        'value' => $this->Auth->user('profile.caster_tags'),
                         'name' => 'caster_tags',
                         'class' => 'form-control',
                         'label' => false,

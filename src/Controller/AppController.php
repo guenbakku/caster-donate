@@ -76,11 +76,7 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
-    }
 
-    public function beforeFilter(Event $event)
-    {
-        $this->set('Auth', $this->Auth);
         $this->set('FormTemplates', Configure::read('FormTemplates'));
     }
 }

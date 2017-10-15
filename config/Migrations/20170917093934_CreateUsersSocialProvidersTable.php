@@ -37,6 +37,8 @@ class CreateUsersSocialProvidersTable extends AbstractMigration
             ->addColumn('modified', 'datetime', [
                 'null' => false,
             ])
+            ->addForeignKey('user_id', 'users', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
+            ->addForeignKey('social_provider_id', 'social_providers', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
             ->create();
     }
 }
