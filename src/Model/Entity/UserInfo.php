@@ -7,11 +7,11 @@ class UserInfo extends AppEntity
 {
     protected function _getAvatarUrl()
     {
-        $avatar = $this->_properties['avatar'];
-        if (!empty($avatar)) {
-            return 'avatar/'.$avatar;
+        $filename = $this->_properties['avatar'];
+        if (!empty($filename)) {
+            return Configure::read('System.Urls.avatar_dir').$filename;
         } else {
-            return 'default_avatar.jpg';
+            return Configure::read('System.Urls.default_avatar');
         }
     }
 }

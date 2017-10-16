@@ -36,9 +36,10 @@ class AppView extends View
      */
     public function initialize()
     {
-        $this->loadHelper('Text');
-        $this->loadHelper('Auth');
-        $this->loadHelper('ContentHeader');
-        $this->loadHelper('Code');
+        $this->loadHelper('Cake.Text');
+        $this->loadHelper('App.Auth');
+        $this->loadHelper('App.ContentHeader');
+        $this->loadHelper('App.Code');
+        $this->loadHelper('App.I18n');
     }
 }

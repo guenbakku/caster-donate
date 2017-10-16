@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?= Cake\Core\Configure::read('System.iso-language') ?>">
+<html lang="<?= $this->I18n->language() ?>">
 <head>
     <title><?= Cake\Core\Configure::read('System.sitename') ?></title>
     <meta charset="utf-8">

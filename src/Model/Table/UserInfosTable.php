@@ -38,7 +38,7 @@ class UserInfosTable extends AppTable
         // Setup upload file
         $this->addBehavior('Upload', [
             'avatar' => [
-                'path' => Configure::read('System.Paths.avatar'),
+                'path' => Configure::read('System.Paths.avatar_dir'),
                 'keepFileOnEdit' => false,
                 'keepFileOnDelete' => false,
                 'resizeTo' => Configure::read('vcv.minImageSize'),

@@ -9,10 +9,22 @@ return [
     'System' => [
         'sitename' => 'Caster Donate',
         'version' => '0.0.1',
-        'iso-language' => 'vi',
-        
+
+        /*
+         * Paths point to file/directory on server
+         */
         'Paths' => [
-            'avatar' => 'webroot'.DS.'img'.DS.'avatar'.DS,
+            'avatar_dir' => 'webroot'.DS.'img'.DS.'avatar'.DS,
         ],
+
+        /*
+         * Paths to generate urls
+         * Below does not need to use constant 'DS' because seperator
+         * in url is always '/'
+         */
+        'Urls' => [
+            'avatar_dir' => 'avatar/',
+            'default_avatar' => 'default_avatar.jpg',
+        ]
     ],
 ];
