@@ -4,7 +4,7 @@
                     <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
                 <ul class="nav" id="side-menu">
                     <li class="user-pro">
-                        <a href="/me" class="waves-effect">
+                        <a href="javascript::void(0)" class="waves-effect active">
                             <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
                                 'class' => 'img-circle', 
                                 'alt' => __('User profile picture'),
@@ -13,7 +13,7 @@
                                 <span class="fa arrow"></span>
                             </span>
                         </a>
-                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                        <ul class="nav nav-second-level" aria-expanded="false" style="height: 0px;">
                             <li><a href="/me/profile"><i class="ti-user"></i> <span class="hide-menu"><?=__('Thông tin tài khoản')?></span></a></li>
                             <li><a href="/me/contract"><i class="ti-wallet"></i> <span class="hide-menu"><?=__('Hợp đồng Lên Sóng')?></span></a></li>
                             <li><a href="/me/withdraw"><i class="ti-wallet"></i> <span class="hide-menu"><?=__('Rút tiền')?></span></a></li>
