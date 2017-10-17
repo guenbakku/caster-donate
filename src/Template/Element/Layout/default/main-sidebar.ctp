@@ -1,4 +1,95 @@
-<aside class="main-sidebar">
+<div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav slimscrollsidebar">
+                <div class="sidebar-head">
+                    <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
+                <ul class="nav" id="side-menu">
+                    <li class="user-pro">
+                        <a href="/me" class="waves-effect">
+                            <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
+                                'class' => 'img-circle', 
+                                'alt' => __('User profile picture'),
+                            ]) ?>
+                            <span class="hide-menu"> <?= h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')) ?>
+                                <span class="fa arrow"></span>
+                            </span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                            <li><a href="/me/profile"><i class="ti-user"></i> <span class="hide-menu"><?=__('Thông tin tài khoản')?></span></a></li>
+                            <li><a href="/me/contract"><i class="ti-wallet"></i> <span class="hide-menu"><?=__('Hợp đồng Lên Sóng')?></span></a></li>
+                            <li><a href="/me/withdraw"><i class="ti-wallet"></i> <span class="hide-menu"><?=__('Rút tiền')?></span></a></li>
+                            <li><a href="/logout"><i class="fa fa-power-off"></i> <span class="hide-menu"><?=__('Đăng xuất')?></span></a></li>
+                        </ul>
+                    </li>
+                    <li> 
+                        <a href="javascript::void(0)" class="waves-effect">
+                            <i class="mdi mdi-av-timer fa-fw"></i> 
+                            <span class="hide-menu"> <?=__('Thống kê')?>
+                                <span class="fa arrow"></span> 
+                            </span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="me/"><i class=" fa-fw"></i><span class="hide-menu"><?=__('Thu nhập')?></span></a> </li>
+                            <li> <a href="me/"><i class=" fa-fw"></i><span class="hide-menu"><?=__('Lượt donate')?></span></a> </li>
+                            <li> <a href="me/"><i class=" fa-fw"></i><span class="hide-menu"><?=__('Người theo dõi')?></span></a> </li>
+                        </ul>
+                    </li>
+                    <li> 
+                        <a href="javascript::void(0)" class="waves-effect">
+                            <i class="fa fa-gift"></i> 
+                            <span class="hide-menu"> <?=__('Donate')?>
+                                <span class="fa arrow"></span> 
+                            </span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="me/"><i class="fa fa-bell-o"> </i><span class="hide-menu"><?=__('Thông báo Donate')?></span></a> </li>
+                            <li> <a href="me/"><i class="fa fa-bullseye"> </i><span class="hide-menu"><?=__('Mục tiêu Donate')?></span></a> </li>
+                            <li> <a href="me/"><i class="fa fa-list-ol"> </i><span class="hide-menu"><?=__('BXH Donate')?></span></a> </li>
+                            <li> <a href="me/"><i class="fa fa-user"> </i><span class="hide-menu"><?=__('Người Donate gần nhất')?></span></a> </li>
+                            <li> <a href="me/"><i class="fa fa-user"> </i><span class="hide-menu"><?=__('Người Donate nhiều nhất')?></span></a> </li>
+                        </ul>
+                    </li>
+                    <li> 
+                        <a href="javascript::void(0)" class="waves-effect">
+                            <i class="fa fa-youtube-play"></i> 
+                            <span class="hide-menu"> <?=__('Thông báo Youtube')?>
+                                <span class="fa arrow"></span> 
+                            </span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="me/"><i class="fa fa-users"> </i><span class="hide-menu"><?=__('Số người Subscribe')?></span></a> </li>
+                            <li> <a href="me/"><i class="fa fa-bell-o"> </i><span class="hide-menu"><?=__('Thông báo Subscribe')?></span></a> </li>
+                            <li> <a href="me/"><i class="fa fa-bullseye"> </i><span class="hide-menu"><?=__('Mục tiêu Subscribe')?></span></a> </li>
+                        </ul>
+                    </li>
+                    <li> 
+                        <a href="javascript::void(0)" class="waves-effect">
+                            <i class="fa fa-calendar"></i> 
+                            <span class="hide-menu"> <?=__('Lịch LiveStream')?></span>
+                        </a>
+                    </li>
+                    <li> 
+                        <a href="javascript::void(0)" class="waves-effect">
+                            <i class="fa fa-windows"></i> 
+                            <span class="hide-menu"> <?=__('Tạo cửa sổ thông báo riêng')?></span>
+                        </a>
+                    </li>
+                    <li> 
+                        <a href="javascript::void(0)" class="waves-effect">
+                            <i class="mdi mdi-av-timer fa-fw"></i> 
+                            <span class="hide-menu"> <?=__('Chi tiết về dịch vụ')?>
+                                <span class="fa arrow"></span> 
+                            </span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="javascript::void(0)"><i class="fa fa-exclamation"> </i> <span class="hide-menu"><?=__('Điều khoản')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="fa fa-dollar" ></i> <span class="hide-menu"><?=__('Biểu phí')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="fa fa-envelope-o"> </i> <span class="hide-menu"><?=__('Liên hệ')?></span></a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+<!--<aside class="main-sidebar">
     <section class="sidebar" style="height: auto;">
     <ul class="sidebar-menu">
 
@@ -111,5 +202,4 @@
 
     </ul>
     </section>
-    <!-- /.sidebar -->
-</aside>
+</aside>-->

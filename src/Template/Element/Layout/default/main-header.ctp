@@ -1,53 +1,95 @@
-<header class="main-header">
-    <nav class="navbar navbar-static-top">
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-        </a>
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="/" class="navbar-brand"><strong><?= Cake\Core\Configure::read('System.sitename') ?></strong></a>
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                <i class="fa fa-bars"></i>
-                </button>
+    <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header">
+            <div class="top-left-part">
+                <!-- Logo -->
+                <a class="logo" href="index.html">
+                    <?= $this->Html->image('admin-logo.png', [
+                            'class' => 'dark-logo', 
+                            'alt' => __('home')
+                        ]) ?>
+                    <?= $this->Html->image('admin-logo-dark.png', [
+                            'class' => 'light-logo', 
+                            'alt' => __('home')
+                        ]) ?>
+                    </b>
+                    <span class="hidden-xs">
+                        <span class="dark-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
+                        <span class="light-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
+                    </span> </a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
-                    </div>
-                </form>
-            </div>
-            <!-- /.navbar-collapse -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <?php 
-                        if (empty($this->Auth->user())) {
-                            echo $this->cell('GuestMenu');
-                        } else {
-                            echo $this->cell('NotificationsMenu');
-                            echo $this->cell('MemberMenu');
-                        }
-                    ?>
-                </ul>
-            </div>
+            <!-- /Logo -->
+            <!-- Search input and Toggle icon -->
+            <ul class="nav navbar-top-links navbar-left">
+                <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
+                <li>
+                    <a href="">Trang Chủ</a>
+                </li>
+                <li>
+                    <a href="">Hướng dẫn</a>
+                </li>
+                <li>
+                    <a href="">Liên hệ</a>
+                </li>
+                <li>
+                    <a href="">Điều khoản</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-gmail"></i>
+                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                    </a>
+                    <ul class="dropdown-menu mailbox animated bounceInDown">
+                        <li>
+                            <div class="drop-title">You have 4 new messages</div>
+                        </li>
+                        <li>
+                            <div class="message-center">
+                                <a href="#">
+                                    <div class="user-img"> <img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
+                                </a>
+                                <a href="#">
+                                    <div class="user-img"> <img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
+                                </a>
+                                <a href="#">
+                                    <div class="user-img"> <img src="../plugins/images/users/arijit.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
+                                </a>
+                                <a href="#">
+                                    <div class="user-img"> <img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                
+            </ul>
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                <li>
+                    <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+                        <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
+                </li>
+                <?php 
+                    if (empty($this->Auth->user())) {
+                        echo $this->cell('GuestMenu');
+                    } else {
+                        echo $this->cell('MemberMenu');
+                    }
+                ?>
+                
+                <!-- /.dropdown -->
+            </ul>
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.navbar-header -->
+        <!-- /.navbar-top-links -->
+        <!-- /.navbar-static-side -->
     </nav>
-</header>

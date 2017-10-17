@@ -6,8 +6,5 @@ use Cake\Core\Configure;
 
 class GuestMenuCell extends Cell
 {
-    public function display() 
-    {
-
-    }
+    public function display(){}
 }
