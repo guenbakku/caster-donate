@@ -6103,6 +6103,7 @@ ul.select-row-icon li a.selected i.whn-hov {
 .sidebar .nav-second-level li,
 .sidebar .nav-third-level li {
   border-bottom: none !important;
+  background-color: #373a48;
 }
 .sidebar .nav-second-level li a {
   padding: 14px 10px 14px 20px;
