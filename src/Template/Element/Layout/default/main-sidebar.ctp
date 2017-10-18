@@ -4,7 +4,7 @@
                     <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
                 <ul class="nav" id="side-menu">
                     <li class="user-pro">
-                        <a href="javascript::void(0)" class="waves-effect <?=($this->request->controller == 'Me')?'active':''?>">
+                        <a href="javascript::void(0)" class="waves-effect <?=(in_array($this->request->action,['profile','contract','withdraw']))?'active':''?>">
                             <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
                                 'class' => 'img-circle', 
                                 'alt' => __('User profile picture'),
@@ -21,14 +21,14 @@
                         </ul>
                     </li>
                     <li> 
-                        <a href="javascript::void(0)" class="waves-effect <?=($this->request->controller == '')?'active':''?>">
+                        <a href="javascript::void(0)" class="waves-effect <?=(in_array($this->request->action,['statistics']))?'active':''?>">
                             <i class="mdi mdi-av-timer fa-fw"></i> 
                             <span class="hide-menu"> <?=__('Thống kê')?>
                                 <span class="fa arrow"></span> 
                             </span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li><a href="/me/profile2"><i class="mdi mdi-cash-usd"></i> <span class="hide-menu"><?=__('Thu nhập')?></span></a> </li>
+                            <li><a href="/me/statistics"><i class="mdi mdi-cash-usd"></i> <span class="hide-menu"><?=__('Thu nhập')?></span></a> </li>
                             <li><a href="javascript::void(0)"><i class="mdi mdi-format-list-bulleted-type"></i> <span class="hide-menu"><?=__('Lượt donate')?></span></a> </li>
                             <li><a href="javascript::void(0)"><i class="mdi mdi-eye-outline"></i> <span class="hide-menu"><?=__('Người theo dõi')?></span></a> </li>
                         </ul>
@@ -63,7 +63,7 @@
                         </ul>
                     </li>
                     <li> 
-                        <a href="javascript::void(0)" class="waves-effect">
+                        <a href="/me/schedule" class="waves-effect">
                             <i class="mdi mdi-calendar-check"></i> 
                             <span class="hide-menu"> <?=__('Lịch LiveStream')?></span>
                         </a>

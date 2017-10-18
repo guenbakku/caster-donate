@@ -20,7 +20,7 @@
                     <p class="text-muted"><?= h($this->Auth->user('profile.email') ?:__('Chưa cập nhật email')) ?></p>
                     <?= $this->Html->link(
                         __d('CakeDC/Users', 'Profile'),
-                        '/me',
+                        '/me/profile',
                         ['class' => 'btn btn-rounded btn-danger btn-sm']
                     ) ?>
                 </div>
