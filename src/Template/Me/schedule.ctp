@@ -1,102 +1,40 @@
-<div class="box">
-
-    <div class="box-header with-border">
-        <h3 class="box-title">Tiêu đề</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-            <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-            <i class="fa fa-times"></i></button>
+<?= $this->Html->css('/packages/calendar/dist/fullcalendar.css',['block'=>true]) ?>
+<div class="row">
+    <div class="col-md-3">
+        <div class="white-box">
+            <h3 class="box-title">Drag and drop your event</h3>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    
+                    <div id="calendar-events" class="m-t-20">
+                        <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-info" style="position: relative;"><i class="fa fa-circle text-info"></i> My Event One</div>
+                        <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-success" style="position: relative;"><i class="fa fa-circle text-success"></i> My Event Two</div>
+                        <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-danger" style="position: relative;"><i class="fa fa-circle text-danger"></i> My Event Three</div>
+                        <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-warning" style="position: relative;"><i class="fa fa-circle text-warning"></i> My Event Four</div> 
+                    </div>
+                    <!-- checkbox -->
+                    <div class="checkbox">
+                        <input id="drop-remove" type="checkbox">
+                        <label for="drop-remove">
+                            Remove after drop
+                        </label>
+                    </div>
+                    <a href="#" data-toggle="modal" data-target="#add-new-event" class="btn btn-lg m-t-40 btn-danger btn-block waves-effect waves-light">
+                        <i class="ti-plus"></i> Add New Event
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="box-body">
-        <div class="tab-pane active" id="schedule">
-            <!-- The timeline -->
-            <ul class="timeline timeline-inverse">
-                <!-- timeline time label -->
-                <li class="time-label">
-                    <span class="bg-red">
-                    10 Feb. 2014
-                    </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
-                    <i class="fa fa-envelope bg-blue"></i>
-                    <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-                        <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                            quora plaxo ideeli hulu weebly balihoo...
-                        </div>
-                        <div class="timeline-footer">
-                            <a class="btn btn-primary btn-xs">Read more</a>
-                            <a class="btn btn-danger btn-xs">Delete</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <li>
-                    <i class="fa fa-user bg-aqua"></i>
-                    <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-                        <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                        </h3>
-                    </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <li>
-                    <i class="fa fa-comments bg-yellow"></i>
-                    <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                        <div class="timeline-body">
-                            Take me to your leader!
-                            Switzerland is small and neutral!
-                            We are more like Germany, ambitious and misunderstood!
-                        </div>
-                        <div class="timeline-footer">
-                            <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline time label -->
-                <li class="time-label">
-                    <span class="bg-green">
-                    3 Jan. 2014
-                    </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
-                    <i class="fa fa-camera bg-purple"></i>
-                    <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-                        <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-                        <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        </div>
-                    </div>
-                </li>
-                <!-- END timeline item -->
-                <li>
-                    <i class="fa fa-clock-o bg-gray"></i>
-                </li>
-            </ul>
+    <div class="col-md-9">
+        <div class="white-box">
+            <div id="calendar" class="fc fc-unthemed fc-ltr"><div class="fc-toolbar fc-header-toolbar"><div class="fc-left"><div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left"><span class="fc-icon fc-icon-left-single-arrow"></span></button><button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right"><span class="fc-icon fc-icon-right-single-arrow"></span></button></div><button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right fc-state-disabled" disabled="">today</button></div><div class="fc-right"><div class="fc-button-group"><button type="button" class="fc-month-button fc-button fc-state-default fc-corner-left fc-state-active">month</button><button type="button" class="fc-agendaWeek-button fc-button fc-state-default">week</button><button type="button" class="fc-agendaDay-button fc-button fc-state-default fc-corner-right">day</button></div></div><div class="fc-center"><h2>October 2017</h2></div><div class="fc-clear"></div></div><div class="fc-view-container" style=""><div class="fc-view fc-month-view fc-basic-view" style=""><table><thead class="fc-head"><tr><td class="fc-head-container fc-widget-header"><div class="fc-row fc-widget-header"><table><thead><tr><th class="fc-day-header fc-widget-header fc-sun"><span>Sun</span></th><th class="fc-day-header fc-widget-header fc-mon"><span>Mon</span></th><th class="fc-day-header fc-widget-header fc-tue"><span>Tue</span></th><th class="fc-day-header fc-widget-header fc-wed"><span>Wed</span></th><th class="fc-day-header fc-widget-header fc-thu"><span>Thu</span></th><th class="fc-day-header fc-widget-header fc-fri"><span>Fri</span></th><th class="fc-day-header fc-widget-header fc-sat"><span>Sat</span></th></tr></thead></table></div></td></tr></thead><tbody class="fc-body"><tr><td class="fc-widget-content"><div class="fc-scroller fc-day-grid-container" style="overflow: hidden; height: 531px;"><div class="fc-day-grid fc-unselectable"><div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 88px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2017-10-01"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2017-10-02"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2017-10-03"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2017-10-04"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2017-10-05"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2017-10-06"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2017-10-07"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2017-10-01"><span class="fc-day-number">1</span></td><td class="fc-day-top fc-mon fc-past" data-date="2017-10-02"><span class="fc-day-number">2</span></td><td class="fc-day-top fc-tue fc-past" data-date="2017-10-03"><span class="fc-day-number">3</span></td><td class="fc-day-top fc-wed fc-past" data-date="2017-10-04"><span class="fc-day-number">4</span></td><td class="fc-day-top fc-thu fc-past" data-date="2017-10-05"><span class="fc-day-number">5</span></td><td class="fc-day-top fc-fri fc-past" data-date="2017-10-06"><span class="fc-day-number">6</span></td><td class="fc-day-top fc-sat fc-past" data-date="2017-10-07"><span class="fc-day-number">7</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-purple fc-draggable"><div class="fc-content"><span class="fc-time">10:18p</span> <span class="fc-title">your meeting with john</span></div></a></td><td></td><td class="fc-event-container" colspan="2"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-warning fc-draggable"><div class="fc-content"><span class="fc-time">2:05a</span> <span class="fc-title">your meeting with john</span></div></a></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 88px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2017-10-08"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2017-10-09"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2017-10-10"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2017-10-11"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2017-10-12"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2017-10-13"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2017-10-14"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2017-10-08"><span class="fc-day-number">8</span></td><td class="fc-day-top fc-mon fc-past" data-date="2017-10-09"><span class="fc-day-number">9</span></td><td class="fc-day-top fc-tue fc-past" data-date="2017-10-10"><span class="fc-day-number">10</span></td><td class="fc-day-top fc-wed fc-past" data-date="2017-10-11"><span class="fc-day-number">11</span></td><td class="fc-day-top fc-thu fc-past" data-date="2017-10-12"><span class="fc-day-number">12</span></td><td class="fc-day-top fc-fri fc-past" data-date="2017-10-13"><span class="fc-day-number">13</span></td><td class="fc-day-top fc-sat fc-past" data-date="2017-10-14"><span class="fc-day-number">14</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-not-end bg-info fc-draggable"><div class="fc-content"><span class="fc-time">4:32a</span> <span class="fc-title">your meeting with john</span></div></a></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 88px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2017-10-15"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2017-10-16"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2017-10-17"></td><td class="fc-day fc-widget-content fc-wed fc-today fc-state-highlight" data-date="2017-10-18"></td><td class="fc-day fc-widget-content fc-thu fc-future" data-date="2017-10-19"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2017-10-20"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2017-10-21"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2017-10-15"><span class="fc-day-number">15</span></td><td class="fc-day-top fc-mon fc-past" data-date="2017-10-16"><span class="fc-day-number">16</span></td><td class="fc-day-top fc-tue fc-past" data-date="2017-10-17"><span class="fc-day-number">17</span></td><td class="fc-day-top fc-wed fc-today fc-state-highlight" data-date="2017-10-18"><span class="fc-day-number">18</span></td><td class="fc-day-top fc-thu fc-future" data-date="2017-10-19"><span class="fc-day-number">19</span></td><td class="fc-day-top fc-fri fc-future" data-date="2017-10-20"><span class="fc-day-number">20</span></td><td class="fc-day-top fc-sat fc-future" data-date="2017-10-21"><span class="fc-day-number">21</span></td></tr></thead><tbody><tr><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-not-start fc-end bg-info fc-draggable"><div class="fc-content"> <span class="fc-title">your meeting with john</span></div></a></td><td></td><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-danger fc-draggable"><div class="fc-content"><span class="fc-time">7:22p</span> <span class="fc-title">This is today check date</span></div></a></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 88px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2017-10-22"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2017-10-23"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2017-10-24"></td><td class="fc-day fc-widget-content fc-wed fc-future" data-date="2017-10-25"></td><td class="fc-day fc-widget-content fc-thu fc-future" data-date="2017-10-26"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2017-10-27"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2017-10-28"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-future" data-date="2017-10-22"><span class="fc-day-number">22</span></td><td class="fc-day-top fc-mon fc-future" data-date="2017-10-23"><span class="fc-day-number">23</span></td><td class="fc-day-top fc-tue fc-future" data-date="2017-10-24"><span class="fc-day-number">24</span></td><td class="fc-day-top fc-wed fc-future" data-date="2017-10-25"><span class="fc-day-number">25</span></td><td class="fc-day-top fc-thu fc-future" data-date="2017-10-26"><span class="fc-day-number">26</span></td><td class="fc-day-top fc-fri fc-future" data-date="2017-10-27"><span class="fc-day-number">27</span></td><td class="fc-day-top fc-sat fc-future" data-date="2017-10-28"><span class="fc-day-number">28</span></td></tr></thead><tbody><tr><td class="fc-event-container" rowspan="2"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-success fc-draggable"><div class="fc-content"><span class="fc-time">8:02p</span> <span class="fc-title">Like it?</span></div></a></td><td rowspan="2"></td><td class="fc-event-container" rowspan="2"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-info fc-draggable"><div class="fc-content"><span class="fc-time">4:08p</span> <span class="fc-title">Released Ample Admin!</span></div></a></td><td rowspan="2"></td><td rowspan="2"></td><td rowspan="2"></td><td class="fc-event-container fc-limited"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-info fc-draggable"><div class="fc-content"><span class="fc-time">2:55p</span> <span class="fc-title">This is your birthday</span></div></a></td><td class="fc-more-cell" rowspan="1"><div><a class="fc-more">+2 more</a></div></td></tr><tr class="fc-limited"><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end bg-danger fc-draggable"><div class="fc-content"><span class="fc-time">8:28p</span> <span class="fc-title">Hanns birthday</span></div></a></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 88px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2017-10-29"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2017-10-30"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2017-10-31"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-future" data-date="2017-11-01"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-future" data-date="2017-11-02"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-future" data-date="2017-11-03"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-future" data-date="2017-11-04"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-future" data-date="2017-10-29"><span class="fc-day-number">29</span></td><td class="fc-day-top fc-mon fc-future" data-date="2017-10-30"><span class="fc-day-number">30</span></td><td class="fc-day-top fc-tue fc-future" data-date="2017-10-31"><span class="fc-day-number">31</span></td><td class="fc-day-top fc-wed fc-other-month fc-future" data-date="2017-11-01"><span class="fc-day-number">1</span></td><td class="fc-day-top fc-thu fc-other-month fc-future" data-date="2017-11-02"><span class="fc-day-number">2</span></td><td class="fc-day-top fc-fri fc-other-month fc-future" data-date="2017-11-03"><span class="fc-day-number">3</span></td><td class="fc-day-top fc-sat fc-other-month fc-future" data-date="2017-11-04"><span class="fc-day-number">4</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 91px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-other-month fc-future" data-date="2017-11-05"></td><td class="fc-day fc-widget-content fc-mon fc-other-month fc-future" data-date="2017-11-06"></td><td class="fc-day fc-widget-content fc-tue fc-other-month fc-future" data-date="2017-11-07"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-future" data-date="2017-11-08"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-future" data-date="2017-11-09"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-future" data-date="2017-11-10"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-future" data-date="2017-11-11"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-other-month fc-future" data-date="2017-11-05"><span class="fc-day-number">5</span></td><td class="fc-day-top fc-mon fc-other-month fc-future" data-date="2017-11-06"><span class="fc-day-number">6</span></td><td class="fc-day-top fc-tue fc-other-month fc-future" data-date="2017-11-07"><span class="fc-day-number">7</span></td><td class="fc-day-top fc-wed fc-other-month fc-future" data-date="2017-11-08"><span class="fc-day-number">8</span></td><td class="fc-day-top fc-thu fc-other-month fc-future" data-date="2017-11-09"><span class="fc-day-number">9</span></td><td class="fc-day-top fc-fri fc-other-month fc-future" data-date="2017-11-10"><span class="fc-day-number">10</span></td><td class="fc-day-top fc-sat fc-other-month fc-future" data-date="2017-11-11"><span class="fc-day-number">11</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div></div></div></td></tr></tbody></table></div></div></div>
         </div>
-    </div>
-
-    <div class="box-footer">
-
     </div>
 </div>
+
+<?= $this->Html->script('/packages/calendar/jquery-ui.min.js',['block'=>true]) ?>
+<?= $this->Html->script('/packages/moment/moment.js',['block'=>true]) ?>
+<?= $this->Html->script('/packages/calendar/dist/fullcalendar.min.js',['block'=>true]) ?>
+<?= $this->Html->script('/packages/calendar/dist/jquery.fullcalendar.js',['block'=>true]) ?>
+<?= $this->Html->script('/packages/calendar/dist/cal-init.js',['block'=>true]) ?>
