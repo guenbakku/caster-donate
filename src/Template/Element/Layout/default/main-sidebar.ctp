@@ -28,64 +28,64 @@
                             </span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li><a href="/me/statistics"><i class="mdi mdi-cash-usd"></i> <span class="hide-menu"><?=__('Thu nhập')?></span></a> </li>
-                            <li><a href="javascript::void(0)"><i class="mdi mdi-format-list-bulleted-type"></i> <span class="hide-menu"><?=__('Lượt donate')?></span></a> </li>
-                            <li><a href="javascript::void(0)"><i class="mdi mdi-eye-outline"></i> <span class="hide-menu"><?=__('Người theo dõi')?></span></a> </li>
+                            <li><a href="/me/statistics"><i class="mdi mdi-cash-usd fa-fw"></i> <span class="hide-menu"><?=__('Thu nhập')?></span></a> </li>
+                            <li><a href="javascript::void(0)"><i class="mdi mdi-format-list-bulleted-type fa-fw"></i> <span class="hide-menu"><?=__('Lượt donate')?></span></a> </li>
+                            <li><a href="javascript::void(0)"><i class="mdi mdi-eye-outline fa-fw"></i> <span class="hide-menu"><?=__('Người theo dõi')?></span></a> </li>
                         </ul>
                     </li>
                     <li class="devider"></li>
                     <li> 
                         <a href="javascript::void(0)" class="waves-effect">
-                            <i class="mdi mdi-gift"></i> 
+                            <i class="mdi mdi-gift fa-fw"></i> 
                             <span class="hide-menu"> <?=__('Thiết lập Donate')?>
                                 <span class="fa arrow"></span> 
                             </span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-bell-ring"></i> <span class="hide-menu"><?=__('Thông báo Donate')?></span></a> </li>
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-target"></i> <span class="hide-menu"><?=__('Mục tiêu Donate')?></span></a> </li>
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-numeric"></i> <span class="hide-menu"><?=__('BXH Donate')?></span></a> </li>
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-nature-people"></i> <span class="hide-menu"><?=__('Người Donate gần nhất')?></span></a> </li>
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-crown"></i> <span class="hide-menu"><?=__('Người Donate nhiều nhất')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-bell-ring fa-fw"></i> <span class="hide-menu"><?=__('Thông báo Donate')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-target fa-fw"></i> <span class="hide-menu"><?=__('Mục tiêu Donate')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-numeric fa-fw"></i> <span class="hide-menu"><?=__('BXH Donate')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-nature-people fa-fw"></i> <span class="hide-menu"><?=__('Người Donate gần nhất')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-crown fa-fw"></i> <span class="hide-menu"><?=__('Người Donate nhiều nhất')?></span></a> </li>
                         </ul>
                     </li>
                     <li> 
                         <a href="javascript::void(0)" class="waves-effect">
-                            <i class="mdi mdi-youtube-play"></i> 
+                            <i class="mdi mdi-youtube-play fa-fw"></i> 
                             <span class="hide-menu"> <?=__('Thiết lập Youtube')?>
                                 <span class="fa arrow"></span> 
                             </span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-bell-ring"></i> <span class="hide-menu"><?=__('Thông báo Subscribe')?></span></a> </li>
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-target"></i> <span class="hide-menu"><?=__('Mục tiêu Subscribe')?></span></a> </li>
-                            <li> <a href="javascript::void(0)"><i class="fa fa-users"></i> <span class="hide-menu"><?=__('Số người Subscribe')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-bell-ring fa-fw"></i> <span class="hide-menu"><?=__('Thông báo Subscribe')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-target fa-fw"></i> <span class="hide-menu"><?=__('Mục tiêu Subscribe')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="fa fa-users fa-fw"></i> <span class="hide-menu"><?=__('Số người Subscribe')?></span></a> </li>
                         </ul>
                     </li>
                     <li> 
                         <a href="/me/schedule" class="waves-effect">
-                            <i class="mdi mdi-calendar-check"></i> 
+                            <i class="mdi mdi-calendar-check fa-fw"></i> 
                             <span class="hide-menu"> <?=__('Lịch LiveStream')?></span>
                         </a>
                     </li>
                     <li> 
                         <a href="javascript::void(0)" class="waves-effect">
-                            <i class="mdi mdi-windows"></i> 
+                            <i class="mdi mdi-windows fa-fw"></i> 
                             <span class="hide-menu"> <?=__('Tạo cửa sổ riêng')?></span>
                         </a>
                     </li>
                     <li class="devider"></li>
                     <li> 
                         <a href="javascript::void(0)" class="waves-effect">
-                            <i class="mdi mdi-leaf"></i> 
+                            <i class="mdi mdi-leaf fa-fw"></i> 
                             <span class="hide-menu"> <?=__('Chi tiết về dịch vụ')?>
                                 <span class="fa arrow"></span> 
                             </span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-alert-octagram"> </i> <span class="hide-menu"><?=__('Điều khoản')?></span></a> </li>
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-blur-linear" ></i> <span class="hide-menu"><?=__('Biểu phí')?></span></a> </li>
-                            <li> <a href="javascript::void(0)"><i class="mdi mdi-email"> </i> <span class="hide-menu"><?=__('Liên hệ')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-alert-octagram fa-fw"> </i> <span class="hide-menu"><?=__('Điều khoản')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-blur-linear fa-fw" ></i> <span class="hide-menu"><?=__('Biểu phí')?></span></a> </li>
+                            <li> <a href="javascript::void(0)"><i class="mdi mdi-email fa-fw"> </i> <span class="hide-menu"><?=__('Liên hệ')?></span></a> </li>
                         </ul>
                     </li>
                 </ul>
