@@ -33,11 +33,11 @@
         <?= ($this->Auth->user()) ? $this->element('Layout/default/main-sidebar') :''?>
         <div id="page-wrapper" class="<?=($this->Auth->user())?'':'without-sidebar'?>">
             <div class="container-fluid">
-                <div class="row bg-title">
-                    <?= $this->element('Layout/default/content-header') ?>
+                <?= $this->element('Layout/default/content-header') ?>
+                <div style="margin-top:25px">
+                    <?= $this->Flash->render() ?>
+                    <?= $this->fetch('content') ?>
                 </div>
-                <?= $this->Flash->render() ?>
-                <?= $this->fetch('content') ?>
             </div>
             
             <?= $this->element('Layout/default/footer') ?>

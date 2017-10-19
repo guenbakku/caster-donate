@@ -13,7 +13,7 @@ $this->Form->templates($FormTemplates['login']);
                     'required' => true, 
                     'label' => false,
                     'class' => 'form-control',
-                    'placeholder' => __d('CakeDC/Users', 'Username'),
+                    'placeholder' => __d('CakeDC/Users', 'Username or email'),
                     'templateVars' => ['glyphicon' => 'user','WrapperDivClass' => 'm-t-20', 'InputDivClass' => 'col-xs-12'],
                 ]) ?>
                 <?= $this->Form->input('password', [
@@ -50,8 +50,8 @@ $this->Form->templates($FormTemplates['login']);
                 <div class="form-group m-b-0">
                     <div class="col-sm-12 text-center">
                     <p>
-                        Bạn chưa có tài khoản ?
                         <?php if (Configure::read('Users.Registration.active')): ?>
+                            <?= __d('CakeDC/Users', 'Don\'t have an account?') ?>
                             <?= $this->Html->link(__d('CakeDC/Users', 'Register'), ['action' => 'register'],['class' => 'text-primary m-l-5']) ?>
                         <?php endif ?>
                     </p>

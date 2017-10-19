@@ -28,6 +28,9 @@ msgstr "Đăng nhập"
 msgid "Username"
 msgstr "Tên đăng nhập"
 
+msgid "Username or email"
+msgstr "Tên đăng nhập hoặc email"
+
 msgid "Password"
 msgstr "Mật khẩu"
 
@@ -45,6 +48,9 @@ msgstr "Đăng nhập"
 
 msgid "Logout"
 msgstr "Đăng xuất"
+
+msgid "Don't have an account?"
+msgstr "Bạn chưa có tài khoản?"
 
 msgid "Register"
 msgstr "Đăng ký"
