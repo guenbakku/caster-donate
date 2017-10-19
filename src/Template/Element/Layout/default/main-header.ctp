@@ -15,20 +15,26 @@
                     <span class="hidden-xs">
                         <span class="dark-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
                         <span class="light-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
-                    </span> </a>
+                    </span> 
+                </a>
             </div>
             <!-- /Logo -->
             <!-- Search input and Toggle icon -->
             <ul class="nav navbar-top-links navbar-left">
-                <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
+                <?php if($this->Auth->user()){
+                    echo '<li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>';
+                }?>
                 <li>
-                    <a href="">Hướng dẫn</a>
+                    <a class="hidden-xs" href="">Hướng dẫn</a>
+                    <a class="visible-xs" href=""><i class="mdi mdi-book-open-page-variant"></i></a>
                 </li>
                 <li>
-                    <a href="">Liên hệ</a>
+                    <a class="hidden-xs" href="">Liên hệ</a>
+                    <a class="visible-xs" href=""><i class="mdi mdi-email-outline"></i></a>
                 </li>
                 <li>
-                    <a href="">Điều khoản</a>
+                    <a class="hidden-xs" href="">Điều khoản</a>
+                    <a class="visible-xs" href=""><i class="mdi mdi-alert-octagram"></i></a>                    
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-gmail"></i>
