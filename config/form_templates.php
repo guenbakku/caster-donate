@@ -39,14 +39,14 @@ return [
         ],
 
         'login' => [
-            'inputContainer' => '<div class="form-group has-feedback">{{content}}</div>',
+            'inputContainer' => '<div class="form-group has-feedback {{WrapperDivClass}}"><div class="{{InputDivClass}}">{{content}}</div></div>',
             'input' => '<input type="{{type}}" name="{{name}}" {{attrs}} /><span class="glyphicon glyphicon-{{glyphicon}} form-control-feedback"></span>',
             
-            'checkboxContainer' => '<div class="form-group"><div class="row">{{content}}</div></div>',
+            'checkboxContainer' => '<div class="checkbox checkbox-info pull-left p-t-0">{{content}}</div>',
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'nestingLabel' => '<label{{attrs}}>{{input}} {{text}}</label>',
-            'checkboxFormGroup' => '<div class="col-xs-12"><div class="checkbox icheck">{{input}}{{label}}</div></div>',
-            'button' => '<div class="form-group"><div class="row"><div class="col-sm-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div></div>',
+            'nestingLabel' => '{{input}}<label{{attrs}}> {{text}}</label>',
+            'checkboxFormGroup' => '{{input}}{{label}}',
+            'button' => '<div class="form-group text-center m-t-20"><div class="col-xs-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div>',
         ],
     ],
 ];
