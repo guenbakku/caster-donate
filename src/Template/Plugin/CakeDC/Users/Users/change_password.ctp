@@ -3,8 +3,7 @@ use Cake\Core\Configure;
 $this->Form->templates($FormTemplates['login']);
 ?>
 
-<div class="col-md-4"></div>
-<div class="col-md-4">
+<div class="col-md-offset-4 col-md-4">
     <div class="new-login-box">
         <div class="white-box">
             <h3 class="box-title m-b-0"><?=  __d('CakeDC/Users', 'Change password') ?></h3>
