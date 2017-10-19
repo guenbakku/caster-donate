@@ -17133,3 +17133,9 @@ h6 small,
 .table > thead > tr > th.danger {
   background-color: #84422e;
 }
+
+
+.without-sidebar{
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+}

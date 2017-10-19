@@ -22,19 +22,16 @@
     <![endif]-->
 </head>
 <body class="fix-header">
-    <!--<div class="preloader">
+    <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
         </svg>
-    </div>-->
+    </div>
 
     <div id="wrapper">
         <?= $this->element('Layout/default/main-header') ?>
-        <?php if ($this->Auth->user()) {
-            echo $this->element('Layout/default/main-sidebar');
-        }
-        ?>
-        <div id="page-wrapper">
+        <?= ($this->Auth->user()) ? $this->element('Layout/default/main-sidebar') :''?>
+        <div id="page-wrapper" class="<?=($this->Auth->user())?'':'without-sidebar'?>">
             <div class="container-fluid">
                 <div class="row bg-title">
                     <?= $this->element('Layout/default/content-header') ?>

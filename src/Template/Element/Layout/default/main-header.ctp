@@ -1,8 +1,8 @@
-    <nav class="navbar navbar-default navbar-static-top m-b-0">
+    <nav class="navbar navbar-default navbar-static-top m-b-0 <?=($this->Auth->user())?'':'without-sidebar'?>">
         <div class="navbar-header">
             <div class="top-left-part">
                 <!-- Logo -->
-                <a class="logo" href="index.html">
+                <a class="logo" href="/">
                     <?= $this->Html->image('admin-logo.png', [
                             'class' => 'dark-logo', 
                             'alt' => __('home')
