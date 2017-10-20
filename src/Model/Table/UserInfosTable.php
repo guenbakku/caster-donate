@@ -126,19 +126,6 @@ class UserInfosTable extends AppTable
                     'allowEmpty' => true,
                     'last' => true,
                 ],
-                'minImageSize' => [
-                    'rule' => [
-                        'imageSize', 
-                        [
-                            'width' => ['>=', Configure::read('vcv.minImageSize')[0]],
-                            'height' => ['>=', Configure::read('vcv.minImageSize')[1]],
-                        ],
-                    ],
-                    'message' => __(
-                        'File tải lên phải có chiều rộng lớn hơn {0}px và chiều cao lớn hơn {1}px',
-                        Configure::read('vcv.minImageSize')
-                    ),
-                ]
             ]);
 
         return $validator;
