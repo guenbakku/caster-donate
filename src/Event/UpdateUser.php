@@ -21,7 +21,7 @@ class UpdateUser implements EventListenerInterface
 
     public function fillSubTablesAfterUserRegister($event)
     {
-        $Controller = $event->subject();
+        $Controller = $event->getSubject();
         $user = $Controller->Auth->user();
         
         // Insert empty row to user_infos table
@@ -34,7 +34,7 @@ class UpdateUser implements EventListenerInterface
 
     public function updateUserSession($event)
     {
-        $Controller = $event->subject();
+        $Controller = $event->getSubject();
         $user = $Controller->Auth->user();
         
         if ($user) {

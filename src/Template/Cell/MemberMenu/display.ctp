@@ -12,7 +12,7 @@
             <div class="dw-user-box">
                 <div class="u-img">
                 <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
-                    'alt' => __('User profile picture'),
+                    'alt' => __('Ảnh đại diện'),
                 ]) ?>
                 </div>
                 <div class="u-text">
@@ -20,7 +20,7 @@
                     <p class="text-muted"><?= h($this->Auth->user('profile.email') ?:__('Chưa cập nhật email')) ?></p>
                     <?= $this->Html->link(
                         __d('CakeDC/Users', 'Profile'),
-                        '/me/profile',
+                        '/me',
                         ['class' => 'btn btn-rounded btn-danger btn-sm']
                     ) ?>
                 </div>
