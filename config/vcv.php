@@ -11,7 +11,7 @@ return [
             'image' => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'],
             'pdf'   => ['application/pdf'],
         ],
-        'uploadFileSize' => '5MB',
+        'uploadFileSize' => '5M',
         'minImageSize' => [400, 400],
     ],
 ];

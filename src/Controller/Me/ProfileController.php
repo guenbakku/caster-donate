@@ -20,7 +20,7 @@ class ProfileController extends AppController
         $user_id = $this->Auth->user('id');
         $Profile = new Profile();
         
-        if ($this->request->is(['patch','post','put'])) {
+        if ($this->request->is('put')) {
             $new_user_info = $this->request->getData();
             $profile = $Profile->edit($user_id, $new_user_info);
             

@@ -15,7 +15,7 @@ return [
             'file' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'dateWidget' => 'Ngày{{day}} Tháng{{month}} Năm{{year}}',
             'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
-            'button' => '<div class="row"><div class="col-sm-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div>',
+            'button' => '<button name="{{name}}"{{attrs}}>{{text}}</button>',
             'label' => '<label class="col-sm-2 control-label" {{attrs}}>{{text}}</label>',
             
             'checkboxContainer' => '<div class="col-sm-4"><div class="checkbox checkbox-info">{{content}}</div></div>',
@@ -25,6 +25,28 @@ return [
             
             'inputContainerError' => '<div class="form-group {{type}}{{required}} has-error">{{content}}{{error}}</div>',
             'error' => '<div class="col-sm-offset-2 help-block" style="padding:0 15px">{{content}}</div>',
+            'errorList' => '<div>{{content}}</div>',
+            'errorItem' => '<div>{{text}}</div>',
+        ],
+
+        'vertical' => [
+            'inputContainer' => '<div class="form-group">{{content}}</div>',
+            'formGroup' => '{{label}}<div class="col-sm-12">{{input}}</div>',
+            'input' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
+            'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+            'file' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
+            'dateWidget' => 'Ngày{{day}} Tháng{{month}} Năm{{year}}',
+            'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+            'button' => '<button name="{{name}}"{{attrs}}>{{text}}</button>',
+            'label' => '<label class="col-sm-12 control-label" {{attrs}}>{{text}}</label>',
+            
+            'checkboxContainer' => '<div class="col-sm-4"><div class="checkbox checkbox-info">{{content}}</div></div>',
+            'checkboxFormGroup' => '{{input}}{{label}}',
+            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+            'nestingLabel' => '{{input}}<label{{attrs}}> {{text}}</label>',
+            
+            'inputContainerError' => '<div class="form-group {{type}}{{required}} has-error">{{content}}{{error}}</div>',
+            'error' => '<div class="help-block" style="padding:0 15px">{{content}}</div>',
             'errorList' => '<div>{{content}}</div>',
             'errorItem' => '<div>{{text}}</div>',
         ],

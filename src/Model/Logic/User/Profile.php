@@ -3,6 +3,7 @@ namespace App\Model\Logic\User;
 
 use Cake\ORM\TableRegistry;
 use Cake\Core\Configure;
+use App\Utility\Flysystem;
 
 class Profile
 {
@@ -35,8 +36,7 @@ class Profile
             ],
         ]);
 
-        if(!$userInfo->errors())
-        {
+        if(!$userInfo->errors()) {
             $userInfos->save($userInfo);
             $userInfo = $this->get($user_id);
         }
@@ -44,20 +44,28 @@ class Profile
         return $userInfo;
     }
 
-    /**
-     * $tags là mảng của nhiều mảng có key id của tag ex:[['id'=>'xyz'],['id'=>'abc']]
-     */
-    public function updateTag($user_id, array $tags)
+    public function deleteAvatar($user_id)
     {
-        $this->autoRender = false;
         $userInfos = TableRegistry::get('UserInfos');
+        $userInfo = $userInfos->findByUserId($user_id)->first();
 
-        $query = $userInfos->findByUserId($user_id);
-        $query->contain(['CasterTags']);
-        $userInfo = $query->first();
+        if (!$userInfo) {
+            return false;
+        }
+
+        $dir = Configure::read('System.Paths.avatar');
+        $path = $dir.$userInfo->avatar;
         
-        $userInfo = $userInfos->patchEntity($userInfo,['caster_tags' => $tags]);
-        $userInfos->save($userInfo);
+        if (!empty($userInfo->avatar) && Flysystem::getFilesystem()->has($path)) {
+            Flysystem::getFilesystem()->delete($path);
+        }
+
+        if ($userInfos->behaviors()->loaded('Upload')) {
+            $userInfos->removeBehavior('Upload');
+        }
+
+        $userInfo->avatar = null;
+        return $userInfos->save($userInfo);
     }
 }
 ?>

@@ -12,6 +12,7 @@
     <?= $this->Html->css('/packages/bootstrap/css/bootstrap.min.css') ?>
     <?= $this->Html->css('/packages/sidebar-nav/dist/sidebar-nav.min.css') ?>
     <?= $this->Html->css('/packages/toast-master/css/jquery.toast.css') ?>
+    <?= $this->Html->css('/packages/dropify/dist/css/dropify.min.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/animate.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/style.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/colors/blue-dark.css', ['id' => 'theme']) ?>

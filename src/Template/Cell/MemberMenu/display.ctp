@@ -2,7 +2,7 @@
     <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#">
         <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
             'class' => 'img-circle', 
-            'alt' => __('User profile picture'),
+            'alt' => __('Ảnh đại diện'),
             'width' => 36
         ]) ?>
         <b class="hidden-xs"><?= h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')) ?></b>

@@ -48,7 +48,7 @@ $groupActive = $groupActiveMatcher($groupActiveMap);
                 </a>
                 <ul class="nav nav-second-level">
                     <li><a href="/me/profile/edit"><i class="mdi mdi-account-card-details"></i> <span class="hide-menu"><?=__('Thông tin cá nhân')?></span></a></li>
-                    <li><a href="/me/avatar/edit"><i class="mdi mdi-account-circle"></i> <span class="hide-menu"><?=__('Hình đại diện')?></span></a></li>
+                    <li><a href="/me/avatar/edit"><i class="mdi mdi-account-circle"></i> <span class="hide-menu"><?=__('Ảnh đại diện')?></span></a></li>
                     <li><a href="/me/password/edit"><i class="mdi mdi-lock"></i> <span class="hide-menu"><?=__('Mật khẩu')?></span></a></li>
                     <li><a href="/me/tags/edit"><i class="mdi mdi-bookmark-music"></i> <span class="hide-menu"><?=__('Thể loại live stream')?></span></a></li>
                     <li><a href="/logout"><i class="mdi mdi-logout"></i> <span class="hide-menu"><?=__('Đăng xuất')?></span></a></li>

@@ -1,21 +1,10 @@
 <div class="white-box">
     <?php $this->Form->setTemplates($FormTemplates['default']);?>
     <?=$this->Form->create($profile, [
-        'type' => 'file',
+        'type' => 'put',
         'class' => 'form-horizontal',
     ]);?>
-        <h4 class="box-title m-b-0"><?= __('Thông tin cơ bản') ?></h4>
-        <?= $this->Form->control('avatar', [
-            'class' => 'form-control',
-            'templateVars' => [
-                'type' => 'file'
-            ],
-            'type' => 'file',
-            'label' => [
-                'text' =>  __('Ảnh đại diện')
-            ],
-        ]) ?>
-
+        <h4 class="m-t-0"><?= __('Thông tin cơ bản') ?></h4>
         <?= $this->Form->control('nickname', [
             'class' => 'form-control',
             'label' => [
@@ -74,8 +63,7 @@
         ]) ?>
 
         <hr>
-        <h4><?= __('Mạng xã hội') ?></h4>
-
+        <h4 class="m-t-0"><?= __('Mạng xã hội') ?></h4>
         <?php foreach($profile->social_providers as $i => $socialProvider): ?>
         <div class="form-group">
             <?= $this->Form->control(sprintf('social_providers.%d.id', $i), [
