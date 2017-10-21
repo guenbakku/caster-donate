@@ -109,10 +109,8 @@
             <?php endforeach ?>
                 
             <?= $this->Form->button( __('Cập nhật'),[
-                'class' => 'btn btn-primary pull-right',
-                'label' => [
-                    'text' => ''
-                ],
+                'class' => 'btn btn-success',
+                'label' => false,
                 'type' => 'submit'
             ]) ?>
 

@@ -8,12 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= $this->fetch('meta') ?>
     <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') ?>
+    <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css') ?>
     <?= $this->Html->css('/packages/bootstrap/css/bootstrap.min.css') ?>
     <?= $this->Html->css('/packages/sidebar-nav/dist/sidebar-nav.min.css') ?>
-    <?= $this->fetch('css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/animate.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/style.css') ?>
-    <?= $this->Html->css('/packages/AmpleAdmin/css/colors/blue-dark.css',['id' => 'theme']) ?>
+    <?= $this->Html->css('/packages/AmpleAdmin/css/colors/blue-dark.css', ['id' => 'theme']) ?>
+    <?= $this->Html->css('style.css')?>
+    <?= $this->fetch('css') ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,19 +44,17 @@
             
             <?= $this->element('Layout/default/footer') ?>
         </div>
-
-        
     </div>
 
-
-    
     <?= $this->Html->script('/packages/jquery/jquery-2.2.4.min.js') ?>
     <?= $this->Html->script('/packages/bootstrap/js/bootstrap.min.js') ?>
     <?= $this->Html->script('/packages/sidebar-nav/dist/sidebar-nav.min.js') ?>
     <?= $this->Html->script('/packages/AmpleAdmin/js/jquery.slimscroll.js') ?>
     <?= $this->Html->script('/packages/AmpleAdmin/js/waves.js') ?>
-    <?= $this->Html->script('/packages/styleswitcher/jQuery.style.switcher.js') ?>    
-    <?= $this->fetch('script') ?>
     <?= $this->Html->script('/packages/AmpleAdmin/js/custom.min.js') ?>
+    <?= $this->Html->script('/packages/styleswitcher/jQuery.style.switcher.js') ?>    
+    <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js') ?>
+    <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/i18n/vi.js') ?>
+    <?= $this->fetch('script') ?>
 </body>
 </html>

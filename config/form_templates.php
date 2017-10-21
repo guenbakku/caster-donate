@@ -15,13 +15,13 @@ return [
             'file' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'dateWidget' => 'Ngày{{day}} Tháng{{month}} Năm{{year}}',
             'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
-            'button' => '<div class="form-group"><div class="col-sm-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div>',
+            'button' => '<div class="row"><div class="col-sm-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div>',
             'label' => '<label class="col-sm-2 control-label" {{attrs}}>{{text}}</label>',
             
-            'checkboxContainer' => '{{content}}',
+            'checkboxContainer' => '<div class="checkbox checkbox-info">{{content}}</div>',
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'nestingLabel' => '<label{{attrs}}>{{text}}&nbsp;&nbsp;{{input}}</label>',
-            'checkboxFormGroup' => '<div class="col-sm-4"><div class="checkbox icheck">{{label}}{{input}}</div></div>',
+            'nestingLabel' => '{{input}}<label{{attrs}}> {{text}}</label>',
+            'checkboxFormGroup' => '<div class="col-sm-4">{{input}}{{label}}</div>',
             
             'inputContainerError' => '<div class="form-group {{type}}{{required}} has-error">{{content}}{{error}}</div>',
             'error' => '<div class="col-sm-offset-2 help-block" style="padding:0 15px">{{content}}</div>',
@@ -35,7 +35,7 @@ return [
             'label' => '<label class="control-label" {{attrs}}>{{text}}</label>',
             'input' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
-            'button' => '<button name="{{name}}"{{attrs}}>{{text}}</button>',
+            'button' => '<div class="row"><div class="col-sm-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div>',
         ],
 
         'login' => [
