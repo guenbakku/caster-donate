@@ -27,10 +27,28 @@
             </div>
         </li>
         <li>
+            <div class="col-md-12">
+                <span><i class="mdi mdi-wallet fa-fw"></i> <?=__('Số dư trong ví')?></span>
+                <span class="pull-right"> 105.540VND</span>
+            </div>
+        </li>
+        <li>
+            <div class="col-md-12">
+                <span><i class="mdi mdi-eye-outline fa-fw"></i> <?=__('Số người Follow')?></span>
+                <span class="pull-right"> 142 người</span>
+            </div>
+        </li>
+        <li>
+            <div class="col-md-12">
+                <span><i class="mdi mdi-key fa-fw"></i> <?=__('Trạng thái')?></span>
+                <span class="pull-right"> <a class="text-success">Bình thường</a> / <a class="text-danger">Khóa</a></span>
+            </div>
+        </li>
+        <li>
             <?= $this->Html->link(
                 __d('CakeDC/Users', 'Logout'), 
                 '/logout',
-                ['class' => '']
+                ['class' => 'pull-right']
             ) ?>
         </li>
     </ul>
