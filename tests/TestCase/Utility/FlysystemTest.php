@@ -13,6 +13,7 @@ class FlysystemTest extends TestCase
 {
     public function setUp()
     {
+        parent::setUp();
         Configure::write('Flysystem', [
             'local' => [
                 'adapter' => 'Local',
@@ -39,6 +40,7 @@ class FlysystemTest extends TestCase
 
     public function tearDown()
     {
+        parent::tearDown();
         $this->Flysystem::clearCache();
     }
 
