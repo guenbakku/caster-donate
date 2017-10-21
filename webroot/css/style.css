@@ -46,6 +46,7 @@ input.k-textbox {
     padding: 6px 8px;
 }
 
+/* Custom select2 */
 .select2-container {
     width: 100% !important;
 }
@@ -57,12 +58,10 @@ input.k-textbox {
          -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
             transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
-
 .select2-container--focus .select2-selection {
     border-color: rgba(120, 130, 150, 1.0) !important;
     box-shadow: none !important;
 }
-
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     background-color: #0bcad1;
     border-color: #0bcad1;
@@ -74,18 +73,26 @@ input.k-textbox {
     padding: 0 5px;
     color: #fff;
 }
-
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     color: #fff;
 }
-
 .select2-close-mask { Cần để chạy đúng trên Bootstrap modal
     z-index: 4099;
 }
 .select2-dropdown { Cần để chạy đúng trên Bootstrap modal
     z-index: 5051;
 }
-
 .main-header .navbar {
     margin-left: 0px; 
+}
+
+/* Custom myadmin-alert of Ample Admin theme */
+.myadmin-alert-top,
+.myadmin-alert-bottom,
+.myadmin-alert-top-left,
+.myadmin-alert-top-right,
+.myadmin-alert-bottom-left,
+.myadmin-alert-bottom-right,
+.myadmin-alert-fullscreen {
+  z-index: 1002;
 }

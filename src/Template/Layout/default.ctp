@@ -38,13 +38,13 @@
             <div class="container-fluid">
                 <?= $this->element('Layout/default/content-header') ?>
                 <div style="margin-top:25px">
-                    <?= $this->Flash->render() ?>
                     <?= $this->fetch('content') ?>
                 </div>
             </div>
             
             <?= $this->element('Layout/default/footer') ?>
         </div>
+        <?= $this->Flash->render() ?>
     </div>
 
     <?= $this->Html->script('/packages/jquery/jquery-2.2.4.min.js') ?>

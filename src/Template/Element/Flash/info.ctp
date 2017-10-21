@@ -4,7 +4,7 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 }
 ?>
 <div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-info myadmin-alert-bottom flash-message-bottom"> 
-    <p class="text-center">
+    <p>
         <i class="mdi mdi-information fa-fw"></i> <?= $message ?> <a href="#" class="closed">&times;</a> 
     </p>
 </div>
