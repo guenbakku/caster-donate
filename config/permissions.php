@@ -36,7 +36,8 @@ return [
         [
             'role' => '*',
             'plugin' => false,
-            'controller' => 'Me',
+            'prefix' => 'Me',
+            'controller' => '*',
             'action' => '*',
             'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
                 return !empty($user);

@@ -80,6 +80,15 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 
+Router::prefix('me', function ($routes) {
+    $routes->redirect('/', [
+        'controller' => 'Statistics', 
+        'action' => 'index'
+    ]);
+
+    $routes->fallbacks(DashedRoute::class);
+});
+
 Router::prefix('api/v1', function ($routes) {
     $routes->extensions(['json']);
     $routes->fallbacks(DashedRoute::class);

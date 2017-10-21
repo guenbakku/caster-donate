@@ -1,37 +1,22 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Me;
 
 use Cake\Core\Configure;
 use Cake\Event\Event;
+use App\Controller\AppController;
 use App\Model\Logic\User\Profile;
 use App\Model\Logic\User\Tag;
 
-class MeController extends AppController
+class ProfileController extends AppController
 {
-    public function index() 
-    {
-        return $this->redirect(['action' => 'statistics']);
-    }
-
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->ContentHeader->title('Trang cá nhân');
+        $this->ContentHeader->title(__('Thông tin cá nhân'));
     }
 
-    public function statistics()
-    {
-        $this->ContentHeader->title('Thống kê thu nhập');
-    }
-
-    public function schedule() 
-    {
-        $this->ContentHeader->title('Lịch LiveStream');
-    }
-
-    public function profile()
+    public function edit()
     {   
-        $this->ContentHeader->title('Thông tin cá nhân');
         $user_id = $this->Auth->user('id');
         $Profile = new Profile();
         
@@ -55,27 +40,4 @@ class MeController extends AppController
         
         $this->set(compact('profile'));
     }
-
-    public function contract() 
-    {
-        $this->ContentHeader->title('Thông tin Lên Sóng');
-    }
-
-    public function tag()
-    {
-        $Tag = new Tag();
-        $caster_tags = $this->request->data('caster_tags') ?: [];
-        $user_id = $this->Auth->user('id');
-        $Tag->save($user_id, $caster_tags);
-
-        // Trigger event after edited tags
-        $this->dispatchEvent(
-            Configure::read('Events.Controller.Me.AfterEditTag')
-        );
-
-        $this->Flash->success(__('Thay đổi tag thành công.'));
-
-        return $this->redirect($this->referer());
-    }
-
 }
