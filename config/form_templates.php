@@ -18,10 +18,10 @@ return [
             'button' => '<div class="row"><div class="col-sm-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div>',
             'label' => '<label class="col-sm-2 control-label" {{attrs}}>{{text}}</label>',
             
-            'checkboxContainer' => '<div class="checkbox checkbox-info">{{content}}</div>',
+            'checkboxContainer' => '<div class="col-sm-4"><div class="checkbox checkbox-info">{{content}}</div></div>',
+            'checkboxFormGroup' => '{{input}}{{label}}',
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'nestingLabel' => '{{input}}<label{{attrs}}> {{text}}</label>',
-            'checkboxFormGroup' => '<div class="col-sm-4">{{input}}{{label}}</div>',
             
             'inputContainerError' => '<div class="form-group {{type}}{{required}} has-error">{{content}}{{error}}</div>',
             'error' => '<div class="col-sm-offset-2 help-block" style="padding:0 15px">{{content}}</div>',
