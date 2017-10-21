@@ -1,4 +1,1 @@
-$(function () {
-    kendo.culture("vi-VN");
-    $('.dateinput').kendoDateInput();    
-})
+// This file is empty

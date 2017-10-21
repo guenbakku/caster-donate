@@ -48,8 +48,10 @@
             ]) ?>
 
             <?= $this->Form->control('birthday', [
-                'class' => 'form-control dateinput',
+                'class' => 'form-control',
                 'type'  => 'text',
+                'data-mask' => "99/99/9999",
+                'placeholder' => 'dd/mm/yyyy',
                 'label' => [
                     'text' =>  __('Ngày sinh')
                 ],
