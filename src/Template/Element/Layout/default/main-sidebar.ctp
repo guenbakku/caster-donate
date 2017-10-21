@@ -1,3 +1,28 @@
+<?php
+use Cake\Utility\Hash;
+
+// Detect which group is active
+$groupActiveMap = [
+    'account' => ['Profile', 'Avatar', 'Password', 'Tags'],
+    'contract' =>  ['Contract', 'Withdraw'],
+    // Other group - controller come here...
+];
+$groupActiveMatcher = function ($groupActiveMap) {
+    $groupActive = [];
+    if ($this->request->prefix === 'me') {
+        $controller = $this->request->controller;
+        foreach ($groupActiveMap as $group => $controllers) {
+            if (in_array($controller, $controllers)) {
+                $groupActive[$group] = 'active';
+                break;
+            }
+        }
+    }
+    return $groupActive;
+};
+$groupActive = $groupActiveMatcher($groupActiveMap);
+?>
+
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav slimscrollsidebar">
         <div class="sidebar-head">
@@ -12,7 +37,7 @@
         </div>
         <ul class="nav" id="side-menu">
             <li class="user-pro">
-                <a href="javascript::void(0)" class="waves-effect <?=(in_array($this->request->action,['profile','contract','withdraw']))?'active':''?>">
+                <a href="javascript::void(0)" class="waves-effect <?= Hash::get($groupActive, 'account')?>">
                     <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
                         'class' => 'img-circle', 
                         'alt' => __('Ảnh đại diện'),
@@ -30,7 +55,7 @@
                 </ul>
             </li>
             <li> 
-                <a href="javascript::void(0)" class="waves-effect <?=(in_array($this->request->action,['statistics']))?'active':''?>">
+                <a href="javascript::void(0)" class="waves-effect <?= Hash::get($groupActive, 'statistic')?>">
                     <i class="mdi mdi-chart-areaspline fa-fw"></i> 
                     <span class="hide-menu"> <?=__('Thống kê')?>
                         <span class="fa arrow"></span> 
@@ -44,7 +69,7 @@
             </li>
             <li class="devider"></li>
             <li> 
-                <a href="javascript::void(0)" class="waves-effect <?=(in_array($this->request->action,['statistics']))?'active':''?>">
+                <a href="javascript::void(0)" class="waves-effect <?= Hash::get($groupActive, 'contract')?>">
                     <i class="mdi mdi-content-paste fa-fw"></i> 
                     <span class="hide-menu"> <?=__('Hợp đồng & rút tiền')?>
                         <span class="fa arrow"></span> 

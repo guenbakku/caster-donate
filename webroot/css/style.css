@@ -1,3 +1,9 @@
+/* Để debug của cakephp không bị che bởi navbar và sidebar */
+.cake-debug-output {
+    margin-top: 70px;
+    padding-left: 70px;
+}
+
 .login-box, 
 .register-box {
     width: 500px;
