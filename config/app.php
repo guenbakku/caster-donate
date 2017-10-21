@@ -308,6 +308,14 @@ return [
             'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
             'url' => env('LOG_ERROR_URL', null),
         ],
+        'access' => [
+            'className' => 'Cake\Log\Engine\FileLog',
+            'path' => LOGS,
+            'file' => 'access',
+            'levels' => ['info'],
+            'url' => env('LOG_DEBUG_URL', null),
+            'scopes' => ['access'],
+        ],
     ],
 
     /**
