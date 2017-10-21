@@ -42,7 +42,7 @@ $groupActive = $groupActiveMatcher($groupActiveMap);
                         'class' => 'img-circle', 
                         'alt' => __('Ảnh đại diện'),
                     ]) ?>
-                    <span class="hide-menu"> <?= h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')) ?>
+                    <span class="hide-menu"> <?= $this->Text->truncate(h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')), 20) ?>
                         <span class="fa arrow"></span>
                     </span>
                 </a>
@@ -51,7 +51,6 @@ $groupActive = $groupActiveMatcher($groupActiveMap);
                     <li><a href="/me/avatar/edit"><i class="mdi mdi-account-circle"></i> <span class="hide-menu"><?=__('Ảnh đại diện')?></span></a></li>
                     <li><a href="/me/password/edit"><i class="mdi mdi-lock"></i> <span class="hide-menu"><?=__('Mật khẩu')?></span></a></li>
                     <li><a href="/me/tags/edit"><i class="mdi mdi-bookmark-music"></i> <span class="hide-menu"><?=__('Thể loại live stream')?></span></a></li>
-                    <li><a href="/logout"><i class="mdi mdi-logout"></i> <span class="hide-menu"><?=__('Đăng xuất')?></span></a></li>
                 </ul>
             </li>
             <li> 

@@ -5,7 +5,7 @@
             'alt' => __('Ảnh đại diện'),
             'width' => 36
         ]) ?>
-        <b class="hidden-xs"><?= h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')) ?></b>
+        <b class="hidden-xs"><?= $this->Text->truncate(h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')), 25) ?></b>
     </a>
     <ul class="dropdown-menu dropdown-user animated flipInY">
         <li>
@@ -16,8 +16,8 @@
                 ]) ?>
                 </div>
                 <div class="u-text">
-                    <h4><?= h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')) ?></h4>
-                    <p class="text-muted"><?= h($this->Auth->user('profile.email') ?:__('Chưa cập nhật email')) ?></p>
+                    <h4><?= $this->Text->truncate(h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')), 17)?></h4>
+                    <p class="text-muted"><?= $this->Text->truncate(h($this->Auth->user('email') ?: __('Chưa cập nhật email')), 20) ?></p>
                     <?= $this->Html->link(
                         __d('CakeDC/Users', 'Profile'),
                         '/me',
@@ -26,29 +26,16 @@
                 </div>
             </div>
         </li>
+        <li role="separator" class="divider"></li>
         <li>
-            <div class="col-md-12">
-                <span><i class="mdi mdi-wallet fa-fw"></i> <?=__('Số dư trong ví')?></span>
-                <span class="pull-right"> 105.540VND</span>
-            </div>
+            <a><i class="icon-wallet"></i> 105.540VND</a>
         </li>
-        <li>
-            <div class="col-md-12">
-                <span><i class="mdi mdi-eye-outline fa-fw"></i> <?=__('Số người Follow')?></span>
-                <span class="pull-right"> 142 người</span>
-            </div>
-        </li>
-        <li>
-            <div class="col-md-12">
-                <span><i class="mdi mdi-key fa-fw"></i> <?=__('Trạng thái')?></span>
-                <span class="pull-right"> <a class="text-success">Bình thường</a> / <a class="text-danger">Khóa</a></span>
-            </div>
-        </li>
+        <li role="separator" class="divider"></li>
         <li>
             <?= $this->Html->link(
-                __d('CakeDC/Users', 'Logout'), 
-                '/logout',
-                ['class' => 'pull-right']
+                '<i class="icon-power"></i> ' . __d('CakeDC/Users', 'Logout'), 
+                '/logout', 
+                ['escape' => false]
             ) ?>
         </li>
     </ul>
