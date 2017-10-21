@@ -24,7 +24,16 @@
                 <?php if($this->Auth->user()){
                     echo '<li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i> </a></li>';
                 }?>
-                <li class="dropdown">
+                <li>
+                    <a class="hidden-xs" href="">Hướng dẫn</a>
+                </li>
+                <li>
+                    <a class="hidden-xs" href="">Liên hệ</a>
+                </li>
+                <li>
+                    <a class="hidden-xs" href="">Điều khoản</a>                
+                </li>
+                <li class="dropdown visible-xs">
                     <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> 
                         Menu <i class="icon-options-vertical"></i>
                     </a>
