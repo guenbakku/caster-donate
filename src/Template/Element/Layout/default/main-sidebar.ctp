@@ -31,7 +31,7 @@
             </li>
             <li> 
                 <a href="javascript::void(0)" class="waves-effect <?=(in_array($this->request->action,['statistics']))?'active':''?>">
-                    <i class="mdi mdi-av-timer fa-fw"></i> 
+                    <i class="mdi mdi-chart-areaspline fa-fw"></i> 
                     <span class="hide-menu"> <?=__('Thống kê')?>
                         <span class="fa arrow"></span> 
                     </span>
