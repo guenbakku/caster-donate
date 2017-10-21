@@ -6,6 +6,7 @@ $collection = $collection->map(function ($val, $key) {
     return [
         'id' => $val->id,
         'text' => $val->name,
+        'image' => $val->image,
     ];
 });
 

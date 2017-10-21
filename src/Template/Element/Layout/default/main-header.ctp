@@ -1,50 +1,147 @@
-<header class="main-header">
-    <nav class="navbar navbar-static-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="/" class="navbar-brand"><strong><?= Cake\Core\Configure::read('System.sitename') ?></strong></a>
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                <i class="fa fa-bars"></i>
-                </button>
+    <nav class="navbar navbar-default navbar-static-top m-b-0 <?=($this->Auth->user())?'':'without-sidebar'?>">
+        <div class="navbar-header">
+            <div class="top-left-part">
+                <!-- Logo -->
+                <a class="logo" href="/">
+                    <?= $this->Html->image('admin-logo.png', [
+                            'class' => 'dark-logo', 
+                            'alt' => __('home')
+                        ]) ?>
+                    <?= $this->Html->image('admin-logo-dark.png', [
+                            'class' => 'light-logo', 
+                            'alt' => __('home')
+                        ]) ?>
+                    </b>
+                    <span class="hidden-xs">
+                        <span class="dark-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
+                        <span class="light-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
+                    </span> 
+                </a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
-                    </div>
-                </form>
-            </div>
-            <!-- /.navbar-collapse -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <?php 
-                        if (empty($this->Auth->user())) {
-                            echo $this->cell('GuestMenu');
-                        } else {
-                            echo $this->cell('NotificationsMenu');
-                            echo $this->cell('MemberMenu');
-                        }
-                    ?>
-                </ul>
-            </div>
+            <!-- /Logo -->
+            <!-- Search input and Toggle icon -->
+            <ul class="nav navbar-top-links navbar-left">
+                <?php if($this->Auth->user()){
+                    echo '<li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i> </a></li>';
+                }?>
+                <li>
+                    <a class="hidden-xs" href="">Hướng dẫn</a>
+                </li>
+                <li>
+                    <a class="hidden-xs" href="">Liên hệ</a>
+                </li>
+                <li>
+                    <a class="hidden-xs" href="">Điều khoản</a>                
+                </li>
+                <li class="dropdown visible-xs">
+                    <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> 
+                        Menu <i class="icon-options-vertical"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                        <li>
+                            <a href="#" class="">
+                                <p><i class="mdi mdi-home fa-fw"></i> <strong><?=__('Trang chủ')?></strong></p>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#" class="">
+                                <p><i class="mdi mdi-book-open-page-variant fa-fw"></i> <strong><?=__('Hướng dẫn')?></strong></p>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#" class="">
+                                <p><i class="mdi mdi-alert-octagram fa-fw"></i> <strong><?=__('Điều khoản')?></strong></p>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#" class="">
+                                <p><i class="mdi mdi-email-outline fa-fw"></i> <strong><?=__('Liên hệ')?></strong></p>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                
+            </ul>
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                <li>
+                    <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+                        <input type="text" placeholder="<?=_('Tìm kiếm')?>..." class="form-control"> 
+                        <a href=""><i class="fa fa-search"></i></a> 
+                    </form>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false"> <i class="mdi mdi-check-circle"></i>
+                        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                        <li>
+                            <div class="drop-title text-center">Thông báo</div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <span class="text-success">Thông báo từ Ban Quản Lý</span>
+                                <span class="pull-right">20/10</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="text-success">Lệnh chuyển tiền đã được gửi đi</span>
+                                <span class="pull-right">19/10</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="">Nhận được 27.000 VND Donate</span>
+                                <span class="pull-right">18/10</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>Hợp đồng đã được duyệt</span>
+                                <span class="pull-right">15/10</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>..............................</span>
+                                <span class="pull-right">15/10</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>..............................</span>
+                                <span class="pull-right">15/10</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>..............................</span>
+                                <span class="pull-right">15/10</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-center" href="#"> <strong><?=__('Xem tất cả thông báo')?></strong> <i class="fa fa-angle-right"></i> </a>
+                        </li>
+                    </ul>
+                </li>
+                <?php 
+                    if (empty($this->Auth->user())) {
+                        echo $this->cell('GuestMenu');
+                    } else {
+                        echo $this->cell('MemberMenu');
+                    }
+                ?>
+                
+                <!-- /.dropdown -->
+            </ul>
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.navbar-header -->
+        <!-- /.navbar-top-links -->
+        <!-- /.navbar-static-side -->
     </nav>
-</header>

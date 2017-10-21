@@ -105,7 +105,7 @@ class UserInfosTable extends AppTable
             ]);
 
         $validator
-            ->allowEmpty('avatar')
+            ->notEmpty('avatar', __('Phải chọn ảnh tải lên'))
             ->add('avatar', [
                 'uploadError' => [
                     'rule' => ['uploadError', true],
@@ -114,7 +114,6 @@ class UserInfosTable extends AppTable
                 'mimeType' => [
                     'rule' => ['mimeType', Configure::read('vcv.AllowFileTypes.image')],
                     'message' => __('File tải lên có định dạng không hợp lệ.'),
-                    'allowEmpty' => true,
                     'last' => true,
                 ],
                 'fileSize' => [
@@ -123,22 +122,8 @@ class UserInfosTable extends AppTable
                         'File tải lên phải có dung lượng nhỏ hơn {0}.', 
                         Configure::read('vcv.uploadFileSize')
                     ),
-                    'allowEmpty' => true,
                     'last' => true,
                 ],
-                'minImageSize' => [
-                    'rule' => [
-                        'imageSize', 
-                        [
-                            'width' => ['>=', Configure::read('vcv.minImageSize')[0]],
-                            'height' => ['>=', Configure::read('vcv.minImageSize')[1]],
-                        ],
-                    ],
-                    'message' => __(
-                        'File tải lên phải có chiều rộng lớn hơn {0}px và chiều cao lớn hơn {1}px',
-                        Configure::read('vcv.minImageSize')
-                    ),
-                ]
             ]);
 
         return $validator;

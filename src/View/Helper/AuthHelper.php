@@ -3,25 +3,22 @@
 namespace App\View\Helper;
 
 use Cake\View\Helper;
+use Cake\Core\Configure;
 
 /**
  * Access data of Auth in session.
  */
 class AuthHelper extends Helper
 {
-    public static $prefix = 'Auth';
-
     /**
      * @param   string: method (must in camelCase)
      * @param   array: first item contain path to value in session
      */
-    public function __call($name, $args)
+    public function user(string $path = null)
     {
-        $group = ucfirst($name);
-        $prefix = static::$prefix.'.'.$group;
-        $path = implode('.', $args);
+        $storageKey = Configure::read('Auth.storage.key', 'Auth.User');
         $fullpath = implode('.', array_filter(
-            [$prefix, $path], 
+            [$storageKey, $path], 
             function ($item) {
                 return $item != '' || (string)$item === '0';
             }

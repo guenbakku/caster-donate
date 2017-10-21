@@ -61,6 +61,14 @@ class AppController extends Controller
          * System's original components
          */
         $this->loadComponent('ContentHeader');
+        $this->loadComponent('AutoLog', [
+            'mask_rules' => [
+                [
+                    'log_keys' => ['data'],
+                    'mask_keys' => ['/password/'],
+                ],
+            ],
+        ]);
     }
 
     /**

@@ -1,13 +1,9 @@
+'use strict';
 
 $(function () {
-    $('input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-        increaseArea: '20%' // optional
+    $('.confirm').click(function (evt) {
+        var msg = $(evt.target).data('confirm-message');
+        return confirm(msg);
     });
 });
 
-$(function () {
-    kendo.culture("vi-VN");
-    $('.dateinput').kendoDateInput();    
-})

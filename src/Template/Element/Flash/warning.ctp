@@ -4,8 +4,8 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 }
 ?>
 
-<div class="alert alert-warning alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <h4><i class="icon fa fa-warning"></i> <?= __('Warning') ?></h4>
-    <?= $message ?>
+<div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-warning myadmin-alert-bottom flash-message-bottom"> 
+    <p>
+        <i class="mdi mdi-alert fa-fw"></i> <?= $message ?> <a href="#" class="closed">&times;</a> 
+    </p>
 </div>

@@ -7,7 +7,7 @@
  */
 return [
     'System' => [
-        'sitename' => 'Caster Donate',
+        'sitename' => 'Tôi Lên Sóng',
         'version' => '0.0.1',
 
         /*

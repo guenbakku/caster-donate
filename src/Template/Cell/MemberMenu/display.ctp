@@ -1,52 +1,43 @@
-<li class="dropdown user user-menu">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+<li class="dropdown">
+    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#">
         <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
-            'class' => 'user-image', 
-            'alt' => __('User profile picture')
+            'class' => 'img-circle', 
+            'alt' => __('Ảnh đại diện'),
+            'width' => 36
         ]) ?>
-        <span class="hidden-xs">
-            <?= h($this->Auth->user('nickname') ?: $this->Auth->user('username')) ?>
-        </span>
+        <b class="hidden-xs"><?= $this->Text->truncate(h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')), 25) ?></b>
     </a>
-    <ul class="dropdown-menu">
-        <li class="user-header">
-            <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
-                'class' => 'img-circle', 
-                'alt' => __('User profile picture')
-            ]) ?>
-            <p>
-                <?= h($this->Auth->user('nickname') ?: h($this->Auth->user('username'))) ?>
-                <small><?=__('Tham gia từ')?> : <?= $this->Auth->user('created')->i18nFormat([\IntlDateFormatter::LONG, \IntlDateFormatter::NONE]) ?></small>
-            </p>
-        </li>
-        <li class="user-body">
-            <div class="row">
-                <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+    <ul class="dropdown-menu dropdown-user animated flipInY">
+        <li>
+            <div class="dw-user-box">
+                <div class="u-img">
+                <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
+                    'alt' => __('Ảnh đại diện'),
+                ]) ?>
                 </div>
-                <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
+                <div class="u-text">
+                    <h4><?= $this->Text->truncate(h($this->Auth->user('profile.nickname') ?: $this->Auth->user('username')), 17)?></h4>
+                    <p class="text-muted"><?= $this->Text->truncate(h($this->Auth->user('email') ?: __('Chưa cập nhật email')), 20) ?></p>
+                    <?= $this->Html->link(
+                        __d('CakeDC/Users', 'Profile'),
+                        '/me',
+                        ['class' => 'btn btn-rounded btn-danger btn-sm']
+                    ) ?>
                 </div>
             </div>
         </li>
-        <li class="user-footer">
-            <div class="pull-left">
-                <?= $this->Html->link(
-                    __d('CakeDC/Users', 'Profile'),
-                    '/me',
-                    ['class' => 'btn btn-default btn-flat']
-                ) ?>
-            </div>
-            <div class="pull-right">
-                <?= $this->Html->link(
-                    __d('CakeDC/Users', 'Logout'), 
-                    '/logout',
-                    ['class' => 'btn btn-default btn-flat']
-                ) ?>
-            </div>
+        <li role="separator" class="divider"></li>
+        <li>
+            <a><i class="icon-wallet"></i> 105.540VND</a>
+        </li>
+        <li role="separator" class="divider"></li>
+        <li>
+            <?= $this->Html->link(
+                '<i class="icon-power"></i> ' . __d('CakeDC/Users', 'Logout'), 
+                '/logout', 
+                ['escape' => false]
+            ) ?>
         </li>
     </ul>
+    <!-- /.dropdown-user -->
 </li>

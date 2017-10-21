@@ -14,11 +14,13 @@ class CodeHelperTest extends TestCase
 {
     public function setUp()
     {
+        parent::setUp();
         $this->Code = new CodeHelper(new View());
     }
 
     public function tearDown()
     {
+        parent::tearDown();
         $this->Code->clearCache();
     }
 
