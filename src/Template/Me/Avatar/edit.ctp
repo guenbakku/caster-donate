@@ -42,7 +42,7 @@ $this->append('script');
                     'class' => 'dropify',
                     'data-max-file-size' => Configure::read('vcv.uploadFileSize'),
                     'templateVars' => [
-                        'type' => 'file'
+                        'type' => 'file',
                     ],
                     'type' => 'file',
                     'label' => false,
@@ -50,16 +50,14 @@ $this->append('script');
 
             <div class="row">
                 <div class="col-md-12">
-                    <?= $this->Form->button( __('Cập nhật'),[
+                    <?= $this->Form->button( __('Gửi'),[
                         'class' => 'btn btn-success',
                         'label' => false,
                         'type' => 'submit'
                     ]) ?>
                     <?= $this->Html->link(
                         __('Xóa ảnh hiện tại'),
-                        [
-                            'action' => 'delete',
-                        ],
+                        ['action' => 'delete'],
                         [
                             'class' => 'btn btn-danger m-l-10',
                             'confirm' => __('Bạn có chắc chắn?'),

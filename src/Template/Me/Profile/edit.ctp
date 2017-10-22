@@ -7,32 +7,24 @@
         <h4 class="m-t-0"><?= __('Thông tin cơ bản') ?></h4>
         <?= $this->Form->control('nickname', [
             'class' => 'form-control',
-            'label' => [
-                'text' => __('Nickname')
-            ],
+            'label' => __('Nickname'),
         ]) ?>
 
         <?= $this->Form->control('firstname', [
             'class' => 'form-control',
-            'label' => [
-                'text' =>  __('Họ và tên đệm')
-            ],
+            'label' => __('Họ và tên đệm'),
         ]) ?>
 
         <?= $this->Form->control('lastname', [
             'class' => 'form-control',
-            'label' => [
-                'text' =>  __('Tên')
-            ],
+            'label' => __('Tên'),
         ]) ?>
 
         <?= $this->Form->control('sex', [
             'class' => 'form-control',
             'empty' => true,
             'options' => $this->Code->getList('sexes'),
-            'label' => [
-                'text' =>  __('Giới tính')
-            ],
+            'label' => __('Giới tính'),
         ]) ?>
 
         <?= $this->Form->control('birthday', [
@@ -40,26 +32,20 @@
             'type'  => 'text',
             'data-mask' => "99/99/9999",
             'placeholder' => 'dd/mm/yyyy',
-            'label' => [
-                'text' =>  __('Ngày sinh')
-            ],
+            'label' => __('Ngày sinh'),
         ]) ?>
 
         <?= $this->Form->control('location', [
             'class' => 'form-control',
             'type'  => 'text',
-            'label' => [
-                'text' =>  __('Nơi ở')
-            ],
+            'label' => __('Nơi ở'),
         ]) ?>
 
         <?= $this->Form->control('introduction', [
             'class' => 'form-control',
             'type'  => 'textarea',
-            'rows'   => 3,
-            'label' => [
-                'text' =>  __('Lời giới thiệu')
-            ],
+            'rows'  => 3,
+            'label' => __('Lời giới thiệu'),
         ]) ?>
 
         <hr>
@@ -81,13 +67,11 @@
             <?= $this->Form->control(sprintf('social_providers.%d._joinData.reference', $i), [
                 'class' => 'form-control',
                 'type' => 'text',
-                'label' => [
-                    'text' => __($socialProvider->name),
-                ],
+                'label' => __($socialProvider->name),
                 'templates' => [
                     'inputContainer' => '{{content}}',
                     'formGroup' => '{{label}}<div class="col-sm-6">{{input}}</div>'
-                ]
+                ],
             ]) ?>
             <?= $this->Form->control(sprintf('social_providers.%d._joinData.public', $i), [
                 'type' => 'checkbox',
@@ -96,12 +80,16 @@
             ]) ?>
         </div>
         <?php endforeach ?>
-            
-        <?= $this->Form->button( __('Cập nhật'),[
-            'class' => 'btn btn-success',
-            'label' => false,
-            'type' => 'submit'
-        ]) ?>
+        
+        <div class="row">
+            <div class="col-md-offset-2 col-md-10">
+                <?= $this->Form->button( __('Gửi'),[
+                    'class' => 'btn btn-success',
+                    'label' => false,
+                    'type' => 'submit'
+                ]) ?>
+            </div>
+        </div>
 
     <?= $this->Form->end() ?>
 </div>

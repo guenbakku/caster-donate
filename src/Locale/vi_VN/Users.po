@@ -34,6 +34,9 @@ msgstr "Tên đăng nhập hoặc email"
 msgid "Password"
 msgstr "Mật khẩu"
 
+msgid "Current password"
+msgstr "Mật khẩu hiện tại"
+
 msgid "Confirm password"
 msgstr "Nhập lại mật khẩu"
 
@@ -86,7 +89,7 @@ msgid "Reset password token was validated successfully"
 msgstr "Mã xác nhận khôi phục mật khẩu hợp lệ"
 
 msgid "Password has been changed successfully"
-msgstr "Khôi phục mật khẩu thành công"
+msgstr "Thay đổi mật khẩu thành công"
 
 msgid "Invalid token or user account already validated"
 msgstr "Mã xác nhận không hợp lệ hoặc tài khoản đã được kích hoạt"
@@ -95,7 +98,7 @@ msgid "You are already logged in"
 msgstr "Bạn đang đăng nhập"
 
 msgid "Password could not be changed"
-msgstr "Không thể đổi mật khẩu"
+msgstr "Không thể thay đổi mật khẩu"
 
 msgid "Your password does not match your confirm password. Please try again"
 msgstr "Mật khẩu và xác nhận mật khẩu không khớp. Vui lòng thử lại"
@@ -117,3 +120,9 @@ msgstr "Không tìm thấy thông tin tài khoản"
 
 msgid "Invalid reCaptcha"
 msgstr "reCaptcha không hợp lệ"
+
+msgid "The current password does not match"
+msgstr "Mật khẩu hiện tại không đúng"
+
+msgid "You cannot use the current password as the new one"
+msgstr "Bạn không thể sử dụng lại mật khẩu hiện tại"
