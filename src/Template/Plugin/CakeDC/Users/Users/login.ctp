@@ -24,7 +24,7 @@ $this->Form->templates($FormTemplates['login']);
                     'templateVars' => ['glyphicon' => 'lock', 'InputDivClass' => 'col-xs-12'],
                 ]) ?>
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <?php if (Configure::read('Users.RememberMe.active')) {
                             echo $this->Form->control(Configure::read('Users.Key.Data.rememberMe'), [
                                 'type' => 'checkbox',
@@ -33,9 +33,14 @@ $this->Form->templates($FormTemplates['login']);
                                 'hiddenField' => true,
                             ]);
                         }?>
+                    </div>
+                    <div class="col-md-6">
                         <?php if (Configure::read('Users.Email.required')): ?>
                             <?= Configure::read('Users.Registration.active')? '' : '' ?>
-                            <?= $this->Html->link(__d('CakeDC/Users', 'Forgot password?'), ['action' => 'requestResetPassword'],['class' => 'text-dark pull-right']) ?>
+                            <?= $this->Html->link(__d('CakeDC/Users', 'Forgot password?'), 
+                                ['action' => 'requestResetPassword'],
+                                ['class' => 'pull-right']
+                            ) ?>
                         <?php endif ?>
                     </div>
                 </div>
@@ -53,7 +58,10 @@ $this->Form->templates($FormTemplates['login']);
                 <?php if (Configure::read('Users.Registration.active')): ?>
                     <div class="form-group m-b-0 text-center">
                         <?= __d('CakeDC/Users', 'Don\'t have an account?') ?>
-                        <?= $this->Html->link(__d('CakeDC/Users', 'Register'), ['action' => 'register'],['class' => 'text-primary m-l-5']) ?>
+                        <?= $this->Html->link(__d('CakeDC/Users', 'Register'), 
+                            ['action' => 'register'],
+                            ['class' => 'm-l-5']
+                        ) ?>
                     </div>
                 <?php endif ?>
             <?= $this->Form->end() ?>
