@@ -20,7 +20,7 @@
             'label' => __('Tên'),
         ]) ?>
 
-        <?= $this->Form->control('sex', [
+        <?= $this->Form->control('sex_id', [
             'class' => 'form-control',
             'empty' => true,
             'options' => $this->Code->getList('sexes'),

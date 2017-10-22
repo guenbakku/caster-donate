@@ -45,6 +45,15 @@ class CreateUsersTable extends AbstractMigration
                 'default' => null,
                 'null' => true,
             ])
+            ->addColumn('secret', 'string', [
+                'default' => null,
+                'limit' => 32,
+                'null' => true,
+            ])
+            ->addColumn('secret_verified', 'boolean', [
+                'default' => null,
+                'null' => true,
+            ])
             ->addColumn('tos_date', 'datetime', [
                 'default' => null,
                 'null' => true,

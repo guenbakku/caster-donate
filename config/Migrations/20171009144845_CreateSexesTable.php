@@ -14,21 +14,21 @@ class CreateSexesTable extends AbstractMigration
     {
         $table = $this->table('sexes');
         $table
-            ->addColumn('name', 'string',[
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 20,
             ])
-            ->addColumn('selector', 'string',[
+            ->addColumn('selector', 'string', [
                 'null' => false,
                 'limit' => 20,
             ])
-            ->addColumn('order_no', 'integer',[
+            ->addColumn('order_no', 'integer', [
                 'null' => true,
             ])
-            ->addColumn('created', 'datetime',[
+            ->addColumn('created', 'datetime', [
                 'null' => false,
             ])
-            ->addColumn('modified', 'datetime',[
+            ->addColumn('modified', 'datetime', [
                 'null' => false,
             ])
             ->create();

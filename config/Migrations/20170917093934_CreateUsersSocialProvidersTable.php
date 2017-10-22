@@ -20,7 +20,7 @@ class CreateUsersSocialProvidersTable extends AbstractMigration
             ->addColumn('user_id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('social_provider_id', 'uuid', [
+            ->addColumn('social_provider_id', 'integer', [
                 'null' => false,
             ])
             ->addColumn('reference', 'string', [

@@ -13,11 +13,8 @@ class CreateSocialProvidersTable extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('social_providers', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('social_providers');
         $table
-            ->addColumn('id', 'uuid', [
-                'null' => false,
-            ])
             ->addColumn('name', 'string', [
                 'limit' => 255,
                 'null' => false,
@@ -35,14 +32,14 @@ class CreateSocialProvidersTable extends AbstractMigration
 
         $rows = [
             [
-                'id' => Text::uuid(),
+                'id' => 1,
                 'name' => 'Facebook',
                 'order_no' => 1,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
-                'id' => Text::uuid(),
+                'id' => 2,
                 'name' => 'Zalo',
                 'order_no' => 2,
                 'created' => date('Y-m-d H:i:s'),
