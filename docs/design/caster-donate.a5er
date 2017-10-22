@@ -46,6 +46,27 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
+Entity1=contracts
+Entity2=fee_percentages
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="QUAN LY THANH VIEN",0,6489,4320,7599,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20171022221331
+LineMode=0
+Bar1=649
+Bar2=432
+Bar3=760
+TermPos1=R
+TermPos2=R
+
+[Relation]
 Entity1=caster_info
 Entity2=donates
 RelationType1=2
@@ -88,29 +109,6 @@ LineMode=0
 Bar1=372
 Bar2=779
 Bar3=316
-TermPos1=R
-TermPos2=R
-
-[Relation]
-Entity1=caster_info
-Entity2=fee_percentages
-RelationType1=2
-RelationType2=2
-Fields1=id
-Fields2=user_id
-Cardinarity1=
-Cardinarity2=
-Position="QUAN LY THANH VIEN",0,3605,4510,4998,R,R
-Position="UNG HO TIEN",0,2267,7733,2205,R,R
-Position="RUT TIEN",0,4983,7355,2573,L,R
-Dependence=0
-Caption=
-PName=
-ModifiedDateTime=20171022195404
-LineMode=0
-Bar1=360
-Bar2=451
-Bar3=500
 TermPos1=R
 TermPos2=R
 
@@ -192,7 +190,7 @@ Fields1=id
 Fields2=user_id
 Cardinarity1=
 Cardinarity2=
-Position="QUAN LY THANH VIEN",0,5885,2225,594,R,R
+Position="QUAN LY THANH VIEN",0,3694,2225,469,R,R
 Position="UNG HO TIEN",0,3140,6860,2205,R,R
 Position="RUT TIEN",0,459,6336,2573,L,R
 Dependence=0
@@ -200,9 +198,9 @@ Caption=
 PName=
 ModifiedDateTime=20171022194215
 LineMode=0
-Bar1=588
+Bar1=369
 Bar2=222
-Bar3=59
+Bar3=47
 TermPos1=R
 TermPos2=R
 
@@ -282,7 +280,7 @@ Comment=
 TableOption=
 Page=QUAN LY THANH VIEN
 Left=4200
-Top=1300
+Top=1400
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên file ảnh CMND mặt trước","identify_card_front","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
@@ -297,7 +295,7 @@ Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20171022192952
-Position="QUAN LY THANH VIEN",4200,1300
+Position="QUAN LY THANH VIEN",4200,1400
 
 [Comment]
 Comment=■ Phân loại bảng (dựa vào tag):\n● transaction: dữ liệu của table sẽ thay đổi do quá trình hoạt động của hệ thống\n● list: dữ liệu của bảng cố định, không thay đổi do quá trình hoạt động của hệ thống\n\n■ Ghi chú:\n● Cột Id của các bảng bình thường có kiểu là CHAR(36)\n● Cột Id của các bảng chứa list có kiểu là INT(11)\n● Các cột cơ bản của bảng chứa list:\n    id, name, key, order_no, created, modified
@@ -343,19 +341,19 @@ Comment=
 TableOption=
 Page=QUAN LY THANH VIEN
 Left=4200
-Top=2100
+Top=1950
 Field="Khóa chính","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Tên ngân hàng","bank_name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Chi nhánh","bank_branch","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
-Field="Tên chủ tài khoản","bank_account_holder","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Số tài khoản","bank_account_number","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên ngân hàng","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Chi nhánh","branch","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Tên chủ tài khoản","account_holder","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Số tài khoản","account_number","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171022185936
-Position="QUAN LY THANH VIEN",4200,2100,1109,325
+ModifiedDateTime=20171022221540
+Position="QUAN LY THANH VIEN",4200,1950,1109,270
 
 [Relation]
 Entity1=transfer_methods
@@ -707,7 +705,7 @@ Comment=
 TableOption=
 Page=QUAN LY THANH VIEN
 Left=4200
-Top=1800
+Top=850
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Phần trăm phí thu","percentage","INT(11)","NOT NULL",,"","phần trăm",$FFFFFFFF,""
@@ -718,7 +716,7 @@ Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20171022215303
-Position="QUAN LY THANH VIEN",4200,1800,794,233
+Position="QUAN LY THANH VIEN",4200,850,794,233
 
 [Entity]
 PName=users_caster_tags
