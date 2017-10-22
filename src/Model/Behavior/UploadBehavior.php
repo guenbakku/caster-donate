@@ -48,50 +48,101 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
      */
     public function beforeSave(Event $event, Entity $entity, ArrayObject $options)
     {
-        $this->deletePreviousOnEdit($event->subject(), $entity);
-        return parent::beforeSave($event, $entity, $options);
+        $this->deletePreviousOnEdit($event, $entity);
+        $result = parent::beforeSave($event, $entity, $options);
+        return $result;
     }
 
     /**
      * Delete previous previous upload item of field
      *
-     * @param   \Cake\ORM\Table
+     * @param   \Cake\Event\Event
      * @param   \Cake\ORM\Entity
      * @return  void|false
      */
-    public function deletePreviousOnEdit(Table $table, Entity $entity)
+    public function deletePreviousOnEdit(Event $event, Entity $entity)
     {
+        $table = $event->getSubject();
+
         foreach ($this->config() as $field => $settings) {
             if (Hash::get((array)$entity->get($field), 'error') !== UPLOAD_ERR_OK
                 || $entity->isNew()
                 || $settings['keepFileOnEdit']) 
-            {
+            {   
                 continue;
             }
 
             $entity = $table->findById($entity->id)->first();
-
-            if (!$entity->$field) {
+            if (!$entity || !$entity->get($field)) {
                 continue;
             }
 
-            $dirField = Hash::get($settings, 'fields.dir', 'dir');
-            if ($entity->has($dirField)) {
-                $path = $entity->get($dirField);
-            } else {
-                $path = $this->getPathProcessor($entity, $entity->get($field), $field, $settings)->basepath();
-            }
-
-            $callback = Hash::get($settings, 'editCallback', null);
-            if ($callback && is_callable($callback)) {
-                $files = $callback($path, $entity, $field, $settings);
-            } else {
-                $files = [$path . $entity->get($field)];
-            }
-
-            $writer = $this->getWriter($entity, [], $field, $settings);
-            $success = $writer->delete($files);
+            return $this->deleteFiles($entity, $field, $settings);
         }
+    }
+
+    /**
+     * Delete uploaded file of provided field of provided record then empty that field
+     *
+     * @param   mixed: record id
+     * @param   string: field name
+     * @param   mixed: value set to field when empty it (default: null)
+     * @return  void
+     */
+    public function deleteUploadField($id, $field, $emptyVal = null)
+    {
+        $settings = $this->config($field);
+        $restoreValueOnFailure = Hash::get($settings, 'restoreValueOnFailure', true);
+
+        $table = $this->_table;
+        $entity = $table->findById($id)->first();
+        if (!$entity || !$entity->get($field)) {
+            return true;
+        }
+
+        if (!$this->deleteFiles($entity, $field, $settings)) {
+            return false;
+        }
+        
+        $this->setConfig($field.'.restoreValueOnFailure', false);
+        $entity->set($field, $emptyVal);
+        $result = $table->save($entity);
+        $this->setConfig($field.'.restoreValueOnFailure', $restoreValueOnFailure);
+        return $result;
+    }
+
+    /**
+     * Delete uploaded files
+     *
+     * @param   \Cake\ORM\Entity
+     * @param   string: field name
+     * @param   array: settings
+     * @return  bool: deleted result
+     */
+    protected function deleteFiles($entity, $field, $settings)
+    {
+        $dirField = Hash::get($settings, 'fields.dir', 'dir');
+        if ($entity->has($dirField)) {
+            $path = $entity->get($dirField);
+        } else {
+            $path = $this->getPathProcessor($entity, $entity->get($field), $field, $settings)->basepath();
+        }
+
+        $callback = Hash::get($settings, 'editCallback', null);
+        if ($callback && is_callable($callback)) {
+            $files = $callback($path, $entity, $field, $settings);
+        } else {
+            $files = [$path . $entity->get($field)];
+        }
+
+        $writer = $this->getWriter($entity, [], $field, $settings);
+        $success = $writer->delete($files);
+
+        if ((new Collection($success))->contains(false)) {
+            return false;
+        }
+        
+        return true;
     }
 
     /**
@@ -100,7 +151,7 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
      * @param   void
      * @return  array
      */
-    public function getDefaultConfig()
+    protected function getDefaultConfig()
     {
         return [
             'filesystem' => [

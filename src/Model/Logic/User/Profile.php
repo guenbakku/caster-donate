@@ -53,19 +53,8 @@ class Profile
             return false;
         }
 
-        $dir = Configure::read('System.Paths.avatar');
-        $path = $dir.$userInfo->avatar;
-        
-        if (!empty($userInfo->avatar) && Flysystem::getFilesystem()->has($path)) {
-            Flysystem::getFilesystem()->delete($path);
-        }
-
-        if ($userInfos->behaviors()->loaded('Upload')) {
-            $userInfos->removeBehavior('Upload');
-        }
-
-        $userInfo->avatar = null;
-        return $userInfos->save($userInfo);
+        // Call method of UploadBehavior
+        return $userInfos->deleteUploadField($userInfo->id, 'avatar');
     }
 }
 ?>
