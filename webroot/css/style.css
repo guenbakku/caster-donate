@@ -4,6 +4,11 @@
     padding-left: 70px;
 }
 
+.has-error .help-block {
+    padding: 0 15px;
+    clear: left;
+}
+
 .login-box, 
 .register-box {
     width: 500px;
@@ -76,10 +81,10 @@ input.k-textbox {
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     color: #fff;
 }
-.select2-close-mask { Cần để chạy đúng trên Bootstrap modal
+.select2-close-mask { /* Cần để chạy đúng trên Bootstrap modal */
     z-index: 4099;
 }
-.select2-dropdown { Cần để chạy đúng trên Bootstrap modal
+.select2-dropdown { /* Cần để chạy đúng trên Bootstrap modal */
     z-index: 5051;
 }
 .main-header .navbar {

@@ -7,15 +7,15 @@ use Cake\ORM\TableRegistry;
 use CakeDC\Users\Controller\Component\UsersAuthComponent;
 use App\Model\Logic\User\Profile;
 
-class UpdateUser implements EventListenerInterface
+class UpdateUserSession implements EventListenerInterface
 {
     public function implementedEvents() {
         return [
-            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateUserSession',
-            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateUserSession',
+            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateUserInfo',
+            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateUserInfo',
             UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
-            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateUserSession',
-            Configure::read('Events.Controller.Me.AfterEditTag') => 'updateUserSession',
+            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateUserInfo',
+            Configure::read('Events.Controller.Me.AfterEditTag') => 'updateUserInfo',
         ];
     }
 
@@ -32,7 +32,7 @@ class UpdateUser implements EventListenerInterface
         $UserInfos->save($userInfo);
     }
 
-    public function updateUserSession($event)
+    public function updateUserInfo($event)
     {
         $Controller = $event->getSubject();
         $user = $Controller->Auth->user();

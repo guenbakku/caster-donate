@@ -5,7 +5,6 @@ use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Collection\Collection;
 use App\Controller\AppController;
-use App\Model\Logic\User\Profile;
 use App\Model\Logic\User\Tag;
 
 class TagsController extends AppController
@@ -29,7 +28,7 @@ class TagsController extends AppController
                 Configure::read('Events.Controller.Me.AfterEditTag')
             );
     
-            $this->Flash->success(__('Thay đổi tag thành công.'));
+            $this->Flash->success(__('Thay đổi thể loại live stream thành công.'));
         }
     }
 }

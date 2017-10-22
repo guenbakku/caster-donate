@@ -39,7 +39,7 @@ $this->Form->templates($FormTemplates['login']);
                 ]) ?>
 
                 <?= $this->Form->button(__('Submit'), [
-                    'class' => 'btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light',
+                    'class' => 'btn btn-info btn-block btn-rounded text-uppercase waves-effect waves-light',
                 ]); ?>
             <?= $this->Form->end() ?>
         </div>

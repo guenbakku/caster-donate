@@ -22,7 +22,7 @@
             ]
         ]) ?> 
 
-        <?= $this->Form->button( __('Cập nhật'),[
+        <?= $this->Form->button( __('Gửi'),[
             'class' => 'btn btn-success',
             'label' => false,
             'type' => 'submit'

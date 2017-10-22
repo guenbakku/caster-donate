@@ -49,16 +49,20 @@ $this->Form->templates($FormTemplates['login']);
                     </div>
                 </div>
 
-                <?php if (Configure::read('Users.Tos.required')) {
-                    echo $this->Form->control('tos', [
-                        'type' => 'checkbox',
-                        'label' => __d('CakeDC/Users', 'Accept TOS conditions'),
-                        'required' => true
-                    ]);
-                }?>
+                <?php if (Configure::read('Users.Tos.required')): ?>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <?= $this->Form->control('tos', [
+                            'type' => 'checkbox',
+                            'label' => __d('CakeDC/Users', 'Accept TOS conditions'),
+                            'required' => true
+                        ]); ?>
+                    </div>
+                </div>
+                <?php endif ?>
 
                 <?= $this->Form->button(__('Submit'), [
-                    'class' => 'btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light',
+                    'class' => 'btn btn-info btn-block btn-rounded text-uppercase waves-effect waves-light',
                 ]); ?>
             <?= $this->Form->end() ?>
         </div>
