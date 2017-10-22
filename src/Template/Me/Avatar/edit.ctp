@@ -62,7 +62,7 @@ $this->append('script');
                         ],
                         [
                             'class' => 'btn btn-danger m-l-10 confirm',
-                            'data-confirm-message' => __('Bạn có chắc chắn?'),
+                            'confirm' => __('Bạn có chắc chắn?'),
                         ]) 
                     ?>
                 </div>
