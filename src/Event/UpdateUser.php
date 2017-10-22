@@ -7,15 +7,15 @@ use Cake\ORM\TableRegistry;
 use CakeDC\Users\Controller\Component\UsersAuthComponent;
 use App\Model\Logic\User\Profile;
 
-class UpdateUserSession implements EventListenerInterface
+class UpdateUser implements EventListenerInterface
 {
     public function implementedEvents() {
         return [
-            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateUserInfo',
-            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateUserInfo',
+            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateUserInfoSession',
+            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateUserInfoSession',
             UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
-            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateUserInfo',
-            Configure::read('Events.Controller.Me.AfterEditTag') => 'updateUserInfo',
+            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateUserInfoSession',
+            Configure::read('Events.Controller.Me.AfterEditTag') => 'updateUserInfoSession',
         ];
     }
 
@@ -30,9 +30,17 @@ class UpdateUserSession implements EventListenerInterface
             'user_id' => $event->getData('user')->id,
         ]);
         $UserInfos->save($userInfo);
+
+        // Insert empty row to caster_infos table
+        $CasterInfos = TableRegistry::get('CasterInfos');
+        $casterInfo = $CasterInfos->newEntity([
+            'user_id' => $event->getData('user')->id,
+            'donate_link' => $event->getData('user')->username,
+        ]);
+        $CasterInfos->save($casterInfo);
     }
 
-    public function updateUserInfo($event)
+    public function updateUserInfoSession($event)
     {
         $Controller = $event->getSubject();
         $user = $Controller->Auth->user();

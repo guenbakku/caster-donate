@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateCasterInfosTable extends AbstractMigration
+class CreateBankAccountsTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,7 +12,7 @@ class CreateCasterInfosTable extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('caster_infos', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('bank_accounts', ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id', 'uuid', [
                 'null' => false,
@@ -20,21 +20,22 @@ class CreateCasterInfosTable extends AbstractMigration
             ->addColumn('user_id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('contracted', 'boolean', [
+            ->addColumn('name', 'string', [
                 'null' => false,
-                'default' => false,
+                'limit' => 255,
             ])
-            ->addColumn('donate_image', 'string', [
+            ->addColumn('branch', 'string', [
                 'null' => true,
-                'limit' => 128,
+                'limit' => 255,
+                'default' => null
             ])
-            ->addColumn('donate_audio', 'string', [
-                'null' => true,
-                'limit' => 128,
+            ->addColumn('account_holder', 'string', [
+                'null' => false,
+                'limit' => 255,
             ])
-            ->addColumn('donate_link', 'string', [
-                'null' => true,
-                'limit' => 128,
+            ->addColumn('account_number', 'string', [
+                'null' => false,
+                'limit' => 255,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,

@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateCasterInfosTable extends AbstractMigration
+class CreateContractsTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,7 +12,7 @@ class CreateCasterInfosTable extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('caster_infos', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('contracts', ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id', 'uuid', [
                 'null' => false,
@@ -20,21 +20,32 @@ class CreateCasterInfosTable extends AbstractMigration
             ->addColumn('user_id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('contracted', 'boolean', [
+            ->addColumn('identify_card_front', 'string', [
                 'null' => false,
-                'default' => false,
-            ])
-            ->addColumn('donate_image', 'string', [
-                'null' => true,
                 'limit' => 128,
             ])
-            ->addColumn('donate_audio', 'string', [
-                'null' => true,
+            ->addColumn('identify_card_back', 'string', [
+                'null' => false,
                 'limit' => 128,
             ])
-            ->addColumn('donate_link', 'string', [
-                'null' => true,
+            ->addColumn('contract', 'string', [
+                'null' => false,
                 'limit' => 128,
+            ])
+            ->addColumn('phone', 'string', [
+                'null' => false,
+                'limit' => 60,
+            ])
+            ->addColumn('firstname', 'string', [
+                'null' => false,
+                'limit' => 50,
+            ])
+            ->addColumn('lastname', 'string', [
+                'null' => false,
+                'limit' => 50,
+            ])
+            ->addColumn('sex_id', 'integer', [
+                'null' => false,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
