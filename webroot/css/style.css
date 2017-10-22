@@ -9,31 +9,22 @@
     clear: left;
 }
 
-.login-box, 
-.register-box {
+.new-login-box, 
+.new-register-box {
     width: 500px;
+    margin: auto;
 }
 
 @media (max-width: 768px) {
-    .login-box, 
-    .register-box {
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .new-login-box, 
+    .new-register-box {
         width: 100%;
-        margin: 0;
     }
-    .content {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-
-@media (min-width: 768px) {
-    .sidebar-mini.sidebar-collapse .main-header .navbar {
-        margin-left: 0px;
-    }
-}
-
-.login-box-msg {
-    font-weight: bold;
 }
 
 .error input,
