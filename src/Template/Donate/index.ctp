@@ -47,6 +47,15 @@
     </div>
 </div>
 <div class="col-md-9">
+    <?php
+    if(!$this->Auth->user())
+    {?>
+    <div class="white-box">
+        <h3 class="box-title"><?=__('Tạo tài khoản')?></h3>
+        <p class="text-muted"><?=__('Tạo tài khoản để Caster biết đến bạn là ai và nhiều tính năng hấp dẫn khác cũng đang chờ đợi bạn.')?></p>
+    </div>
+    <?php 
+    }?>
     <div class="white-box">
         <h3 class="box-title"><?=__('Lựa chọn phương thức thanh toán')?></h3>
         <section class="m-t-40">
@@ -61,17 +70,17 @@
                 <div class="content-wrap">
                     <section id="donate-the-dien-thoai" class="">
                             <form action="" method="" class="form-material form-horizontal">
-                                <div style="display:none">
-                                    <input type="radio" id="radio1" name="mobile-card" value="1" checked/>
-                                    <input type="radio" id="radio2" name="mobile-card" value="2" />
-                                    <input type="radio" id="radio3" name="mobile-card" value="3" />
-                                    <input type="radio" id="radio4" name="mobile-card" value="4" />
-                                    <input type="radio" id="radio5" name="mobile-card" value="5" />
+                                <div style="display:none__">
+                                    <input type="radio" id="radio-mobile-1" name="mobile-card" value="1" checked/>
+                                    <input type="radio" id="radio-mobile-2" name="mobile-card" value="2" />
+                                    <input type="radio" id="radio-mobile-3" name="mobile-card" value="3" />
+                                    <input type="radio" id="radio-mobile-4" name="mobile-card" value="4" />
+                                    <input type="radio" id="radio-mobile-5" name="mobile-card" value="5" />
                                 </div>
                                 <div class="vtabs col-md-12 col-xs-12">
                                     <ul class="nav tabs-vertical">
                                         <li class="tab active">
-                                            <a class="MY-tab-radio" data-for="radio1" data-toggle="tab" href="#tab-form-mobile-card" aria-expanded="true">
+                                            <a class="MY-tab-radio" data-for="radio-mobile-1" data-toggle="tab" href="#tab-form-mobile-card" aria-expanded="true">
                                                 <span>
                                                     <?= $this->Html->image('mobile/viettel.png', [
                                                         'class' => '', 
@@ -83,7 +92,7 @@
                                             </a>
                                         </li>
                                         <li class="tab">
-                                            <a class="MY-tab-radio" data-for="radio2" data-toggle="tab" href="#tab-form-mobile-card">
+                                            <a class="MY-tab-radio" data-for="radio-mobile-2" data-toggle="tab" href="#tab-form-mobile-card">
                                                 <span>
                                                     <?= $this->Html->image('mobile/mobifone.png', [
                                                         'class' => '', 
@@ -95,7 +104,7 @@
                                             </a>
                                         </li> 
                                         <li class="tab">
-                                            <a class="MY-tab-radio" data-for="radio3" data-toggle="tab" href="#tab-form-mobile-card">
+                                            <a class="MY-tab-radio" data-for="radio-mobile-3" data-toggle="tab" href="#tab-form-mobile-card">
                                                 <span>
                                                     <?= $this->Html->image('mobile/vinaphone.png', [
                                                         'class' => '', 
@@ -107,7 +116,7 @@
                                             </a>
                                         </li>
                                         <li class="tab">
-                                            <a class="MY-tab-radio" data-for="radio4" data-toggle="tab" href="#tab-form-mobile-card">
+                                            <a class="MY-tab-radio" data-for="radio-mobile-4" data-toggle="tab" href="#tab-form-mobile-card">
                                                 <span>
                                                     <?= $this->Html->image('mobile/gate.png', [
                                                         'class' => '', 
@@ -119,7 +128,7 @@
                                             </a>
                                         </li>
                                         <li class="tab">
-                                            <a class="MY-tab-radio" data-for="radio5" data-toggle="tab" href="#tab-form-mobile-card">
+                                            <a class="MY-tab-radio" data-for="radio-mobile-5" data-toggle="tab" href="#tab-form-mobile-card">
                                                 <span>
                                                     <?= $this->Html->image('mobile/vtc.png', [
                                                         'class' => '', 
@@ -153,11 +162,104 @@
                                 </div>
                             </form>
                     </section>
+
+
+
+
+
                     <section id="donate-the-ngan-hang" class="">
                         <h2>Tabbing 2</h2>
                     </section>
+
+
+
+
+
                     <section id="donate-the-tin-dung" class="">
-                        <h2>Tabbing 3</h2>
+                        <form action="" method="" class="form-material form-horizontal">
+                            <div style="display:none__">
+                                <input type="radio" id="radio-credit-1" name="credit-card" value="1" checked/>
+                                <input type="radio" id="radio-credit-2" name="credit-card" value="2" />
+                                <input type="radio" id="radio-credit-3" name="credit-card" value="3" />
+                            </div>
+                            <div class="vtabs col-md-12 col-xs-12">
+                                <ul class="nav tabs-vertical">
+                                    <li class="tab active">
+                                        <a class="MY-tab-radio" data-for="radio-credit-1" data-toggle="tab" href="#tab-form-mobile-card" aria-expanded="true">
+                                            <span>
+                                                <?= $this->Html->image('credit/visacard.png', [
+                                                    'class' => '', 
+                                                    'height' => '15px',
+                                                    'alt' => __('Visa Card'),
+                                                ]) ?>
+                                            </span> 
+                                            <span class="hidden-xs pull-right">Visa</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab">
+                                        <a class="MY-tab-radio" data-for="radio-credit-2" data-toggle="tab" href="#tab-form-mobile-card">
+                                            <span>
+                                                <?= $this->Html->image('credit/mastercard.png', [
+                                                    'class' => '', 
+                                                    'height' => '15px',
+                                                    'alt' => __('Master Card'),
+                                                ]) ?>
+                                            </span> 
+                                            <span class="hidden-xs pull-right">Master</span>
+                                        </a>
+                                    </li> 
+                                    <li class="tab">
+                                        <a class="MY-tab-radio" data-for="radio-credit-3" data-toggle="tab" href="#tab-form-mobile-card">
+                                            <span>
+                                                <?= $this->Html->image('credit/JCB.png', [
+                                                    'class' => '', 
+                                                    'height' => '15px',
+                                                    'alt' => __('JCB Card'),
+                                                ]) ?>
+                                            </span> 
+                                            <span class="hidden-xs pull-right">JCB</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Số thẻ</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-line"> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Tên chủ thẻ</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-line"> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Ngày hết hạn</label>
+                                        <div class="col-md-12">
+                                            <input type="text" data-mask="99/99" class="form-control form-control-line"> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Mã CVV/CVC2</label>
+                                        <div class="col-md-12">
+                                            <input type="text" data-mask="999" class="form-control form-control-line"> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Số tiền nạp</label>
+                                        <div class="col-md-12">
+                                            <input type="text" data-mask="999.999.000 đồng" class="form-control form-control-line"> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3 pull-right">
+                                            <button class="btn btn-block btn-success">Thanh toán</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </section>
                 </div>
                 <!-- /content -->
