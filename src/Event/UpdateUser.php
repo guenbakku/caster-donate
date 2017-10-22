@@ -40,7 +40,7 @@ class UpdateUser implements EventListenerInterface
         if ($user) {
             $UserInfos = TableRegistry::get('UserInfos');
             $entity = $UserInfos->findByUserId($user['id'])
-                ->contain(['CasterTags'])
+                ->contain([])
                 ->first();
             
             $user['profile'] = [
@@ -48,7 +48,6 @@ class UpdateUser implements EventListenerInterface
                 'nickname' => $entity->nickname,
                 'birthday' => $entity->birthday,
                 'location' => $entity->location,
-                'caster_tags' => $entity->caster_tags,
             ];
             $Controller->Auth->setUser($user);
         }
