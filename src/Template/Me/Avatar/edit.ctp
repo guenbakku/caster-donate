@@ -61,7 +61,7 @@ $this->append('script');
                             'action' => 'delete',
                         ],
                         [
-                            'class' => 'btn btn-danger m-l-10 confirm',
+                            'class' => 'btn btn-danger m-l-10',
                             'confirm' => __('Bạn có chắc chắn?'),
                         ]) 
                     ?>
