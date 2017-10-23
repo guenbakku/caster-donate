@@ -45,17 +45,33 @@
             </div>
         </div>
     </div>
+
+    <div class="white-box">
+        <h3>Form test donate</h3>
+        <form class="form-material form-horizontal" method="" action="">
+             <div class="form-group">
+                <label class="col-md-12">Số tiền </label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control form-control-line" name="amount"> 
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary waves-effect waves-light" value="Donate"/>
+        </form>
+    </div>
 </div>
 <div class="col-md-9">
     <?php
-    if(!$this->Auth->user())
-    {?>
+    //if(!$this->Auth->user())
+    //{?>
     <div class="white-box">
-        <h3 class="box-title"><?=__('Tạo tài khoản')?></h3>
-        <p class="text-muted"><?=__('Tạo tài khoản để Caster biết đến bạn là ai và nhiều tính năng hấp dẫn khác cũng đang chờ đợi bạn.')?></p>
+        <h3 class="box-title"><?=__('Đăng nhập')?></h3>
+        <p class="text-muted"><?=__('Đăng nhập để Caster biết đến bạn là ai và để có thể sử dụng nhiều tính năng hấp dẫn khác.')?></p>
+        <button class="btn btn-facebook waves-effect waves-light" type="button"> <i class="fa fa-facebook"></i> Tài khoản Facebook</button>
+        <button class="btn btn-googleplus waves-effect waves-light" type="button"> <i class="fa fa-google-plus"></i> Tài khoản Google</button>
+        <button class="btn btn-primary waves-effect waves-light" type="button"> Tài khoản ToiLenSong </button>
     </div>
     <?php 
-    }?>
+    //}?>
     <div class="white-box">
         <h3 class="box-title"><?=__('Lựa chọn phương thức thanh toán')?></h3>
         <section class="m-t-40">
@@ -168,7 +184,34 @@
 
 
                     <section id="donate-the-ngan-hang" class="">
-                        <h2>Tabbing 2</h2>
+                        <form action="" method="" class="form-material form-horizontal">
+                            <div style="display:none__">
+                                <input type="radio" id="radio-bank-1" name="credit-card" value="1" checked/>
+                                <input type="radio" id="radio-bank-2" name="credit-card" value="2" />
+                            </div>
+                            <div class="vtabs col-md-12 col-xs-12">
+                                <ul class="nav tabs-vertical">
+                                    <li class="tab active">
+                                        <a class="MY-tab-radio" data-for="radio-bank-1" data-toggle="tab" href="#bank-atm" aria-expanded="true">
+                                            <span class="">Thẻ ATM</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab">
+                                        <a class="MY-tab-radio" data-for="radio-bank-2" data-toggle="tab" href="#bank-internet-banking">
+                                            <span class="">Internet Banking</span>
+                                        </a>
+                                    </li> 
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="bank-atm" class="tab-pane active">
+                                        Chưa biết (1)
+                                    </div>
+                                    <div id="bank-internet-banking" class="tab-pane">
+                                        Chưa biết (2)
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </section>
 
 
