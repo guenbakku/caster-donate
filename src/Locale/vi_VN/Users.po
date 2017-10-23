@@ -126,3 +126,6 @@ msgstr "Mật khẩu hiện tại không đúng"
 
 msgid "You cannot use the current password as the new one"
 msgstr "Bạn không thể sử dụng lại mật khẩu hiện tại"
+
+msgid "Token already expired"
+msgstr "Mã xác nhận đã hết hạn"
