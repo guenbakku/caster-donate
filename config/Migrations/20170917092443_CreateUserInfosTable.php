@@ -51,6 +51,10 @@ class CreateUserInfosTable extends AbstractMigration
                 'null' => true,
                 'limit' => 50,
             ])
+            ->addColumn('balance', 'integer', [
+                'null' => true,
+                'limit' => 11,
+            ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
             ])
