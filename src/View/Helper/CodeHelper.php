@@ -12,6 +12,11 @@ use Cake\Utility\Hash;
 class CodeHelper extends Helper
 {
     protected static $cached = [];
+    protected $_defaultConfig = [
+        'keyField' => 'id',
+        'valueField' => 'name',
+        'selectorField' => 'selector',
+    ];
     
     /**
      * Return all records in provided table and return in list format
@@ -77,8 +82,8 @@ class CodeHelper extends Helper
     {
         $table = TableRegistry::get($table);
         $query = $table->find('list', [
-            'keyField' => Hash::get($options, 'keyField', 'id'),
-            'valueField' => Hash::get($options, 'selectorField', 'selector'),
+            'keyField' => Hash::get($options, 'keyField', $this->getConfig('keyField')),
+            'valueField' => Hash::get($options, 'selectorField', $this->getConfig('selectorField')),
         ]);
 
         return array_flip($query->toArray());
@@ -95,8 +100,8 @@ class CodeHelper extends Helper
     {
         $table = TableRegistry::get($table);
         $query = $table->find('list', [
-            'keyField' => Hash::get($options, 'keyField', 'id'),
-            'valueField' => Hash::get($options, 'valueField', 'name'),
+            'keyField' => Hash::get($options, 'keyField', $this->getConfig('keyField')),
+            'valueField' => Hash::get($options, 'valueField', $this->getConfig('valueField')),
         ]);
 
         $order = Hash::get($options, 'order', 'order_no');
