@@ -535,13 +535,13 @@ Left=150
 Top=1750
 Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên","name","VARCHAR(20)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Khóa","key","VARCHAR(20)","NOT NULL",,"","Sử dụng để tránh hardcode",$FFFFFFFF,""
+Field="Khóa gọi","selector","VARCHAR(20)","NOT NULL",,"","dành cho coder",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171022190236
+ModifiedDateTime=20171023232042
 Position="QUAN LY THANH VIEN",150,1750,849,226
 
 [Relation]
@@ -659,14 +659,14 @@ Page=NAP TIEN
 Left=2200
 Top=800
 Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
-Field="Tên phương thức donate","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Khóa","key","VARCHAR(20)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Khóa gọi","selector","VARCHAR(20)","NOT NULL",,"","dành cho coder",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171022195756
+ModifiedDateTime=20171023232104
 Position="NAP TIEN",2200,800,827,181
 Position="UNG HO TIEN",1300,1650
 
