@@ -13,16 +13,13 @@ class CreateTransferMethodsTable extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('transfer_methods', ['id' => false, 'primary_key' => ['id']]);
-        $table->addColumn('id', 'uuid', [
-            'null' => false,
-        ]);
+        $table = $this->table('transfer_methods');
         $table->addColumn('name', 'string', [
             'null' => false,
             'limit' => 255
         ]);
-        $table->addColumn('key_name', 'string', [
-            'null' => true,
+        $table->addColumn('selector', 'string', [
+            'null' => false,
             'limit' => 20
         ]);
         $table->addColumn('order_no', 'integer', [
