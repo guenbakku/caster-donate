@@ -1,4 +1,4 @@
-    <nav class="navbar navbar-default navbar-static-top m-b-0 <?=($this->Auth->user())?'':'without-sidebar'?>">
+    <nav class="navbar navbar-default navbar-static-top m-b-0 <?=($hasSideBar)?'':'without-sidebar'?>">
         <div class="navbar-header">
             <div class="top-left-part">
                 <!-- Logo -->

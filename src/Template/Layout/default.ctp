@@ -31,18 +31,17 @@
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
         </svg>
     </div>
-
+    
     <div id="wrapper">
         <?= $this->element('Layout/default/main-header') ?>
-        <?= ($this->Auth->user()) ? $this->element('Layout/default/main-sidebar') :''?>
-        <div id="page-wrapper" class="<?=($this->Auth->user())?'':'without-sidebar'?>">
+        <?= ($hasSideBar) ? $this->element('Layout/default/main-sidebar') :''?>
+        <div id="page-wrapper" class="<?=($hasSideBar)?'':'without-sidebar'?>">
             <div class="container-fluid">
                 <?= $this->element('Layout/default/content-header') ?>
                 <div style="margin-top:25px">
                     <?= $this->fetch('content') ?>
                 </div>
             </div>
-            
             <?= $this->element('Layout/default/footer') ?>
         </div>
         <?= $this->Flash->render() ?>
