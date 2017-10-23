@@ -1,12 +1,10 @@
 
 <div class="col-md-3">
     <div class="white-box">
-        <div class="col-md-12 text-center">
         <?=$this->Html->image($profile->avatar_url,[
-            'class' => '',
+            'class' => 'img-circle col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12',
             'alt' => h($profile->nickname)
         ])?>
-        </div>
         <div class="user-btm-box">
             <div class="table-responsive">
                 <table class="table">
@@ -83,7 +81,7 @@
                         <li class=""><a href="#donate-the-tin-dung" class="sticon mdi mdi-credit-card"><span><?=__('Thẻ tín dụng')?></span></a></li>
                     </ul>
                 </nav>
-                <div class="content-wrap">
+                <div class="content-wrap m-l-0">
                     <section id="donate-the-dien-thoai" class="">
                             <form action="" method="" class="form-material form-horizontal">
                                 <div style="display:none__">
