@@ -28,7 +28,7 @@ class DonateController extends AppController
             $this->render('usernotfound');
             return;
         }
-        
+        debug($profile);
         $this->set(compact('profile'));
     }
 }

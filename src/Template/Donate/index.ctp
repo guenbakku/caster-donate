@@ -24,7 +24,7 @@
                         foreach($profile->social_providers as $social_provider){?>                        
                         <tr style="border-top:none">
                             <td><?=$social_provider->name?></td>
-                            <td><?=h($social_provider->_joinData->reference)?></td>
+                            <td><?=($social_provider->_joinData->public) ? h($social_provider->_joinData->reference) : ''?></td>
                         </tr>
                         <?php
                         }
