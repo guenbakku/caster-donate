@@ -85,8 +85,6 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
         
-        $hasSideBar = ($this->Auth->user() && ($this->request->prefix == "me") );
-        $this->set(compact('hasSideBar'));
         $this->set('FormTemplates', Configure::read('FormTemplates'));
     }
 }

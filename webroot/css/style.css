@@ -1,3 +1,9 @@
+/*Xóa border trắng khi màn hình nhỏ của boostrap*/
+@media screen and (max-width: 767px) {
+    .table-responsive {
+       border: none;
+    }
+}
 /* Để debug của cakephp không bị che bởi navbar và sidebar */
 .cake-debug-output {
     margin-top: 70px;
@@ -17,10 +23,18 @@
 
 @media (max-width: 768px) {
     .container-fluid {
-        padding-left: 15px;
-        padding-right: 15px;
+        /* padding-left: 15px;
+        padding-right: 15px; */
+        padding-left: 0px;
+        padding-right: 0px;
     }
-
+    /*--MY--*/
+    .bg-title{
+        padding: 15px 20px 9px;
+    }
+    section{
+        padding: 25px 0px !important;
+    }
     .new-login-box, 
     .new-register-box {
         width: 100%;
