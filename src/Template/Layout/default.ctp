@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+    $hasSideBar = ($this->Auth->user() && ($this->request->prefix == "me") );
+?>
 <html lang="<?= $this->I18n->language() ?>">
 <head>
     <title><?= Cake\Core\Configure::read('System.sitename') ?></title>
@@ -33,7 +36,7 @@
     </div>
     
     <div id="wrapper">
-        <?= $this->element('Layout/default/main-header') ?>
+        <?= $this->element('Layout/default/main-header',['hasSideBar' => $hasSideBar]) ?>
         <?= ($hasSideBar) ? $this->element('Layout/default/main-sidebar') :''?>
         <div id="page-wrapper" class="<?=($hasSideBar)?'':'without-sidebar'?>">
             <div class="container-fluid">

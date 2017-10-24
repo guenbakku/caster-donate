@@ -42,7 +42,5 @@ class AppView extends View
         $this->loadHelper('App.Code');
         $this->loadHelper('App.I18n');
 
-        $hasSideBar = ($this->Auth->user() && ($this->request->prefix == "me") );
-        $this->set(compact('hasSideBar'));
     }
 }
