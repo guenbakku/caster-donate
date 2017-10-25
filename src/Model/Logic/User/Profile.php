@@ -7,38 +7,40 @@ use App\Utility\Flysystem;
 
 class Profile
 {
+    public function __construct()
+    {
+        $this->userInfosTb = TableRegistry::get('UserInfos');
+    }
+
     public function get($user_id)
     {
-        $userInfos = TableRegistry::get('UserInfos');
-        $query = $userInfos->findByUserId($user_id);
-        $query->contain(['SocialProviders','CasterTags','CasterInfos']);
-        $userInfo = $query->first();
+        $userInfo = $this->userInfosTb->findByUserId($user_id)
+            ->contain(['SocialProviders','CasterTags','CasterInfos'])
+            ->first();
+
         if ($userInfo) {
-            $UsersSocialProviders = TableRegistry::get('UsersSocialProviders');
-            $userInfo->social_providers = $UsersSocialProviders->repleteEntities($userInfo->social_providers);
+            $UsersSocialProvidersTb = TableRegistry::get('UsersSocialProviders');
+            $userInfo->social_providers = $UsersSocialProvidersTb->repleteEntities($userInfo->social_providers);
         }
         else {
-            return $userInfos->newEntity();
+            $userInfo = $this->userInfosTb->newEntity();
         }
         return $userInfo;
     }
 
     public function edit($user_id, array $new_user_info)
     {
-        $userInfos = TableRegistry::get('UserInfos');
         $userInfo = $this->get($user_id);
         $userInfo->user_id = $user_id;
 
-        // Don't update excepted columns, eg: avatar
-        $userInfos->patchEntity($userInfo, $new_user_info, [
+        $this->userInfosTb->patchEntity($userInfo, $new_user_info, [
             'associated' => [
                 'SocialProviders._joinData' => ['validate' => 'default'],
             ],
         ]);
 
         if(!$userInfo->errors()) {
-            $userInfos->save($userInfo);
-            $userInfo = $this->get($user_id);
+            $this->userInfosTb->save($userInfo);
         }
 
         return $userInfo;
@@ -46,15 +48,14 @@ class Profile
 
     public function deleteAvatar($user_id)
     {
-        $userInfos = TableRegistry::get('UserInfos');
-        $userInfo = $userInfos->findByUserId($user_id)->first();
+        $userInfo = $this->userInfosTb->findByUserId($user_id)->first();
 
         if (!$userInfo) {
             return false;
         }
 
         // Call method of UploadBehavior
-        return $userInfos->deleteUploadField($userInfo->id, 'avatar');
+        return $this->userInfosTb->deleteUploadField($userInfo->id, 'avatar');
     }
 }
 ?>

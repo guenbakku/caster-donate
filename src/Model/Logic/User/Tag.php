@@ -11,8 +11,8 @@ class Tag
 {
     public function __construct ()
     {
-        $this->CasterTags = TableRegistry::get('CasterTags');
-        $this->UsersCasterTags = TableRegistry::get('UsersCasterTags');
+        $this->CasterTagsTb = TableRegistry::get('CasterTags');
+        $this->UsersCasterTagsTb = TableRegistry::get('UsersCasterTags');
     }
 
     /**
@@ -23,7 +23,7 @@ class Tag
      */
     public function searchByName(string $keyword)
     {
-        $tags = $this->CasterTags->find()
+        $tags = $this->CasterTagsTb->find()
             ->where(['CasterTags.name LIKE' => '%'.$keyword.'%'])
             ->group('CasterTags.name') // Select unique tag name
             ->all();
@@ -39,7 +39,7 @@ class Tag
      */
     public function searchByUserId(string $user_id)
     {
-        $tags = $this->UsersCasterTags->find()
+        $tags = $this->UsersCasterTagsTb->find()
             ->where(['UsersCasterTags.user_id' => $user_id])
             ->contain(['CasterTags'])
             ->all();
@@ -61,7 +61,7 @@ class Tag
         {
             $conn->begin();
             
-            $this->UsersCasterTags->deleteAll(['user_id' => $user_id]);
+            $this->UsersCasterTagsTb->deleteAll(['user_id' => $user_id]);
 
             $classified = $this->classify($tags);
             $new_ids = $this->createNewTags($classified['new']);
@@ -71,8 +71,8 @@ class Tag
                 $save_data = Hash::insert($save_data, '{n}.user_id', $user_id);
             }
 
-            $entities = $this->UsersCasterTags->newEntities($save_data);
-            $result = $this->UsersCasterTags->saveMany($entities);
+            $entities = $this->UsersCasterTagsTb->newEntities($save_data);
+            $result = $this->UsersCasterTagsTb->saveMany($entities);
 
             $conn->commit();
             return $result;
@@ -92,8 +92,8 @@ class Tag
      */
     public function createNewTags(array $tags)
     {   
-        $entities = $this->CasterTags->newEntities($tags);
-        $result = $this->CasterTags->saveMany($entities);
+        $entities = $this->CasterTagsTb->newEntities($tags);
+        $result = $this->CasterTagsTb->saveMany($entities);
         if (!$result) {
             return false;
         }
@@ -124,14 +124,14 @@ class Tag
         ];
         foreach ($tags as $tag) {
             if (Validation::uuid($tag)) {
-                $exists = $this->CasterTags->exists(['id' => $tag]);
+                $exists = $this->CasterTagsTb->exists(['id' => $tag]);
                 if ($exists) {
                     $classified['old'][] = ['caster_tag_id' => $tag];
                 }
                 continue;
             }
 
-            $exists = $this->CasterTags->findByName($tag)->first();
+            $exists = $this->CasterTagsTb->findByName($tag)->first();
             if ($exists) {
                 $classified['old'][] = ['caster_tag_id' => $exists->id];
                 continue;
@@ -141,11 +141,6 @@ class Tag
         }
         
         return $classified;
-    }
-
-    public function getTagsRelatedWithUser($user_id)
-    {
-
     }
 }
 ?>
