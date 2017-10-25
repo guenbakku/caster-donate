@@ -31,8 +31,11 @@ if (Configure::read('debug')):
     $this->end();
 endif;
 ?>
-<h2><?= h($message) ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
-</p>
+
+<h1 class="text-danger">404</h1>
+<h3 class="text-uppercase"><?= h($message) ?></h3>
+<p class="text-muted m-t-30 m-b-30"><?= __('Không tìm thấy tài nguyên bạn muốn truy cập') ?></p>
+<?= $this->Html->link(__('Quay lại'), 'javascript:history.back()', [
+    'class' => 'btn btn-danger btn-rounded waves-effect waves-light m-b-40'
+]) ?>
+

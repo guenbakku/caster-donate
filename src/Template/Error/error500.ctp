@@ -36,8 +36,11 @@ if (Configure::read('debug')):
     $this->end();
 endif;
 ?>
-<h2><?= __d('cake', 'An Internal Error Has Occurred') ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= h($message) ?>
-</p>
+
+<h1>500</h1>
+<h3 class="text-uppercase"><?= h($message) ?></h3>
+<p class="text-muted m-t-30 m-b-30"><?= __('Có lỗi xảy ra ở phía máy chủ. Chúng tôi đang cố gắng hết sức để khôi phục lại.') ?></p>
+<?= $this->Html->link(__('Quay lại'), 'javascript:history.back()', [
+    'class' => 'btn btn-danger btn-rounded waves-effect waves-light m-b-40'
+]) ?>
+
