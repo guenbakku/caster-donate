@@ -57,6 +57,8 @@
     <?= $this->Html->script('/packages/AmpleAdmin/js/jquery.slimscroll.js') ?>
     <?= $this->Html->script('/packages/AmpleAdmin/js/waves.js') ?>
     <?= $this->Html->script('/packages/AmpleAdmin/js/mask.js') ?>
+    <?= $this->Html->script('/packages/AmpleAdmin/js/jasny-bootstrap.js') ?>
+    <?= $this->Html->script('/packages/AmpleAdmin/js/cbpFWTabs.js') ?>
     <?= $this->Html->script('/packages/AmpleAdmin/js/custom.min.js') ?>
     <?= $this->Html->script('/packages/styleswitcher/jQuery.style.switcher.js') ?>    
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js') ?>

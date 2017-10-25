@@ -408,7 +408,3 @@
 
 
 
-<?php 
-echo $this->Html->script('/packages/AmpleAdmin/js/jasny-bootstrap.js');
-echo $this->Html->script('/packages/AmpleAdmin/js/cbpFWTabs.js');
-?>

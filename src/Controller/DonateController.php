@@ -24,10 +24,9 @@ class DonateController extends AppController
         $Profile = new Profile();
 
         $caster_profile = $Profile->get($user_id);        
-        if($caster_profile->isNew())
+        if ($caster_profile->isNew())
         {
-            $this->render('usernotfound');
-            return;
+            throw new NotFoundException();
         }
         // debug($this->Auth->user());
         $this->set(compact('caster_profile'));
