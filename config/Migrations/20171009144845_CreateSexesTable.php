@@ -32,33 +32,5 @@ class CreateSexesTable extends AbstractMigration
                 'null' => false,
             ])
             ->create();
-
-        $rows = [
-            [
-                'id' => 1,
-                'name' => 'Nam',
-                'selector' => 'male',
-                'order_no' => 1,
-                'created' => date('Y-m-d H:i:s'),
-                'modified' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 2,
-                'name' => 'Nữ',
-                'selector' => 'female',
-                'order_no' => 2,
-                'created' => date('Y-m-d H:i:s'),
-                'modified' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 3,
-                'name' => 'Khác',
-                'selector' => 'other',
-                'order_no' => 3,
-                'created' => date('Y-m-d H:i:s'),
-                'modified' => date('Y-m-d H:i:s'),
-            ],
-        ];
-        $table->insert($rows)->saveData();
     }
 }

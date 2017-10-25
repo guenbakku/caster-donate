@@ -29,23 +29,5 @@ class CreateSocialProvidersTable extends AbstractMigration
                 'null' => false,
             ])
             ->create();
-
-        $rows = [
-            [
-                'id' => 1,
-                'name' => 'Facebook',
-                'order_no' => 1,
-                'created' => date('Y-m-d H:i:s'),
-                'modified' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 2,
-                'name' => 'Zalo',
-                'order_no' => 2,
-                'created' => date('Y-m-d H:i:s'),
-                'modified' => date('Y-m-d H:i:s'),
-            ],
-        ];
-        $table->insert($rows)->saveData();
     }
 }
