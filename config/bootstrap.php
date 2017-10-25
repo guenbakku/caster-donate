@@ -204,12 +204,20 @@ Type::build('timestamp')
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
 
 /*
+ * Load config of system
+ */
+Configure::load('system', 'default');
+Configure::load('vcv', 'default');
+Configure::load('form_templates', 'default');
+Configure::load('events', 'default');
+
+/*
  * Plugins need to be loaded manually, you can either load them one by one or all of them in a single call
  * Uncomment one of the lines below, as you need. make sure you read the documentation on Plugin to use more
  * advanced ways of loading plugins
  *
  * Plugin::loadAll(); // Loads all plugins at once
-//  * Plugin::load('Migrations'); //Loads a single plugin named Migrations
+ * Plugin::load('Migrations'); //Loads a single plugin named Migrations
  *
  */
 
@@ -227,19 +235,7 @@ if (Configure::read('debug')) {
 Configure::write('Users.config', ['users']);
 Plugin::load('CakeDC/Users', ['routes' => true, 'bootstrap' => true]);
 Plugin::load('Josegonzalez/Upload');
-
-/*
- * Load Migrations
- */
 Plugin::load('Migrations');
-
-/*
- * Load config of system
- */
- Configure::load('system', 'default');
- Configure::load('vcv', 'default');
- Configure::load('form_templates', 'default');
- Configure::load('events', 'default');
 
 /*
  * Event register
