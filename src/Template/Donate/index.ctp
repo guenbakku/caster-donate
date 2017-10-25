@@ -1,25 +1,25 @@
 
 <div class="col-md-3">
     <div class="white-box">
-        <?=$this->Html->image($profile->avatar_url,[
+        <?=$this->Html->image($caster_profile->avatar_url,[
             'class' => 'img-circle col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12',
-            'alt' => h($profile->nickname)
+            'alt' => h($caster_profile->nickname)
         ])?>
         <div class="user-btm-box">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <th colspan="2" class="text-center">
-                            <h5><?=__('Thông tin Caster')?></h5>
+                            <h4><?=__('Thông tin Caster')?></h4>
                         </th>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Tên</td>
-                            <td><strong><?=h($profile->nickname)?></strong></td>
+                            <td><strong><?=h($caster_profile->nickname)?></strong></td>
                         </tr>
                         <?php
-                        foreach($profile->social_providers as $social_provider){?>                        
+                        foreach($caster_profile->social_providers as $social_provider){?>                        
                         <tr style="border-top:none">
                             <td><?=$social_provider->name?></td>
                             <td><?=($social_provider->_joinData->public) ? h($social_provider->_joinData->reference) : ''?></td>
@@ -29,7 +29,7 @@
                         ?>
                         <tr>
                             <td>Lời giới thiệu</td>
-                            <td><?=h($profile->introduction)?></td>
+                            <td><?=h($caster_profile->introduction)?></td>
                         </tr>
                         <tr>
                             <td>Tag Lên Sóng</td>
@@ -44,34 +44,25 @@
         </div>
     </div>
 
-    <div class="white-box">
-        <h3>Form test donate</h3>
-        <form class="form-material form-horizontal" method="" action="">
-             <div class="form-group">
-                <label class="col-md-12">Số tiền </label>
-                <div class="col-md-12">
-                    <input type="text" class="form-control form-control-line" name="amount"> 
-                </div>
-            </div>
-            <input type="submit" class="btn btn-primary waves-effect waves-light" value="Donate"/>
-        </form>
-    </div>
+    
 </div>
 <div class="col-md-9">
     <?php
-    //if(!$this->Auth->user())
-    //{?>
+    if(!$this->Auth->user())
+    {?>
     <div class="white-box">
         <h3 class="box-title"><?=__('Đăng nhập')?></h3>
+        <hr class="m-t-0 m-b-40">
         <p class="text-muted"><?=__('Đăng nhập để Caster biết đến bạn là ai và để có thể sử dụng nhiều tính năng hấp dẫn khác.')?></p>
         <button class="btn btn-facebook waves-effect waves-light" type="button"> <i class="fa fa-facebook"></i> Tài khoản Facebook</button>
         <button class="btn btn-googleplus waves-effect waves-light" type="button"> <i class="fa fa-google-plus"></i> Tài khoản Google</button>
         <button class="btn btn-primary waves-effect waves-light" type="button"> Tài khoản ToiLenSong </button>
     </div>
     <?php 
-    //}?>
+    }?>
     <div class="white-box">
         <h3 class="box-title"><?=__('Lựa chọn phương thức thanh toán')?></h3>
+        <hr class="m-t-0 m-b-40">
         <section class="m-t-40">
             <div class="sttabs tabs-style-iconbox">
                 <nav>
@@ -79,6 +70,7 @@
                         <li class=""><a href="#donate-the-dien-thoai" class=" sticon mdi mdi-cards"><span><?=__('Thẻ điện thoại')?></span></a></li>
                         <li class=""><a href="#donate-the-ngan-hang" class="sticon mdi mdi-bank"><span><?=__('Thông qua ngân hàng')?></span></a></li>
                         <li class=""><a href="#donate-the-tin-dung" class="sticon mdi mdi-credit-card"><span><?=__('Thẻ tín dụng')?></span></a></li>
+                        <li class=""><a href="#donate-vo-so" class="sticon mdi mdi-coin"><span><?=__('Vỏ Sò')?></span></a></li>
                     </ul>
                 </nav>
                 <div class="content-wrap m-l-0">
@@ -165,6 +157,28 @@
                                             <label class="col-md-12">Mã số nạp tiền </label>
                                             <div class="col-md-12">
                                                 <input type="text" class="form-control form-control-line"> 
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Tên của bạn </label>
+                                            <div class="col-md-12">
+                                                <?php
+                                                if($this->Auth->user())
+                                                {
+                                                    echo '<input type="text" class="form-control form-control-line" value="'.$this->Auth->user('username').'" readonly>';
+                                                }
+                                                else
+                                                {
+                                                    echo '<input type="text" class="form-control form-control-line">';
+                                                }
+                                                ?>
+                                                 
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Thông điệp </label>
+                                            <div class="col-md-12">
+                                                <textarea type="text" class="form-control form-control-line" rows="4"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -302,6 +316,76 @@
                             </div>
                         </form>
                     </section>
+
+                    <section id="donate-vo-so" class="">
+                        <?php
+                        if($this->Auth->user())
+                        {?>
+                        <div class="white-box col-md-4">
+                            Số sò hiện có trong tài khoản: ______ sò<br>
+                            Số sò hiện có của caster:<?=$caster_profile->balance?> sò
+                        </div>
+                        <div class="col-md-8">
+                            <?=$this->Form->create(null, [
+                                'type' => 'put',
+                                'url' => '/donate/do/'.h($caster_profile->user_id),
+                                'class' => 'form-material form-horizontal',
+                            ]);?>
+                            <?= $this->Form->control('donate_method_id', [
+                                'type'  => 'hidden',
+                                'label' => false,
+                                'value' => '______________'
+                            ]) ?>
+                            <?= $this->Form->control('receiver_id', [
+                                'type'  => 'hidden',
+                                'label' => false,
+                                'value' => $caster_profile->user_id
+                            ]) ?>
+                            <?= $this->Form->control('sender_id', [
+                                'type'  => 'hidden',
+                                'label' => false,
+                                'value' => ($this->Auth->user('id')) ?: null
+                            ]) ?>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <?= $this->Form->control('amount', [
+                                        'class' => 'form-control',
+                                        'type'  => 'text',
+                                        'label' => 'Nhập số sò muốn donate',
+                                        'value' => ''
+                                    ]) ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <?= $this->Form->control('receiver_name', [
+                                        'class' => 'form-control form-control-line',
+                                        'type'  => 'text',
+                                        'label' => 'Tên của bạn',
+                                        'value' => $this->Auth->user('username') ?: '',
+                                        'disabled' => ($this->Auth->user() ? 'disabled' : '')
+                                    ]);?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Thông điệp </label>
+                                <div class="col-md-12">
+                                    <textarea type="text" class="form-control form-control-line" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-success waves-effect waves-light pull-right" value="Donate"/>
+                            <?= $this->Form->end() ?>
+                        </div>
+                        <?php
+                        }
+                        else
+                        {?>
+                            <h4><?=__('Bạn cần đăng nhập để sử dụng tính năng này.')?></h4>    
+                        <?php
+                        }?>
+                    </section>
+
+
                 </div>
                 <!-- /content -->
             </div>

@@ -8,6 +8,7 @@ use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
 use App\Model\Logic\User\Profile;
+use App\Model\Logic\User\Money;
 
 class DonateController extends AppController
 {
@@ -22,12 +23,41 @@ class DonateController extends AppController
     {
         $Profile = new Profile();
 
-        $profile = $Profile->get($user_id);        
-        if($profile->isNew())
+        $caster_profile = $Profile->get($user_id);        
+        if($caster_profile->isNew())
         {
             $this->render('usernotfound');
             return;
         }
-        $this->set(compact('profile'));
+        // debug($this->Auth->user());
+        $this->set(compact('caster_profile'));
+    }
+
+    public function do($user_id = null)
+    {
+        if ($this->request->is('put')) 
+        {
+            /*1')   - Xác nhận kết quả chuyển tiền từ bên 3 nếu không phải là Donate bằng Coin
+                    - Quy đổi số tiền thành Coin
+            */
+            //1'')Xác nhận số dư Coin của người Donate nếu Donate bằng Coin
+            //2)Thực hiện Donate
+            $Money = new Money();
+            $donateDatas = $this->request->getData();
+            $result = $Money->donate($donateDatas);
+            if($result)
+            {
+                $this->Flash->success("Donate thành công");
+            }
+            else
+            {
+                $this->Flash->error("Donate thất bại");
+            }
+        }
+        else
+        {
+            $this->Flash->error("Có lỗi xảy ra trong quá trình donate");
+        }
+        return $this->redirect('/donate/'.$user_id);
     }
 }
