@@ -52,25 +52,15 @@
         <h4 class="m-t-0"><?= __('Mạng xã hội') ?></h4>
         <?php foreach($profile->social_providers as $i => $socialProvider): ?>
         <div class="form-group">
-            <?= $this->Form->control(sprintf('social_providers.%d.id', $i), [
-                'type' => 'hidden',
-                'templates' => [
-                    'inputContainer' => '{{content}}',
-                ]
-            ]) ?>
-            <?= $this->Form->control(sprintf('social_providers.%d._joinData.id', $i), [
-                'type' => 'hidden',
-                'templates' => [
-                    'inputContainer' => '{{content}}',
-                ]
-            ]) ?>
+            <?= $this->Form->hidden(sprintf('social_providers.%d.id', $i)) ?>
+            <?= $this->Form->control(sprintf('social_providers.%d._joinData.id', $i)) ?>
             <?= $this->Form->control(sprintf('social_providers.%d._joinData.reference', $i), [
                 'class' => 'form-control',
                 'type' => 'text',
                 'label' => __($socialProvider->name),
                 'templates' => [
                     'inputContainer' => '{{content}}',
-                    'formGroup' => '{{label}}<div class="col-sm-6">{{input}}</div>'
+                    'formGroup' => '<div class="col-sm-2 control-label">{{label}}</div><div class="col-sm-6">{{input}}</div>'
                 ],
             ]) ?>
             <?= $this->Form->control(sprintf('social_providers.%d._joinData.public', $i), [

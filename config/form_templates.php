@@ -9,14 +9,14 @@ return [
     'FormTemplates' => [
         'default' => [
             'inputContainer' => '<div class="form-group">{{content}}</div>',
-            'formGroup' => '{{label}}<div class="col-md-10">{{input}}</div>',
+            'formGroup' => '<div class="col-md-2 control-label">{{label}}</div><div class="col-md-10">{{input}}</div>',
             'input' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
             'file' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'dateWidget' => 'Ngày{{day}} Tháng{{month}} Năm{{year}}',
             'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
             'button' => '<button name="{{name}}"{{attrs}}>{{text}}</button>',
-            'label' => '<label class="col-md-2 control-label" {{attrs}}>{{text}}</label>',
+            'label' => '<label {{attrs}}>{{text}}</label>',
             
             'checkboxContainer' => '<div class="col-sm-4"><div class="checkbox checkbox-info">{{content}}</div></div>',
             'checkboxFormGroup' => '{{input}}{{label}}',
@@ -31,13 +31,13 @@ return [
 
         'input-short' => [
             'inputContainer' => '<div class="form-group">{{content}}</div>',
-            'formGroup' => '{{label}}<div class="col-md-6">{{input}}</div>',
+            'formGroup' => '<div class="col-md-2 control-label>{{label}}</div><div class="col-md-6">{{input}}</div>',
             'input' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
             'file' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
             'button' => '<button name="{{name}}"{{attrs}}>{{text}}</button>',
-            'label' => '<label class="col-md-2 control-label" {{attrs}}>{{text}}</label>',
+            'label' => '<label {{attrs}}>{{text}}</label>',
             
             'checkboxContainer' => '<div class="col-sm-4"><div class="checkbox checkbox-info">{{content}}</div></div>',
             'checkboxFormGroup' => '{{input}}{{label}}',
