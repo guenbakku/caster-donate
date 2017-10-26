@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
+use Cake\ORM\TableRegistry;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
@@ -23,6 +24,12 @@ class DonateController extends AppController
     {
         $Profile = new Profile();
 
+        $Donates = TableRegistry::get('Donates');
+        $donate =  $Donates->newEntity();
+
+        $TransferMethods = TableRegistry::get('TransferMethods');
+        $transferMethods = $TransferMethods->find();
+        
         $caster_profile = $Profile->get($user_id);        
         if ($caster_profile->isNew())
         {
@@ -32,17 +39,25 @@ class DonateController extends AppController
         $this->set(compact('caster_profile'));
     }
 
-    public function do($user_id = null)
+    public function perform($user_id = null)
     {
         if ($this->request->is('put')) 
         {
+            $Money = new Money();
+            $donateDatas = $this->request->getData();
             /*1')   - Xác nhận kết quả chuyển tiền từ bên 3 nếu không phải là Donate bằng Coin
                     - Quy đổi số tiền thành Coin
             */
             //1'')Xác nhận số dư Coin của người Donate nếu Donate bằng Coin
+            if($donateDatas['donate_method_selector'] == 'coin')
+            {
+                if($Money->getCurrentBalance($donateDatas['sender_id']) < $donateDatas['amount'])
+                {
+                    $this->Flash->error(__('Số dư trong tài khoản không đủ'));
+                    return $this->redirect('/donate/'.$user_id);
+                }
+            }
             //2)Thực hiện Donate
-            $Money = new Money();
-            $donateDatas = $this->request->getData();
             $result = $Money->donate($donateDatas);
             if($result)
             {

@@ -20,7 +20,7 @@ class Money
     {
         //1)kiểm tra        
         //2)thực hiện cộng trừ tiền
-        if(1)// trường hợp Donate Coin
+        if($donateDatas['donate_method_selector'] == 'coin')// trường hợp Donate Coin
         {
             $this->decrease($donateDatas['sender_id'], $donateDatas['amount']);
         }

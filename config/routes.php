@@ -80,7 +80,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 Router::connect('/donate/*', ['controller' => 'Donate', 'action' => 'index']);
-Router::connect('/donate/do/*', ['controller' => 'Donate', 'action' => 'do']);
+Router::connect('/donate/perform/*', ['controller' => 'Donate', 'action' => 'perform']);
 Router::prefix('me', function ($routes) {
     $routes->redirect('/', [
         'controller' => 'Statistics', 

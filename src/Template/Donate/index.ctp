@@ -328,13 +328,13 @@
                         <div class="col-md-8">
                             <?=$this->Form->create(null, [
                                 'type' => 'put',
-                                'url' => '/donate/do/'.h($caster_profile->user_id),
+                                'url' => '/donate/perform/'.h($caster_profile->user_id),
                                 'class' => 'form-material form-horizontal',
                             ]);?>
-                            <?= $this->Form->control('donate_method_id', [
+                            <?= $this->Form->control('donate_method_selector', [
                                 'type'  => 'hidden',
                                 'label' => false,
-                                'value' => '______________'
+                                'value' => 'coin'
                             ]) ?>
                             <?= $this->Form->control('receiver_id', [
                                 'type'  => 'hidden',
