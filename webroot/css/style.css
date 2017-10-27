@@ -1,13 +1,19 @@
-/*Xóa border trắng khi màn hình nhỏ của boostrap*/
-@media screen and (max-width: 767px) {
-    .table-responsive {
-       border: none;
-    }
-}
 /* Để debug của cakephp không bị che bởi navbar và sidebar */
 .cake-debug-output {
     margin-top: 70px;
     padding-left: 70px;
+}
+
+/* Xóa border trắng khi màn hình nhỏ của boostrap*/
+@media screen and (max-width: 768px) {
+    .table-responsive {
+       border: none;
+    }
+}
+
+.navbar-top-links .dropdown-notifs {
+    right: 0;
+    left: auto;
 }
 
 .has-error .help-block {
@@ -23,18 +29,17 @@
 
 @media (max-width: 768px) {
     .container-fluid {
-        /* padding-left: 15px;
-        padding-right: 15px; */
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
-    /*--MY--*/
-    .bg-title{
-        padding: 15px 20px 9px;
+
+    .bg-title {
+        padding: 15px 0px 10px 0px;
+        margin-bottom: 25px;
+        margin-left: 0px;
+        margin-right: 0px;
     }
-    section{
-        padding: 25px 0px !important;
-    }
+
     .new-login-box, 
     .new-register-box {
         width: 100%;
@@ -106,3 +111,5 @@ input.k-textbox {
 .myadmin-alert-fullscreen {
   z-index: 1002;
 }
+
+.miw-100 {min-width: 100px} .miw-150 {min-width:150px}

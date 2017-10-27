@@ -2,11 +2,10 @@
     <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false"> <i class="mdi mdi-check-circle"></i>
         <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
     </a>
-    <ul class="dropdown-menu dropdown-tasks animated bounceInDown">
+    <ul class="dropdown-menu dropdown-notifs animated bounceInDown">
         <li>
             <div class="drop-title text-center">Thông báo</div>
         </li>
-        <li class="divider"></li>
         <li>
             <a href="#">
                 <span class="text-success">Thông báo từ Ban Quản Lý</span>

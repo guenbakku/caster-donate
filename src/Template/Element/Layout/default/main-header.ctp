@@ -21,7 +21,7 @@
             <!-- /Logo -->
             <!-- Search input and Toggle icon -->
             <ul class="nav navbar-top-links navbar-left">
-                <?php if($hasSideBar){
+                <?php if ($hasSideBar) {
                     echo '<li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i> </a></li>';
                 }?>
                 <li>
@@ -37,7 +37,7 @@
                     <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> 
                         Menu <i class="icon-options-vertical"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                    <ul class="dropdown-menu dropdown-tasks animated bounceInDown">
                         <li>
                             <a href="#" class="">
                                 <p><i class="mdi mdi-home fa-fw"></i> <strong><?=__('Trang chủ')?></strong></p>

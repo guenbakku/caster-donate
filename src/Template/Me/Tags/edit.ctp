@@ -23,7 +23,7 @@
         ]) ?> 
 
         <?= $this->Form->button( __('Gửi'),[
-            'class' => 'btn btn-success',
+            'class' => 'btn btn-success miw-100',
             'label' => false,
             'type' => 'submit'
         ]) ?>
