@@ -31,7 +31,7 @@ return [
 
         'input-short' => [
             'inputContainer' => '<div class="form-group">{{content}}</div>',
-            'formGroup' => '<div class="col-md-2 control-label>{{label}}</div><div class="col-md-6">{{input}}</div>',
+            'formGroup' => '<div class="col-md-2 control-label">{{label}}</div><div class="col-md-6">{{input}}</div>',
             'input' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
             'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
             'file' => '<input type="{{type}}" name="{{name}}" {{attrs}} />',
