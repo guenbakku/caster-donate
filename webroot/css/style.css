@@ -36,8 +36,8 @@
     .bg-title {
         padding: 15px 0px 10px 0px;
         margin-bottom: 25px;
-        margin-left: 0px;
-        margin-right: 0px;
+        margin-left: -15px;
+        margin-right: -15px;
     }
 
     .new-login-box, 
