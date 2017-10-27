@@ -14,7 +14,6 @@
                     </b>
                     <span class="hidden-xs">
                         <span class="dark-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
-                        <span class="light-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
                     </span> 
                 </a>
             </div>
