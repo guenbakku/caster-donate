@@ -16,11 +16,11 @@ class CreateTransferMethodsTable extends AbstractMigration
         $table = $this->table('transfer_methods');
         $table->addColumn('name', 'string', [
             'null' => false,
-            'limit' => 255
+            'limit' => 64
         ]);
         $table->addColumn('selector', 'string', [
             'null' => false,
-            'limit' => 20
+            'limit' => 64
         ]);
         $table->addColumn('order_no', 'integer', [
             'null' => true,

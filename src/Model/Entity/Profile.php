@@ -2,18 +2,9 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Core\Configure;
 
-/**
- * CasterTagsTable Entity
- *
- * @property string $id
- * @property string $name
- * @property string $image
- * @property int $order_no
- * @property \Cake\I18n\Time $created
- * @property \Cake\I18n\Time $modified
- */
-class CasterTagsTable extends Entity
+class Profile extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -28,4 +19,14 @@ class CasterTagsTable extends Entity
         '*' => true,
         'id' => false
     ];
+
+    protected function _getAvatarUrl()
+    {
+        $filename = $this->_properties['avatar'];
+        if (!empty($filename)) {
+            return Configure::read('System.Urls.avatar_dir').$filename;
+        } else {
+            return Configure::read('System.Urls.default_avatar');
+        }
+    }
 }

@@ -22,6 +22,8 @@ class SocialProvidersSeed extends AbstractSeed
             [
                 'id' => 1,
                 'name' => 'Facebook',
+                'selector' => 'facebook',
+                'access' => 'https://www.facebook.com',
                 'order_no' => 1,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
@@ -29,6 +31,8 @@ class SocialProvidersSeed extends AbstractSeed
             [
                 'id' => 2,
                 'name' => 'Zalo',
+                'selector' => 'zalo',
+                'access' => 'https://zalo.me',
                 'order_no' => 2,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),

@@ -15,12 +15,7 @@ class SocialProvidersTable extends AppTable
         $this->belongsToMany('User', [
             'through' => 'UsersSocialProviders',
         ]);
-        $this->belongsToMany('UserInfos', [
-            'through' => 'UsersSocialProviders',
-            'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id',
-        ]);
-        $this->belongsToMany('CasterInfos', [
+        $this->belongsToMany('Profiles', [
             'through' => 'UsersSocialProviders',
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id',

@@ -29,11 +29,11 @@ class CreateBankAccountsTable extends AbstractMigration
                 'limit' => 255,
                 'default' => null
             ])
-            ->addColumn('account_holder', 'string', [
+            ->addColumn('holder', 'string', [
                 'null' => false,
                 'limit' => 255,
             ])
-            ->addColumn('account_number', 'string', [
+            ->addColumn('number', 'string', [
                 'null' => false,
                 'limit' => 255,
             ])

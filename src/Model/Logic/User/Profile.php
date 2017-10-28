@@ -9,53 +9,53 @@ class Profile
 {
     public function __construct()
     {
-        $this->userInfosTb = TableRegistry::get('UserInfos');
+        $this->profilesTb = TableRegistry::get('Profiles');
     }
 
     public function get($user_id)
     {
-        $userInfo = $this->userInfosTb->findByUserId($user_id)
-            ->contain(['SocialProviders','CasterTags','CasterInfos'])
+        $profile = $this->profilesTb->findByUserId($user_id)
+            ->contain(['SocialProviders', 'CasterTags'])
             ->first();
 
-        if ($userInfo) {
+        if ($profile) {
             $UsersSocialProvidersTb = TableRegistry::get('UsersSocialProviders');
-            $userInfo->social_providers = $UsersSocialProvidersTb->repleteEntities($userInfo->social_providers);
+            $profile->social_providers = $UsersSocialProvidersTb->repleteEntities($profile->social_providers);
         }
         else {
-            $userInfo = $this->userInfosTb->newEntity();
+            $profile = $this->profilesTb->newEntity();
         }
-        return $userInfo;
+        return $profile;
     }
 
     public function edit($user_id, array $new_user_info)
     {
-        $userInfo = $this->get($user_id);
-        $userInfo->user_id = $user_id;
+        $profile = $this->get($user_id);
+        $profile->user_id = $user_id;
 
-        $this->userInfosTb->patchEntity($userInfo, $new_user_info, [
+        $this->profilesTb->patchEntity($profile, $new_user_info, [
             'associated' => [
                 'SocialProviders._joinData' => ['validate' => 'default'],
             ],
         ]);
 
-        if(!$userInfo->errors()) {
-            $this->userInfosTb->save($userInfo);
+        if(!$profile->errors()) {
+            $this->profilesTb->save($profile);
         }
 
-        return $userInfo;
+        return $profile;
     }
 
     public function deleteAvatar($user_id)
     {
-        $userInfo = $this->userInfosTb->findByUserId($user_id)->first();
+        $profile = $this->profilesTb->findByUserId($user_id)->first();
 
-        if (!$userInfo) {
+        if (!$profile) {
             return false;
         }
 
         // Call method of UploadBehavior
-        return $this->userInfosTb->deleteUploadField($userInfo->id, 'avatar');
+        return $this->profilesTb->deleteUploadField($profile->id, 'avatar');
     }
 }
 ?>

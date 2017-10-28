@@ -8,7 +8,7 @@ use App\Utility\Flysystem;
 class Money
 {
     function __construct() {
-        $this->userInfos = TableRegistry::get('UserInfos');
+        $this->$profilesTb = TableRegistry::get('Profiles');
     }
 
     public function getCurrentBalance($user_id)
@@ -34,32 +34,32 @@ class Money
 
     public function increase($user_id, $amount)
     {
-        $userInfo = $this->userInfos->findByUserId($user_id)->first();
+        $profile = $this->$profilesTb->findByUserId($user_id)->first();
 
-        if($userInfo)
+        if($profile)
         {
             if($amount > 0)
             {
-                if($userInfo->balance == null) $userInfo->balance = 0;
+                if($profile->balance == null) $profile->balance = 0;
                 debug($amount);
-                $userInfo->balance += $amount;
+                $profile->balance += $amount;
             }
-            $this->userInfos->save($userInfo);
+            $this->$profilesTb->save($profile);
         }
-        return $userInfo;
+        return $profile;
     }
 
     public function decrease($user_id, $amount)
     {
-        $userInfo = $this->userInfos->findByUserId($user_id)->first();
-        if($userInfo)
+        $profile = $this->$profilesTb->findByUserId($user_id)->first();
+        if($profile)
         {
             if($amount > 0)
             {
-                if($userInfo->balance == null) $userInfo->balance = 0;
-                $userInfo->balance -= $amount;
+                if($profile->balance == null) $profile->balance = 0;
+                $profile->balance -= $amount;
             }
-            $this->userInfos->save($userInfo);
+            $this->$profilesTb->save($profile);
         }
         return;
     }

@@ -13,13 +13,9 @@ class UsersCasterTagsTable extends AppTable
         parent::initialize($config);
 
         $this->belongsTo('Users');
-        $this->belongsTo('UserInfos', [
+        $this->belongsTo('Profiles', [
             'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id', // Bind với cột user_id trên bảng UserInfos
-        ]);
-        $this->belongsTo('CasterInfos', [
-            'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id', // Bind với cột user_id trên bảng CasterInfos
+            'bindingKey' => 'user_id', // Bind với cột user_id trên bảng Profiles
         ]);
         $this->belongsTo('CasterTags',[
             'foreignKey' => 'caster_tag_id',

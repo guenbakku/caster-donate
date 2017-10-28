@@ -11,8 +11,7 @@ class UsersTable extends \CakeDC\Users\Model\Table\UsersTable
     {
         parent::initialize($config);
 
-        $this->hasMany('UserInfos');
-        $this->hasMany('CasterInfos');
+        $this->hasOne('Profiles');
     }
 
     

@@ -6,7 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
 
-class UserInfosTable extends AppTable
+class ProfilesTable extends AppTable
 {
     public function initialize(array $config)
     {
@@ -29,10 +29,6 @@ class UserInfosTable extends AppTable
         ]);
         $this->hasMany('UsersCasterTags',[
             'foreignKey' => 'user_id'
-        ]);
-        $this->hasOne('CasterInfos',[
-            'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id'
         ]);
 
         // Setup upload file

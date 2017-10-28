@@ -7,15 +7,15 @@ use Cake\ORM\TableRegistry;
 use CakeDC\Users\Controller\Component\UsersAuthComponent;
 use App\Model\Logic\User\Profile;
 
-class UpdateUser implements EventListenerInterface
+class UpdateUserListener implements EventListenerInterface
 {
     public function implementedEvents() {
         return [
-            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateUserInfoSession',
-            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateUserInfoSession',
+            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateLoginSession',
+            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateLoginSession',
             UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
-            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateUserInfoSession',
-            Configure::read('Events.Controller.Me.AfterEditTag') => 'updateUserInfoSession',
+            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateLoginSession',
+            Configure::read('Events.Controller.Me.AfterEditTag') => 'updateLoginSession',
         ];
     }
 
@@ -24,30 +24,22 @@ class UpdateUser implements EventListenerInterface
         $Controller = $event->getSubject();
         $user = $Controller->Auth->user();
         
-        // Insert empty row to user_infos table
-        $UserInfos = TableRegistry::get('UserInfos');
-        $userInfo = $UserInfos->newEntity([
+        // Insert empty row to profiles table
+        $profilesTb = TableRegistry::get('Profiles');
+        $profile = $profilesTb->newEntity([
             'user_id' => $event->getData('user')->id,
         ]);
-        $UserInfos->save($userInfo);
-
-        // Insert empty row to caster_infos table
-        $CasterInfos = TableRegistry::get('CasterInfos');
-        $casterInfo = $CasterInfos->newEntity([
-            'user_id' => $event->getData('user')->id,
-            'donate_link' => $event->getData('user')->username,
-        ]);
-        $CasterInfos->save($casterInfo);
+        $profilesTb->save($profile);
     }
 
-    public function updateUserInfoSession($event)
+    public function updateLoginSession($event)
     {
         $Controller = $event->getSubject();
         $user = $Controller->Auth->user();
         
         if ($user) {
-            $UserInfos = TableRegistry::get('UserInfos');
-            $entity = $UserInfos->findByUserId($user['id'])
+            $profilesTb = TableRegistry::get('Profiles');
+            $entity = $profilesTb->findByUserId($user['id'])
                 ->contain([])
                 ->first();
             

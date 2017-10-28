@@ -16,11 +16,11 @@ class CreateSexesTable extends AbstractMigration
         $table
             ->addColumn('name', 'string', [
                 'null' => false,
-                'limit' => 20,
+                'limit' => 64,
             ])
             ->addColumn('selector', 'string', [
                 'null' => false,
-                'limit' => 20,
+                'limit' => 64,
             ])
             ->addColumn('order_no', 'integer', [
                 'null' => true,

@@ -34,15 +34,15 @@ class CreateContractsTable extends AbstractMigration
             ])
             ->addColumn('phone', 'string', [
                 'null' => false,
-                'limit' => 60,
+                'limit' => 64,
             ])
             ->addColumn('firstname', 'string', [
                 'null' => false,
-                'limit' => 50,
+                'limit' => 128,
             ])
             ->addColumn('lastname', 'string', [
                 'null' => false,
-                'limit' => 50,
+                'limit' => 128,
             ])
             ->addColumn('sex_id', 'integer', [
                 'null' => false,

@@ -241,4 +241,4 @@ Plugin::load('Migrations');
  * Event register
  */
 use Cake\Event\EventManager;
-EventManager::instance()->attach(new \App\Event\UpdateUser());
+EventManager::instance()->attach(new \App\Event\UpdateUserListener());

@@ -16,6 +16,14 @@ class CreateSocialProvidersTable extends AbstractMigration
         $table = $this->table('social_providers');
         $table
             ->addColumn('name', 'string', [
+                'limit' => 64,
+                'null' => false,
+            ])
+            ->addColumn('selector', 'string', [
+                'limit' => 64,
+                'null' => false,
+            ])
+            ->addColumn('access', 'string', [
                 'limit' => 255,
                 'null' => false,
             ])

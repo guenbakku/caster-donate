@@ -42,11 +42,6 @@ class CasterTagsTable extends AppTable
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id',
         ]);
-        $this->belongsToMany('CasterInfos', [
-            'through' => 'UsersCasterTags',
-            'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id',
-        ]);
     }
 
     /**
