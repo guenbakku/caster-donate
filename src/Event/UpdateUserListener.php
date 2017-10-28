@@ -5,7 +5,6 @@ use Cake\Core\Configure;
 use Cake\Event\EventListenerInterface;
 use Cake\ORM\TableRegistry;
 use CakeDC\Users\Controller\Component\UsersAuthComponent;
-use App\Model\Logic\User\Profile;
 
 class UpdateUserListener implements EventListenerInterface
 {

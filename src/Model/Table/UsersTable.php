@@ -13,6 +13,4 @@ class UsersTable extends \CakeDC\Users\Model\Table\UsersTable
 
         $this->hasOne('Profiles');
     }
-
-    
 }
