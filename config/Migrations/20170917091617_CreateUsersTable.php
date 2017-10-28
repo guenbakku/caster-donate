@@ -11,7 +11,7 @@ class CreateUsersTable extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('username', 'string', [
-                'limit' => 255,
+                'limit' => 256,
                 'null' => false,
             ])
             ->addColumn('status', 'boolean', [
@@ -19,16 +19,16 @@ class CreateUsersTable extends AbstractMigration
             ])
             ->addColumn('email', 'string', [
                 'default' => null,
-                'limit' => 255,
+                'limit' => 256,
                 'null' => true,
             ])
             ->addColumn('password', 'string', [
-                'limit' => 255,
+                'limit' => 256,
                 'null' => false,
             ])
             ->addColumn('token', 'string', [
                 'default' => null,
-                'limit' => 255,
+                'limit' => 256,
                 'null' => true,
             ])
             ->addColumn('token_expires', 'datetime', [
@@ -37,7 +37,7 @@ class CreateUsersTable extends AbstractMigration
             ])
             ->addColumn('api_token', 'string', [
                 'default' => null,
-                'limit' => 255,
+                'limit' => 256,
                 'null' => true,
             ])
             ->addColumn('activation_date', 'datetime', [
@@ -67,7 +67,7 @@ class CreateUsersTable extends AbstractMigration
             ])
             ->addColumn('role', 'string', [
                 'default' => 'user',
-                'limit' => 255,
+                'limit' => 256,
                 'null' => true,
             ])
             ->addColumn('created', 'datetime', [

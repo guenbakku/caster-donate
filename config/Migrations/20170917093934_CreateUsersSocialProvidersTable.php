@@ -25,7 +25,7 @@ class CreateUsersSocialProvidersTable extends AbstractMigration
             ])
             ->addColumn('reference', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 256,
             ])
             ->addColumn('public', 'boolean', [
                 'null' => false,

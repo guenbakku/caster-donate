@@ -21,7 +21,7 @@ class CreateDonatesTable extends AbstractMigration
             'null' => true,
         ]);
         $table->addColumn('sender_name', 'string', [
-            'limit' => 255,
+            'limit' => 256,
             'null' => true,
         ]);
         $table->addColumn('receiver_id', 'uuid', [

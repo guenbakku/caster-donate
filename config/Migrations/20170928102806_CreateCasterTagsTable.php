@@ -20,7 +20,7 @@ class CreateCasterTagsTable extends AbstractMigration
             ])
             ->addColumn('name', 'string',[
                 'null' => true,
-                'limit' => 255,
+                'limit' => 256,
             ])
             ->addColumn('image', 'string', [
                 'null' => true,

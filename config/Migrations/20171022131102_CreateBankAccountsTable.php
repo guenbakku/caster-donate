@@ -22,20 +22,20 @@ class CreateBankAccountsTable extends AbstractMigration
             ])
             ->addColumn('name', 'string', [
                 'null' => false,
-                'limit' => 255,
+                'limit' => 256,
             ])
             ->addColumn('branch', 'string', [
                 'null' => true,
-                'limit' => 255,
+                'limit' => 256,
                 'default' => null
             ])
             ->addColumn('holder', 'string', [
                 'null' => false,
-                'limit' => 255,
+                'limit' => 256,
             ])
             ->addColumn('number', 'string', [
                 'null' => false,
-                'limit' => 255,
+                'limit' => 256,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,

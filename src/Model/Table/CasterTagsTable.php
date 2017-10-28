@@ -37,7 +37,7 @@ class CasterTagsTable extends AppTable
         $this->belongsToMany('User', [
             'through' => 'UsersCasterTags',
         ]);
-        $this->belongsToMany('UserInfos', [
+        $this->belongsToMany('Profiles', [
             'through' => 'UsersCasterTags',
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id',

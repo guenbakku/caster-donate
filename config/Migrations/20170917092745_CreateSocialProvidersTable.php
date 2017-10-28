@@ -24,7 +24,7 @@ class CreateSocialProvidersTable extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('access', 'string', [
-                'limit' => 255,
+                'limit' => 256,
                 'null' => false,
             ])
             ->addColumn('order_no', 'integer', [

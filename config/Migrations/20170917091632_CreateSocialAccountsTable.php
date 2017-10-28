@@ -14,21 +14,21 @@ class CreateSocialAccountsTable extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('provider', 'string', [
-                'limit' => 255,
+                'limit' => 256,
                 'null' => false,
             ])
             ->addColumn('username', 'string', [
                 'default' => null,
-                'limit' => 255,
+                'limit' => 256,
                 'null' => true,
             ])
             ->addColumn('reference', 'string', [
-                'limit' => 255,
+                'limit' => 256,
                 'null' => false,
             ])
             ->addColumn('avatar', 'string', [
                 'default' => null,
-                'limit' => 255,
+                'limit' => 256,
                 'null' => true,
             ])
             ->addColumn('description', 'text', [
@@ -36,7 +36,7 @@ class CreateSocialAccountsTable extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('link', 'string', [
-                'limit' => 255,
+                'limit' => 256,
                 'null' => false,
             ])
             ->addColumn('token', 'string', [
