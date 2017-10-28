@@ -1,5 +1,5 @@
 <li class="dropdown">
-    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#">
+    <a class="dropdown-toggle profile-pic waves-effect waves-light" data-toggle="dropdown" href="#">
         <?= $this->Html->image($this->Auth->user('profile.avatar_url'), [
             'class' => 'img-circle', 
             'alt' => __('Ảnh đại diện'),
