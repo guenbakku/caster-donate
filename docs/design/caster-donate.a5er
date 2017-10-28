@@ -71,13 +71,13 @@ Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,"
 Field="Tên","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","dùng để gọi khi code",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_id","INT(11)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028140532
+ModifiedDateTime=20171028142359
 Position="Vi tien",4150,950
 
 [Relation]
@@ -111,14 +111,14 @@ Left=4150
 Top=1600
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Mã của lỗi gửi về","code","INT(4)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thông điệp","message","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thông điệp","message","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028135935
+ModifiedDateTime=20171028152241
 Position="Vi tien",4150,1600
 
 [Relation]
@@ -175,13 +175,13 @@ Top=500
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id user","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Số tiền trong ví","balance","INT(11)","NOT NULL",,"0","Sum của giá trị trong bảng cashflows",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028135021
+ModifiedDateTime=20171028142305
 Position="VI TIEN",1800,500
 
 [Relation]
@@ -358,15 +358,15 @@ Top=1950
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id dòng tiền cho","from_id","CHAR(36)",,,"NULL","Nếu là người ngoài hệ thống donate thì có thể null",$FFFFFFFF,""
 Field="Id dòng tiền nhận","to_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Tên người cho","donater","VARCHAR(255)",,,"","",$FFFFFFFF,""
-Field="Lời nhắn","message","VARCHAR(255)",,,"","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên người cho","donater","VARCHAR(256)",,,"","",$FFFFFFFF,""
+Field="Lời nhắn","message","VARCHAR(256)",,,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028132541
+ModifiedDateTime=20171028152226
 Position="VI TIEN",3050,1950,734,318
 
 [Relation]
@@ -402,13 +402,13 @@ Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","dùng để gọi khi code",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028140502
+ModifiedDateTime=20171028142318
 Position="VI TIEN",750,1300
 
 [Relation]
@@ -445,13 +445,13 @@ Field="Id ví tiền","wallet_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Số tiền","amount","INT(11)","NOT NULL",,"","Có thể chứa số âm",$FFFFFFFF,""
 Field="Id thể loại dòng tiền","cashflow_type_id","INT(11)","NOT NULL",,"","Nạp tiền, Donate, Nhận donate, hay rút tiền",$FFFFFFFF,""
 Field="Id phương thức chuyển tiền","transfer_method_id","INT(11)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028134725
+ModifiedDateTime=20171028142324
 Position="VI TIEN",1750,950
 
 [Relation]
@@ -534,13 +534,13 @@ Field="Số điện thoại","phone","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,"
 Field="Họ và tên đệm","firstname","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên","lastname","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id giới tính","sex_id","INT(11)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028135726
+ModifiedDateTime=20171028142248
 Position="THANH VIEN",4100,2350,1037,476
 
 [Comment]
@@ -569,17 +569,17 @@ Left=4100
 Top=1800
 Field="Khóa chính","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Tên ngân hàng","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Chi nhánh","branch","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
-Field="Tên chủ tài khoản","holder","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Số tài khoản","number","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên ngân hàng","name","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Chi nhánh","branch","VARCHAR(256)",,,"NULL","",$FFFFFFFF,""
+Field="Tên chủ tài khoản","holder","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Số tài khoản","number","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028121407
+ModifiedDateTime=20171028152055
 Position="THANH VIEN",4100,1800,732,360
 
 [Entity]
@@ -593,13 +593,13 @@ Top=1550
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id dòng tiền","cashflow_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id kết quả lệnh","result_id","INT(11)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028140025
+ModifiedDateTime=20171028142346
 Position="VI TIEN",3050,1550,794,254
 
 [Entity]
@@ -612,14 +612,14 @@ Left=4150
 Top=1300
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Mã của lỗi gửi về","code","INT(4)","NOT NULL",,"","= code",$FFFFFFFF,""
-Field="Thông điệp","message","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thông điệp","message","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028140833
+ModifiedDateTime=20171028152234
 Position="VI TIEN",4150,1300
 
 [Entity]
@@ -632,19 +632,19 @@ Left=3050
 Top=950
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id dòng tiền","cashflow_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Id tài khoản ngân hàng","bank_account_id","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Id tài khoản ngân hàng","bank_account_id","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Ngày duyệt lệnh","approve_date","DATETIME",,,"NULL","",$FFFFFFFF,""
 Field="Ngày chuyển tiền","transfer_date","DATETIME",,,"NULL","",$FFFFFFFF,""
 Field="Id tình trạng","status_id","INT(11)",,,"NULL","",$FFFFFFFF,""
 Field="Mã lệnh từ ngân hàng","bank_code","INT(11)",,,"NULL","",$FFFFFFFF,""
 Field="Id kết quả lệnh","result_id","INT(4)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028140210
+ModifiedDateTime=20171028152112
 Position="VI TIEN",3050,950,921,434
 
 [Line]
@@ -715,13 +715,13 @@ Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","dùng để gọi khi code",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm tạo","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028140545
+ModifiedDateTime=20171028142208
 Position="THANH VIEN",1400,1800,849,278
 
 [Relation]
@@ -775,16 +775,17 @@ Page=THANH VIEN
 Left=400
 Top=2250
 Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
-Field="Nhà cung cấp","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Địa chỉ truy cập","access","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Nhà cung cấp","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Địa chỉ truy cập","access","VARCHAR(256)",,,"NULL","",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028120958
+ModifiedDateTime=20171028152027
 Position="THANH VIEN",400,2250
 
 [Entity]
@@ -800,14 +801,14 @@ Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id nhà cung cấp","social_provider_id","INT(11)","NOT NULL",,"NULL","",$FFFFFFFF,""
 Field="Link tài khoản","reference","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
 Field="Công khai hay không","public","BOOLEAN","NOT NULL",,"FALSE","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Index=user_id=1,user_id
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028120927
+ModifiedDateTime=20171028142219
 Position="THANH VIEN",1350,2250,923,307
 
 [Entity]
@@ -822,13 +823,13 @@ Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","dùng để gọi khi code",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028140457
+ModifiedDateTime=20171028142311
 Position="VI TIEN",750,950
 
 [Entity]
@@ -840,25 +841,25 @@ Page=THANH VIEN
 Left=2800
 Top=950
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
-Field="Tên đăng nhập","username","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên đăng nhập","username","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Trạng thái tài khoản","status","BOOLEAN",,,"","[0|NULL]Bình thường [1]:Khóa",$FFFFFFFF,""
-Field="Địa chỉ email","email","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Mật khẩu","password","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Token","token","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Địa chỉ email","email","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Mật khẩu","password","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Token","token","VARCHAR(256)",,,"NULL","",$FFFFFFFF,""
 Field="Thời gian hết hạn token","token_expires","DATETIME",,,"NULL","",$FFFFFFFF,""
-Field="Api token","api_token","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Api token","api_token","VARCHAR(256)",,,"NULL","",$FFFFFFFF,""
 Field="Thời điểm kích hoạt tài khoản","activation_date","DATETIME",,,"NULL","",$FFFFFFFF,""
 Field="Thời điểm đồng ý tos","tos_date","DATETIME",,,"NULL","tos = Term of service",$FFFFFFFF,""
 Field="Đã kích hoạt","active","BOOLEAN",,,"0","",$FFFFFFFF,""
 Field="Có phải là super user","is_superuser","BOOLEAN",,,"0","",$FFFFFFFF,""
-Field="Phân quyền","role","VARCHAR(255)","NOT NULL",,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Phân quyền","role","VARCHAR(256)","NOT NULL",,"NULL","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028135700
+ModifiedDateTime=20171028152019
 Position="THANH VIEN",2800,950
 
 [Entity]
@@ -872,15 +873,15 @@ Top=3000
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Phần trăm phí thu","percentage","INT(11)","NOT NULL",,"","phần trăm",$FFFFFFFF,""
-Field="Thời điểm bắt đầu","start","TIMESTAMP",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm kết thúc","end","TIMESTAMP",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm bắt đầu","start","DATETIME",,,"NULL","",$FFFFFFFF,""
+Field="Thời điểm kết thúc","end","DATETIME",,,"NULL","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028121240
+ModifiedDateTime=20171028142255
 Position="THANH VIEN",4100,3000,794,310
 
 [Entity]
@@ -894,13 +895,13 @@ Top=2750
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id tag","tag_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id user","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028121036
+ModifiedDateTime=20171028142237
 Position="THANH VIEN",1500,2750,749,222
 
 [Entity]
@@ -912,16 +913,16 @@ Page=THANH VIEN
 Left=400
 Top=2650
 Field="Khóa chính cả bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
-Field="Tên tag","name","VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên tag","name","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên file ảnh của tag","image","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028121114
+ModifiedDateTime=20171028152035
 Position="THANH VIEN",400,2650
 
 [Entity]
@@ -934,7 +935,7 @@ Left=2800
 Top=1800
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Nickname","nickname","VARCHAR(255)",,,"NULL","",$FFFFFFFF,""
+Field="Nickname","nickname","VARCHAR(64)",,,"NULL","",$FFFFFFFF,""
 Field="Tên","firstname","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
 Field="Họ","lastname","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
 Field="Id giới tính","sex_id","INT(11)",,,"NULL","",$FFFFFFFF,""
@@ -946,12 +947,12 @@ Field="Đã làm hợp đồng chưa","contracted","BOOLEAN","NOT NULL",,"FALSE"
 Field="Tên file ảnh donate","donate_image","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
 Field="Tên file audio donate","donate_audio","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
 Field="Link donate","donate_link","VARCHAR(128)",,,"NULL","",$FFFFFFFF,""
-Field="Thời điểm tạo","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
-Field="Thời điểm sửa","modified","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Index=user_id=1,user_id
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171028135611
+ModifiedDateTime=20171028143627
 Position="THANH VIEN",2800,1800,868,688
