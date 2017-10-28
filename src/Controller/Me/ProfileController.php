@@ -27,7 +27,7 @@ class ProfileController extends AppController
             if (!$profile->errors()) {   
                 // Trigger event after edited profile
                 $this->dispatchEvent(
-                    Configure::read('Events.Controller.Me.AfterEditProfile'), 
+                    Configure::read('Events.App_AfterEditProfile'), 
                     ['profile' => $profile]
                 );
                 $this->Flash->success(__('Thay đổi thông tin cá nhân thành công.'));

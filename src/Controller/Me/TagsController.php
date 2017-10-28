@@ -23,11 +23,6 @@ class TagsController extends AppController
             $caster_tags = $this->request->data('caster_tags') ?: [];
             $Tag->save($user_id, $caster_tags);
     
-            // Trigger event after edited tags
-            $this->dispatchEvent(
-                Configure::read('Events.Controller.Me.AfterEditTag')
-            );
-    
             $this->Flash->success(__('Thay đổi thể loại live stream thành công.'));
         }
     }

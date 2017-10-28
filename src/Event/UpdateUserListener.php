@@ -14,8 +14,7 @@ class UpdateUserListener implements EventListenerInterface
             UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateLoginSession',
             UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateLoginSession',
             UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
-            Configure::read('Events.Controller.Me.AfterEditProfile') => 'updateLoginSession',
-            Configure::read('Events.Controller.Me.AfterEditTag') => 'updateLoginSession',
+            Configure::read('Events.App_AfterEditProfile') => 'updateLoginSession',
         ];
     }
 

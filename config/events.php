@@ -7,7 +7,6 @@
  */
 return [
     'Events' => [
-        'Controller.Me.AfterEditProfile' => 'Controller.Me.AfterEditProfile',
-        'Controller.Me.AfterEditTag' => 'Controller.Me.AfterEditTag',
+        'App_AfterEditProfile' => 'App_AfterEditProfile',
     ],
 ];
