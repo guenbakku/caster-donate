@@ -4,149 +4,56 @@ namespace App\View\Helper;
 use Cake\View\Helper;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
+use App\Utility\Code;
 
 /**
- * Manage code table.
- * Use for accessing code in code table to display in <select> tag.
+ * Wrapper of \App\Utility\Code
  */
 class CodeHelper extends Helper
 {
-    protected static $cached = [];
-    protected $_defaultConfig = [
-        'keyField' => 'id',
-        'valueField' => 'name',
-        'selectorField' => 'selector',
-    ];
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+        $this->Code = new Code();
+    }
     
     /**
-     * Return all records in provided table and return in list format
-     * More about list format:
-     * https://book.cakephp.org/3.0/ja/orm/retrieving-data-and-resultsets.html#table-find-list
-     *
-     * @param   string: table name
-     * @param   array: contains custom keyField and valueField
-     * @return  array
+     * Wrapper of Code::getList()
      */
     public function getList(string $table, array $options = [])
     {
-        $group = 'list';
-        $hash = $this->hash($table, $options);
-        $result = $this->readCache($group, $hash);
-        if (!$result) {
-            $result = $this->readDBForList($table, $options);
-            $this->writeCache($group, $hash, $result);
-        }
-
-        return $result;
+        return $this->Code->getList($table, $options);
     }
 
     /**
-     * Return key (id) of specific selector in specific code table
-     *
-     * @param   string: table name
-     * @param   string: selector
-     * @param   mixed: key of selector
+     * Wrapper of Code::getKey()
      */
     public function getKey(string $table, string $selector, array $options = [])
     {
-        $group = 'key';
-        $hash = $this->hash($table, $options);
-        $result = $this->readCache($group, $hash);
-        if (!$result) {
-            $result = $this->readDBForKey($table, $options);
-            $this->writeCache($group, $hash, $result);
-        }
-
-        return Hash::get($result, $selector);
+        return $this->Code->getKey($table, $selector, $options);
     }
 
     /**
-     * Clear cache (useful when write unit test case)
-     *
-     * @param   void
-     * @return  void
+     * Wrapper of Code::setTable()
+     */
+    public function setTable(string $table)
+    {
+        return $this->Code->setTable($table);
+    }
+
+    /**
+     * Wrapper of Code::getTable()
+     */
+    public function getTable()
+    {
+        return $this->Code->getTable();
+    }
+
+    /**
+     * Wrapper of Code::clearCache()
      */
     public function clearCache()
     {
-        return static::$cached = [];
-    }
-
-    /**
-     * Return key of indentify get from database
-     *
-     * @param   string: table name
-     * @param   array: contains custom keyField and selectorField
-     * @return  array
-     */
-    protected function readDBForKey(string $table, array $options = [])
-    {
-        $table = TableRegistry::get($table);
-        $query = $table->find('list', [
-            'keyField' => Hash::get($options, 'keyField', $this->getConfig('keyField')),
-            'valueField' => Hash::get($options, 'selectorField', $this->getConfig('selectorField')),
-        ]);
-
-        return array_flip($query->toArray());
-    }
-
-    /**
-     * Return data of code group get from database
-     *
-     * @param   string: table name
-     * @param   array: contains custom keyField and valueField
-     * @return  array
-     */
-    protected function readDBForList(string $table, array $options = [])
-    {
-        $table = TableRegistry::get($table);
-        $query = $table->find('list', [
-            'keyField' => Hash::get($options, 'keyField', $this->getConfig('keyField')),
-            'valueField' => Hash::get($options, 'valueField', $this->getConfig('valueField')),
-        ]);
-
-        $order = Hash::get($options, 'order', 'order_no');
-        if ($table->schema()->column($order)) {
-            $query->order($order);
-        }
-
-        return $query->toArray();
-    }
-
-    /**
-     * Convert input to hash by using MD5
-     *
-     * @param   string: table name
-     * @param   array: options
-     * @return  string
-     */
-    protected function hash(string $table, array $options = [])
-    {
-        return md5($table.' '.json_encode($options));
-    }
-
-    /**
-     * Cache result to memory to improve perfomance
-     * when same result is retrieved
-     *
-     * @param   string: key
-     * @param   mixed: result
-     * @return  void
-     */
-    protected function writeCache(string $group, string $key, $result)
-    {
-        $path = $group.'.'.$key;
-        Hash::insert(static::$cached, $path, $result);
-    }
-
-    /**
-     * Return cached value
-     *
-     * @param   string: key
-     * @return  mixed
-     */
-    protected function readCache(string $group, string $key)
-    {
-        $path = $group.'.'.$key;
-        return Hash::get(static::$cached, $path);
+        return $this->Code->clearCache();
     }
 }

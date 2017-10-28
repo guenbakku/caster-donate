@@ -23,7 +23,7 @@
         <?= $this->Form->control('sex_id', [
             'class' => 'form-control',
             'empty' => true,
-            'options' => $this->Code->getList('sexes'),
+            'options' => $this->Code->setTable('sexes')->getList(),
             'label' => __('Giới tính'),
         ]) ?>
 
