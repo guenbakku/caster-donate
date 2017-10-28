@@ -26,7 +26,7 @@ class AvatarController extends AppController
             if (!$profile->errors()) {   
                 // Trigger event after edited profile
                 $this->dispatchEvent(
-                    Configure::read('Events.Controller.Me.AfterEditProfile'), 
+                    Configure::read('Events.App_AfterEditProfile'), 
                     ['profile' => $profile]
                 );
                 $this->Flash->success(__('Thay đổi ảnh đại diện thành công.'));
@@ -49,7 +49,7 @@ class AvatarController extends AppController
         if ($result) {
             // Trigger event after edited profile
             $this->dispatchEvent(
-                Configure::read('Events.Controller.Me.AfterEditProfile'), 
+                Configure::read('Events.App_AfterEditProfile'), 
                 ['profile' => $result]
             );
             $this->Flash->success(__('Xóa ảnh đại diện thành công.'));
