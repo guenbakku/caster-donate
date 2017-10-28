@@ -1,5 +1,5 @@
 <div class="white-box">
-    <?php $this->Form->setTemplates($FormTemplates['default']);?>
+    <?php $this->Form->setTemplates($FormTemplates['input-short']);?>
     <?=$this->Form->create($profile, [
         'type' => 'put',
         'class' => 'form-horizontal',
