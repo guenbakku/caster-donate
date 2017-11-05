@@ -38,8 +38,8 @@
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
         var $this = this;
             var form = $("<form></form>");
-            form.append("<label>Change event name</label>");
-            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button></span></div>");
+            form.append("<label>Đổi tên Event</label>");
+            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Lưu</button></span></div>");
             $this.$modal.modal({
                 backdrop: 'static'
             });
@@ -65,16 +65,15 @@
             var form = $("<form></form>");
             form.append("<div class='row'></div>");
             form.find(".row")
-                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title'/></div></div>")
-                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' name='category'></select></div></div>")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Tên Sự Kiện</label><input class='form-control' placeholder='Nhập tên' type='text' name='title'/></div></div>")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Nhóm màu</label><select class='form-control' name='category'></select></div></div>")
                 .find("select[name='category']")
-                .append("<option value='bg-danger'>Danger</option>")
-                .append("<option value='bg-success'>Success</option>")
-                .append("<option value='bg-purple'>Purple</option>")
-                .append("<option value='bg-primary'>Primary</option>")
-                .append("<option value='bg-pink'>Pink</option>")
-                .append("<option value='bg-info'>Info</option>")
-                .append("<option value='bg-warning'>Warning</option></div></div>");
+                .append("<option value='bg-danger'>Đỏ</option>")
+                .append("<option value='bg-success'>Xanh lá</option>")
+                .append("<option value='bg-purple'>Tím</option>")
+                .append("<option value='bg-info'>Xanh nước biển</option>")
+                .append("<option value='bg-warning'>Vàng</option></div></div>")
+                .append("<option value='bg-inverse'>Xám</option>");
             $this.$modal.find('.delete-event').hide().end().find('.save-event').show().end().find('.modal-body').empty().prepend(form).end().find('.save-event').unbind('click').click(function () {
                 form.submit();
             });
@@ -94,10 +93,9 @@
                     $this.$modal.modal('hide');
                 }
                 else{
-                    alert('You have to give a title to your event');
+                    alert('Bạn phải nhập tiêu đề cho sự kiện của bạn');
                 }
                 return false;
-                
             });
             $this.$calendarObj.fullCalendar('unselect');
     },
@@ -198,10 +196,9 @@
             var categoryName = $this.$categoryForm.find("input[name='category-name']").val();
             var categoryColor = $this.$categoryForm.find("select[name='category-color']").val();
             if (categoryName !== null && categoryName.length != 0) {
-                $this.$extEvents.append('<div class="calendar-events bg-' + categoryColor + '" data-class="bg-' + categoryColor + '" style="position: relative;"><i class="fa fa-move"></i>' + categoryName + '</div>')
+                $this.$extEvents.append('<div class="calendar-events" data-class="bg-' + categoryColor + '" style="position: relative;"><i class="fa fa-circle text-' + categoryColor + '"></i>' + categoryName + '</div>')
                 $this.enableDrag();
             }
-
         });
     },
 
@@ -215,3 +212,12 @@ function($) {
     "use strict";
     $.CalendarApp.init()
 }(window.jQuery);
+
+$(function() {
+    $('#trash').droppable({
+        drop: function(event, ui) {
+            ui.draggable.remove();
+        },
+        tolerance: 'pointer'
+    });
+});
