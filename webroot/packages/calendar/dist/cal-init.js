@@ -29,10 +29,10 @@
             // render the event on the calendar
             $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
             // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
+            /*if ($('#drop-remove').is(':checked')) {
                 // if so, remove the element from the "Draggable Events" list
                 eventObj.remove();
-            }
+            }*/
     },
     /* on click on event */
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
@@ -157,7 +157,7 @@
                 end: new Date($.now() - 219000000),
                 className: 'bg-info'
             },  
-              {
+            {
                 title: 'Hanns birthday',
                 start: new Date($.now() + 868000000),
                 className: 'bg-danger'

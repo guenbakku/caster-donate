@@ -2,6 +2,13 @@
 <div class="row">
     <div class="col-md-3">
         <div class="white-box">
+            <form action="me/" method="POST">
+            <a href="#" class="btn btn-lg btn-info btn-block waves-effect waves-light" id="update-schedule">
+                Cập nhật lịch
+            </a>
+            </form>
+        </div>
+        <div class="white-box">
             <h3 class="box-title">Nhóm sự kiện chính</h3>
             <p class="text-muted">Kéo và thả sự kiện vào lịch</p>
             <div class="row">
@@ -20,16 +27,10 @@
                             <i class="fa fa-circle text-warning"></i> My Event Four
                         </div>
                     </div>
-                    <div class="checkbox col-md-9">
-                        <input id="drop-remove" type="checkbox">
-                        <label for="drop-remove">
-                            Xóa sau khi thêm vào lịch
-                        </label>
-                    </div>
-                    <div class="col-md-3" id="trash">
+                    <div class="col-md-3 pull-right m-t-20" id="trash">
                         <button class="btn btn-outline btn-default btn-lg"><i class="ti-trash" style="font-size:40px"></i></button>
                     </div>
-                    <a href="#" data-toggle="modal" data-target="#add-new-event" class="btn btn-lg m-t-40 btn-danger btn-block waves-effect waves-light">
+                    <a href="#" data-toggle="modal" data-target="#add-new-event" class="btn btn-lg m-t-40 btn-success btn-block waves-effect waves-light">
                         <i class="ti-plus"></i> Thêm nhóm sự kiện
                     </a>
                 </div>
@@ -43,10 +44,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 
 
@@ -115,6 +112,5 @@
 <?= $this->Html->script('/packages/calendar/jquery-ui.min.js',['block'=>true]) ?>
 <?= $this->Html->script('/packages/moment/moment.js',['block'=>true]) ?>
 <?= $this->Html->script('/packages/calendar/dist/fullcalendar.min.js',['block'=>true]) ?>
-<?= $this->Html->script('/packages/calendar/dist/jquery.fullcalendar.js',['block'=>true]) ?>
 <?= $this->Html->script('/packages/calendar/dist/locale/vi.js',['block'=>true]) ?>
 <?= $this->Html->script('/packages/calendar/dist/cal-init.js',['block'=>true]) ?>
