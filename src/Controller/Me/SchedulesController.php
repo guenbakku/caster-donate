@@ -17,6 +17,20 @@ class SchedulesController extends AppController
     {
 
     }
+    
+    public function update() 
+    {
+        $this->autoRender = false;
+        echo "asd";
+        if ($this->request->is('put')) {
+            $donateDatas = $this->request->getData();
+            debug( $donateDatas);
+        }else{
+            return $this->redirect([
+                'action' => 'index'
+            ]);
+        }
+    }
 
     public function add() 
     {

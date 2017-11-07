@@ -218,6 +218,16 @@ $(function() {
         drop: function(event, ui) {
             ui.draggable.remove();
         },
-        tolerance: 'pointer'
+        tolerance: 'pointer'//lấy vị trí chuột làm cơ sở xác định vị trí (thay vì trung điểm của element)
     });
+    // $("#form-update-schedule").append();
+    // $("#form-update-schedule").submit( function(eventObj) {
+    //     eventObj.preventDefault();
+    //     var data = $('#calendar').fullCalendar('clientEvents');
+    //     var json = jQuery.parseJSON(data);
+    //     alert(json);
+
+    //     $('input[name="event-datas"]').val(json);
+    //     return true;
+    // });
 });

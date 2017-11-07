@@ -2,11 +2,22 @@
 <div class="row">
     <div class="col-md-3">
         <div class="white-box">
-            <form action="me/" method="POST">
-            <a href="#" class="btn btn-lg btn-info btn-block waves-effect waves-light" id="update-schedule">
-                Cập nhật lịch
-            </a>
-            </form>
+            <?=$this->Form->create(null, [
+                'type' => 'put',
+                'url' => '/me/schedules/update',
+                'id' => 'form-update-schedule'
+            ]);?>
+            <?=$this->Form->control('event-datas', [
+                'label' => false,
+                'class' => 'hidden',
+                'value' => 'null'
+            ]);?>
+            <?=$this->Form->button('Cập nhật lịch', [
+                'type'  => 'submit',
+                'id' => false,
+                'class' => 'btn btn-lg btn-info btn-block waves-effect waves-light',
+            ]);?>
+            <?= $this->Form->end()?>
         </div>
         <div class="white-box">
             <h3 class="box-title">Nhóm sự kiện chính</h3>
@@ -15,7 +26,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div id="calendar-events" class="m-t-20">
                         <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-info" style="position: relative;">
-                            <i class="fa fa-circle text-info"></i> My Event One 
+                            <i class="fa fa-circle text-info"></i> My Event One
                         </div>
                         <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-success" style="position: relative;">
                             <i class="fa fa-circle text-success"></i> My Event Two
