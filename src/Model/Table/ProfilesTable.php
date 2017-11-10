@@ -34,6 +34,10 @@ class ProfilesTable extends AppTable
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id'
         ]);
+        $this->hasMany('ScheduleEventLabels',[
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id'
+        ]);
 
         // Setup upload file
         $this->addBehavior('Upload', [

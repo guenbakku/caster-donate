@@ -26,6 +26,7 @@
             copiedEventObject.start = date;
             if ($categoryClass)
                 copiedEventObject['className'] = [$categoryClass];
+                copiedEventObject['isNew'] = true;
             // render the event on the calendar
             $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
     },
@@ -120,16 +121,6 @@
         var form = '';
         var today = new Date($.now());
 
-        var defaultEvents =  [{
-            title: 'Released Ample Admin!',
-            start: new Date($.now() + 506800000),
-            className: 'bg-info'
-        }, {
-            title: 'This is today check date',
-            start: today,
-            end: today,
-            className: 'bg-danger'
-        }];
         var defaultEvents =  $.parseJSON($('#eventResources').html());
         $.each(defaultEvents, function (index, value) {
             value.end = new Date(value.end);
@@ -156,7 +147,6 @@
             drop: function(date) { $this.onDrop($(this), date); },
             select: function (start, end, resource) {  $this.onSelect(start, end, resource);},
             eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }
-
         });
 
         //on new event
@@ -164,7 +154,7 @@
             var categoryName = $this.$categoryForm.find("input[name='category-name']").val();
             var categoryColor = $this.$categoryForm.find("select[name='category-color']").val();
             if (categoryName !== null && categoryName.length != 0) {
-                $this.$extEvents.append('<div class="calendar-events" data-class="bg-' + categoryColor + '" style="position: relative;"><i class="fa fa-circle text-' + categoryColor + '"></i>' + categoryName + '</div>')
+                $this.$extEvents.append('<div class="calendar-events" data-class="bg-' + categoryColor + '" data-id="" data-color="' + categoryColor + '" style="position: relative;"><i class="fa fa-circle text-' + categoryColor + '"></i> <span class="label-title">' + categoryName + '</span></div>')
                 $this.enableDrag();
             }
         });
@@ -189,8 +179,10 @@ $(function() {
         },
         tolerance: 'pointer'//lấy vị trí chuột làm cơ sở xác định vị trí (thay vì trung điểm của element)
     });
-    //tạo array dữ liệu cho event trước khi POST
+    //tạo array dữ liệu cho event và label trước khi POST
     $("#form-update-schedule").submit( function(eventObj){
+        // eventObj.preventDefault();
+        //event
         var data = $('#calendar').fullCalendar('clientEvents');
         var event_datas = new Array();
         data.forEach(function(element, index, array){
@@ -207,5 +199,16 @@ $(function() {
             };
         });
         $('input[name="event-datas"]').val(JSON.stringify(event_datas));
+        //event-label
+        var event_labels = new Array();
+        $('.calendar-events').each(function(){
+            event_labels.unshift({
+                id : $(this).data('id'),
+                title : $(this).find('.label-title').html(),
+                color : $(this).data('color'),
+                className : $(this).data('class'),
+            });
+        });
+        $('input[name="event-labels"]').val(JSON.stringify(event_labels));
     });
 });

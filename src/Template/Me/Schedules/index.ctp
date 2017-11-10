@@ -13,6 +13,11 @@
                 'class' => 'hidden',
                 'value' => 'null'
             ]);?>
+            <?=$this->Form->control('event-labels', [
+                'label' => false,
+                'class' => 'hidden',
+                'value' => 'null'
+            ]);?>
             <?=$this->Form->button('Cập nhật lịch', [
                 'type'  => 'submit',
                 'id' => false,
@@ -26,20 +31,16 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div id="calendar-events" class="m-t-20">
-                        <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-info" style="position: relative;">
-                            <i class="fa fa-circle text-info"></i> My Event One
-                        </div>
-                        <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-success" style="position: relative;">
-                            <i class="fa fa-circle text-success"></i> My Event Two
-                        </div>
-                        <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-danger" style="position: relative;">
-                            <i class="fa fa-circle text-danger"></i> My Event Three
-                        </div>
-                        <div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-warning" style="position: relative;">
-                            <i class="fa fa-circle text-warning"></i> My Event Four
-                        </div>
+                        <?php
+                        foreach($labelDatas as $label)
+                        {
+                            echo '<div class="calendar-events ui-draggable ui-draggable-handle" data-class="'.$label['className'].'" data-id="'.$label['id'].'" data-color="'.$label['color'].'" style="position: relative;">';
+                            echo '<i class="fa fa-circle text-'.$label['color'].'"></i> <span class="label-title">'.$label['title'].'</span>';
+                            echo '</div>';
+                        }
+                        ?>
                     </div>
-                    <div class="col-md-3 pull-right m-t-20" id="trash">
+                    <div class="col-md-3 m-t-20" id="trash">
                         <button class="btn btn-outline btn-default btn-lg"><i class="ti-trash" style="font-size:40px"></i></button>
                     </div>
                     <a href="#" data-toggle="modal" data-target="#add-new-event" class="btn btn-lg m-t-40 btn-success btn-block waves-effect waves-light">
