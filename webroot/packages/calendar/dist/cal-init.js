@@ -28,11 +28,6 @@
                 copiedEventObject['className'] = [$categoryClass];
             // render the event on the calendar
             $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
-            // is the "remove after drop" checkbox checked?
-            /*if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
-                eventObj.remove();
-            }*/
     },
     /* on click on event */
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
@@ -57,7 +52,7 @@
             });
     },
     /* on select */
-    CalendarApp.prototype.onSelect = function (start, end, allDay) {
+    CalendarApp.prototype.onSelect = function (start, end, resource) {
         var $this = this;
             $this.$modal.modal({
                 backdrop: 'static'
@@ -79,18 +74,18 @@
             });
             $this.$modal.find('form').on('submit', function () {
                 var title = form.find("input[name='title']").val();
-                var beginning = form.find("input[name='beginning']").val();
-                var ending = form.find("input[name='ending']").val();
                 var categoryClass = form.find("select[name='category'] option:checked").val();
                 if (title !== null && title.length != 0) {
                     $this.$calendarObj.fullCalendar('renderEvent', {
                         title: title,
-                        start:start,
+                        start: start,
                         end: end,
-                        allDay: false,
+                        isNew: true,
                         className: categoryClass
-                    }, true);  
+                    }, true);
                     $this.$modal.modal('hide');
+
+                    
                 }
                 else{
                     alert('Bạn phải nhập tiêu đề cho sự kiện của bạn');
@@ -102,12 +97,9 @@
     CalendarApp.prototype.enableDrag = function() {
         //init events
         $(this.$event).each(function () {
-            // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-            // it doesn't need to have a start or end
             var eventObject = {
                 title: $.trim($(this).text()) // use the element's text as the event title
             };
-            // store the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject);
             // make the event draggable using jQuery UI
             $(this).draggable({
@@ -129,47 +121,23 @@
         var today = new Date($.now());
 
         var defaultEvents =  [{
-                title: 'Released Ample Admin!',
-                start: new Date($.now() + 506800000),
-                className: 'bg-info'
-            }, {
-                title: 'This is today check date',
-                start: today,
-                end: today,
-                className: 'bg-danger'
-            }, {
-                title: 'This is your birthday',
-                start: new Date($.now() + 848000000),
-                className: 'bg-info'
-            },{
-                title: 'your meeting with john',
-                start: new Date($.now() - 1099000000),
-                end:  new Date($.now() - 919000000),
-                className: 'bg-warning'
-            },{
-                title: 'your meeting with john',
-                start: new Date($.now() - 1199000000),
-                end: new Date($.now() - 1199000000),
-                className: 'bg-purple'
-            },{
-                title: 'your meeting with john',
-                start: new Date($.now() - 399000000),
-                end: new Date($.now() - 219000000),
-                className: 'bg-info'
-            },  
-            {
-                title: 'Hanns birthday',
-                start: new Date($.now() + 868000000),
-                className: 'bg-danger'
-            },{
-                title: 'Like it?',
-                start: new Date($.now() + 348000000),
-                className: 'bg-success'
-            }];
-
+            title: 'Released Ample Admin!',
+            start: new Date($.now() + 506800000),
+            className: 'bg-info'
+        }, {
+            title: 'This is today check date',
+            start: today,
+            end: today,
+            className: 'bg-danger'
+        }];
+        var defaultEvents =  $.parseJSON($('#eventResources').html());
+        $.each(defaultEvents, function (index, value) {
+            value.end = new Date(value.end);
+            value.start = new Date(value.start);
+        });
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({
-            slotDuration: '00:15:00', /* If we want to split day time each 15minutes */
+            slotDuration: '00:15:00',
             minTime: '08:00:00',
             maxTime: '19:00:00',  
             defaultView: 'month',  
@@ -182,11 +150,11 @@
             },
             events: defaultEvents,
             editable: true,
-            droppable: true, // this allows things to be dropped onto the calendar !!!
-            eventLimit: true, // allow "more" link when too many events
+            droppable: true,
+            eventLimit: true,
             selectable: true,
             drop: function(date) { $this.onDrop($(this), date); },
-            select: function (start, end, allDay) { $this.onSelect(start, end, allDay); },
+            select: function (start, end, resource) {  $this.onSelect(start, end, resource);},
             eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }
 
         });
@@ -214,20 +182,30 @@ function($) {
 }(window.jQuery);
 
 $(function() {
+    //kích hoạt thùng rác
     $('#trash').droppable({
         drop: function(event, ui) {
             ui.draggable.remove();
         },
         tolerance: 'pointer'//lấy vị trí chuột làm cơ sở xác định vị trí (thay vì trung điểm của element)
     });
-    // $("#form-update-schedule").append();
-    // $("#form-update-schedule").submit( function(eventObj) {
-    //     eventObj.preventDefault();
-    //     var data = $('#calendar').fullCalendar('clientEvents');
-    //     var json = jQuery.parseJSON(data);
-    //     alert(json);
-
-    //     $('input[name="event-datas"]').val(json);
-    //     return true;
-    // });
+    //tạo array dữ liệu cho event trước khi POST
+    $("#form-update-schedule").submit( function(eventObj){
+        var data = $('#calendar').fullCalendar('clientEvents');
+        var event_datas = new Array();
+        data.forEach(function(element, index, array){
+            var a = new Array();
+            a['title'] = element.title;
+            event_datas[index] = {
+                title: element.title, 
+                id: element._id,
+                isNew: element.isNew,
+                allDay: element.allDay,
+                start: $.fullCalendar.formatDate(element.start, "YYYY-MM-DD HH:mm:ss"), 
+                end: (element.end == null) ? null : $.fullCalendar.formatDate(element.end, "YYYY-MM-DD HH:mm:ss"), 
+                className: JSON.stringify(element.className)
+            };
+        });
+        $('input[name="event-datas"]').val(JSON.stringify(event_datas));
+    });
 });

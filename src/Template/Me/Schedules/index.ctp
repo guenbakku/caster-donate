@@ -1,10 +1,11 @@
 <?= $this->Html->css('/packages/calendar/dist/fullcalendar.css',['block'=>true]) ?>
 <div class="row">
     <div class="col-md-3">
+        <div id="eventResources" style="display:none"><?=$eventDatas?></div>
         <div class="white-box">
             <?=$this->Form->create(null, [
                 'type' => 'put',
-                'url' => '/me/schedules/update',
+                'url' => '/me/schedules/edit',
                 'id' => 'form-update-schedule'
             ]);?>
             <?=$this->Form->control('event-datas', [

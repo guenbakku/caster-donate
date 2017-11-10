@@ -30,6 +30,10 @@ class ProfilesTable extends AppTable
         $this->hasMany('UsersCasterTags',[
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Schedules',[
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id'
+        ]);
 
         // Setup upload file
         $this->addBehavior('Upload', [

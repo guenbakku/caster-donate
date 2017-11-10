@@ -30,7 +30,10 @@ class CreateSchedulesTable extends AbstractMigration
             ->addColumn('end', 'datetime', [
                 'null' => true,
             ])
-            ->addColumn('bg_color', 'string', [
+            ->addColumn('allDay', 'boolean', [
+                'null' => true,
+            ])
+            ->addColumn('className', 'string', [
                 'limit' => 128,
                 'null' => true,
             ])
