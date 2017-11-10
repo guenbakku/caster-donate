@@ -28,7 +28,7 @@ class CreateScheduleEventLabels extends AbstractMigration
                 'limit' => 128,
                 'null' => true,
             ])
-            ->addColumn('className', 'string', [
+            ->addColumn('classes', 'string', [
                 'limit' => 128,
                 'null' => true,
             ])

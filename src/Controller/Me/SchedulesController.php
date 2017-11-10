@@ -49,7 +49,7 @@ class SchedulesController extends AppController
                 'id' => $label->id,
                 'title' => $label->title,
                 'color' => $label->color,
-                'className' => $label->className,
+                'classes' => $label->classes,
             ];
         }
         $this->set(compact(['eventDatas','labelDatas']));

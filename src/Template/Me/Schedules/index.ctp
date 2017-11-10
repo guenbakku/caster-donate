@@ -34,7 +34,7 @@
                         <?php
                         foreach($labelDatas as $label)
                         {
-                            echo '<div class="calendar-events ui-draggable ui-draggable-handle" data-class="'.$label['className'].'" data-id="'.$label['id'].'" data-color="'.$label['color'].'" style="position: relative;">';
+                            echo '<div class="calendar-events ui-draggable ui-draggable-handle" data-class="'.$label['classes'].'" data-id="'.$label['id'].'" data-color="'.$label['color'].'" style="position: relative;">';
                             echo '<i class="fa fa-circle text-'.$label['color'].'"></i> <span class="label-title">'.$label['title'].'</span>';
                             echo '</div>';
                         }
