@@ -26,25 +26,31 @@
             <?= $this->Form->end()?>
         </div>
         <div class="white-box">
-            <h3 class="box-title">Nhóm sự kiện chính</h3>
-            <p class="text-muted">Kéo và thả sự kiện vào lịch</p>
+            <h3 class="box-title"><?=__('Nhãn sự kiện thường dùng')?></h3>
+            <p class="text-muted"><?=__('Kéo và thả sự kiện vào lịch')?></p>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div id="calendar-events" class="m-t-20">
+                        <table class="table">
                         <?php
                         foreach($labelDatas as $label)
                         {
-                            echo '<div class="calendar-events ui-draggable ui-draggable-handle" data-class="'.$label['classes'].'" data-id="'.$label['id'].'" data-color="'.$label['color'].'" style="position: relative;">';
-                            echo '<i class="fa fa-circle text-'.$label['color'].'"></i> <span class="label-title">'.$label['title'].'</span>';
-                            echo '</div>';
+                            printf('
+                            <tr class="label-rows">
+                                <td>
+                                    <div class="calendar-events ui-draggable ui-draggable-handle" data-class="%s" data-id="%s" data-color="%s" style="position: relative;">
+                                    <i class="fa fa-circle text-%s"></i> <span class="label-title">%s</span>
+                                </td>
+                                <td class="w10p">
+                                    <button type="button" class="btn btn-circle btn-info btn-outline"><i class="ti-trash"></i></button>
+                                </td>
+                            </tr>',$label['classes'],$label['id'],$label['color'],$label['color'],$label['title']);
                         }
                         ?>
-                    </div>
-                    <div class="col-md-3 m-t-20" id="trash">
-                        <button class="btn btn-outline btn-default btn-lg"><i class="ti-trash" style="font-size:40px"></i></button>
+                        </table>
                     </div>
                     <a href="#" data-toggle="modal" data-target="#add-new-event" class="btn btn-lg m-t-40 btn-success btn-block waves-effect waves-light">
-                        <i class="ti-plus"></i> Thêm nhóm sự kiện
+                        <i class="ti-plus"></i> <?=__('Thêm nhãn sự kiện')?>
                     </a>
                 </div>
             </div>

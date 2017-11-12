@@ -59,8 +59,7 @@ class SchedulesController extends AppController
     {
         $this->autoRender = false;
         if ($this->request->is('put')) {
-            $post_data = $this->request->getData();                
-            
+            $post_data = $this->request->getData();    
             //event
             $event_datas = json_decode ($post_data['event-datas']);
             foreach($event_datas as $key => $value)
@@ -77,16 +76,14 @@ class SchedulesController extends AppController
                 }
 
                 $event_datas[$key]['start'] = Time::parse($value['start']);
-                $event_datas[$key]['end'] = Time::parse($value['end']);                
-                //nếu khoảng cách giữa start và end là 1(ngày) => cả ngày
-                if (    (   $event_datas[$key]['start']->diffInDays($event_datas[$key]['end'])  )     == 1    )
+                if($event_datas[$key]['end'] != null)
                 {
-                    $event_datas[$key]['allDay'] = true;
+                    $event_datas[$key]['end'] = Time::parse($value['end']); 
                 }
-            }
-            //xóa events cũ
-            $this->schedulesTb->query()->delete()->where(['user_id' => $this->Auth->user('id')])->execute();   
+            } 
             $calendar['schedules'] = $event_datas;        
+            //xóa events cũ
+            $this->schedulesTb->query()->delete()->where(['user_id' => $this->Auth->user('id')])->execute(); 
 
             //label
             $event_labels = json_decode ($post_data['event-labels']);
@@ -95,9 +92,9 @@ class SchedulesController extends AppController
                 //convert thành array để tích hợp với ORM Table
                 $event_labels[$key] = (array)$value;                
             }
+            $calendar['schedule_event_labels'] = $event_labels;
             //xóa labels cũ
             $this->schedule_event_labelsTb->query()->delete()->where(['user_id' => $this->Auth->user('id')])->execute();
-            $calendar['schedule_event_labels'] = $event_labels;
 
             //cập nhật thông tin mới
             $Profile = $this->profilesTb
@@ -107,7 +104,6 @@ class SchedulesController extends AppController
             $this->profilesTb->patchEntity($Profile, $calendar);
             $this->profilesTb->save($Profile);
         }
-        // debug($Profile);
         return $this->redirect([
             'action' => 'index'
         ]);
