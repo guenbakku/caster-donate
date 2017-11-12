@@ -57,9 +57,9 @@ Caption=
 PName=
 ModifiedDateTime=20171110164551
 LineMode=0
-Bar1=650
-Bar2=601
-Bar3=216
+Bar1=50
+Bar2=950
+Bar3=528
 TermPos1=R
 TermPos2=R
 
@@ -75,11 +75,11 @@ Field="Khóa chính","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tiêu đề","title","VARCHAR(128)",,,"","",$FFFFFFFF,""
 Field="Màu của nhãn","color","VARCHAR(128)",,,"","",$FFFFFFFF,""
-Field="Tên các class","classes","VARCHAR(128)",,,"","",$FFFFFFFF,""
+Field="Tên các class","classes","VARCHAR(128)",,,"","String các class cách nhau bằng khoảng trắng",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171110203413
+ModifiedDateTime=20171112160418
 Position="SCHEDULE",500,950,669,212
 
 [Relation]
@@ -92,7 +92,7 @@ Fields2=user_id
 Cardinarity1=
 Cardinarity2=
 Position="THANH VIEN",0,500,9500,5275,R,R
-Position="SCHEDULE",0,4273,5727,4696,R,R
+Position="SCHEDULE",0,4273,5727,4555,R,R
 Dependence=0
 Caption=
 PName=
@@ -118,12 +118,12 @@ Field="Tiêu đề","title","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Bắt đầu","start","DATETIME",,,"","",$FFFFFFFF,""
 Field="Kết thúc","end","DATETIME",,,"","",$FFFFFFFF,""
 Field="Cả ngày ?","allDay","INT(1)",,,"","",$FFFFFFFF,""
-Field="class","className","VARCHAR(128)",,,"","",$FFFFFFFF,""
+Field="Json các class của event","className","VARCHAR(128)",,,"","json của array có chứa các class của sự kiện",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171110164530
-Position="SCHEDULE",400,400,661,323
+ModifiedDateTime=20171112160303
+Position="SCHEDULE",400,400,913,333
 
 [Relation]
 Entity1=users
