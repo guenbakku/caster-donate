@@ -139,6 +139,7 @@
                 right: 'month,agendaWeek,agendaDay'
             },
             events: defaultEvents,
+            timeFormat: 'HH:mm',
             editable: true,
             droppable: true,
             eventLimit: true,
