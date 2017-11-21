@@ -68,10 +68,23 @@
             </ul>
             <ul class="nav navbar-top-links navbar-right pull-right">
                 <li>
-                    <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                        <input type="text" placeholder="<?=_('Tìm kiếm')?>..." class="form-control"> 
+                    <div class="app-search hidden-sm hidden-xs m-r-10">
+                        <?php $this->Form->setTemplates($FormTemplates['main-header-search']); ?>
+                        <?= $this->cell('MultipleSelect', [
+                            $this,
+                            'tranport' => [
+                                'read' => $this->Url->build('/api/v1/tags/get-by-name'),
+                                'jump' => ''
+                            ],
+                            'input' => [
+                                // 'value' => $this->Auth->user('profile.caster_tags'),
+                                'name' => 'caster_tags',
+                                'class' => 'form-control',
+                                'label' => false,
+                            ],
+                        ]) ?>
                         <a href=""><i class="fa fa-search"></i></a> 
-                    </form>
+                    </div>
                 </li>
 
                 <?php 

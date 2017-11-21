@@ -90,5 +90,8 @@ return [
             'checkboxFormGroup' => '{{input}}{{label}}',
             'button' => '<div class="form-group text-center m-t-20"><div class="col-xs-12"><button name="{{name}}"{{attrs}}>{{text}}</button></div></div>',
         ],
+        'main-header-search' =>[
+            'inputContainer' => '{{content}}',
+        ]
     ],
 ];

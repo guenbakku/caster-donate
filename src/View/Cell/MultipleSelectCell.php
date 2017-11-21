@@ -11,6 +11,7 @@ class MultipleSelectCell extends Cell
         $defaultTransport = [
             'read' => null,
             'preSelected' => null,
+            'jump' => null,
         ];
         $defaultInput = [
             'id' => md5(uniqid()),
