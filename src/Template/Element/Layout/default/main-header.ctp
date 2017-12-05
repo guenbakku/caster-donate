@@ -73,20 +73,27 @@
                         <?= $this->cell('MultipleSelect', [
                             $this,
                             'tranport' => [
-                                'read' => $this->Url->build('/api/v1/tags/get-by-name'),
-                                'jump' => ''
+                                'read' => $this->Url->build('/api/v1/search/get-by-name'),
+                                'jump' => true
                             ],
                             'input' => [
-                                // 'value' => $this->Auth->user('profile.caster_tags'),
                                 'name' => 'caster_tags',
                                 'class' => 'form-control',
                                 'label' => false,
                             ],
+                            'select2Option' => [
+                                'placeholder'=> __('Tìm kiếm'),
+                                'language' => 'vi',
+                                'minimumInputLength' => 1,
+                            ],
+                            'resultLayout' => [
+                                'templateResult' => 'Select2MyResultFormat',
+                                'templateSelection' => 'formatRepoSelection'
+                            ],
                         ]) ?>
-                        <a href=""><i class="fa fa-search"></i></a> 
+                        <a href=""><i class="fa fa-search"></i></a>
                     </div>
                 </li>
-
                 <?php 
                     if (empty($this->Auth->user())) {
                         echo $this->cell('GuestMenu');
@@ -95,7 +102,6 @@
                         echo $this->cell('MemberMenu');
                     }
                 ?>
-                
                 <!-- /.dropdown -->
             </ul>
         </div>

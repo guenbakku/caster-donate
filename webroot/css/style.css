@@ -133,10 +133,9 @@ input.k-textbox {
 .app-search .select2-container--focus .select2-selection{
     width: 300px !important;
 }
-.app-search .select2-container--default .select2-container--focus .select2-selection--multiple{
-    
+.select2-container--default .select2-results>.select2-results__options {
+    overflow-x: hidden;
 }
-
 
 
 
@@ -155,3 +154,18 @@ input.k-textbox {
 
 .miw-100 {min-width: 100px} .miw-150 {min-width:150px}
 .w10p{width: 10%} .w15p{width: 15%} .w20p{width: 20%}
+
+/* Custom select2's result */
+.select2-result-repository__avatar {
+    float: left;
+    width: 60px;
+    margin-right: 10px;
+}
+.select2-result-repository__avatar img {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+}
+.select2-result-repository__meta {
+    margin-left: 70px;
+}
