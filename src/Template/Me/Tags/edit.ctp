@@ -19,7 +19,13 @@
                 'name' => 'caster_tags',
                 'class' => 'form-control',
                 'label' => false,
-            ]
+            ],
+            'select2Option' =>[
+                'minimumInputLength' => 2,
+                'tags' => true, // Enable dynamic creation
+                'language' => 'vi',
+                'tokenSeparators' => [','],
+            ],
         ]) ?> 
 
         <?= $this->Form->button( __('Gửi'),[

@@ -6,12 +6,12 @@ use Cake\Core\Configure;
 
 class MultipleSelectCell extends Cell
 {
-    public function display($rootView, $transport, $input) 
+    public function display($rootView, $transport, $input, $select2Option = [], $resultLayout = []) 
     {
         $defaultTransport = [
-            'read' => null,
-            'preSelected' => null,
-            'jump' => null,
+            'read' => null,//nguồn tìm kiếm
+            'preSelected' => null,//những select đã được chọn từ trước
+            'jump' => null,//click vào kết quả tìm kiếm để chuyển trang
         ];
         $defaultInput = [
             'id' => md5(uniqid()),
@@ -20,10 +20,17 @@ class MultipleSelectCell extends Cell
             'class' => null,
             'label' => false,
         ];
+        $defaultSelect2Option = [];
+        $defaultResultLayout = [
+            'templateResult' => null,
+            'templateSelection' => null
+        ];
         
         $transport = array_merge($defaultTransport, $transport);
         $input = array_merge($defaultInput, $input);
+        $select2Option = array_merge($defaultSelect2Option, $select2Option);
+        $resultLayout = array_merge($defaultResultLayout, $resultLayout);
 
-        $this->set(compact('input', 'transport', 'rootView'));
+        $this->set(compact('input', 'transport', 'rootView', 'select2Option', 'resultLayout'));
     }
 }

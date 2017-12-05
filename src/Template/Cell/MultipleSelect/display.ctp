@@ -13,60 +13,52 @@ $rootView->append('script');
     (function ($) {
         var elemId = '<?= $input['id'] ?>';
         var transport = <?= json_encode($transport) ?>;
+        var select2Option= <?= json_encode($select2Option) ?>;
+        var resultLayout= <?= json_encode($resultLayout) ?>;
         
         var multipleSelect = $('#'+elemId);
-
-        <?php if($transport['jump'] != null)//để code php để bỏ những đoạn code thừa thải cho client
+        <?php 
+        if($transport['jump'] != null)//để if trong code php để bỏ những đoạn code thừa thải cho client
         {?>
-            multipleSelect.select2({
-                ajax: {
-                    url: transport['read'],
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function (data) {
-                        return {results: data};
-                    },
-                },
-                maximumSelectionLength: 1
-            });
             multipleSelect.on("select2:selecting", function(e) { 
                 // location.href = 'http://www.vimirai.com';
-            });
-            
+            });            
         <?php
+        }?>
+        var ajaxOption =    {
+            ajax: {
+                url: transport['read'],
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    // Tranforms the top-level key of the response object from 'items' to 'results'
+                    return {results: data};
+                },
+            },
+            createTag: function (params) {
+                var term = $.trim(params.term);
+                if (term === '') {
+                    return null;
+                }
+                return {
+                    id: term,
+                    text: term,
+                }
+            },
         }
-        else
-        {?>
-            // Configure select2
-            multipleSelect.select2({
-                ajax: {
-                    url: transport['read'],
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function (data) {
-                        // Tranforms the top-level key of the response object from 'items' to 'results'
-                        return {results: data};
-                    },
+        multipleSelect.select2(
+            Object.assign(ajaxOption,{
+                escapeMarkup: function (markup) { return markup; }, // let custom formatter work
+                <?php
+                foreach($resultLayout as $key => $value)
+                {
+                    echo ($value != null) ? "{$key}:{$value}," : '';
+                }
+                ?>
                 },
-                createTag: function (params) {
-                    var term = $.trim(params.term);
-
-                    if (term === '') {
-                        return null;
-                    }
-                    
-                    return {
-                        id: term,
-                        text: term,
-                    }
-                },
-                minimumInputLength: 2,
-                tags: true, // Enable dynamic creation
-                tokenSeparators: [','],
-                language: 'vi',
-            });
-        <?php } ?>
-        
+                select2Option
+            )
+        );
 
         // Retrieve pre-selected values
         <?php if($transport['preSelected'] != null)
@@ -91,7 +83,7 @@ $rootView->append('script');
             });
         <?php } ?>
     })(jQuery);
-
+    
 </script>
                 
 <?php $rootView->end() ?>
