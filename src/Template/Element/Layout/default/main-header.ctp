@@ -88,7 +88,6 @@
                             ],
                             'resultLayout' => [
                                 'templateResult' => 'Select2MyResultFormat',
-                                'templateSelection' => 'formatRepoSelection'
                             ],
                         ]) ?>
                         <a href=""><i class="fa fa-search"></i></a>

@@ -8,6 +8,9 @@ $collection = $collection->map(function ($val, $key) {
         'lastname' => $val->lastname,
         'firstname' => $val->firstname,
         'avatar' => $this->Html->image($val->avatar),
+        // 'facebook' => json_encode($val),
+        'facebook' => $val->facebook,
+        'fullname' => $val->fullname,
     ];
 });
 

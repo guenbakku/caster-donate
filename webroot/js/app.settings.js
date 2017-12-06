@@ -1,25 +1,37 @@
 'use strict';
 function Select2MyResultFormat (repo) {
-    console.log(JSON.stringify(repo));
     if (repo.loading) {
         return repo.text;
     }
+    var typing_text = $(".select2-search__field").val();
 
-    var markup = "<div class='select2-result-repository clearfix'>" +
-        "<div class='select2-result-repository__avatar'>"+ repo.avatar +"</div>" +
-        "<div class='select2-result-repository__meta'>" +
-        "<div class='select2-result-repository__title'>" + repo.nickname + "</div>";
+    var markup = "<div class='clearfix'>" +
+        "<div class='select2-result-avatar'>"+ repo.avatar +"</div>" +
+        "<div class='select2-result-meta'>" +
+        "<div class='select2-result-nickname'>" + boldingKeyword(typing_text, repo.nickname) + "</div>";
+    
+    var div_fullname = '';
+    if($.trim(repo.fullname).length > 0)
+    {
+        var div_fullname = "<div><i class='fa fa-facebook'></i> " + boldingKeyword(typing_text, repo.fullname) + "</div>";
+    }
 
-    markup += "<div class='select2-result-repository__statistics'>" +
-        "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> Forks</div>" +
-        "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> Stars</div>" +
-        "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> Watchers</div>" +
-    "</div>" +
+    var div_facebook = '';
+    if($.trim(repo.facebook).length > 0)
+    {
+        var div_facebook = "<div><i class='fa fa-facebook'></i> " + boldingKeyword(typing_text, repo.facebook) + "</div>";
+    }
+    
+    markup += "<div class='select2-result-statistics'>" + div_fullname + div_facebook +  "</div>" +
     "</div></div>";
 
     return markup;
 }
 
-function formatRepoSelection (repo) {
-    return repo.full_name || repo.text;
+function boldingKeyword(key,text)
+{
+    /* 'i' : không phân biệt chữ hoa chữ thường
+    xem thêm tại https://www.w3schools.com/jsref/jsref_obj_regexp.asp
+    */
+    return text.replace(new RegExp(key,'i'), '<strong>$&</strong>');
 }

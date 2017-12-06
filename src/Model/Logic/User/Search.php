@@ -16,11 +16,18 @@ class Search
     {
         $users = $this->profilesTb->find()
             ->where(['Profiles.nickname LIKE' => '%'.$keyword.'%'])
-            ->group('Profiles.nickname') // Select unique tag name
+            ->orwhere(['Profiles.firstname LIKE' => '%'.$keyword.'%'])
+            ->orwhere(['Profiles.lastname LIKE' => '%'.$keyword.'%'])
+            ->group('Profiles.nickname')
+            ->contain(['SocialProviders', 'CasterTags'])
             ->all();
+
         foreach($users as $user){
             $user['avatar'] = $user->get('avatar_url');
+            $user['facebook'] = $user->get('facebook');
+            $user['fullname'] = $user->get('fullname');
         }
+
         return $users;    
     }
 }

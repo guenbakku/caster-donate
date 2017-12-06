@@ -29,4 +29,38 @@ class Profile extends Entity
             return Configure::read('System.Urls.default_avatar');
         }
     }
+
+    protected function _getFullname()
+    {
+        $firstname = $this->_properties['firstname'];
+        $lastname = $this->_properties['lastname'];
+        $fullname = '';
+        if(!empty($firstname)) {
+            $fullname .= $firstname. ' ';
+        }
+        if(!empty($lastname)) {
+            $fullname .= $lastname;
+        }
+        return $fullname;
+    }
+
+    protected function _getFacebook()
+    {
+        $social_providers = $this->_properties['social_providers'];
+        if (!empty($social_providers)) {
+            /*
+                1) xét công khai hay không
+                2) bỏ link https://facebook.com/
+                3) 
+            */
+            return "Chưa xong - src\Model\Entity\Profile.php";
+        }else{
+            
+        }
+    }
+
+    protected function _getZalo()
+    {
+
+    }
 }
