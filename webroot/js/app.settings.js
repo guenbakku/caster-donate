@@ -9,12 +9,13 @@ function Select2MyResultFormat (repo) {
     {
         repo.fullname = " - " + repo.fullname;
     }
-    var markup = "<div class='clearfix'>" +
+    var markup = "<a href='"+ repo.jumplink +"'><div class='clearfix' style='padding: 10px;width: 100%;'>" +
         "<div class='select2-result-avatar'>"+ repo.avatar +"</div>" +
         "<div class='select2-result-meta'>" +
-        "<div class='select2-result-nickname'>" + boldingKeyword(typing_text, repo.nickname) + boldingKeyword(typing_text, repo.fullname) + "</div>";
-
-    
+        "<div class='select2-result-nickname'><u>" + 
+            boldingKeyword(typing_text, repo.nickname) + 
+            boldingKeyword(typing_text, repo.fullname) + 
+        "</u></div>";
 
     var div_facebook = '';
     if($.trim(repo.facebook).length > 0)
@@ -23,7 +24,7 @@ function Select2MyResultFormat (repo) {
     }
     
     markup += "<div class='select2-result-statistics'>"  + div_facebook +  "</div>" +
-    "</div></div>";
+    "</div></div></a>";
 
     return markup;
 }

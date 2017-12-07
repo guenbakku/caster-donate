@@ -18,10 +18,11 @@ $rootView->append('script');
         
         var multipleSelect = $('#'+elemId);
         <?php 
-        if($transport['jump'] != null)//để if trong code php để bỏ những đoạn code thừa thải cho client
+        if($transport['jump'] != null)
         {?>
             multipleSelect.on("select2:selecting", function(e) { 
-                // location.href = 'http://www.vimirai.com';
+                // // location.href = 'http://www.vimirai.com';
+                // console.log( e.params);
             });            
         <?php
         }?>
