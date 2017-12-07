@@ -5,16 +5,16 @@ function Select2MyResultFormat (repo) {
     }
     var typing_text = $(".select2-search__field").val();
 
+    if($.trim(repo.fullname).length > 0)
+    {
+        repo.fullname = " - " + repo.fullname;
+    }
     var markup = "<div class='clearfix'>" +
         "<div class='select2-result-avatar'>"+ repo.avatar +"</div>" +
         "<div class='select2-result-meta'>" +
-        "<div class='select2-result-nickname'>" + boldingKeyword(typing_text, repo.nickname) + "</div>";
+        "<div class='select2-result-nickname'>" + boldingKeyword(typing_text, repo.nickname) + boldingKeyword(typing_text, repo.fullname) + "</div>";
+
     
-    var div_fullname = '';
-    if($.trim(repo.fullname).length > 0)
-    {
-        var div_fullname = "<div><i class='fa fa-facebook'></i> " + boldingKeyword(typing_text, repo.fullname) + "</div>";
-    }
 
     var div_facebook = '';
     if($.trim(repo.facebook).length > 0)
@@ -22,7 +22,7 @@ function Select2MyResultFormat (repo) {
         var div_facebook = "<div><i class='fa fa-facebook'></i> " + boldingKeyword(typing_text, repo.facebook) + "</div>";
     }
     
-    markup += "<div class='select2-result-statistics'>" + div_fullname + div_facebook +  "</div>" +
+    markup += "<div class='select2-result-statistics'>"  + div_facebook +  "</div>" +
     "</div></div>";
 
     return markup;
