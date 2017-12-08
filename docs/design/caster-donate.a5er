@@ -52,6 +52,8 @@ Fields1=user_id
 Fields2=user_id
 Cardinarity1=
 Cardinarity2=
+Position="THANH VIEN",0,500,9500,5275,R,R
+Position="SCHEDULE",0,500,9500,2158,R,R
 Position="THIET LAP THONG BAO DONATE",0,1993,8007,2221,R,R
 Dependence=0
 Caption=
@@ -191,11 +193,11 @@ Page=THIET LAP THONG BAO DONATE
 Left=1750
 Top=1350
 Field=" Khóa chính của bảng","id","char(36)","NOT NULL",0,"","",$FFFFFFFF,""
-Field="Hiệu ứng","effect","char(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Hiệu ứng","effect_name","char(36)","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171208193616
+ModifiedDateTime=20171208215116
 Position="THIET LAP THONG BAO DONATE",1750,1350,714,85
 
 [Entity]
@@ -213,15 +215,15 @@ Field="Đối tượng 1","target1","varchar(128)",,,"","",$FFFFFFFF,""
 Field="Thông điệp thông báo 2","message2","varchar(128)",,,"","",$FFFFFFFF,""
 Field="Đối tượng 2","target2","varchar(128)",,,"","",$FFFFFFFF,""
 Field="Thông điệp thông báo 3","message3","varchar(128)",,,"","",$FFFFFFFF,""
-Field="Id âm thanh","audio_id","char(36)",,,"","",$FFFFFFFF,""
-Field="Id hình ảnh","image_id","char(36)",,,"","",$FFFFFFFF,""
-Field=" Hiệu ứng hiển thị","effect_in","char(36)",,,"","",$FFFFFFFF,""
-Field="Hiệu ứng biến mất","effect_out","char(36)",,,"","",$FFFFFFFF,""
+Field="Id âm thanh","audio_id","char(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Id hình ảnh","image_id","char(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field=" Hiệu ứng hiển thị","effect_in","char(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Hiệu ứng biến mất","effect_out","char(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field=" Thời gian hiển thị","display_time","int(11)",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171208203442
+ModifiedDateTime=20171208215101
 Position="THIET LAP THONG BAO DONATE",250,1050,838,520
 
 [Relation]
