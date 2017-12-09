@@ -44,6 +44,27 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
+Entity1=audio_resources
+Entity2=setting_alert_donates
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=audio_id
+Cardinarity1=
+Cardinarity2=
+Position="THIET LAP THONG BAO DONATE",0,7927,2073,1592,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20171209102341
+LineMode=0
+Bar1=793
+Bar2=207
+Bar3=159
+TermPos1=R
+TermPos2=R
+
+[Relation]
 Entity1=profiles
 Entity2=setting_alert_donates
 RelationType1=2
@@ -126,27 +147,6 @@ LineMode=0
 Bar1=109
 Bar2=438
 Bar3=327
-TermPos1=R
-TermPos2=R
-
-[Relation]
-Entity1=setting_alert_donates
-Entity2=audio_resources
-RelationType1=3
-RelationType2=2
-Fields1=audio_id
-Fields2=id
-Cardinarity1=
-Cardinarity2=
-Position="THIET LAP THONG BAO DONATE",0,1631,4588,5618,R,R
-Dependence=0
-Caption=
-PName=
-ModifiedDateTime=20171208202644
-LineMode=0
-Bar1=163
-Bar2=459
-Bar3=562
 TermPos1=R
 TermPos2=R
 
@@ -568,7 +568,7 @@ Cardinarity1=
 Cardinarity2=
 Position="THANH VIEN",0,4113,6027,3380,R,R
 Position="SCHEDULE",0,4646,666,7654,R,R
-Position="THIET LAP THONG BAO DONATE",0,9500,500,9500,R,R
+Position="THIET LAP THONG BAO DONATE",0,8324,500,9500,R,R
 Dependence=0
 Caption=
 PName=
@@ -591,7 +591,7 @@ Cardinarity1=
 Cardinarity2=
 Position="THANH VIEN",0,3754,6246,3366,R,R
 Position="SCHEDULE",0,6248,2914,7654,R,R
-Position="THIET LAP THONG BAO DONATE",0,9500,500,9500,R,R
+Position="THIET LAP THONG BAO DONATE",0,1684,500,9500,R,R
 Dependence=0
 Caption=
 PName=
