@@ -7,9 +7,6 @@ $rootView->append('script');
 ?>
 
 <script type="text/javascript">
-    function jumptolink (state) {
-        alert("sfd");
-    };
     (function ($) {
         var elemId = '<?= $input['id'] ?>';
         var transport = <?= json_encode($transport) ?>;
@@ -21,8 +18,6 @@ $rootView->append('script');
         if($transport['jump'] != null)
         {?>
             multipleSelect.on("select2:selecting", function(e) { 
-                // // location.href = 'http://www.vimirai.com';
-                // console.log( e.params);
             });            
         <?php
         }?>
