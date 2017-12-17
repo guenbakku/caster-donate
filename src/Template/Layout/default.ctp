@@ -16,11 +16,11 @@
     <?= $this->Html->css('/packages/sidebar-nav/dist/sidebar-nav.min.css') ?>
     <?= $this->Html->css('/packages/toast-master/css/jquery.toast.css') ?>
     <?= $this->Html->css('/packages/dropify/dist/css/dropify.min.css') ?>
+    <?= $this->fetch('css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/animate.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/style.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/colors/blue-dark.css', ['id' => 'theme']) ?>
     <?= $this->Html->css('style.css')?>
-    <?= $this->fetch('css') ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
