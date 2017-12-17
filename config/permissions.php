@@ -54,5 +54,16 @@ return [
                 return !empty($user);
             }
         ],
+        //
+        [
+            'role' => '*',
+            'plugin' => false,
+            'prefix' => false,
+            'controller' => 'ReAuthenticate',
+            'action' => '*',
+            'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
+                return !empty($user);
+            }
+        ],
     ]
 ];
