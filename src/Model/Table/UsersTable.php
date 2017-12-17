@@ -13,4 +13,17 @@ class UsersTable extends \CakeDC\Users\Model\Table\UsersTable
 
         $this->hasOne('Profiles');
     }
+
+    public function validationEmail(Validator $validator)
+    {
+        $validator
+            ->add('email', [
+                'valid' => [
+                    'rule' => 'email'
+                ]
+            ])
+            ->notEmpty('email');
+
+        return $validator;
+    }
 }

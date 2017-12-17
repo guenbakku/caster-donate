@@ -4,21 +4,10 @@
         'type' => 'put',
         'class' => 'form-horizontal',
     ]) ?>
-        <?= $this->Form->input('password', [
+        <?= $this->Form->input('email', [
             'class' => 'form-control',
-            'type' => 'password',
             'label' => [
-                'text' => __d('CakeDC/Users', 'New password'),
-                'class' => 'required',
-            ],
-            'required' => true,
-        ]) ?>
-
-        <?= $this->Form->input('password_confirm', [
-            'class' => 'form-control',
-            'type' => 'password',
-            'label' => [
-                'text' => __d('CakeDC/Users', 'Confirm password'),
+                'text' => __('Địa chỉ email'),
                 'class' => 'required',
             ],
             'required' => true,

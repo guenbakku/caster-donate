@@ -30,9 +30,9 @@ class ProfileController extends AppController
                     Configure::read('Events.App_AfterEditProfile'), 
                     ['profile' => $profile]
                 );
-                $this->Flash->success(__('Thay đổi thông tin cá nhân thành công.'));
+                $this->Flash->success(__('Thay đổi thông tin cá nhân thành công'));
             } else {
-                $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập.'));
+                $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập'));
             }
         } else {
             $profile = $Profile->get($user_id);

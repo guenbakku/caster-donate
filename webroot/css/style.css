@@ -189,3 +189,4 @@ input.k-textbox {
 .miw-100 {min-width: 100px} .miw-150 {min-width:150px}
 .w10p{width: 10%} .w15p{width: 15%} .w20p{width: 20%}
 
+.required:after { content:" *"; color: red}
