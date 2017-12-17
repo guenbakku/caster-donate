@@ -371,5 +371,13 @@ return [
             'root' => ROOT.DS,
         ],
         'uses' => 'default',
-    ]
+    ],
+
+    /**
+     * Config for ReAuthenticate
+     */
+    'ReAuthenticate' => [
+        // The time in seconds the reAuthenticate session should be valid for
+        'timeout' => 900,
+    ],
 ];

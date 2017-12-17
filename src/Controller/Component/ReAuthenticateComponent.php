@@ -21,11 +21,8 @@ class ReAuthenticateComponent extends Component
             'controller' => 'ReAuthenticate',
             'action' => 'confirm',
         ],
-        'session' => [
-            'key' => 'Reauthenticate',
-            'timeout' => 1800, // seconds
-        ],
         'keys' => [
+            'session' => 'ReAuthenticate',
             'redirect' => 'redirect',
             'sessionExpires' => 'expires',
         ],
@@ -39,6 +36,9 @@ class ReAuthenticateComponent extends Component
      */
     public function startup(Event $event)
     {
+        $config = Configure::read('ReAuthenticate');
+        $this->setConfig($config);
+
         if (!$this->isBindingAction()) {
             return true;
         }
@@ -66,7 +66,7 @@ class ReAuthenticateComponent extends Component
         $Controller = $this->getController();
         $expires = $Controller->request->session()->read(
             implode('.', [
-                $this->getConfig('session.key'),
+                $this->getConfig('keys.session'),
                 $this->getConfig('keys.sessionExpires')
             ])
         );
@@ -98,14 +98,14 @@ class ReAuthenticateComponent extends Component
      */
     public function setSession()
     {
-        $sessionKey = $this->getConfig('session.key');
-        $timeout = $this->getConfig('session.timeout');
+        $sessionKey = $this->getConfig('keys.session');
+        $timeout = $this->getConfig('timeout');
 
         $expires = Time::now();
         $expires->add(new \DateInterval("PT{$timeout}S"));
-        $this->getController()->session()->write(
+        $this->getController()->request->session()->write(
             $sessionKey, 
-            [$this->ReAuthenticate->getConfig('keys.sessionExpires') => $expires]
+            [$this->getConfig('keys.sessionExpires') => $expires]
         );
     }
 }

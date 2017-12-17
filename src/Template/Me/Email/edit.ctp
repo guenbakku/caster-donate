@@ -4,13 +4,6 @@
         'type' => 'put',
         'class' => 'form-horizontal',
     ]) ?>
-        <?= $this->Form->input('current_password', [
-            'class' => 'form-control',
-            'type' => 'password',
-            'label' => __d('CakeDC/Users', 'Current password'),
-            'required' => true,
-        ]) ?>
-
         <?= $this->Form->input('password', [
             'class' => 'form-control',
             'type' => 'password',

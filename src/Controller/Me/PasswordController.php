@@ -14,6 +14,14 @@ class PasswordController extends AppController
 {
     use CustomUsersTableTrait;
 
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('ReAuthenticate', [
+            'bindActions' => ['edit'],
+        ]);
+    }
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -28,9 +36,6 @@ class PasswordController extends AppController
         if ($this->request->is('put')) {
             try {
                 $validator = $this->getUsersTable()->validationPasswordConfirm(new Validator());
-                if (!empty($id)) {
-                    $validator = $this->getUsersTable()->validationCurrentPassword($validator);
-                }
                 $user = $this->getUsersTable()->patchEntity(
                     $user,
                     $this->request->getData(),
@@ -42,6 +47,7 @@ class PasswordController extends AppController
                     $user = $this->getUsersTable()->changePassword($user);
                     if ($user) {
                         $this->Flash->success(__d('CakeDC/Users', 'Password has been changed successfully'));
+                        $this->redirect($this->request->here());
                     } else {
                         $this->Flash->error(__d('CakeDC/Users', 'Password could not be changed'));
                     }
