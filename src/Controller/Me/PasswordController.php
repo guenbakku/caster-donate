@@ -47,7 +47,6 @@ class PasswordController extends AppController
                     $user = $this->getUsersTable()->changePassword($user);
                     if ($user) {
                         $this->Flash->success(__d('CakeDC/Users', 'Password has been changed successfully'));
-                        $this->redirect($this->request->here());
                     } else {
                         $this->Flash->error(__d('CakeDC/Users', 'Password could not be changed'));
                     }

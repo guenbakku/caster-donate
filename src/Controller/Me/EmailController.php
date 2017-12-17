@@ -54,8 +54,12 @@ class EmailController extends AppController
                     if ($result === false) {
                         throw new ValidateErrorException();
                     }
+                    // Trigger event after edited profile
+                    $this->dispatchEvent(
+                        Configure::read('Events.App_AfterEditEmail'), 
+                        ['user' => $user]
+                    );
                     $this->Flash->success(__('Thay đổi địa chỉ email thành công'));
-                    $this->redirect($this->request->here());
                 }
             } catch (ValidateErrorException $e) {
                 $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập'));

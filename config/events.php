@@ -8,5 +8,6 @@
 return [
     'Events' => [
         'App_AfterEditProfile' => 'App_AfterEditProfile',
+        'App_AfterEditEmail' => 'App_AfterEditEmail',
     ],
 ];

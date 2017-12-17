@@ -10,10 +10,11 @@ class UpdateUserListener implements EventListenerInterface
 {
     public function implementedEvents() {
         return [
-            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateLoginSession',
-            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateLoginSession',
+            UsersAuthComponent::EVENT_AFTER_LOGIN => 'updateLoginSessionProfile',
+            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'updateLoginSessionProfile',
             UsersAuthComponent::EVENT_AFTER_REGISTER => 'fillSubTablesAfterUserRegister',
-            Configure::read('Events.App_AfterEditProfile') => 'updateLoginSession',
+            Configure::read('Events.App_AfterEditProfile') => 'updateLoginSessionProfile',
+            Configure::read('Events.App_AfterEditEmail') => 'updateLoginSessionUser',
         ];
     }
 
@@ -30,7 +31,7 @@ class UpdateUserListener implements EventListenerInterface
         $profilesTb->save($profile);
     }
 
-    public function updateLoginSession($event)
+    public function updateLoginSessionProfile($event)
     {
         $Controller = $event->getSubject();
         $user = $Controller->Auth->user();
@@ -47,6 +48,22 @@ class UpdateUserListener implements EventListenerInterface
                 'birthday' => $entity->birthday,
                 'location' => $entity->location,
             ];
+            $Controller->Auth->setUser($user);
+        }
+    }
+
+    public function updateLoginSessionUser($event)
+    {
+        $Controller = $event->getSubject();
+        $user = $Controller->Auth->user();
+        
+        if ($user) {
+            $usersTb = TableRegistry::get('Users');
+            $entity = $usersTb->findById($user['id'])
+                ->contain([])
+                ->first();
+            
+            $user = array_merge($user, $entity->toArray());
             $Controller->Auth->setUser($user);
         }
     }
