@@ -7,14 +7,20 @@
         <?= $this->Form->input('password', [
             'class' => 'form-control',
             'type' => 'password',
-            'label' => __d('CakeDC/Users', 'New password'),
+            'label' => [
+                'text' => __d('CakeDC/Users', 'New password'),
+                'class' => 'required',
+            ],
             'required' => true,
         ]) ?>
 
         <?= $this->Form->input('password_confirm', [
             'class' => 'form-control',
             'type' => 'password',
-            'label' => __d('CakeDC/Users', 'Confirm password'),
+            'label' => [
+                'text' => __d('CakeDC/Users', 'Confirm password'),
+                'class' => 'required',
+            ],
             'required' => true,
         ]) ?>
 

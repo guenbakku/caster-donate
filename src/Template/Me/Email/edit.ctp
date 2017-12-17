@@ -6,7 +6,10 @@
     ]) ?>
         <?= $this->Form->input('email', [
             'class' => 'form-control',
-            'label' => __('Địa chỉ email'),
+            'label' => [
+                'text' => __('Địa chỉ email'),
+                'class' => 'required',
+            ],
             'required' => true,
         ]) ?>
 
