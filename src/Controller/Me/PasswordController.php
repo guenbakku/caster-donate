@@ -42,7 +42,7 @@ class PasswordController extends AppController
                     ['validate' => $validator]
                 );
                 if ($user->errors()) {
-                    $this->Flash->error(__d('CakeDC/Users', 'Password could not be changed'));
+                    $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập'));
                 } else {
                     $user = $this->getUsersTable()->changePassword($user);
                     if ($user) {

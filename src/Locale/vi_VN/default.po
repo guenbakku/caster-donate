@@ -31,3 +31,6 @@ msgstr "Quay lại"
 
 msgid "Submit"
 msgstr "Gửi"
+
+msgid "The provided value is invalid"
+msgstr "Thông tin nhập vào không hợp lệ"

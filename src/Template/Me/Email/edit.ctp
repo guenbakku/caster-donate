@@ -1,20 +1,12 @@
 <div class="white-box">
     <?php $this->Form->setTemplates($FormTemplates['input-short']);?>
-    <?= $this->Form->create($user=null, [
+    <?= $this->Form->create($user, [
         'type' => 'put',
         'class' => 'form-horizontal',
     ]) ?>
-        <?= $this->Form->input('password', [
+        <?= $this->Form->input('email', [
             'class' => 'form-control',
-            'type' => 'password',
-            'label' => __d('CakeDC/Users', 'New password'),
-            'required' => true,
-        ]) ?>
-
-        <?= $this->Form->input('password_confirm', [
-            'class' => 'form-control',
-            'type' => 'password',
-            'label' => __d('CakeDC/Users', 'Confirm password'),
+            'label' => __('Địa chỉ email'),
             'required' => true,
         ]) ?>
 
