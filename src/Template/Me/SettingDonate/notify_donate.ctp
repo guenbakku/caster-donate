@@ -42,25 +42,6 @@ $this->append("script");
     $(".gradient-colorpicker").asColorPicker({
         mode: 'gradient'
     });
-    
-    function initAudio(){
-        var audio, dir, ext, mylist;
-        dir = "audio/";
-        ext = ".mp3";
-        // Audio Object
-        audio = new Audio();
-        audio.src = dir+"Jam_On_It"+ext;
-        audio.play();
-        // Event Handling
-        mylist = document.getElementById("mylist");
-        mylist.addEventListener("change", changeTrack);
-        // Functions
-        function changeTrack(event){
-            audio.src = event.target.value;
-            audio.play();
-        }
-    }
-    window.addEventListener("load", initAudio);
 });
 </script>
 <script>
@@ -70,6 +51,7 @@ $this->append("script");
         });
     };
     $(document).ready(function () {
+        var audio = new Audio();
         $('.js--triggerAnimation').click(function (e) {
             e.preventDefault();
             var anim = $('#'+$(this).data('value')).val();
@@ -82,22 +64,53 @@ $this->append("script");
             testAnim(anim,target);
         });
         $('#alert-donate-preview-button').click(function(e){
-            var m1 = $('#message1').html();
-            var m2 = $('#message2').html();
-            var m3 = $('#message3').html();
-            var m4 = $('#message4').html();
-            var t1 = $('#target1').html();
-            var t2 = $('#target2').html();
-            var t3 = $('#target3').html();
+            //cập nhật nội dung text
+            var m1 = replace_message($('#message1').html());
+            var m2 = replace_message($('#message2').html());
+            var m3 = replace_message($('#message3').html());
+            var m4 = replace_message($('#message4').html());
+            var t1 = replace_message($('#target1').html());
+            var t2 = replace_message($('#target2').html());
+            var t3 = replace_message($('#target3').html());
             $('.alert-donate-thank-you')
-                .css('color',$('input.colorpicker').val())
-                .html(m1 + t1 + m2 + t2 + m3 + t3 + m4);
-            $('.alert-donate-message').css('color',$('input.colorpicker').val());
+                .css('color',$('input[name=A]').val())
+                .html(m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4);
+            $('.alert-donate-message')
+                .css('color',$('input[name=B]').val())
+                .html('Chúc bạn có buổi LiveStream vui vẻ.');
+            //cập nhật hình ảnh
+            $('#alert-donate-image').attr('src',$('select.image-picker option:selected').data('img-src'));
+            //cập nhật âm thanh
+            audio.pause();
+            audio.currentTime = 0;
+            audio.src = $("select[name='alert-donate-sound']").find(":selected").val();
+            audio.play();
+            //biểu diễn hiệu ứng
+            $('#alert-donate-box').removeClass().addClass($('#animationValue1').val() + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $(this).removeClass();
+            });
+            setTimeout(
+            function() 
+            {
+                $('#alert-donate-box').delay( 800 ).removeClass().addClass($('#animationValue2').val() + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    audio.pause();
+                    audio.currentTime = 0;
+                });
+            }, $("input[name='alert-donate-time']").val() * 1000);
         });
     });
-
+    function replace_message(text){
+        switch (text){
+            case '[Người ủng hộ]': text = '<strong>Nguyễn Văn A</strong>'; break;
+            case '[Người nhận]': text = '<strong><?=$this->Auth->user('profile.nickname')?></strong>'; break;
+            case '[Số tiền]': text = '<strong>10.000</strong>'; break;
+            case 'Empty': text = ''; break;
+            default: break;
+        }
+        return text;
+    }
     //
-    $("input[name='tch3_22']").TouchSpin({
+    $("input[name='alert-donate-time']").TouchSpin({
         initval: 40
     });
 
@@ -106,7 +119,6 @@ $this->append("script");
 $this->end();
 $this->append("css");
 ?>
-
 <style type="text/css">
 .image_picker_selector{
     text-align: center;
@@ -114,7 +126,6 @@ $this->append("css");
 .thumbnails.image_picker_selector li .thumbnail img {
     height: 70px;
 }
-
 </style>
 <?php
 $this->end();
@@ -124,14 +135,14 @@ $this->end();
         <div class="panel panel-default">
             <div class="panel-heading"><?=__('Xem trước thông báo')?></div>
             <div class="panel-wrapper collapse in">
-                <div class="white-box text-center" id="alert-donate-box">
-                    <img class="alert-donate-image" width="100" height="100" src="https://images.unsplash.com/photo-1473115209096-e0375dd6b3b3?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
-                    <p class="alert-donate-thank-you text-center"></p>
-                    <p class="alert-donate-message text-center"></p>
-                    <!-- 
-                    //
-                    //
-                    -->
+                <div id="alert-donate-box" class="white-box">
+                    <div class="col-sm-12 text-center">
+                        <img id="alert-donate-image" height="100" src="http://placekitten.com/400/150">
+                    </div>
+                    <div class"col-sm-12">
+                        <p class="alert-donate-thank-you text-center">........... </p>
+                        <p class="alert-donate-message text-center">......... </p>
+                    </div>
                 </div>
             </div>
             <div class="panel-footer clearfix">
@@ -281,8 +292,8 @@ $this->end();
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?=__('hoặc sử dụng tài nguyên sẵn có')?></label>
                                 <div class="col-sm-9">
-                                    <select class="form-control my-designed-scrollbar" id="mylist" size="4">
-                                    <option value="https://freemusicarchive.org/file/music/Creative_Commons/Podington_Bear/Piano_IV_Cinematic/Podington_Bear_-_Bittersweet.mp3">Jam On It</option>
+                                    <select class="form-control my-designed-scrollbar" name="alert-donate-sound" size="4">
+                                    <option value="https://freemusicarchive.org/file/music/Creative_Commons/Podington_Bear/Piano_IV_Cinematic/Podington_Bear_-_Bittersweet.mp3" selected>Jam On It</option>
                                     <option value="https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3">Stoker</option>
                                     <option value="https://freemusicarchive.org/file/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3">Skull Fire</option>
                                     <option value="https://freemusicarchive.org/file/music/none_given/Audiobinger/Audiobinger_-_Singles/Audiobinger_-_Sandman.mp3">Scurvy Pirate</option>
@@ -456,13 +467,13 @@ $this->end();
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?=__('Màu chữ thông báo')?></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="colorpicker form-control" value="#ff7676" />
+                                    <input name="A" type="text" class="colorpicker form-control" value="#ff7676" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?=__('Màu chữ lời nhắn')?></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="colorpicker form-control" value="#ffffff" />
+                                    <input name="B" type="text" class="colorpicker form-control" value="#ffffff" />
                                 </div>
                             </div>
                         </section>
@@ -472,8 +483,9 @@ $this->end();
 
                         <section id="section-iconbox-5">
                             <div class="form-group">
-                                <div class="col-sm-3 col-sm-offset-6">
-                                    <input id="tch3_22" type="text" value="10" name="tch3_22" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline"> 
+                                <label class="col-sm-6 control-label"><?=__('Đơn vị:')?> <?=__('giây')?></label>
+                                <div class="col-sm-3">
+                                    <input type="text" value="5" name="alert-donate-time" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline">
                                 </div>
                             </div>
                         </section>
