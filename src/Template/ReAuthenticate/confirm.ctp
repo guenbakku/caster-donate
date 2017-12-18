@@ -6,7 +6,7 @@ $this->Form->templates($FormTemplates['login']);
 <div class="new-login-box">
     <div class="white-box">
         <h3 class="box-title m-b-0"><?=  __('Xác thực') ?></h3>
-        <small><?=__('Vui lòng nhập mật khẩu hiện tại để xác thực')?></small>
+        <small><?=__('Vui lòng nhập mật khẩu hiện tại để tiếp tục')?></small>
         <?= $this->Form->create(null, ['class' => 'form-horizontal new-lg-form']) ?>
             <?= $this->Form->input('current_password', [
                 'required' => true, 
@@ -17,9 +17,13 @@ $this->Form->templates($FormTemplates['login']);
                 'templateVars' => ['glyphicon' => 'lock', 'WrapperDivClass' => 'm-t-20', 'InputDivClass' => 'col-xs-12'],
             ]) ?>
         
-            <?= $this->Form->button(__d('CakeDC/Users', 'Login'), [
+            <?= $this->Form->button(__('Tiếp tục'), [
                 'class' => 'btn btn-info btn-block btn-rounded text-uppercase waves-effect waves-light',
             ]) ?>
+
+            <div class="form-group m-b-0 text-center">
+                <?= $this->Html->link(__('Quay lại trang cá nhân'), '/me', ['class' => 'm-l-5']) ?>
+            </div>
             
         <?= $this->Form->end() ?>
     </div>
