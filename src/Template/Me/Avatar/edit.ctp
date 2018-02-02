@@ -1,7 +1,3 @@
-<?php
-use Cake\Core\Configure;
-?>
-
 <div class="white-box">
     <div class="row">
         <div class="col-sm-3">
