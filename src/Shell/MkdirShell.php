@@ -4,6 +4,7 @@ namespace App\Shell;
 use Cake\Console\Shell;
 use Cake\Core\Configure;
 use Cake\Filesystem\Folder;
+use Cake\Utility\Hash;
 
 /**
  * Mkdir shell command.
@@ -18,19 +19,24 @@ class MkdirShell extends Shell
      */
     public function main()
     {
-        $paths = Configure::read('System.Paths');
+        $paths = Hash::flatten(Configure::read('System.Paths'));
 
         if (empty($paths)) {
-            $this->warn(__('System.Paths is empty. Nothing to do!'));
+            $this->warn(__('System.Paths configuration is empty. Nothing to do.'));
             return;
         }
 
         $folder = new Folder();
         foreach ($paths as $path) {
-            if(!$this->inRootPath($path)) {
-                $this->err(__('NG: {0}  Could not create directory outside ROOT', $path));
+            if (!Folder::isAbsolute($path)) {
+                $path = ROOT.DS.ltrim($path, DS);
             }
-            else if ($folder->create($path)) {
+            else if (!$this->inRootPath($path)) {
+                $this->err(__('NG: {0}  Could not create directory outside ROOT', $path));
+                continue;
+            }
+            
+            if ($folder->create($path)) {
                 $this->success(__('OK: {0}', $path));
             }
             else {
