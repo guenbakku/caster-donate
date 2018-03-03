@@ -98,6 +98,7 @@ Cardinarity1=
 Cardinarity2=
 Position="THANH VIEN",0,2040,7960,3472,R,R
 Position="THONG BAO DONATE",0,1561,8439,2015,R,R
+Position="LICH LIVESTREAM",0,1267,8733,1510,R,R
 Dependence=0
 Caption=
 PName=
@@ -162,14 +163,13 @@ Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thứ tự sắp xếp","order_no","INT(11)",,,"","",$FFFFFFFF,""
-Field="Đường dẫn thư mục","path","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=list
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180303224902
+ModifiedDateTime=20180303232941
 Position="THONG BAO DONATE",2950,900
 
 [Entity]
@@ -182,7 +182,7 @@ Left=2950
 Top=450
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên tài nguyên","filename","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Id thành viên","user_id","CHAR(36)",,,"","nếu null là tài nguyên chung",$FFFFFFFF,""
+Field="Id thành viên","user_id","CHAR(36)",,,"","tài nguyên chung sẽ có user_id là null",$FFFFFFFF,""
 Field="Id loại tài nguyên","resource_type_id","INT(11)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
@@ -190,7 +190,7 @@ EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180303224408
+ModifiedDateTime=20180303235822
 Position="THONG BAO DONATE",2950,450,895,270
 
 [Relation]
@@ -931,7 +931,7 @@ ModifiedDateTime=20171028231318
 Position="THANH VIEN",4100,2350,1037,516
 
 [Comment]
-Comment=■ Phân loại bảng (dựa vào tag):\n● transaction: dữ liệu của table sẽ thay đổi do quá trình hoạt động của hệ thống\n● list: dữ liệu của bảng cố định, không thay đổi do quá trình hoạt động của hệ thống\n\n■ Ghi chú:\n● Cột Id của các bảng bình thường có kiểu là CHAR(36)\n● Cột Id của các bảng chứa list có kiểu là INT(11)\n● Các cột cơ bản của bảng chứa list:\n    id, name, selector, order_no, created, modified
+Comment=■ Phân loại bảng (dựa vào tag):\n● transaction: dữ liệu của table sẽ thay đổi do quá trình hoạt động của hệ thống\n● list: dữ liệu của bảng cố định, không thay đổi do quá trình hoạt động của hệ thống\n\n■ Ghi chú:\n● Cột Id của các bảng bình thường có kiểu là CHAR(36)\n● Cột Id của các bảng chứa list có kiểu là INT(11)\n● Các cột cơ bản của bảng chứa list:\n    id, name, selector, order_no, created, modified\n● Khi tạo migrations script, không cần định nghĩa liên kết khóa ngoại giữa bảng transaction và list. Chỉ định nghĩa liên kết khóa ngoại giữa bảng transaction và transaction
 FontName=Tahoma
 FontBold=0
 FontItalic=0
@@ -944,7 +944,7 @@ Page=THANH VIEN
 Left=0
 Top=-5
 Width=2256
-Height=674
+Height=795
 
 [Entity]
 PName=bank_accounts
