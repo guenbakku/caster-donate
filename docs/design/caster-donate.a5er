@@ -43,6 +43,29 @@ SqlSeparator=0
 ShowTag=1
 ShowCommonAttributes=0
 
+[Comment]
+Comment=Cần đổi tên bảng này sang tên:\ndonation_notification_settings
+FontName=Tahoma
+FontBold=0
+FontItalic=0
+FontUnderline=0
+FontSize=14
+FontColor=$0000FF
+LineColor=$000000
+BkColor=$FFFFFF
+Page=Thong bao donate
+Left=2300
+Top=1700
+Width=928
+Height=166
+
+[Line]
+Page=Thong bao donate
+Left=2038
+Top=1400
+Width=328
+Height=298
+
 [Relation]
 Entity1=resources
 Entity2=users_resources
@@ -219,7 +242,7 @@ Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,"
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171210192058
+ModifiedDateTime=20180303230948
 Position="THONG BAO DONATE",1700,750
 
 [Relation]
