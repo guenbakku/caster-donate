@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateUsersAudioResources extends AbstractMigration
+class CreateUsersResourcesTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,25 +12,25 @@ class CreateUsersAudioResources extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('users_audio_resources', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('users_resources', ['id' => false, 'primary_key' => ['id']]);
         $table
-            ->addColumn('id','uuid',[
+            ->addColumn('id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('user_id','uuid',[
+            ->addColumn('resource_id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('audio_id','uuid',[
+            ->addColumn('user_id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('created','datetime',[
+            ->addColumn('created', 'datetime', [
                 'null' => false,
             ])
-            ->addColumn('modified','datetime',[
+            ->addColumn('modified', 'datetime', [
                 'null' => false,
             ])
+            ->addForeignKey('resource_id', 'resources', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
             ->addForeignKey('user_id', 'users', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
-            ->addForeignKey('audio_id', 'audio_resources', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
             ->create();
     }
 }
