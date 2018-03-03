@@ -61,6 +61,23 @@ Router::scope('/', function (RouteBuilder $routes) {
         ['action' => '((?!users).)*']
     );
 
+    $routes->connect('donate/*', ['controller' => 'Donate', 'action' => 'index']);
+    $routes->connect('donate/perform/*', ['controller' => 'Donate', 'action' => 'perform']);
+
+    $routes->prefix('me', function ($routes) {
+        $routes->redirect('/', [
+            'controller' => 'Statistics', 
+            'action' => 'index'
+        ]);
+    
+        $routes->fallbacks(DashedRoute::class);
+    });
+    
+    $routes->prefix('api/v1', function ($routes) {
+        $routes->extensions(['json']);
+        $routes->fallbacks(DashedRoute::class);
+    });
+
     /**
      * Connect catchall routes for all controllers.
      *
@@ -77,21 +94,6 @@ Router::scope('/', function (RouteBuilder $routes) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
-    $routes->fallbacks(DashedRoute::class);
-});
-Router::connect('/donate/*', ['controller' => 'Donate', 'action' => 'index']);
-Router::connect('/donate/perform/*', ['controller' => 'Donate', 'action' => 'perform']);
-Router::prefix('me', function ($routes) {
-    $routes->redirect('/', [
-        'controller' => 'Statistics', 
-        'action' => 'index'
-    ]);
-
-    $routes->fallbacks(DashedRoute::class);
-});
-
-Router::prefix('api/v1', function ($routes) {
-    $routes->extensions(['json']);
     $routes->fallbacks(DashedRoute::class);
 });
 
