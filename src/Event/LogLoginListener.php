@@ -10,12 +10,12 @@ class LogLoginListener implements EventListenerInterface
 {
     public function implementedEvents() {
         return [
-            UsersAuthComponent::EVENT_AFTER_LOGIN => 'logLogin',
-            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'logLogin',
+            UsersAuthComponent::EVENT_AFTER_LOGIN => 'log',
+            UsersAuthComponent::EVENT_AFTER_COOKIE_LOGIN => 'log',
         ];
     }
 
-    public function logLogin($event)
+    public function log($event)
     {
         $Controller = $event->getSubject();
         $loginLogsTb = TableRegistry::get('LoginLogs');
