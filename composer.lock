@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "05ee6242954d97ccdb75ab1d642049a1",
+    "content-hash": "0d2dc1192f8610746199279adbb65095",
     "packages": [
         {
             "name": "adrienrn/php-mimetyper",
@@ -221,21 +221,21 @@
         },
         {
             "name": "cakedc/users",
-            "version": "dev-develop",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CakeDC/users.git",
-                "reference": "a7a1fb70cb5f21d81276f52e5c43d06e06684e85"
+                "reference": "3fe8d0a1253d4ef8a803710095dfdacc30c24793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CakeDC/users/zipball/a7a1fb70cb5f21d81276f52e5c43d06e06684e85",
-                "reference": "a7a1fb70cb5f21d81276f52e5c43d06e06684e85",
+                "url": "https://api.github.com/repos/CakeDC/users/zipball/3fe8d0a1253d4ef8a803710095dfdacc30c24793",
+                "reference": "3fe8d0a1253d4ef8a803710095dfdacc30c24793",
                 "shasum": ""
             },
             "require": {
                 "cakedc/auth": "^2.0",
-                "cakephp/cakephp": "^3.4.0"
+                "cakephp/cakephp": "^3.5.0"
             },
             "require-dev": {
                 "cakephp/cakephp-codesniffer": "^2.0",
@@ -244,6 +244,7 @@
                 "league/oauth2-google": "@stable",
                 "league/oauth2-instagram": "@stable",
                 "league/oauth2-linkedin": "@stable",
+                "luchianenco/oauth2-amazon": "^1.1",
                 "phpunit/phpunit": "^5.0",
                 "robthree/twofactorauth": "~1.6.0",
                 "satooshi/php-coveralls": "dev-master"
@@ -255,6 +256,7 @@
                 "league/oauth2-google": "Provides Social Authentication with Google+",
                 "league/oauth2-instagram": "Provides Social Authentication with Instagram",
                 "league/oauth2-linkedin": "Provides Social Authentication with LinkedIn",
+                "luchianenco/oauth2-amazon": "Provides Social Authentication with Amazon",
                 "robthree/twofactorauth": "Provides Google Authenticator functionality"
             },
             "type": "cakephp-plugin",
@@ -287,7 +289,7 @@
                 "cakephp",
                 "oauth2"
             ],
-            "time": "2017-09-22T14:12:58+00:00"
+            "time": "2017-12-12T13:35:40+00:00"
         },
         {
             "name": "cakephp/cakephp",
@@ -4350,7 +4352,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "cakedc/users": 20,
         "google/recaptcha": 0,
         "psy/psysh": 0
     },

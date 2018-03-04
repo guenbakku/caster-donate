@@ -10,7 +10,7 @@
         "mobiledetect/mobiledetectlib": "2.*",
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "~1.0",
-        "cakedc/users": "dev-develop",
+        "cakedc/users": "6.0.0",
         "adrienrn/php-mimetyper": "^0.2.0",
         "josegonzalez/cakephp-upload": "^3.7",
         "league/flysystem": "^1.0",
