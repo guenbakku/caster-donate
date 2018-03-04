@@ -17,6 +17,10 @@ class CreateResourcesTable extends AbstractMigration
             ->addColumn('id', 'uuid', [
                 'null' => false,
             ])
+            ->addColumn('name', 'string', [
+                'limit' => 256,
+                'null' => true,
+            ])
             ->addColumn('filename', 'string', [
                 'limit' => 256,
                 'null' => false,

@@ -22,7 +22,7 @@ class ContractStatusesSeed extends AbstractSeed
             [
                 'id' => 1,
                 'name' => 'Đang kiểm tra',
-                'selector' => 'under_review',
+                'selector' => 'checking',
                 'order_no' => 1,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
