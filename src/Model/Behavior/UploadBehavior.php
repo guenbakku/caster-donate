@@ -3,6 +3,7 @@ namespace App\Model\Behavior;
 
 use ArrayObject;
 use Cake\Collection\Collection;
+use Cake\Core\Configure;
 use Cake\ORM\Entity;
 use Cake\ORM\Table;
 use Cake\Utility\Hash;
@@ -157,7 +158,7 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
             'filesystem' => [
                 'adapter' => function () {return Flysystem::getAdapter();},
             ],
-            // A hack to implement removing old file feature
+            // A hack to implement feature that removes old file
             'transformer' =>  function ($table, $entity, $data, $field, $settings) {
                 // Resize image
                 $tmp = $settings['resizer']($data['tmp_name'], $settings['resizeTo']);
@@ -176,23 +177,11 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
                 ];
             },
             'resizer' => function ($path, $resizeTo) {
-                $extension = pathinfo(File::uuidName($path), PATHINFO_EXTENSION);
-                $tmp = tempnam(sys_get_temp_dir(), 'upload') . '.' . $extension;
-
-                $size = new \Imagine\Image\Box(...$resizeTo);
-                $mode = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
-                $imagine = new \Imagine\Gd\Imagine();
-
-                // Save that modified file to our temp file
-                $imagine->open($path)
-                    ->thumbnail($size, $mode)
-                    ->save($tmp);
-
-                return $tmp;
+                return File::resizeImageTo($path, $resizeTo);
             },
             'keepFileOnEdit' => true,
             'keepFilesOnDelete' => true,
-            'resizeTo' => [300, 300],
+            'resizeTo' => Configure::read('System.Dimensions.avatar'),
         ];
     }
 }

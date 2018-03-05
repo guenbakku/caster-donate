@@ -33,6 +33,10 @@ return [
                 'image' => '/resources/img',
                 'audio' => '/resources/audio',
             ]
+        ],
+
+        'Dimensions' => [
+            'avatar' => [300, 300],
         ]
     ],
 ];

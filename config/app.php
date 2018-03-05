@@ -366,11 +366,15 @@ return [
      * More information: https://flysystem.thephpleague.com
      */
     'Flysystem' => [
-        'default' => [
+        'root' => [
             'adapter' => 'Local',
             'root' => ROOT.DS,
         ],
-        'uses' => 'default',
+        'webroot' => [
+            'adapter' => 'Local',
+            'root' => ROOT.DS.'webroot'.DS,
+        ],
+        'uses' => 'root',
     ],
 
     /**

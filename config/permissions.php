@@ -32,7 +32,18 @@ return [
                 return false;
             }
         ],
-        // each user is allowed to access his/her own profile
+        // authenticated user is allowed to access ReAuthenticate Controller
+        [
+            'role' => '*',
+            'plugin' => false,
+            'prefix' => false,
+            'controller' => 'ReAuthenticate',
+            'action' => '*',
+            'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
+                return !empty($user);
+            }
+        ],
+        // authenticated user is allowed to access his/her own profile
         [
             'role' => '*',
             'plugin' => false,
@@ -49,17 +60,6 @@ return [
             'plugin' => false,
             'prefix' => 'api/v1',
             'controller' => '*',
-            'action' => '*',
-            'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
-                return !empty($user);
-            }
-        ],
-        //
-        [
-            'role' => '*',
-            'plugin' => false,
-            'prefix' => false,
-            'controller' => 'ReAuthenticate',
             'action' => '*',
             'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
                 return !empty($user);
