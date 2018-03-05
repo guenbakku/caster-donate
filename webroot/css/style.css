@@ -172,9 +172,6 @@ input.k-textbox {
     background-color: #424a58;
 }
 
-
-
-
 /* Custom myadmin-alert of Ample Admin theme */
 .myadmin-alert-top,
 .myadmin-alert-bottom,
@@ -190,3 +187,8 @@ input.k-textbox {
 .w10p{width: 10%} .w15p{width: 15%} .w20p{width: 20%}
 
 .required:after { content:" *"; color: red}
+
+.social-login a {
+    display: inline-block;
+    margin-bottom: 5px;
+}

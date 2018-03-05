@@ -16,7 +16,9 @@
         "league/flysystem": "^1.0",
         "imagine/imagine": "^0.7.1",
         "google/recaptcha": "@stable",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "league/oauth2-facebook": "@stable",
+        "league/oauth2-google": "@stable"
     },
     "require-dev": {
         "psy/psysh": "@stable",

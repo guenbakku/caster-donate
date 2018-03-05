@@ -27,4 +27,30 @@ class File extends CakeFile
         $new_file_name = implode('.', array_filter([Text::uuid(), $ext]));
         return $new_file_name;
     }
+
+    /**
+     * Resize image to $resizeTo size.
+     *
+     * @param   string: path to input image
+     * @param   string: size [width, height] want to resize to
+     * @return  string: path to output image
+     */
+    public static function resizeImageTo(string $path, array $resizeTo)
+    {
+        $extension = pathinfo(File::uuidName($path), PATHINFO_EXTENSION);
+        $tmp = tempnam(sys_get_temp_dir(), 'upload');
+        unlink($tmp);
+        $tmp = $tmp.'.'.$extension;
+
+        $size = new \Imagine\Image\Box(...$resizeTo);
+        $mode = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
+        $imagine = new \Imagine\Gd\Imagine();
+
+        // Save that modified file to our temp file
+        $imagine->open($path)
+            ->thumbnail($size, $mode)
+            ->save($tmp);
+
+        return $tmp;
+    }
 }

@@ -241,5 +241,6 @@ Plugin::load('Migrations');
  * Event register
  */
 use Cake\Event\EventManager;
-EventManager::instance()->attach(new \App\Event\UpdateUserListener());
-EventManager::instance()->attach(new \App\Event\LogLoginListener());
+EventManager::instance()->attach(new \App\Event\InitProfileListener());
+EventManager::instance()->attach(new \App\Event\UpdateLoginSessionListener());
+EventManager::instance()->attach(new \App\Event\LoginLogListener());

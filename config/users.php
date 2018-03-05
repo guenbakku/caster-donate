@@ -40,7 +40,7 @@ return [
         ],
         'Social' => [
             // enable social login
-            'login' => false,
+            'login' => true,
         ],
         // Avatar placeholder
         'Avatar' => [
@@ -84,5 +84,22 @@ return [
             'controller' => 'Home',
             'action' => 'index',
         ]
+    ],
+
+    'OAuth' => [
+        'providers' => [
+            'facebook' => [
+                'options' => [
+                    'clientId' => env('FACEBOOK_CLIENT_ID', '195322367903151'),
+                    'clientSecret' => env('FACEBOOK_CLIENT_SECRET', 'd93a5973d5d7a75e36723b2e08a5f3c7'),
+                ],
+            ],
+            'google' => [
+                'options' => [
+                    'clientId' => env('GOOGLE_CLIENT_ID', '822481616028-ksobnsmud6l4jm39nnjames0p0j7ms43.apps.googleusercontent.com'),
+                    'clientSecret' => env('GOOGLE_CLIENT_SECRET', '9E0uIaoz_2_g2-TPz8Rj5Cex'),
+                ],
+            ]
+        ],
     ],
 ];
