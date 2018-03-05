@@ -3,7 +3,7 @@ use Cake\Utility\Hash;
 
 // Detect which group is active
 $groupActiveMap = [
-    'account' => ['Profile', 'Avatar', 'Password', 'Tags'],
+    'account' => ['Profile', 'Avatar', 'Email', 'Password', 'Tags'],
     'contract' =>  ['Contract', 'Withdraw'],
     'statistic' => ['Statistics'],
     'setting-donate' => ['SettingDonate']
@@ -51,7 +51,7 @@ $groupActive = $groupActiveMatcher($groupActiveMap);
                 <ul class="nav nav-second-level">
                     <li><a href="/me/profile/edit"><i class="mdi mdi-account-card-details"></i> <span class="hide-menu"><?=__('Thông tin cá nhân')?></span></a></li>
                     <li><a href="/me/avatar/edit"><i class="mdi mdi-account-circle"></i> <span class="hide-menu"><?=__('Ảnh đại diện')?></span></a></li>
-                    <li><a href="/me/email/edit"><i class="mdi mdi-email"></i> <span class="hide-menu"><?=__('Địa chỉ email')?></span></a></li>
+                    <li><a href="/me/email"><i class="mdi mdi-email"></i> <span class="hide-menu"><?=__('Địa chỉ email')?></span></a></li>
                     <li><a href="/me/password/edit"><i class="mdi mdi-lock"></i> <span class="hide-menu"><?=__('Mật khẩu')?></span></a></li>
                     <li><a href="/me/tags/edit"><i class="mdi mdi-bookmark-music"></i> <span class="hide-menu"><?=__('Thể loại live stream')?></span></a></li>
                 </ul>

@@ -29,6 +29,14 @@ class EmailController extends AppController
         $this->ContentHeader->title(__('Địa chỉ email'));
     }
 
+    public function index()
+    {
+        $Table = TableRegistry::get('users');
+        $user_id = $this->Auth->user('id');
+        $user = $Table->findById($user_id)->first();
+        $this->set(compact('user'));
+    }
+
     public function edit()
     {   
         $Table = TableRegistry::get('users');
@@ -60,6 +68,7 @@ class EmailController extends AppController
                         ['user' => $user]
                     );
                     $this->Flash->success(__('Thay đổi địa chỉ email thành công'));
+                    $this->redirect(['action' => 'index']);
                 }
             } catch (ValidateErrorException $e) {
                 $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập'));
