@@ -55,18 +55,6 @@ class CreateProfilesTable extends AbstractMigration
                 'null' => false,
                 'default' => false,
             ])
-            ->addColumn('donate_image', 'string', [
-                'null' => true,
-                'limit' => 128,
-            ])
-            ->addColumn('donate_audio', 'string', [
-                'null' => true,
-                'limit' => 128,
-            ])
-            ->addColumn('donate_link', 'string', [
-                'null' => true,
-                'limit' => 128,
-            ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
             ])
