@@ -42,8 +42,41 @@ $this->append("script");
 });
 </script>
 <script>
+    function test(){
+        var formdatas = new FormData($('#abc')[0]);
+        $.ajax({
+            url: '<?php echo $this->Url->build([
+                'action' => 'add-new-image',
+            ])?>',
+            dataType: 'json',
+            method: 'post',
+            data:  formdatas,
+            contentType: false,
+            processData: false
+        }).done(function(response) {
+                console.log(response);
+                //show result
+                if (response.status == 'OK') {
+                    
+                } else if (response.status == 'FAIL') {
+
+                } else {
+                    //show default message
+                }
+            })
+            .fail(function(jqXHR) {
+                if (jqXHR.status == 403) {
+                    window.location = '/';
+                } else {
+                    console.log(jqXHR);
+
+                }
+            });
+        return false;
+    }
     function testAnim(effect,target) {
-        $('#'+target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+        $(target).finish();
+        $(target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
         });
     };
@@ -53,13 +86,13 @@ $this->append("script");
             e.preventDefault();
             var anim = $('#'+$(this).data('value')).val();
             var target = $(this).data('target');
-            testAnim(anim,target);
+            testAnim(anim,'#' + target);
         });
 
         $('.js--animations').change(function () {
             var anim = $(this).val();
             var target = $(this).data('target');
-            testAnim(anim,target);
+            testAnim(anim,'#' + target);
         });
         $('#alert-donate-preview-button').click(function(e){
             // var group = $('#original-images');
@@ -87,9 +120,7 @@ $this->append("script");
             audio.src = $("select[name='alert-donate-sound']").find(":selected").val();
             //audio.play();
             //biểu diễn hiệu ứng
-            $('#alert-donate-box').removeClass().addClass($('#animationValue1').val() + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $(this).removeClass();
-            });
+            testAnim($('#animationValue1').val(), '#alert-donate-box');
             setTimeout(
             function() 
             {
@@ -199,10 +230,17 @@ $this->end();
                                     <label class="col-sm-3 control-label"><?=__('hoặc sử dụng hình ảnh của bạn')?></label>
                                     <div class="col-sm-9">
 
-                                        <?php $this->Form->setTemplates($FormTemplates['vertical']);?>
-                                        <?= $this->cell('DragDropArea', [$this, 'image']) ?> 
-                                        
-                                        <button class="btn btn-block btn-success" data-toggle="modal" data-target=".bs-example-modal-lg">Thêm hình mới</button>
+                                        <?php $this->Form->setTemplates($FormTemplates['vertical']);
+                                        echo $this->Form->create('setting_alert_donates',array(
+                                            'id'    =>  'abc',
+                                        ));
+                                        echo $this->cell('DragDropArea', [$this, 'image']); 
+                                        echo $this->Form->submit('Thêm hình mới', array(
+                                            'class' => 'form-control btn btn-block btn-success',
+                                            //'onClick' => 'return test()'
+                                        )); 
+                                        echo $this->Form->end();
+                                        ?> 
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +270,7 @@ $this->end();
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('hoặc sử dụng file âm thanh của bạn')?></label>
                                     <div class="col-sm-9">
-
+                            
                                         <?php $this->Form->setTemplates($FormTemplates['vertical']);?>
                                         <?= $this->cell('DragDropArea', [$this, 'audio']) ?> 
 

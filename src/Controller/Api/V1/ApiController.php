@@ -21,7 +21,7 @@ class ApiController extends AppController
         parent::beforeFilter($event);
 
         $this->loadComponent('RequestHandler');
-        $this->eventManager()->off($this->Csrf);
+        // $this->eventManager()->off($this->Csrf);
         $this->viewBuilder()->layout('ajax');
         $this->response->charset('UTF-8');
         $this->response->type('json');

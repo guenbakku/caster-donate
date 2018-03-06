@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateSettingAlertDonates extends AbstractMigration
+class CreateDonationNotificationSettings extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,7 +12,7 @@ class CreateSettingAlertDonates extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('setting_alert_donates', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('donation_notification_settings', ['id' => false, 'primary_key' => ['id']]);
         $table->addColumn('id', 'uuid', [
             'null' => false,
         ]);
