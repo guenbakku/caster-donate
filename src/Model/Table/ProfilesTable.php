@@ -21,6 +21,8 @@ class ProfilesTable extends AppTable
             'bindingKey' => 'user_id',
             'sort' => ['SocialProviders.order_no'],
         ]);
+
+        //Tag
         $this->belongsToMany('CasterTags',[
             'through' => 'UsersCasterTags',
             'foreignKey' => 'user_id',
@@ -30,6 +32,24 @@ class ProfilesTable extends AppTable
         $this->hasMany('UsersCasterTags',[
             'foreignKey' => 'user_id'
         ]);
+
+        //
+        $this->hasOne('DonationNotificationSettings',[
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id'
+        ]);
+
+        //Resource
+        $this->belongsToMany('Resources',[
+            'through' => 'UsersResources',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
+        ]);
+        $this->hasMany('UsersResources',[
+            'foreignKey' => 'user_id'
+        ]);
+
+        //Schedules
         $this->hasMany('Schedules',[
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id'

@@ -15,18 +15,20 @@ class DonationNotificationSettingsTable extends AppTable
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
         ]);
+
         $this->belongsTo('Profiles', [
             'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id', // Bind với cột user_id trên bảng Profiles
+            'bindingKey' => 'user_id', 
         ]);
-        $this->belongsTo('AudioResources',[
-            'foreignKey' => 'audio_id',
+        
+        //Resource
+        $this->belongsToMany('Resources',[
+            'through' => 'UsersResources',
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
         ]);
-        $this->belongsTo('ImageResources',[
-            'foreignKey' => 'image_id',
-        ]);
-        $this->hasOne('TextEffects',[
-            'foreignKey' => 'text_effect_id',
+        $this->hasMany('UsersResources',[
+            'foreignKey' => 'user_id'
         ]);
     }
 
