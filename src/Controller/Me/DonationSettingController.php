@@ -7,7 +7,7 @@ use App\Controller\AppController;
 use App\Model\Logic\User\Profile;
 use App\Model\Logic\User\DonationNotificationSetting;
 
-class DonationNotificationSettingController extends AppController
+class DonationSettingController extends AppController
 
 {
     public function beforeFilter(Event $event)
@@ -21,7 +21,7 @@ class DonationNotificationSettingController extends AppController
         
     }
 
-    public function notifyDonate()
+    public function notify()
     {
         $DonationNotificationSetting = new DonationNotificationSetting();
         $user_id = $this->Auth->user('id');

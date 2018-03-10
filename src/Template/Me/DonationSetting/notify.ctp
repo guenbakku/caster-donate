@@ -42,12 +42,13 @@ $this->append("script");
 });
 </script>
 <script>
-    function test(){
-        var formdatas = new FormData($('#abc')[0]);
+    
+    function test(form){
+        var formdatas  = new FormData(form);
+        alert($(form).attr('action'));
+        alert($(form).find('input[name="_csrfToken"]').val());
         $.ajax({
-            url: '<?php echo $this->Url->build([
-                'action' => 'add-new-image',
-            ])?>',
+            url: $(form).attr('action'),
             dataType: 'json',
             method: 'post',
             data:  formdatas,
@@ -55,23 +56,23 @@ $this->append("script");
             processData: false
         }).done(function(response) {
                 console.log(response);
-                //show result
                 if (response.status == 'OK') {
                     
-                } else if (response.status == 'FAIL') {
+                }else if (response.status == 'FAIL') {
 
-                } else {
-                    //show default message
+                }else {
                 }
             })
-            .fail(function(jqXHR) {
-                if (jqXHR.status == 403) {
-                    window.location = '/';
-                } else {
-                    console.log(jqXHR);
+            // .fail(function(jqXHR) {
+            //     if (jqXHR.status == 403) {
+            //         window.location = '/';
+            //     } else {
+            //         console.log(jqXHR);
 
-                }
-            });
+            //     }
+            // })
+        ;
+        
         return false;
     }
     function testAnim(effect,target) {
@@ -231,13 +232,14 @@ $this->end();
                                     <div class="col-sm-9">
 
                                         <?php $this->Form->setTemplates($FormTemplates['vertical']);
-                                        echo $this->Form->create('setting_alert_donates',array(
-                                            'id'    =>  'abc',
-                                        ));
+                                        echo $this->Form->create($donation_notification_setting,[
+                                            'url' => $this->Url->build('/api/v1/file/upload'),
+                                            'id' => 'upload_image_form'
+                                        ]);
                                         echo $this->cell('DragDropArea', [$this, 'image']); 
                                         echo $this->Form->submit('Thêm hình mới', array(
                                             'class' => 'form-control btn btn-block btn-success',
-                                            //'onClick' => 'return test()'
+                                            'onClick' => 'return test(this.form)'
                                         )); 
                                         echo $this->Form->end();
                                         ?> 

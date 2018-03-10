@@ -90,7 +90,7 @@ $groupActive = $groupActiveMatcher($groupActiveMap);
                     </span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li> <a href="/me/donation-notification-setting/notify-donate"><i class="mdi mdi-bell-ring fa-fw"></i> <span class="hide-menu"><?=__('Thông báo Donate')?></span></a> </li>
+                    <li> <a href="/me/donation-setting/notify"><i class="mdi mdi-bell-ring fa-fw"></i> <span class="hide-menu"><?=__('Thông báo Donate')?></span></a> </li>
                     <li> <a href="javascript::void(0)"><i class="mdi mdi-target fa-fw"></i> <span class="hide-menu"><?=__('Mục tiêu Donate')?></span></a> </li>
                     <li> <a href="javascript::void(0)"><i class="mdi mdi-numeric fa-fw"></i> <span class="hide-menu"><?=__('BXH Donate')?></span></a> </li>
                     <li> <a href="javascript::void(0)"><i class="mdi mdi-nature-people fa-fw"></i> <span class="hide-menu"><?=__('Người Donate gần nhất')?></span></a> </li>
