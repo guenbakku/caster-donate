@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateScheduleEventLabels extends AbstractMigration
+class CreateScheduleEventLabelsTable extends AbstractMigration
 {
     /**
      * Change Method.

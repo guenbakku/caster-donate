@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateDonationNotificationSettings extends AbstractMigration
+class CreateDonationNotificationSettingsTable extends AbstractMigration
 {
     /**
      * Change Method.
