@@ -7,30 +7,9 @@ use Migrations\AbstractSeed;
 class ResourcesSeed extends AbstractSeed
 {
     /**
-     * Run Method.
-     *
-     * Write your database seeder using this method.
-     *
-     * More information on writing seeds is available here:
-     * http://docs.phinx.org/en/latest/seeding.html
-     *
-     * @return void
+     * Bảng `resources` vừa chứa dữ liệu ban đầu của hệ thống, vừa chứa dữ liệu của user đưa lên.
+     * Ngoài ra bảng resources được liên kết khóa ngoại với bảng `users_resources`.
+     * Do đó không thể sử dụng seed script để đưa dữ liệu ban đầu của hệ thống vào bảng này.
+     * Dữ liệu ban đầu của bảng này được đưa vào bằng migration script: `SeedResourcesTable.php`
      */
-    public function run()
-    {
-        $data = [
-            [
-                'id' => 1,
-                'name' => 'Test 1',
-                'filename' => '1.jpg',
-                'resource_type_id' => '1',
-                'created' => date('Y-m-d H:i:s'),
-                'modified' => date('Y-m-d H:i:s'),
-            ],
-        ];
-
-        $table = $this->table('resources');
-        $table->truncate();
-        $table->insert($data)->save();
-    }
 }
