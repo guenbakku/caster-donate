@@ -40,13 +40,9 @@ class ProfilesTable extends AppTable
         ]);
 
         //Resource
-        $this->belongsToMany('Resources',[
-            'through' => 'UsersResources',
+        $this->hasMany('Resources',[
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id',
-        ]);
-        $this->hasMany('UsersResources',[
-            'foreignKey' => 'user_id'
         ]);
 
         //Schedules

@@ -27,9 +27,6 @@ class DonationNotificationSettingsTable extends AppTable
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id',
         ]);
-        $this->hasMany('UsersResources',[
-            'foreignKey' => 'user_id'
-        ]);
     }
 
     public function validationDefault(Validator $validator)

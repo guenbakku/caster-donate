@@ -20,9 +20,12 @@ class ResourcesTable extends AppTable
         parent::initialize($config);
 
         $this->belongsToMany('Profiles', [
-            'through' => 'UsersResources',
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id',
+        ]);
+
+        $this->belongsTo('ResourceTypes',[
+            'foreignKey' => 'resource_type_id',
         ]);
     }
 
@@ -36,7 +39,7 @@ class ResourcesTable extends AppTable
     {
         $validator
             ->uuid('id')
-            ->allowEmpty('id', 'name');
+            ->allowEmpty('id', 'name','user_id');
 
         return $validator;
     }
