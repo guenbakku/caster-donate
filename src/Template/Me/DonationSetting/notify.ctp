@@ -43,10 +43,8 @@ $this->append("script");
 </script>
 <script>
     
-    function test(form){
+    function uploadfile(form){
         var formdatas  = new FormData(form);
-        alert($(form).attr('action'));
-        alert($(form).find('input[name="_csrfToken"]').val());
         $.ajax({
             url: $(form).attr('action'),
             dataType: 'json',
@@ -217,11 +215,6 @@ $this->end();
                                                 <optgroup label="<?=__('Hình ảnh có sẵn')?>">
                                                     <option data-img-src="http://placekitten.com/400/150" value="3"></option>
                                                     <option data-img-src="http://placekitten.com/450/151" value="4"></option>
-                                                    <option data-img-src="https://images.unsplash.com/photo-1468436139062-f60a71c5c892?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" value="5"></option>
-                                                    <option data-img-src="https://images.unsplash.com/photo-1504889270807-ccd74713ad45?auto=format&fit=crop&w=634&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" value="6"></option>
-                                                    <option data-img-src="https://images.unsplash.com/photo-1476493279419-b785d41e38d8?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" value="7"></option>
-                                                    <option data-img-src="https://images.unsplash.com/photo-1510253782297-404c4da27214?auto=format&fit=crop&w=1351&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" value="8"></option>
-                                                    <option data-img-src="https://images.unsplash.com/photo-1473115209096-e0375dd6b3b3?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" value="9"></option>
                                                 </optgroup>
                                             </select>
                                         </div>
@@ -234,12 +227,17 @@ $this->end();
                                         <?php $this->Form->setTemplates($FormTemplates['vertical']);
                                         echo $this->Form->create($donation_notification_setting,[
                                             'url' => $this->Url->build('/api/v1/file/upload'),
-                                            'id' => 'upload_image_form'
+                                            'id' => 'upload_image_form',
+                                            'type' => 'file'
                                         ]);
-                                        echo $this->cell('DragDropArea', [$this, 'image']); 
+                                        echo $this->cell('DragDropArea', [$this, 'filename']); 
+                                        echo $this->Form->hidden('resource_type_id', [
+                                            'value' => $this->Code->setTable('resource_types')->getKey('image','id'),
+                                            'label' => __('Giới tính'),
+                                        ]) ;
                                         echo $this->Form->submit('Thêm hình mới', array(
                                             'class' => 'form-control btn btn-block btn-success',
-                                            'onClick' => 'return test(this.form)'
+                                            // 'onClick' => 'return uploadfile(this.form)'
                                         )); 
                                         echo $this->Form->end();
                                         ?> 
@@ -273,8 +271,23 @@ $this->end();
                                     <label class="col-sm-3 control-label"><?=__('hoặc sử dụng file âm thanh của bạn')?></label>
                                     <div class="col-sm-9">
                             
-                                        <?php $this->Form->setTemplates($FormTemplates['vertical']);?>
-                                        <?= $this->cell('DragDropArea', [$this, 'audio']) ?> 
+                                        <?php $this->Form->setTemplates($FormTemplates['vertical']);
+                                        echo $this->Form->create($donation_notification_setting,[
+                                            'url' => $this->Url->build('/api/v1/file/upload'),
+                                            'id' => 'upload_audio_form',
+                                            'type' => 'file'
+                                        ]);
+                                        echo $this->cell('DragDropArea', [$this, 'filename']); 
+                                        echo $this->Form->hidden('resource_type_id', [
+                                            'value' => $this->Code->setTable('resource_types')->getKey('audio','id'),
+                                            'label' => __('Giới tính'),
+                                        ]) ;
+                                        echo $this->Form->submit('Thêm hình mới', array(
+                                            'class' => 'form-control btn btn-block btn-success',
+                                            // 'onClick' => 'return uploadfile(this.form)'
+                                        )); 
+                                        echo $this->Form->end();
+                                        ?> 
 
                                     </div>
                                 </div>

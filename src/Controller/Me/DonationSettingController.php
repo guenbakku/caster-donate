@@ -6,6 +6,7 @@ use Cake\Event\Event;
 use App\Controller\AppController;
 use App\Model\Logic\User\Profile;
 use App\Model\Logic\User\DonationNotificationSetting;
+use App\Model\Logic\User\Resources;
 
 class DonationSettingController extends AppController
 
@@ -26,7 +27,9 @@ class DonationSettingController extends AppController
         $DonationNotificationSetting = new DonationNotificationSetting();
         $user_id = $this->Auth->user('id');
         $donation_notification_setting = $DonationNotificationSetting->get($user_id);
+
         $this->set(compact('donation_notification_setting'));
+
     }
 
     

@@ -4,51 +4,65 @@ namespace App\Model\Logic\User;
 use Cake\ORM\TableRegistry;
 use Cake\Core\Configure;
 use App\Utility\Flysystem;
+use App\View\Helper\CodeHelper;
 
 class Resources
 {
     public function __construct()
     {
-        $this->usersResourcesTb = TableRegistry::get('users_resources');
         $this->resourcesTb = TableRegistry::get('resources');
     }
 
     public function get($user_id)
     {
-        $usersResources = $this->usersResourcesTb->find()
-        ->where(['OR' =>['user_id =' => $user_id, 'user_id =' => null]])
+        $resources = $this->resourcesTb->find()
+        ->where(['user_id is' => null])
+        ->orwhere(['user_id =' => $user_id])
         ->all();
 
-        if ($usersResources) {
-            // $UsersSocialProvidersTb = TableRegistry::get('UsersSocialProviders');
-            // $profile->social_providers = $UsersSocialProvidersTb->repleteEntities($profile->social_providers);
+        if ($resources) {
+            //
         }
         else {
-            $usersResources = $this->usersResourcesTb->newEntity();
+            $resources = $this->resourcesTb->newEntity();
         }
-        return $usersResources;
+        return $resources;
     }
 
     public function uploadNew($user_id, array $new_resource)
     {
-        $userResource = $this->usersResourcesTb->newEntity();
-        $userResource->user_id = $user_id;
-        
+        $codeHelper = new CodeHelper(new \Cake\View\View());
         $resource = $this->resourcesTb->newEntity();
-        $resource->user_id = $user_id;
 
-        $this->usersResourcesTb->patchEntity($resource, $new_resource, [
-            'associated' => [
-                'ResourceTypes._joinData' => ['validate' => 'default'],
-            ],
+        //image
+        if($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('image','id')){
+            $path = Configure::read('System.Paths.resource_dir.image');
+            $validate = 'image';
+        }
+        //audio
+        elseif($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('audio','id')){
+            $path = Configure::read('System.Paths.resource_dir.audio');
+            $validate = 'audio';
+        }
+
+        $this->resourcesTb->patchEntity($resource, $new_resource,[
+            'validate' => $validate,
         ]);
 
         if(!$resource->errors()) {
-            $this->resourcesTb->save($resource);
-            $userResource->resource_id = $resource->id;
+            //UploadBehavior config
+            if ($this->resourcesTb->behaviors()->has('Upload')) {
+                $this->resourcesTb->behaviors()->get('Upload')->config([
+                    'filename' => [
+                        'path' => $path,
+                    ],
+                ]);
+            }
+
+            $this->resourcesTb->save($resource,['validate' => false]);
         }
 
-        // return $profile;
+        return $resource;
     }
 }
 ?>
