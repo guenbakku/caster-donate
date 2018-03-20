@@ -16,6 +16,7 @@
     <?= $this->Html->css('/packages/sidebar-nav/dist/sidebar-nav.min.css') ?>
     <?= $this->Html->css('/packages/toast-master/css/jquery.toast.css') ?>
     <?= $this->Html->css('/packages/dropify/dist/css/dropify.min.css') ?>
+    <?= $this->Html->css('/packages/sweetalert/sweetalert.css') ?>
     <?= $this->fetch('css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/animate.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/style.css') ?>
@@ -61,6 +62,7 @@
     <?= $this->Html->script('/packages/AmpleAdmin/js/cbpFWTabs.js') ?>
     <?= $this->Html->script('/packages/AmpleAdmin/js/custom.min.js') ?>
     <?= $this->Html->script('/packages/styleswitcher/jQuery.style.switcher.js') ?>    
+    <?= $this->Html->script('/packages/sweetalert/sweetalert.min.js') ?>    
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js') ?>
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/i18n/vi.js') ?>
     <?= $this->Html->script('app.settings.js') ?>
