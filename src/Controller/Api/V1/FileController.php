@@ -15,21 +15,28 @@ class FileController extends ApiController
         $user_id = $this->Auth->user('id');
         $Resources = new Resources();
 
+        $result=[
+            'result'    => false,
+            'message'   => false,
+            'newResourceInfo'  =>   [],
+        ];
+
         if ($this->request->is('post')) {
             $new_resource = $this->request->getData();
             $resource = $Resources->uploadNew($user_id, $new_resource);
-            
+
             if (!$resource->errors()) {   
-                $this->Flash->success(__('Upload ảnh thành công.'));
+                $result['message']  =   __('Upload file thành công.');
+                $result['result']  =   true;
+                $result['newResourceInfo']  =   $resource;
             } else {
-                $this->Flash->error(__('Xảy ra lỗi trong quá trình upload ảnh.'));
+                $result['message']  =   __('Upload file không thành công !');
             }
+            
         } else {
             
         }
-        
-        // $this->set(compact('profile'));
-        // debug($this->request->getData());
+        $this->set(compact('result'));
     }
 
 }
