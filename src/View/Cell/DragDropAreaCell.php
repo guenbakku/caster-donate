@@ -6,7 +6,7 @@ use Cake\Core\Configure;
 
 class DragDropAreaCell extends Cell
 {
-    public function display($rootView, $fieldname = 'unknown'){
-        $this->set(compact( 'rootView', 'fieldname'));
+    public function display($rootView, $fieldname = 'unknown', $id = ''){
+        $this->set(compact( 'rootView', 'fieldname', 'id'));
     }
 }

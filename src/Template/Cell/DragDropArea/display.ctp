@@ -26,6 +26,7 @@ $rootView->end();
 
 echo $rootView->Form->control($fieldname, [
     'class' => 'dropify',
+    'id'    =>  $id,
     'data-max-file-size' => Configure::read('vcv.uploadFileSize'),
     'templateVars' => [
         'type' => 'file',
