@@ -225,21 +225,14 @@ $this->end();
                                     <div class="col-sm-9">
 
                                         <?php $this->Form->setTemplates($FormTemplates['vertical']);
-                                        echo $this->Form->create($donation_notification_setting,[
-                                            'url' => $this->Url->build('/api/v1/file/upload'),
-                                            'id' => 'upload_image_form',
-                                            'type' => 'file'
+                                        echo $this->cell('UploadFile',[
+                                            $this, 
+                                            [
+                                                'button_text' => __('Thêm hình ảnh'),
+                                                'file_type_id' => $this->Code->setTable('resource_types')->getKey('image','id'),
+                                                'drag_drop_area_id'  =>  'upload_donate_image',
+                                            ]
                                         ]);
-                                        echo $this->cell('DragDropArea', [$this, 'filename']); 
-                                        echo $this->Form->hidden('resource_type_id', [
-                                            'value' => $this->Code->setTable('resource_types')->getKey('image','id'),
-                                            'label' => __('Giới tính'),
-                                        ]) ;
-                                        echo $this->Form->submit('Thêm hình mới', array(
-                                            'class' => 'form-control btn btn-block btn-success',
-                                            // 'onClick' => 'return uploadfile(this.form)'
-                                        )); 
-                                        echo $this->Form->end();
                                         ?> 
                                     </div>
                                 </div>
