@@ -26,9 +26,6 @@ $this->append("script");
         ]
     });
 
-    //
-    
-    //
     $(".colorpicker").asColorPicker();
     $(".complex-colorpicker").asColorPicker({
         mode: 'complex'
@@ -39,34 +36,14 @@ $this->append("script");
 });
 </script>
 <script>
-    
-    function uploadfile(form){
-        $("select.image-picker").data('picker').destroy();
-        var formdatas  = new FormData(form);
-        $.ajax({
-            url: $(form).attr('action'),
-            dataType: 'json',
-            method: 'post',
-            data:  formdatas,
-            contentType: false,
-            processData: false
-        }).done(function(response) {
-                console.log(response);
-                if (response.status == 'OK') {
-                    updateAfterUploadResource(response.newResourceInfo); 
-                }else if (response.status == 'FAIL') {
-
-                }else {
-                }
-            })
-            // .fail(function(jqXHR) {if (jqXHR.status == 403) { window.location = '/'; } else { console.log(jqXHR);}})
-        ;
-        
-        return false;
-    }
-
-    function updateAfterUploadResource(newResourceInfo){
-
+    function updateAfterUploadResource(response){
+        var newResourceInfo = response.newResourceInfo;
+        var message =   response.message;
+        var result =   response.result;
+        var path =  newResourceInfo.dir.replace("webroot", "") + '/' + newResourceInfo.filename;
+        $('#image_resources').prepend(
+           '<div class="col-sm-4"><input type="radio" id="'+newResourceInfo.id+'" name="image_id" value="'+newResourceInfo.id+'"><label for="'+newResourceInfo.id+'"><img src="'+ path+'" height="128"></label></div>'
+        );
     }
     
     function testAnim(effect,target) {
@@ -91,9 +68,6 @@ $this->append("script");
             testAnim(anim,'#' + target);
         });
         $('#alert-donate-preview-button').click(function(e){
-            // var group = $('#original-images');
-            // $('<option />').data("img-src","http://placekitten.com/400/150").val(99).appendTo(group);
-            // $("select.image-picker").imagepicker();
             //cập nhật nội dung text
             var m1 = replace_message($('#message1').html());
             var m2 = replace_message($('#message2').html());
@@ -170,6 +144,7 @@ $this->end();
                 
             </div>
             <div class="panel-footer clearfix">
+                
                 <div class="col-sm-6">
                     <button id="alert-donate-preview-button" class="btn btn-block btn-info"><?=__('Xem trước')?></button>
                 </div>
@@ -184,7 +159,7 @@ $this->end();
     <div class="col-md-8 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading"><?=__('Thiết lập thông báo')?></div>
-            <?php $this->Form->setTemplates($FormTemplates['input-short']);?>
+            <?php $this->Form->setTemplates($FormTemplates['vertical']);?>
             <section>
                 <div class="sttabs tabs-style-iconbox">
                     <nav>
@@ -203,13 +178,13 @@ $this->end();
                                     <div class="col-sm-3">
                                         <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>                                    
                                     </div>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-9" id="image_resources">
                                         <?php 
                                         foreach($image_resources as $key => $resource)
                                         {
                                             echo '<div class="col-sm-4">';
                                             echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="email" checked>';
-                                            echo '<label for="'.$resource['id'].'" style="text-align: center"><img src="'.$this->Url->build($resource['filename']).'" height="128"></label>';
+                                            echo '<label for="'.$resource['id'].'"><img src="'.$this->Url->build($resource['filename']).'" height="128"></label>';
                                             echo '</div>';
                                         }
                                         ?>
@@ -218,14 +193,14 @@ $this->end();
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Upload file mới')?></label>
                                     <div class="col-sm-9">
-
-                                        <?php $this->Form->setTemplates($FormTemplates['vertical']);
+                                        <?php 
                                         echo $this->cell('UploadFile',[
                                             $this, 
                                             [
                                                 'button_text' => __('Thêm hình ảnh'),
                                                 'file_type_id' => $this->Code->setTable('resource_types')->getKey('image','id'),
                                                 'drag_drop_area_id'  =>  'upload_donate_image',
+                                                'callBackFunction'  => 'updateAfterUploadResource',
                                             ]
                                         ]);
                                         ?> 
@@ -259,8 +234,8 @@ $this->end();
                                     <label class="col-sm-3 control-label"><?=__('hoặc sử dụng file âm thanh của bạn')?></label>
                                     <div class="col-sm-9">
                             
-                                        <?php $this->Form->setTemplates($FormTemplates['vertical']);
-                                        echo $this->Form->create($donation_notification_setting,[
+                                        <?php
+                                        echo $this->Form->create($resources,[
                                             'url' => $this->Url->build('/api/v1/file/upload'),
                                             'id' => 'upload_audio_form',
                                             'type' => 'file'

@@ -17,9 +17,18 @@ $rootView->append('script');
             contentType: false,
             processData: false
         }).done(function(response) {
-            console.log(response);
+            //console.log(response);
             if (response.result == true) {
                 swalSuccess(response.message);
+                <?php
+                if($setting['callBackFunction'] != '')
+                {?>
+                    var callback = $.Callbacks();
+                    callback.add(<?=$setting['callBackFunction']?>);
+                    callback.fire(response);
+                <?php
+                }
+                ?>
             }else if (response.result == false) {
                 swalError(response.message);
             }

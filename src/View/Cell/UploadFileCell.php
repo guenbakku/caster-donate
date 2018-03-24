@@ -14,6 +14,7 @@ class UploadFileCell extends Cell
             'button_text' => __('Thêm file mới'),
             'file_type_id' => 'image',
             'drag_drop_area_id'  =>  'default_id',
+            'callBackFunction' =>   ''
         ];
         
         $this->resourcesTb = TableRegistry::get('resources');
