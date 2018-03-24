@@ -4,10 +4,11 @@ use Cake\Utility\Hash;
 use Cake\Collection\Collection;
 
 $rootView->append('script');
+$cell_id    =   rand();
 ?>
 
 <script type="text/javascript">
-    function uploadfile(form){
+    function uploadFile<?=$cell_id?>(form){
         var formdatas  = new FormData(form);
         $.ajax({
             url: $(form).attr('action'),
@@ -46,21 +47,21 @@ $rootView->append('script');
 <?php $rootView->end() ?>
 
 <?php 
-echo $this->Form->create($resource,[
+echo $rootView->Form->create($resource,[
     'url' => $this->Url->build('/api/v1/file/upload'),
     'id' => 'upload_image_form',
     'type' => 'file'
 ]);
 echo $rootView->cell('DragDropArea', [$rootView, 'filename', $setting['drag_drop_area_id']]); 
-echo $this->Form->hidden('resource_type_id', [
+echo $rootView->Form->hidden('resource_type_id', [
     'value' => $setting['file_type_id'],
     'label' => __('Giới tính'),
 ]) ;
-echo $this->Form->submit('Thêm hình mới', array(
+echo $rootView->Form->submit('Thêm hình mới', array(
     'class' => 'form-control btn btn-block btn-success',
-    'onClick' => 'return uploadfile(this.form)'
+    'onClick' => 'return uploadFile'.$cell_id.'(this.form)'
 )); 
-echo $this->Form->end();
+echo $rootView->Form->end();
 ?> 
 
 
