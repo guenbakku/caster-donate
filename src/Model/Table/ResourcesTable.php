@@ -35,6 +35,8 @@ class ResourcesTable extends AppTable
                 //'path' sẽ được set ở Logic tùy theo định dạng của tài nguyên
                 'keepFileOnEdit' => false,
                 'keepFileOnDelete' => false,
+                'resizeTo' => [600,600],
+                'keepRatio' => true
             ]
         ]);
     }

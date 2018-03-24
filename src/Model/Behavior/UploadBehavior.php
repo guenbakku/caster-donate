@@ -161,7 +161,7 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
             // A hack to implement feature that removes old file
             'transformer' =>  function ($table, $entity, $data, $field, $settings) {
                 // Resize image
-                $tmp = $settings['resizer']($data['tmp_name'], $settings['resizeTo']);
+                $tmp = $settings['resizer']($data['tmp_name'], $settings['resizeTo'],$settings['keepRatio']);
 
                 // Now return the original *and* the thumbnail
                 return [
@@ -176,12 +176,13 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
                     $path . $entity->{$field},
                 ];
             },
-            'resizer' => function ($path, $resizeTo) {
-                return File::resizeImageTo($path, $resizeTo);
+            'resizer' => function ($path, $resizeTo, $keepRatio) {
+                return File::resizeImageTo($path, $resizeTo, $keepRatio);
             },
             'keepFileOnEdit' => true,
             'keepFilesOnDelete' => true,
             'resizeTo' => Configure::read('System.Dimensions.avatar'),
+            'keepRatio' => false,
         ];
     }
 }
