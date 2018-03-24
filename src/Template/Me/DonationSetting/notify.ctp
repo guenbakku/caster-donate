@@ -1,10 +1,8 @@
 <?php
-echo $this->Html->css('/packages/image-picker/css/image-picker.css', ['block' => 'css']);
 echo $this->Html->css('/packages/x-editable/css/bootstrap-editable.css', ['block' => 'css']);
 echo $this->Html->css('/packages/Touchspin/css/jquery.bootstrap-touchspin.min.css', ['block' => 'css']);
 echo $this->Html->css('/packages/jquery-asColorPicker-master/css/asColorPicker.css', ['block' => 'css']);
 
-echo $this->Html->script('/packages/image-picker/js/image-picker.min.js', ['block' => 'script']);
 echo $this->Html->script('/packages/x-editable/js/bootstrap-editable.min.js', ['block' => 'script']);
 echo $this->Html->script('/packages/Touchspin/js/jquery.bootstrap-touchspin.min.js', ['block' => 'script']);
 echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColor.js', ['block' => 'script']);
@@ -29,7 +27,6 @@ $this->append("script");
     });
 
     //
-    $("select.image-picker").imagepicker();
     
     //
     $(".colorpicker").asColorPicker();
@@ -44,6 +41,7 @@ $this->append("script");
 <script>
     
     function uploadfile(form){
+        $("select.image-picker").data('picker').destroy();
         var formdatas  = new FormData(form);
         $.ajax({
             url: $(form).attr('action'),
@@ -55,30 +53,29 @@ $this->append("script");
         }).done(function(response) {
                 console.log(response);
                 if (response.status == 'OK') {
-                    
+                    updateAfterUploadResource(response.newResourceInfo); 
                 }else if (response.status == 'FAIL') {
 
                 }else {
                 }
             })
-            // .fail(function(jqXHR) {
-            //     if (jqXHR.status == 403) {
-            //         window.location = '/';
-            //     } else {
-            //         console.log(jqXHR);
-
-            //     }
-            // })
+            // .fail(function(jqXHR) {if (jqXHR.status == 403) { window.location = '/'; } else { console.log(jqXHR);}})
         ;
         
         return false;
     }
+
+    function updateAfterUploadResource(newResourceInfo){
+
+    }
+    
     function testAnim(effect,target) {
         $(target).finish();
         $(target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
         });
     };
+
     $(document).ready(function () {
         var audio = new Audio();
         $('.js--triggerAnimation').click(function (e) {
@@ -207,21 +204,19 @@ $this->end();
                                         <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>                                    
                                     </div>
                                     <div class="col-sm-9">
-                                        <div class="row">
-                                            <select class="form-control image-picker">
-                                                <optgroup id="original-images" label="<?=__('Hình ảnh riêng của bạn')?>">
-                                                    <option data-img-src="https://images.unsplash.com/photo-1485811055483-1c09e64d4576?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" value="2"></option>
-                                                </optgroup>
-                                                <optgroup label="<?=__('Hình ảnh có sẵn')?>">
-                                                    <option data-img-src="http://placekitten.com/400/150" value="3"></option>
-                                                    <option data-img-src="http://placekitten.com/450/151" value="4"></option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
+                                        <?php 
+                                        foreach($image_resources as $key => $resource)
+                                        {
+                                            echo '<div class="col-sm-4">';
+                                            echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="email" checked>';
+                                            echo '<label for="'.$resource['id'].'" style="text-align: center"><img src="'.$this->Url->build($resource['filename']).'" height="128"></label>';
+                                            echo '</div>';
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?=__('hoặc sử dụng hình ảnh của bạn')?></label>
+                                    <label class="col-sm-3 control-label"><?=__('Upload file mới')?></label>
                                     <div class="col-sm-9">
 
                                         <?php $this->Form->setTemplates($FormTemplates['vertical']);
@@ -245,7 +240,7 @@ $this->end();
                         <section id="section-iconbox-3">
                             <div class="white-box form-horizontal">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?=__('Sử dụng tài nguyên sẵn có')?></label>
+                                    <label class="col-sm-3 control-label"></label>
                                     <div class="col-sm-9">
                                         <select class="form-control my-designed-scrollbar" name="alert-donate-sound" size="9">
                                         <option value="https://freemusicarchive.org/file/music/Creative_Commons/Podington_Bear/Piano_IV_Cinematic/Podington_Bear_-_Bittersweet.mp3" selected>Jam On It</option>
