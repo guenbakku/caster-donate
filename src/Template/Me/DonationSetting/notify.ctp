@@ -83,7 +83,10 @@ $this->append("script");
                 .css('color',$('input[name=B]').val())
                 .html('Chúc bạn có buổi LiveStream vui vẻ.');
             //cập nhật hình ảnh
-            $('#alert-donate-image').attr('src',$('select.image-picker option:selected').data('img-src'));
+            $("input[name='image_id']:checked").each(function(){
+                var checked_input_id = $(this).attr("id");
+                $('#alert-donate-image').attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));
+            });
             //cập nhật âm thanh
             audio.pause();
             audio.currentTime = 0;
@@ -183,7 +186,7 @@ $this->end();
                                         foreach($image_resources as $key => $resource)
                                         {
                                             echo '<div class="col-sm-4">';
-                                            echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="email" checked>';
+                                            echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="'.$resource['id'].'" checked>';
                                             echo '<label for="'.$resource['id'].'"><img src="'.$this->Url->build($resource['filename']).'" height="128"></label>';
                                             echo '</div>';
                                         }
@@ -235,21 +238,16 @@ $this->end();
                                     <div class="col-sm-9">
                             
                                         <?php
-                                        echo $this->Form->create($resources,[
-                                            'url' => $this->Url->build('/api/v1/file/upload'),
-                                            'id' => 'upload_audio_form',
-                                            'type' => 'file'
+                                        // echo $this->cell('DragDropArea', [$this, 'filename']); 
+                                        echo $this->cell('UploadFile',[
+                                            $this, 
+                                            [
+                                                'button_text' => __('Thêm file âm thanh'),
+                                                'file_type_id' => $this->Code->setTable('resource_types')->getKey('audio','id'),
+                                                'drag_drop_area_id'  =>  'upload_donate_audio',
+                                                // 'callBackFunction'  => 'updateAfterUploadResource',
+                                            ]
                                         ]);
-                                        echo $this->cell('DragDropArea', [$this, 'filename']); 
-                                        echo $this->Form->hidden('resource_type_id', [
-                                            'value' => $this->Code->setTable('resource_types')->getKey('audio','id'),
-                                            'label' => __('Giới tính'),
-                                        ]) ;
-                                        echo $this->Form->submit('Thêm hình mới', array(
-                                            'class' => 'form-control btn btn-block btn-success',
-                                            // 'onClick' => 'return uploadfile(this.form)'
-                                        )); 
-                                        echo $this->Form->end();
                                         ?> 
 
                                     </div>

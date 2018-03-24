@@ -51,7 +51,7 @@ echo $this->Form->create($resource,[
     'id' => 'upload_image_form',
     'type' => 'file'
 ]);
-echo $this->cell('DragDropArea', [$this, 'filename', $setting['drag_drop_area_id']]); 
+echo $rootView->cell('DragDropArea', [$rootView, 'filename', $setting['drag_drop_area_id']]); 
 echo $this->Form->hidden('resource_type_id', [
     'value' => $setting['file_type_id'],
     'label' => __('Giới tính'),
