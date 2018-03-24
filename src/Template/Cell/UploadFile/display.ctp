@@ -21,7 +21,7 @@ $rootView->append('script');
             if (response.result == true) {
                 swalSuccess(response.message);
             }else if (response.result == false) {
-
+                swalError(response.message);
             }
             //Xóa file trên DragDropArea
             var drEvent = $('#<?=$setting['drag_drop_area_id']?>').dropify();

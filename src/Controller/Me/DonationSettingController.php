@@ -17,18 +17,17 @@ class DonationSettingController extends AppController
         $this->ContentHeader->title(__('Thiết lập chức năng Donate'));
     }
     
-    public function addNewImage()
-    {
-        
-    }
-
     public function notify()
     {
-        $DonationNotificationSetting = new DonationNotificationSetting();
         $user_id = $this->Auth->user('id');
-        $donation_notification_setting = $DonationNotificationSetting->get($user_id);
 
-        $this->set(compact('donation_notification_setting'));
+        $DonationNotificationSettingTb = new DonationNotificationSetting();
+        $donation_notification_setting = $DonationNotificationSettingTb->get($user_id);
+        
+        $resourceTb = new Resources();
+        $image_resources = $resourceTb->getAllAvailableResources($user_id,'image');
+
+        $this->set(compact('donation_notification_setting','image_resources'));
 
     }
 
