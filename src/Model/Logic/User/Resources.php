@@ -29,7 +29,9 @@ class Resources
                 'user_id is' => null,//public
                 'user_id =' => $user_id//private
             ]
-        ])->order(['user_id'=>'DESC'])->all();
+        ])->order(['user_id'=>'DESC'])
+        ->order(['modified' => 'DESC'])
+        ->all();
 
         if ($resources) {
             //convert resource's path
