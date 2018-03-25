@@ -58,15 +58,24 @@ class Resources
         $codeHelper = new CodeHelper(new \Cake\View\View());
         $resource = $this->resourcesTb->newEntity();
         $resource['user_id'] = $user_id;
+        $uploadSettings = [];
 
-        //image
-        if($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('image','id')){
-            $path = Configure::read('System.Paths.resource_dir.image');
+        if ($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('image', 'id')) {
+            $uploadSettings = [
+                'filename' => [
+                    'path' => Configure::read('System.Paths.resource_dir.image'),
+                    'resizeTo' => [600, 600],
+                    'resizeKeepRatio' => true
+                ]
+            ];
             $validate = 'image';
-        }
-        //audio
-        elseif($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('audio','id')){
-            $path = Configure::read('System.Paths.resource_dir.audio');
+        } elseif ($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('audio', 'id')) {
+            $uploadSettings = [
+                'filename' => [
+                    'path' => Configure::read('System.Paths.resource_dir.audio'),
+                    'transformer' => null,
+                ]
+            ];
             $validate = 'audio';
         }
         
@@ -74,17 +83,12 @@ class Resources
             'validate' => $validate,
         ]);
 
-        if(!$resource->errors()) {
-            //UploadBehavior config
-            if ($this->resourcesTb->behaviors()->has('Upload')) {
-                $this->resourcesTb->behaviors()->get('Upload')->config([
-                    'filename' => [
-                        'path' => $path,
-                    ],
-                ]);
-            }
-            
-            $this->resourcesTb->save($resource,['validate' => false]);
+        if (!$resource->errors()) {
+            $conn = $this->resourcesTb->getConnection();
+            $conn->transactional(function () use ($uploadSettings, $resource) {
+                $this->resourcesTb->behaviors()->get('Upload')->config($uploadSettings);
+                $this->resourcesTb->save($resource, ['validate' => false]);
+            });
         }
 
         return $resource;
@@ -95,15 +99,12 @@ class Resources
         $codeHelper = new CodeHelper(new \Cake\View\View());
         $image_type_id = $codeHelper->setTable('resource_types')->getKey('image','id');
         $audio_type_id = $codeHelper->setTable('resource_types')->getKey('audio','id');
-        foreach($resources as $key => $resource)
-        {
-            if($resource['resource_type_id'] == $image_type_id){
+        foreach ($resources as $key => $resource) {
+            if ($resource['resource_type_id'] == $image_type_id) {
                 $resource['filename'] = str_replace('webroot/', '', Configure::read('System.Paths.resource_dir.image').'/'.$resource['filename']);
-            }
-            //audio
-            elseif($resource['resource_type_id'] == $audio_type_id){
+            } elseif ($resource['resource_type_id'] == $audio_type_id) {
                 $resource['filename'] = str_replace('webroot/', '', Configure::read('System.Paths.resource_dir.audio').'/'.$resource['filename']);
-            }else{
+            } else {
                 $path = '';
             }
         }

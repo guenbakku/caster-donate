@@ -31,12 +31,10 @@ class ResourcesTable extends AppTable
 
         // Setup upload file
         $this->addBehavior('Upload', [
+            // Setting default. Các setting khác sẽ được set ở Logic
             'filename' => [
-                //'path' sẽ được set ở Logic tùy theo định dạng của tài nguyên
                 'keepFilesOnEdit' => false,
                 'keepFilesOnDelete' => false,
-                'resizeTo' => [600, 600],
-                'resizeKeepRatio' => true
             ]
         ]);
     }
