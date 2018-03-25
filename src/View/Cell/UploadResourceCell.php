@@ -5,12 +5,11 @@ use Cake\View\Cell;
 use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
 
-class UploadFileCell extends Cell
+class UploadResourceCell extends Cell
 {
-    public function display($rootView, $setting)
+    public function display($rootView, $settings)
     {
-       
-        $defaultSetting = [
+        $defaultSettings = [
             'button_text' => __('Thêm file mới'),
             'file_type_id' => 'image',
             'drag_drop_area_id'  =>  'default_id',
@@ -20,8 +19,8 @@ class UploadFileCell extends Cell
         $this->resourcesTb = TableRegistry::get('resources');
         $resource = $this->resourcesTb->newEntity();
 
-        $setting = array_merge($defaultSetting, $setting);
+        $settings = array_merge($defaultSettings, $settings);
 
-        $this->set(compact( 'rootView','setting','resource'));
+        $this->set(compact('rootView', 'settings', 'resource'));
     }
 }

@@ -20,9 +20,8 @@ class ResourcesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->belongsToMany('Profiles', [
+        $this->belongsTo('Profiles', [
             'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id',
         ]);
 
         $this->belongsTo('ResourceTypes',[
@@ -31,7 +30,7 @@ class ResourcesTable extends AppTable
 
         // Setup upload file
         $this->addBehavior('Upload', [
-            // Setting default. Các setting khác sẽ được set ở Logic
+            // Default setting. Các setting khác sẽ được set ở Logic
             'filename' => [
                 'keepFilesOnEdit' => false,
                 'keepFilesOnDelete' => false,

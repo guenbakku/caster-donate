@@ -33,13 +33,10 @@ class Resources
         ->order(['modified' => 'DESC'])
         ->all();
 
-        if ($resources) {
-            //convert resource's path
-            $resources  = $this->convertResourePath($resources);
-        }
-        else {
+        if (empty($resources)) {
             $resources = $this->resourcesTb->newEntity();
         }
+
         return $resources;
     }
 
@@ -53,7 +50,7 @@ class Resources
        
     }
 
-    public function uploadNew($user_id, array $new_resource)
+    public function addUserResource($user_id, array $new_resource)
     {
         $codeHelper = new CodeHelper(new \Cake\View\View());
         $resource = $this->resourcesTb->newEntity();
@@ -84,32 +81,26 @@ class Resources
         ]);
 
         if (!$resource->errors()) {
+            $this->resourcesTb->behaviors()->get('Upload')->config($uploadSettings);
             $conn = $this->resourcesTb->getConnection();
             $conn->transactional(function () use ($uploadSettings, $resource) {
-                $this->resourcesTb->behaviors()->get('Upload')->config($uploadSettings);
+                // Delete old record
+                $oldResource = $this->resourcesTb->find()
+                    ->where(['user_id' => $resource['user_id']])
+                    ->where(['resource_type_id' => $resource['resource_type_id']])
+                    ->where(['resource_feature_id' => $resource['resource_feature_id']])
+                    ->contain([])
+                    ->first();
+                if (!empty($oldResource)) {
+                    $this->resourcesTb->delete($oldResource);
+                }
+
+                // Add new record
                 $this->resourcesTb->save($resource, ['validate' => false]);
             });
         }
 
         return $resource;
-    }
-
-    private function convertResourePath($resources)
-    {
-        $codeHelper = new CodeHelper(new \Cake\View\View());
-        $image_type_id = $codeHelper->setTable('resource_types')->getKey('image','id');
-        $audio_type_id = $codeHelper->setTable('resource_types')->getKey('audio','id');
-        foreach ($resources as $key => $resource) {
-            if ($resource['resource_type_id'] == $image_type_id) {
-                $resource['filename'] = str_replace('webroot/', '', Configure::read('System.Paths.resource_dir.image').'/'.$resource['filename']);
-            } elseif ($resource['resource_type_id'] == $audio_type_id) {
-                $resource['filename'] = str_replace('webroot/', '', Configure::read('System.Paths.resource_dir.audio').'/'.$resource['filename']);
-            } else {
-                $path = '';
-            }
-        }
-        
-        return $resources;
     }
 }
 ?>

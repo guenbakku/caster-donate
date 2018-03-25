@@ -55,7 +55,7 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
     }
 
     /**
-     * Delete previous previous upload item of field
+     * Delete previous uploaded item of field
      *
      * @param   \Cake\Event\Event
      * @param   \Cake\ORM\Entity

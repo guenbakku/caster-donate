@@ -8,8 +8,9 @@ echo $this->Html->script('/packages/Touchspin/js/jquery.bootstrap-touchspin.min.
 echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColor.js', ['block' => 'script']);
 echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asGradient.js', ['block' => 'script']);
 echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColorPicker.min.js', ['block' => 'script']); 
-$this->append("script");
 ?>
+
+<?php $this->append("script"); ?>
 <script>
  $(function () {
     //
@@ -120,10 +121,9 @@ $this->append("script");
     });
 
 </script>
-<?php
-$this->end();
-$this->append("css");
-?>
+<?php $this->end(); ?> 
+
+<?php $this->append("css"); ?>
 <style type="text/css">
 .image_picker_selector{
     text-align: center;
@@ -132,9 +132,7 @@ $this->append("css");
     height: 70px;
 }
 </style>
-<?php
-$this->end();
-?>
+<?php $this->end(); ?>
 
 
 <div class="row">
@@ -187,7 +185,7 @@ $this->end();
                                         {
                                             echo '<div class="col-sm-4">';
                                             echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="'.$resource['id'].'" checked>';
-                                            echo '<label for="'.$resource['id'].'"><img src="'.$this->Url->build($resource['filename']).'" height="128"></label>';
+                                            echo '<label for="'.$resource['id'].'">'.$this->Html->image($resource->url, ['height' => 128]) .'</label>';
                                             echo '</div>';
                                         }
                                         ?>
@@ -197,7 +195,7 @@ $this->end();
                                     <label class="col-sm-3 control-label"><?=__('Upload file mới')?></label>
                                     <div class="col-sm-9">
                                         <?php 
-                                        echo $this->cell('UploadFile',[
+                                        echo $this->cell('UploadResource',[
                                             $this, 
                                             [
                                                 'button_text' => __('Thêm hình ảnh'),
@@ -240,7 +238,7 @@ $this->end();
                             
                                         <?php
                                         // echo $this->cell('DragDropArea', [$this, 'filename']); 
-                                        echo $this->cell('UploadFile',[
+                                        echo $this->cell('UploadResource',[
                                             $this, 
                                             [
                                                 'button_text' => __('Thêm file âm thanh'),

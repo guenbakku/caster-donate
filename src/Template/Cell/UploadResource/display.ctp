@@ -4,7 +4,7 @@ use Cake\Utility\Hash;
 use Cake\Collection\Collection;
 
 $rootView->append('script');
-$cell_id    =   rand();
+$cell_id = rand();
 ?>
 
 <script type="text/javascript">
@@ -22,10 +22,10 @@ $cell_id    =   rand();
             if (response.result == true) {
                 swalSuccess(response.message);
                 <?php
-                if($setting['callBackFunction'] != '')
+                if($settings['callBackFunction'] != '')
                 {?>
                     var callback = $.Callbacks();
-                    callback.add(<?=$setting['callBackFunction']?>);
+                    callback.add(<?=$settings['callBackFunction']?>);
                     callback.fire(response);
                 <?php
                 }
@@ -34,7 +34,7 @@ $cell_id    =   rand();
                 swalError(response.message);
             }
             //Xóa file trên DragDropArea
-            var drEvent = $('#<?=$setting['drag_drop_area_id']?>').dropify();
+            var drEvent = $('#<?=$settings['drag_drop_area_id']?>').dropify();
             drEvent = drEvent.data('dropify');
             drEvent.resetPreview();
             drEvent.clearElement();
@@ -46,18 +46,24 @@ $cell_id    =   rand();
 </script>
 <?php $rootView->end() ?>
 
-<?php 
+<?php
+$formUrl = Hash::get($settings, 'url', [
+    'prefix' => 'api/v1',
+    'controller' => 'Resources',
+    'action' => 'upload',
+]);
+
 echo $rootView->Form->create($resource,[
-    'url' => $this->Url->build('/api/v1/file/upload'),
+    'url' => $formUrl,
     'id' => 'upload_image_form',
     'type' => 'file'
 ]);
-echo $rootView->cell('DragDropArea', [$rootView, 'filename', $setting['drag_drop_area_id']]); 
+echo $rootView->cell('DragDropArea', [$rootView, 'filename', $settings['drag_drop_area_id']]); 
 echo $rootView->Form->hidden('resource_type_id', [
-    'value' => $setting['resource_type_id'],
+    'value' => $settings['resource_type_id'],
 ]) ;
 echo $rootView->Form->hidden('resource_feature_id', [
-    'value' => $setting['resource_feature_id'],
+    'value' => $settings['resource_feature_id'],
 ]) ;
 echo $rootView->Form->submit('Thêm hình mới', array(
     'class' => 'form-control btn btn-block btn-success',
