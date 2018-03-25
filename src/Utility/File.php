@@ -32,24 +32,24 @@ class File extends CakeFile
      * Resize image to $resizeTo size.
      *
      * @param   string: path to input image
-     * @param   string: size [width, height] want to resize to
+     * @param   array: size [width, height] want to resize to
+     * @param   bool: keep ratio or not
      * @return  string: path to output image
      */
-    public static function resizeImageTo(string $path, array $resizeTo, $keepRatio = false)
-    {
+    public static function resizeImageTo(
+        string $path, 
+        array $resizeTo, 
+        bool $keepRatio = false
+    ) {
         $extension = pathinfo(File::uuidName($path), PATHINFO_EXTENSION);
         $tmp = tempnam(sys_get_temp_dir(), 'upload');
         unlink($tmp);
         $tmp = $tmp.'.'.$extension;
 
+        $mode = $keepRatio
+            ? \Imagine\Image\ImageInterface::THUMBNAIL_INSET
+            : \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
         $size = new \Imagine\Image\Box(...$resizeTo);
-        if($keepRatio)
-        {
-            $mode = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-        }else
-        {
-            $mode = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
-        }
         $imagine = new \Imagine\Gd\Imagine();
 
         // Save that modified file to our temp file

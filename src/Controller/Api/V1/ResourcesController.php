@@ -8,7 +8,7 @@ use Cake\Network\Exception\BadRequestException;
 use App\Controller\Api\V1\ApiController;
 use App\Model\Logic\User\Resources;
 
-class FileController extends ApiController
+class ResourcesController extends ApiController
 {
     public function upload()
     {
@@ -23,7 +23,7 @@ class FileController extends ApiController
 
         if ($this->request->is('post')) {
             $new_resource = $this->request->getData();
-            $resource = $Resources->uploadNew($user_id, $new_resource);
+            $resource = $Resources->addUserResource($user_id, $new_resource);
 
             if (!$resource->errors()) {   
                 $result['message']  =   __('Upload file thành công.');

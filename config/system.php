@@ -16,8 +16,8 @@ return [
         'Paths' => [
             'avatar_dir' => 'webroot'.DS.'img'.DS.'avatar'.DS,
             'resource_dir' => [
-                'image' => 'webroot'.DS.'resources'.DS.'img',
-                'audio' => 'webroot'.DS.'resources'.DS.'audio',
+                'image' => 'webroot'.DS.'resources'.DS.'img'.DS,
+                'audio' => 'webroot'.DS.'resources'.DS.'audio'.DS,
             ]
         ],
 
@@ -30,8 +30,8 @@ return [
             'avatar_dir' => 'avatar/',
             'default_avatar' => 'default_avatar.jpg',
             'resource_dir' => [
-                'image' => '/resources/img',
-                'audio' => '/resources/audio',
+                'image' => '/resources/img/',
+                'audio' => '/resources/audio/',
             ]
         ],
 

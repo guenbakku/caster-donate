@@ -32,6 +32,10 @@ class CreateResourcesTable extends AbstractMigration
                 'limit' => 11,
                 'null' => false,
             ])
+            ->addColumn('resource_feature_id', 'integer', [
+                'limit' => 11,
+                'null' => false,
+            ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
             ])

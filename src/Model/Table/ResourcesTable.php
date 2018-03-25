@@ -20,9 +20,8 @@ class ResourcesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->belongsToMany('Profiles', [
+        $this->belongsTo('Profiles', [
             'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id',
         ]);
 
         $this->belongsTo('ResourceTypes',[
@@ -31,12 +30,10 @@ class ResourcesTable extends AppTable
 
         // Setup upload file
         $this->addBehavior('Upload', [
+            // Default setting. Các setting khác sẽ được set ở Logic
             'filename' => [
-                //'path' sẽ được set ở Logic tùy theo định dạng của tài nguyên
-                'keepFileOnEdit' => false,
-                'keepFileOnDelete' => false,
-                'resizeTo' => [600,600],
-                'keepRatio' => true
+                'keepFilesOnEdit' => false,
+                'keepFilesOnDelete' => false,
             ]
         ]);
     }
@@ -58,7 +55,7 @@ class ResourcesTable extends AppTable
             ->add('filename', [
                 'uploadError' => [
                     'rule' => ['uploadError', true],
-                    'message' => 'Có lỗi xảy ra trong quá trình tải file.',
+                    'message' => __('Có lỗi xảy ra trong quá trình tải file.'),
                 ],
                 'fileSize' => [
                     'rule' => ['fileSize', '<=', Configure::read('vcv.uploadFileSize')],
@@ -69,6 +66,7 @@ class ResourcesTable extends AppTable
                     'last' => true,
                 ],
             ]);
+        
         return $validator;
     }
 

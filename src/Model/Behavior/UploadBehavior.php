@@ -55,7 +55,7 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
     }
 
     /**
-     * Delete previous previous upload item of field
+     * Delete previous uploaded item of field
      *
      * @param   \Cake\Event\Event
      * @param   \Cake\ORM\Entity
@@ -68,7 +68,7 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
         foreach ($this->config() as $field => $settings) {
             if (Hash::get((array)$entity->get($field), 'error') !== UPLOAD_ERR_OK
                 || $entity->isNew()
-                || $settings['keepFileOnEdit']) 
+                || $settings['keepFilesOnEdit']) 
             {   
                 continue;
             }
@@ -161,7 +161,9 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
             // A hack to implement feature that removes old file
             'transformer' =>  function ($table, $entity, $data, $field, $settings) {
                 // Resize image
-                $tmp = $settings['resizer']($data['tmp_name'], $settings['resizeTo'],$settings['keepRatio']);
+                $resizeTo = Hash::get($settings, 'resizeTo');
+                $resizeKeepRatio = Hash::get($settings, 'resizeKeepRatio');
+                $tmp = File::resizeImageTo($data['tmp_name'], $resizeTo, $resizeKeepRatio);
 
                 // Now return the original *and* the thumbnail
                 return [
@@ -176,13 +178,10 @@ class UploadBehavior extends \Josegonzalez\Upload\Model\Behavior\UploadBehavior
                     $path . $entity->{$field},
                 ];
             },
-            'resizer' => function ($path, $resizeTo, $keepRatio) {
-                return File::resizeImageTo($path, $resizeTo, $keepRatio);
-            },
-            'keepFileOnEdit' => true,
+            'keepFilesOnEdit' => true,
             'keepFilesOnDelete' => true,
             'resizeTo' => Configure::read('System.Dimensions.avatar'),
-            'keepRatio' => false,
+            'resizeKeepRatio' => false,
         ];
     }
 }

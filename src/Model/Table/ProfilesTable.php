@@ -59,9 +59,9 @@ class ProfilesTable extends AppTable
         $this->addBehavior('Upload', [
             'avatar' => [
                 'path' => Configure::read('System.Paths.avatar_dir'),
-                'keepFileOnEdit' => false,
-                'keepFileOnDelete' => false,
-                'resizeTo' => Configure::read('vcv.minImageSize'),
+                'keepFilesOnEdit' => false,
+                'keepFilesOnDelete' => false,
+                'resizeTo' => Configure::read('System.Dimensions.avatar'),
             ]
         ]);
     }
@@ -143,6 +143,20 @@ class ProfilesTable extends AppTable
                         Configure::read('vcv.uploadFileSize')
                     ),
                     'last' => true,
+                ],
+                'minWidth' => [
+                    'rule' => ['imageWidth', '>=', Configure::read('System.Dimensions.avatar')[0]],
+                    'message' => __(
+                        'Chiều rộng ảnh tải lên không được nhỏ hơn {0}.',
+                        Configure::read('System.Dimensions.avatar')[0]
+                    ),
+                ],
+                'minHeight' => [
+                    'rule' => ['imageHeight', '>=', Configure::read('System.Dimensions.avatar')[1]],
+                    'message' => __(
+                        'Chiều cao ảnh tải lên không được nhỏ hơn {0}.',
+                        Configure::read('System.Dimensions.avatar')[1]
+                    ),
                 ],
             ]);
 
