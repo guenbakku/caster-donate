@@ -201,7 +201,8 @@ $this->end();
                                             $this, 
                                             [
                                                 'button_text' => __('Thêm hình ảnh'),
-                                                'file_type_id' => $this->Code->setTable('resource_types')->getKey('image','id'),
+                                                'resource_type_id' => $this->Code->setTable('resource_types')->getKey('image', 'id'),
+                                                'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
                                                 'drag_drop_area_id'  =>  'upload_donate_image',
                                                 'callBackFunction'  => 'updateAfterUploadResource',
                                             ]
@@ -243,7 +244,8 @@ $this->end();
                                             $this, 
                                             [
                                                 'button_text' => __('Thêm file âm thanh'),
-                                                'file_type_id' => $this->Code->setTable('resource_types')->getKey('audio','id'),
+                                                'resource_type_id' => $this->Code->setTable('resource_types')->getKey('audio', 'id'),
+                                                'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
                                                 'drag_drop_area_id'  =>  'upload_donate_audio',
                                                 // 'callBackFunction'  => 'updateAfterUploadResource',
                                             ]

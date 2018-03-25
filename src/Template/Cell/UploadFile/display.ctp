@@ -54,8 +54,10 @@ echo $rootView->Form->create($resource,[
 ]);
 echo $rootView->cell('DragDropArea', [$rootView, 'filename', $setting['drag_drop_area_id']]); 
 echo $rootView->Form->hidden('resource_type_id', [
-    'value' => $setting['file_type_id'],
-    'label' => __('Giới tính'),
+    'value' => $setting['resource_type_id'],
+]) ;
+echo $rootView->Form->hidden('resource_feature_id', [
+    'value' => $setting['resource_feature_id'],
 ]) ;
 echo $rootView->Form->submit('Thêm hình mới', array(
     'class' => 'form-control btn btn-block btn-success',

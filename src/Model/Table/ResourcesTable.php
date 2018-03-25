@@ -56,7 +56,7 @@ class ResourcesTable extends AppTable
             ->add('filename', [
                 'uploadError' => [
                     'rule' => ['uploadError', true],
-                    'message' => 'Có lỗi xảy ra trong quá trình tải file.',
+                    'message' => __('Có lỗi xảy ra trong quá trình tải file.'),
                 ],
                 'fileSize' => [
                     'rule' => ['fileSize', '<=', Configure::read('vcv.uploadFileSize')],
@@ -67,6 +67,7 @@ class ResourcesTable extends AppTable
                     'last' => true,
                 ],
             ]);
+        
         return $validator;
     }
 
