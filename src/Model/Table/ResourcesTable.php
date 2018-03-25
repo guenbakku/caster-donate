@@ -33,10 +33,10 @@ class ResourcesTable extends AppTable
         $this->addBehavior('Upload', [
             'filename' => [
                 //'path' sẽ được set ở Logic tùy theo định dạng của tài nguyên
-                'keepFileOnEdit' => false,
-                'keepFileOnDelete' => false,
-                'resizeTo' => [600,600],
-                'keepRatio' => true
+                'keepFilesOnEdit' => false,
+                'keepFilesOnDelete' => false,
+                'resizeTo' => [600, 600],
+                'resizeKeepRatio' => true
             ]
         ]);
     }
