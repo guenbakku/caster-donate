@@ -44,6 +44,48 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
+Entity1=resource_features
+Entity2=resources
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=resource_feature_id
+Cardinarity1=
+Cardinarity2=
+Position="THONG BAO DONATE",0,6097,3903,7037,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20180325115130
+LineMode=0
+Bar1=610
+Bar2=390
+Bar3=704
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=resource_features
+LName=Feature sử dụng tài nguyên
+Comment=
+TableOption=
+Page=Thong bao donate
+Left=3200
+Top=1800
+Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Tên","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thứ tự sắp xếp","order_no","INT(11)",,,"","",$FFFFFFFF,""
+Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Tag=list
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20180325114923
+Position="Thong bao donate",3200,1800
+
+[Relation]
 Entity1=resources
 Entity2=donation_notification_settings
 RelationType1=2
@@ -94,15 +136,15 @@ Fields1=id
 Fields2=resource_type_id
 Cardinarity1=
 Cardinarity2=
-Position="THONG BAO DONATE",0,1865,8135,1866,R,R
+Position="THONG BAO DONATE",0,1865,4824,1854,R,R
 Dependence=0
 Caption=
 PName=
 ModifiedDateTime=20180303224953
 LineMode=0
 Bar1=186
-Bar2=814
-Bar3=187
+Bar2=482
+Bar3=185
 TermPos1=R
 TermPos2=R
 
@@ -113,7 +155,7 @@ Comment=
 TableOption=
 Page=THONG BAO DONATE
 Left=2350
-Top=1550
+Top=1800
 Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
@@ -125,7 +167,7 @@ Tag=list
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180304182211
-Position="THONG BAO DONATE",2350,1550
+Position="THONG BAO DONATE",2350,1800
 
 [Entity]
 PName=resources
@@ -133,21 +175,22 @@ LName=Tài nguyên
 Comment=
 TableOption=
 Page=THONG BAO DONATE
-Left=2350
+Left=2650
 Top=1100
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên tài nguyên","name","VARCHAR(256)",,,"","",$FFFFFFFF,""
 Field="Tên file tài nguyên","filename","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)",,,"","tài nguyên chung sẽ có user_id là null",$FFFFFFFF,""
 Field="Id loại tài nguyên","resource_type_id","INT(11)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Id feature sử dụng","resource_feature_id","INT(11)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180304182216
-Position="THONG BAO DONATE",2350,1100,895,315
+ModifiedDateTime=20180325115014
+Position="THONG BAO DONATE",2650,1100,895,352
 
 [Relation]
 Entity1=profiles
@@ -1303,4 +1346,4 @@ BkColor=$FFFFFF
 ModifiedDateTime=20180305214332
 Position="THANH VIEN",2800,1800,868,575
 Position="LICH LIVESTREAM",1800,250,921,706
-Position="THONG BAO DONATE",1350,400
+Position="THONG BAO DONATE",1200,250
