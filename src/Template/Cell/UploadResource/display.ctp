@@ -20,7 +20,7 @@ $cell_id = rand();
         }).done(function(response) {
             //console.log(response);
             if (response.result == true) {
-                swalSuccess(response.message);
+                swalSuccess('' + response.title, '' + response.message);
                 <?php
                 if($settings['callBackFunction'] != '')
                 {?>
@@ -31,15 +31,16 @@ $cell_id = rand();
                 }
                 ?>
             }else if (response.result == false) {
-                swalError(response.message);
+                swalError('' + response.title, '' + response.message);
             }
             //Xóa file trên DragDropArea
             var drEvent = $('#<?=$settings['drag_drop_area_id']?>').dropify();
             drEvent = drEvent.data('dropify');
             drEvent.resetPreview();
             drEvent.clearElement();
-        })// .fail(function(jqXHR) { if (jqXHR.status == 403) { window.location = '/'; } else {  console.log(jqXHR); } })
-        ;
+        }).fail(function(jqXHR) { 
+            swalError('' + jqXHR.status,'' +jqXHR.text);
+        });
         
         return false;
     }
@@ -65,7 +66,7 @@ echo $rootView->Form->hidden('resource_type_id', [
 echo $rootView->Form->hidden('resource_feature_id', [
     'value' => $settings['resource_feature_id'],
 ]) ;
-echo $rootView->Form->submit('Thêm hình mới', array(
+echo $rootView->Form->submit($settings['button_text'], array(
     'class' => 'form-control btn btn-block btn-success',
     'onClick' => 'return uploadFile'.$cell_id.'(this.form)'
 )); 

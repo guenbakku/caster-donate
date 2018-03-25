@@ -17,8 +17,10 @@ class ResourcesController extends ApiController
 
         $result=[
             'result'    => false,
+            'title'    => __('Lỗi'),
             'message'   => false,
             'newResourceInfo'  =>   [],
+            'url'   => '',
         ];
 
         if ($this->request->is('post')) {
@@ -26,11 +28,24 @@ class ResourcesController extends ApiController
             $resource = $Resources->addUserResource($user_id, $new_resource);
 
             if (!$resource->errors()) {   
-                $result['message']  =   __('Upload file thành công.');
-                $result['result']  =   true;
-                $result['newResourceInfo']  =   $resource;
+                $result=[
+                    'result'    => true,
+                    'title'    => __('Hoàn tất'),                    
+                    'message'   => __('File đã được tải lên.'),
+                    'newResourceInfo'  =>   $resource,
+                    'url'   => $resource->url,
+                ];
             } else {
-                $result['message']  =   __('Upload file không thành công !');
+                foreach( $resource->errors() as $errors){
+                    if(is_array($errors)){
+                        foreach($errors as $error){
+                            $errorMsg[]    =   $error;
+                        }
+                    }else{
+                        $errorMsg[]    =   $errors;
+                    }
+                }
+                $result['message']  =   implode("\n \r", $errorMsg);
             }
             
         } else {
