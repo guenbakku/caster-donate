@@ -144,6 +144,20 @@ class ProfilesTable extends AppTable
                     ),
                     'last' => true,
                 ],
+                'minWidth' => [
+                    'rule' => ['imageWidth', '>=', Configure::read('System.Dimensions.avatar')[0]],
+                    'message' => __(
+                        'Chiều rộng ảnh tải lên không được nhỏ hơn {0}.',
+                        Configure::read('System.Dimensions.avatar')[0]
+                    ),
+                ],
+                'minHeight' => [
+                    'rule' => ['imageHeight', '>=', Configure::read('System.Dimensions.avatar')[1]],
+                    'message' => __(
+                        'Chiều cao ảnh tải lên không được nhỏ hơn {0}.',
+                        Configure::read('System.Dimensions.avatar')[1]
+                    ),
+                ],
             ]);
 
         return $validator;
