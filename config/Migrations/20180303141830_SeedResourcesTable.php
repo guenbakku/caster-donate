@@ -11,6 +11,7 @@ class SeedResourcesTable extends AbstractMigration
                 'name' => 'Test 1',
                 'filename' => 'public/1.jpg',
                 'resource_type_id' => 1,
+                'resource_feature_id' => 1,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
