@@ -23,8 +23,9 @@ class ApiController extends AppController
         $this->loadComponent('RequestHandler');
         // $this->eventManager()->off($this->Csrf);
         $this->viewBuilder()->layout('ajax');
-        $this->response->charset('UTF-8');
-        $this->response->type('json');
+        $this->response = $this->response
+            ->withCharset('UTF-8')
+            ->withType('json');
     }
 
     public function beforeRender(Event $event)
