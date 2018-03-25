@@ -22,7 +22,7 @@ class Resources
         
         if($type_id != null)
         {
-            
+            $resources->where(["resource_type_id" => $type_id]);
         }
         $resources = $resources->andWhere([
             'OR' =>[
@@ -61,7 +61,7 @@ class Resources
             $uploadSettings = [
                 'filename' => [
                     'path' => Configure::read('System.Paths.resource_dir.image'),
-                    'resizeTo' => [600, 600],
+                    'resizeTo' => [300, 300],
                     'resizeKeepRatio' => true
                 ]
             ];

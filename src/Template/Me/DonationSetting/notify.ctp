@@ -37,14 +37,8 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 });
 </script>
 <script>
-    function updateAfterUploadResource(response){
-        var newResourceInfo = response.newResourceInfo;
-        var message =   response.message;
-        var result =   response.result;
-        var path =  newResourceInfo.dir.replace("webroot", "") + '/' + newResourceInfo.filename;
-        $('#image_resources').prepend(
-           '<div class="col-sm-4"><input type="radio" id="'+newResourceInfo.id+'" name="image_id" value="'+newResourceInfo.id+'"><label for="'+newResourceInfo.id+'"><img src="'+ path+'" height="128"></label></div>'
-        );
+    function updateImageResourceAfterUpload(response){
+        $('img[data-type="'+response.newResourceInfo.user_id+'"]').attr("src",response.url).click();
     }
     
     function testAnim(effect,target) {
@@ -179,33 +173,16 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                     <div class="col-sm-3">
                                         <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>                                    
                                     </div>
-                                    <div class="col-sm-9" id="image_resources">
+                                    <div class="col-sm-9">
                                         <?php 
-                                        foreach($image_resources as $key => $resource)
+                                        foreach($image_resources as $resource)
                                         {
-                                            echo '<div class="col-sm-4">';
+                                            echo '<div class="col-sm-6">';
                                             echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="'.$resource['id'].'" checked>';
-                                            echo '<label for="'.$resource['id'].'">'.$this->Html->image($resource->url, ['height' => 128]) .'</label>';
+                                            echo '<label for="'.$resource['id'].'"> '.$this->Html->image($resource->url, ['height' => 128,'data-type' => $resource['user_id']]) .'</label>';
                                             echo '</div>';
                                         }
                                         ?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?=__('Upload file mới')?></label>
-                                    <div class="col-sm-9">
-                                        <?php 
-                                        echo $this->cell('UploadResource',[
-                                            $this, 
-                                            [
-                                                'button_text' => __('Thêm hình ảnh'),
-                                                'resource_type_id' => $this->Code->setTable('resource_types')->getKey('image', 'id'),
-                                                'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
-                                                'drag_drop_area_id'  =>  'upload_donate_image',
-                                                'callBackFunction'  => 'updateAfterUploadResource',
-                                            ]
-                                        ]);
-                                        ?> 
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +214,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                     <div class="col-sm-9">
                             
                                         <?php
-                                        // echo $this->cell('DragDropArea', [$this, 'filename']); 
                                         echo $this->cell('UploadResource',[
                                             $this, 
                                             [
@@ -259,7 +235,19 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 
 
                         <section id="section-iconbox-4">
-                            <div class="white-box form-horizontal">                            
+                            <div class="white-box form-horizontal">  
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?=__('Màu chữ thông báo')?></label>
+                                    <div class="col-sm-9">
+                                        <input name="A" type="text" class="colorpicker form-control" value="#ff7676" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?=__('Màu chữ lời nhắn')?></label>
+                                    <div class="col-sm-9">
+                                        <input name="B" type="text" class="colorpicker form-control" value="#ffffff" />
+                                    </div>
+                                </div>                          
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Hiệu ứng xuất hiện')?></label>
                                     <div class="col-sm-9">
@@ -414,18 +402,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?=__('Màu chữ thông báo')?></label>
-                                    <div class="col-sm-9">
-                                        <input name="A" type="text" class="colorpicker form-control" value="#ff7676" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?=__('Màu chữ lời nhắn')?></label>
-                                    <div class="col-sm-9">
-                                        <input name="B" type="text" class="colorpicker form-control" value="#ffffff" />
-                                    </div>
-                                </div>
                             </div>
                         </section>
 
@@ -467,6 +443,59 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             </section>
 
 
+        </div>
+    </div>
+
+    
+</div>
+
+
+<div class="row">
+<div class="col-md-offset-4 col-md-4 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><?=__('Sử dụng hình ảnh riêng của bạn')?></div>
+            <div class="panel-wrapper collapse in">
+                            
+                        <?php
+                        echo $this->cell('UploadResource',[
+                            $this, 
+                            [
+                                'button_text' => __('Thêm file âm thanh'),
+                                'resource_type_id' => $this->Code->setTable('resource_types')->getKey('audio', 'id'),
+                                'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
+                                'drag_drop_area_id'  =>  'upload_donate_audio',
+                                // 'callBackFunction'  => 'updateAfterUploadResource',
+                            ]
+                        ]);
+                        ?> 
+
+            </div>
+            <div class="col-sm-6">
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><?=__('Sử dụng âm thanh riêng của bạn')?></div>
+            <div class="panel-wrapper collapse in">
+                <?php
+                echo $this->cell('UploadResource',[
+                    $this, 
+                    [
+                        'button_text' => __('Thêm file âm thanh'),
+                        'resource_type_id' => $this->Code->setTable('resource_types')->getKey('audio', 'id'),
+                        'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
+                        'drag_drop_area_id'  =>  'upload_donate_audio',
+                        // 'callBackFunction'  => 'updateAfterUploadResource',
+                    ]
+                ]);
+                ?> 
+            </div>
+            <div class="col-sm-6">
+                <br>
+            </div>
         </div>
     </div>
 </div>
