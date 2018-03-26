@@ -38,9 +38,18 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 </script>
 <script>
     function updateImageResourceAfterUpload(response){
-        $('img[data-type="'+response.newResourceInfo.user_id+'"]').attr("src",response.url).click();
+        $('div').find('[data-img-original=true]').remove();
+        $('#image_resources').prepend('<div class="col-sm-6" data-img-original="true"><input type="radio" id="'+response.newResourceInfo.id+'" name="image_id" value="'+response.newResourceInfo.id+'"><label for="'+response.newResourceInfo.id+'"> <img src="'+response.url+'" height="128" alt=""></label></div>');
+        $('div').find('[data-img-original=true]').find("img").click();
     }
     
+    function updateAudioResourceAfterUpload(response){
+        $('div').find('[data-audio-original=true]').remove();
+        $('#audio_resources').prepend('<option data-audio-original="true" value="'+response.newResourceInfo.id+'" data-url="'+response.url+'" selected="">'+response.newResourceInfo.name+'</option>');
+        $('div').find('[data-audio-original=true]').click();
+        console.log(response);
+    }
+
     function testAnim(effect,target) {
         $(target).finish();
         $(target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -85,8 +94,8 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             //cập nhật âm thanh
             audio.pause();
             audio.currentTime = 0;
-            audio.src = $("select[name='alert-donate-sound']").find(":selected").val();
-            //audio.play();
+            audio.src = $("select[name='audio_id']").find(":selected").data('url');
+            audio.play();
             //biểu diễn hiệu ứng
             testAnim($('#animationValue1').val(), '#alert-donate-box');
             setTimeout(
@@ -173,12 +182,12 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                     <div class="col-sm-3">
                                         <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>                                    
                                     </div>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-9" id="image_resources">
                                         <?php 
                                         foreach($image_resources as $resource)
                                         {
-                                            echo '<div class="col-sm-6">';
-                                            echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="'.$resource['id'].'" checked>';
+                                            echo '<div class="col-sm-6" data-img-original="'.(($resource['user_id'] == null)?'false':'true').'">';
+                                            echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="'.$resource['id'].'">';
                                             echo '<label for="'.$resource['id'].'"> '.$this->Html->image($resource->url, ['height' => 128,'data-type' => $resource['user_id']]) .'</label>';
                                             echo '</div>';
                                         }
@@ -196,38 +205,17 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"></label>
                                     <div class="col-sm-9">
-                                        <select class="form-control my-designed-scrollbar" name="alert-donate-sound" size="9">
-                                        <option value="https://freemusicarchive.org/file/music/Creative_Commons/Podington_Bear/Piano_IV_Cinematic/Podington_Bear_-_Bittersweet.mp3" selected>Jam On It</option>
-                                        <option value="https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3">Stoker</option>
-                                        <option value="https://freemusicarchive.org/file/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3">Skull Fire</option>
-                                        <option value="https://freemusicarchive.org/file/music/none_given/Audiobinger/Audiobinger_-_Singles/Audiobinger_-_Sandman.mp3">Scurvy Pirate</option>
-                                        <option value="https://freemusicarchive.org/file/music/ccCommunity/Borrtex/Snowflake/Borrtex_-_01_-_Snowflake.mp3">Circle</option>
-                                        <option value="https://freemusicarchive.org/file/music/ccCommunity/Dan_Lerch/A_Very_Badgerland_Christmas_2011/Dan_Lerch_-_09_-_O_Tannenbaum.mp3">Palse</option>
-                                        <option value="https://freemusicarchive.org/file/music/ccCommunity/Lobo_Loco/CAVE_OF_MIRACLES/Lobo_Loco_-_05_-_Manhattan_Skyline_ID_761.mp3">Hello</option>
-                                        <option value="https://freemusicarchive.org/file/music/no_curator/Scott_Holmes/Corporate__Motivational_Music/Scott_Holmes_-_09_-_Follow_your_Dreams.mp3">Samurai Heart</option>
-                                        <option value="https://freemusicarchive.org/file/music/none_given/Audiobinger/Audiobinger_-_Singles/Audiobinger_-_Sandman.mp3">Tone 1</option>
+                                        <select class="form-control my-designed-scrollbar" name="audio_id" id="audio_resources" size="9">
+                                        <?php 
+                                        foreach($audio_resources as $resource)
+                                        {
+                                            echo '<option data-audio-original="'.(($resource['user_id'] == null)?'false':'true').'" value="'.$resource['id'].'" data-url="'.$this->Url->build($resource['url'],['fullBase' => true]).'" selected>'.$resource['name'].'</option>';
+                                        }
+                                        ?>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label"><?=__('hoặc sử dụng file âm thanh của bạn')?></label>
-                                    <div class="col-sm-9">
-                            
-                                        <?php
-                                        echo $this->cell('UploadResource',[
-                                            $this, 
-                                            [
-                                                'button_text' => __('Thêm file âm thanh'),
-                                                'resource_type_id' => $this->Code->setTable('resource_types')->getKey('audio', 'id'),
-                                                'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
-                                                'drag_drop_area_id'  =>  'upload_donate_audio',
-                                                // 'callBackFunction'  => 'updateAfterUploadResource',
-                                            ]
-                                        ]);
-                                        ?> 
 
-                                    </div>
-                                </div>
                             </div>
                         </section>
 
@@ -456,18 +444,18 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             <div class="panel-heading"><?=__('Sử dụng hình ảnh riêng của bạn')?></div>
             <div class="panel-wrapper collapse in">
                             
-                        <?php
-                        echo $this->cell('UploadResource',[
-                            $this, 
-                            [
-                                'button_text' => __('Thêm file âm thanh'),
-                                'resource_type_id' => $this->Code->setTable('resource_types')->getKey('audio', 'id'),
-                                'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
-                                'drag_drop_area_id'  =>  'upload_donate_audio',
-                                // 'callBackFunction'  => 'updateAfterUploadResource',
-                            ]
-                        ]);
-                        ?> 
+                    <?php 
+                    echo $this->cell('UploadResource',[
+                        $this, 
+                        [
+                            'button_text' => __('Thêm file hình ảnh'),
+                            'resource_type_id' => $this->Code->setTable('resource_types')->getKey('image', 'id'),
+                            'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
+                            'drag_drop_area_id'  =>  'upload_donate_image',
+                            'callBackFunction'  => 'updateImageResourceAfterUpload',
+                        ]
+                    ]);
+                    ?> 
 
             </div>
             <div class="col-sm-6">
@@ -488,7 +476,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                         'resource_type_id' => $this->Code->setTable('resource_types')->getKey('audio', 'id'),
                         'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
                         'drag_drop_area_id'  =>  'upload_donate_audio',
-                        // 'callBackFunction'  => 'updateAfterUploadResource',
+                        'callBackFunction'  => 'updateAudioResourceAfterUpload',
                     ]
                 ]);
                 ?> 

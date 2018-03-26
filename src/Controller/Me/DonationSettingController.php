@@ -26,8 +26,9 @@ class DonationSettingController extends AppController
         
         $resourceTb = new Resources();
         $image_resources = $resourceTb->getAllAvailableResources($user_id,'image');
+        $audio_resources = $resourceTb->getAllAvailableResources($user_id,'audio');
 
-        $this->set(compact('donation_notification_setting','image_resources'));
+        $this->set(compact('donation_notification_setting','image_resources','audio_resources'));
 
     }
 
