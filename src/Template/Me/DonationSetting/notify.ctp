@@ -59,6 +59,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 
     $(document).ready(function () {
         var audio = new Audio();
+        var anime_handle;
         $('.js--triggerAnimation').click(function (e) {
             e.preventDefault();
             var anim = $('#'+$(this).data('value')).val();
@@ -72,6 +73,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             testAnim(anim,'#' + target);
         });
         $('#alert-donate-preview-button').click(function(e){
+            clearTimeout(anime_handle);
             //cập nhật nội dung text
             var m1 = replace_message($('#message1').html());
             var m2 = replace_message($('#message2').html());
@@ -98,14 +100,18 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             audio.play();
             //biểu diễn hiệu ứng
             testAnim($('#animationValue1').val(), '#alert-donate-box');
-            setTimeout(
-            function() 
-            {
-                $('#alert-donate-box').delay( 800 ).removeClass().addClass($('#animationValue2').val() + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                    audio.pause();
-                    audio.currentTime = 0;
-                });
-            }, $("input[name='alert-donate-time']").val() * 1000);
+            anime_handle = setTimeout(
+                function() 
+                {
+                    $('#alert-donate-box').delay( 800 ).removeClass().addClass($('#animationValue2').val() + ' animated').one(
+                        'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+                        function () {
+                            audio.pause();
+                            audio.currentTime = 0;
+                        }
+                    );
+                }, $("input[name='alert-donate-time']").val() * 1000
+            );
         });
     });
     function replace_message(text){
