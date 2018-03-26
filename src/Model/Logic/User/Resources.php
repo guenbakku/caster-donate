@@ -55,6 +55,7 @@ class Resources
         $codeHelper = new CodeHelper(new \Cake\View\View());
         $resource = $this->resourcesTb->newEntity();
         $resource['user_id'] = $user_id;
+        $resource['name'] = $new_resource['filename']['name'];
         $uploadSettings = [];
 
         if ($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('image', 'id')) {
