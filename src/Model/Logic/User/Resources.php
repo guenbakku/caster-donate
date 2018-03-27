@@ -50,12 +50,13 @@ class Resources
        
     }
 
-    public function addUserResource($user_id, array $new_resource)
+    public function addPrivateResource($user_id, array $new_resource)
     {
+        $new_resource   =   array_merge($new_resource, [
+            'name' => $new_resource['filename']['name'],
+            'user_id' => $user_id,
+        ]);
         $codeHelper = new CodeHelper(new \Cake\View\View());
-        $resource = $this->resourcesTb->newEntity();
-        $resource['user_id'] = $user_id;
-        $resource['name'] = $new_resource['filename']['name'];
         $uploadSettings = [];
 
         if ($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('image', 'id')) {
@@ -77,10 +78,11 @@ class Resources
             $validate = 'audio';
         }
         
+        $resource = $this->resourcesTb->newEntity();
         $this->resourcesTb->patchEntity($resource, $new_resource,[
             'validate' => $validate,
         ]);
-
+        
         if (!$resource->errors()) {
             $this->resourcesTb->behaviors()->get('Upload')->config($uploadSettings);
             $conn = $this->resourcesTb->getConnection();

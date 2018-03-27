@@ -19,21 +19,22 @@ class ResourcesController extends ApiController
             'result'    => false,
             'title'    => __('Lỗi'),
             'message'   => false,
-            'newResourceInfo'  =>   [],
+            'resource'  =>   [],
             'url'   => '',
         ];
 
         if ($this->request->is('post')) {
             $new_resource = $this->request->getData();
-            $resource = $Resources->addUserResource($user_id, $new_resource);
+            $resource = $Resources->addPrivateResource($user_id, $new_resource);
 
             if (!$resource->errors()) {   
                 $result=[
                     'result'    => true,
                     'title'    => __('Hoàn tất'),                    
                     'message'   => __('File đã được tải lên.'),
-                    'newResourceInfo'  =>   $resource,
-                    'url'   => $resource->url,
+                    'resource' => array_merge($resource->toArray(), [
+                        'url' => $resource->url,
+                    ])
                 ];
             } else {
                 foreach( $resource->errors() as $errors){

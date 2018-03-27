@@ -39,18 +39,42 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 <script>
     function updateImageResourceAfterUpload(response){
         $('div').find('[data-img-original=true]').remove();
-        $('#image_resources').prepend('<div class="col-sm-6" data-img-original="true"><input type="radio" id="'+response.newResourceInfo.id+'" name="image_id" value="'+response.newResourceInfo.id+'"><label for="'+response.newResourceInfo.id+'"> <img src="'+response.url+'" height="128" alt=""></label></div>');
+        var img = $('<img>',{
+            height  :   128,
+            src     :   response.resource.url
+        });
+
+        var label = $('<label>',{
+            for :   response.resource.id
+        }).append(img);
+
+        var input = $('<input>',{
+            type    :    'radio',
+            id      :    response.resource.id,
+            name    :    'image_id',
+            value   :    response.resource.id
+        });
+        var div =   $('<div>',{
+            class : 'col-sm-6',
+            'data-img-original': true,
+        }).append(input).append(label);
+        $('#image_resources').prepend(div);
         $('div').find('[data-img-original=true]').find("img").click();
     }
     
     function updateAudioResourceAfterUpload(response){
         $('div').find('[data-audio-original=true]').remove();
-        $('#audio_resources').prepend('<option data-audio-original="true" value="'+response.newResourceInfo.id+'" data-url="'+response.url+'" selected="">'+response.newResourceInfo.name+'</option>');
+        var dom = $('<option>',{
+                'data-audio-original': true,
+                'data-url': response.resource.url,
+                value: response.resource.id,
+            }).text(response.resource.name);//hàm text đã thực hiện escape xxs
+        $('#audio_resources').prepend(dom);
         $('div').find('[data-audio-original=true]').click();
         console.log(response);
     }
 
-    function testAnim(effect,target) {
+    function previewAnimation(effect,target) {
         $(target).finish();
         $(target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
@@ -64,24 +88,24 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             e.preventDefault();
             var anim = $('#'+$(this).data('value')).val();
             var target = $(this).data('target');
-            testAnim(anim,'#' + target);
+            previewAnimation(anim,'#' + target);
         });
 
         $('.js--animations').change(function () {
             var anim = $(this).val();
             var target = $(this).data('target');
-            testAnim(anim,'#' + target);
+            previewAnimation(anim,'#' + target);
         });
         $('#alert-donate-preview-button').click(function(e){
             clearTimeout(anime_handle);
             //cập nhật nội dung text
-            var m1 = replace_message($('#message1').html());
-            var m2 = replace_message($('#message2').html());
-            var m3 = replace_message($('#message3').html());
-            var m4 = replace_message($('#message4').html());
-            var t1 = replace_message($('#target1').html());
-            var t2 = replace_message($('#target2').html());
-            var t3 = replace_message($('#target3').html());
+            var m1 = replaceMessage($('#message1').html());
+            var m2 = replaceMessage($('#message2').html());
+            var m3 = replaceMessage($('#message3').html());
+            var m4 = replaceMessage($('#message4').html());
+            var t1 = replaceMessage($('#target1').html());
+            var t2 = replaceMessage($('#target2').html());
+            var t3 = replaceMessage($('#target3').html());
             $('.alert-donate-thank-you')
                 .css('color',$('input[name=A]').val())
                 .html(m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4);
@@ -93,13 +117,15 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                 var checked_input_id = $(this).attr("id");
                 $('#alert-donate-image').attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));
             });
+            
             //cập nhật âm thanh
             audio.pause();
             audio.currentTime = 0;
             audio.src = $("select[name='audio_id']").find(":selected").data('url');
             audio.play();
+            
             //biểu diễn hiệu ứng
-            testAnim($('#animationValue1').val(), '#alert-donate-box');
+            previewAnimation($('#animationValue1').val(), '#alert-donate-box');
             anime_handle = setTimeout(
                 function() 
                 {
@@ -114,7 +140,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             );
         });
     });
-    function replace_message(text){
+    function replaceMessage(text){
         switch (text){
             case '[Người ủng hộ]': text = '<strong>Nguyễn Văn A</strong>'; break;
             case '[Người nhận]': text = '<strong><?=$this->Auth->user('profile.nickname')?></strong>'; break;
@@ -134,12 +160,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 
 <?php $this->append("css"); ?>
 <style type="text/css">
-.image_picker_selector{
-    text-align: center;
-}
-.thumbnails.image_picker_selector li .thumbnail img {
-    height: 70px;
-}
 </style>
 <?php $this->end(); ?>
 
