@@ -12,15 +12,14 @@ class ApiController extends AppController
 {
     public function beforeFilter(Event $event)
     {
+        parent::beforeFilter($event);
+
         if (!Configure::read('debug')) {
             if (!$this->request->is('ajax')) {
                 throw new BadRequestException('Need ajax request');
             }
         }
 
-        parent::beforeFilter($event);
-
-        $this->loadComponent('RequestHandler');
         // $this->eventManager()->off($this->Csrf);
         $this->viewBuilder()->layout('ajax');
         $this->response = $this->response

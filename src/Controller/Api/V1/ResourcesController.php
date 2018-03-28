@@ -2,6 +2,7 @@
 namespace App\Controller\Api\V1;
 
 use Cake\Event\Event;
+use Cake\Utility\Hash;
 use Cake\Core\Configure;
 use Cake\Collection\Collection;
 use Cake\Network\Exception\BadRequestException;
@@ -37,15 +38,11 @@ class ResourcesController extends ApiController
                     ])
                 ];
             } else {
-                foreach( $resource->errors() as $errors){
-                    if(is_array($errors)){
-                        foreach($errors as $error){
-                            $errorMsg[]    =   $error;
-                        }
-                    }else{
-                        $errorMsg[]    =   $errors;
-                    }
+                $errors = Hash::flatten($resource->errors());
+                foreach($errors as $error){
+                    $errorMsg[]    =   $error;
                 }
+                
                 $result['message']  =   implode("\n \r", $errorMsg);
             }
             
