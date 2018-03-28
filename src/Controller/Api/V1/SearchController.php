@@ -1,10 +1,6 @@
 <?php
 namespace App\Controller\Api\V1;
 
-use Cake\Event\Event;
-use Cake\Core\Configure;
-use Cake\Collection\Collection;
-use Cake\Network\Exception\BadRequestException;
 use App\Controller\Api\V1\ApiController;
 use App\Model\Logic\User\Search;
 

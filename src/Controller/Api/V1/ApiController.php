@@ -10,13 +10,6 @@ use App\Model\Logic\User\Tag;
 
 class ApiController extends AppController
 {
-    protected $defaultResult = [
-        'title' => null,
-        'message' => null,
-        'data' => null,
-        'errors' => [],
-    ];
-
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -38,16 +31,5 @@ class ApiController extends AppController
     {
         parent::beforeRender($event);
         $this->set('_serialize', false);
-    }
-
-    /**
-     * Set result for Api
-     *
-     * @param   array
-     * @return  array 
-     */
-    protected function setResult(array $result)
-    {
-        return array_merge($this->defaultResult, $result);
     }
 }
