@@ -29,11 +29,11 @@ class CreateDonationNotificationSettingsTable extends AbstractMigration
         $table->addColumn('image_id', 'uuid', [
             'null' => false,
         ]);
-        $table->addColumn('text_color1', 'integer', [
+        $table->addColumn('text_color_1', 'string', [
             'limit' => 64,
             'null' => false,
         ]);
-        $table->addColumn('text_color2', 'string', [
+        $table->addColumn('text_color_2', 'string', [
             'limit' => 64,
             'null' => false,
         ]);
@@ -46,6 +46,7 @@ class CreateDonationNotificationSettingsTable extends AbstractMigration
             'null' => false,
         ]);
         $table->addColumn('display_time', 'integer', [
+            'default' => 0,
             'limit' => 11,
             'null' => false,
         ]);
