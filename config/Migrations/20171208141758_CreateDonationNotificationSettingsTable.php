@@ -19,23 +19,7 @@ class CreateDonationNotificationSettingsTable extends AbstractMigration
         $table->addColumn('user_id', 'uuid', [
             'null' => false,
         ]);
-        $table->addColumn('message1', 'string', [
-            'limit' => 128,
-            'null' => true,
-        ]);
-        $table->addColumn('target1', 'string', [
-            'limit' => 128,
-            'null' => true,
-        ]);
-        $table->addColumn('message2', 'string', [
-            'limit' => 128,
-            'null' => true,
-        ]);
-        $table->addColumn('target2', 'string', [
-            'limit' => 128,
-            'null' => true,
-        ]);
-        $table->addColumn('message3', 'string', [
+        $table->addColumn('notify_message', 'string', [
             'limit' => 128,
             'null' => true,
         ]);
@@ -45,20 +29,25 @@ class CreateDonationNotificationSettingsTable extends AbstractMigration
         $table->addColumn('image_id', 'uuid', [
             'null' => false,
         ]);
-        $table->addColumn('text_effect_id', 'uuid', [
+        $table->addColumn('text_color1', 'integer', [
+            'limit' => 64,
             'null' => false,
         ]);
-        $table->addColumn('text_fontsize', 'integer', [
-            'limit' => 11,
+        $table->addColumn('text_color2', 'string', [
+            'limit' => 64,
             'null' => false,
         ]);
-        $table->addColumn('text_color', 'string', [
+        $table->addColumn('appear_effect', 'string', [
+            'limit' => 64,
+            'null' => false,
+        ]);
+        $table->addColumn('disappear_effect', 'string', [
             'limit' => 64,
             'null' => false,
         ]);
         $table->addColumn('display_time', 'integer', [
+            'limit' => 11,
             'null' => false,
-            'limit' => 11
         ]);
         $table->addColumn('created', 'datetime', [
             'null' => false,
