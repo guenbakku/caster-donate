@@ -41,18 +41,18 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         $('div').find('[data-img-original=true]').remove();
         var img = $('<img>',{
             height  :   128,
-            src     :   response.resource.url
+            src     :   response.data.url
         });
 
         var label = $('<label>',{
-            for :   response.resource.id
+            for :   response.data.id
         }).append(img);
 
         var input = $('<input>',{
             type    :    'radio',
-            id      :    response.resource.id,
+            id      :    response.data.id,
             name    :    'image_id',
-            value   :    response.resource.id
+            value   :    response.data.id
         });
         var div =   $('<div>',{
             class : 'col-sm-6',
@@ -66,9 +66,9 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         $('div').find('[data-audio-original=true]').remove();
         var dom = $('<option>',{
                 'data-audio-original': true,
-                'data-url': response.resource.url,
-                value: response.resource.id,
-            }).text(response.resource.name);//hàm text đã thực hiện escape xxs
+                'data-url': response.data.url,
+                value: response.data.id,
+            }).text(response.data.name);//hàm text đã thực hiện escape xxs
         $('#audio_resources').prepend(dom);
         $('div').find('[data-audio-original=true]').click();
         console.log(response);
@@ -469,19 +469,18 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         <div class="panel panel-default">
             <div class="panel-heading"><?=__('Sử dụng hình ảnh riêng của bạn')?></div>
             <div class="panel-wrapper collapse in">
-                            
-                    <?php 
-                    echo $this->cell('UploadResource',[
-                        $this, 
-                        [
-                            'button_text' => __('Thêm file hình ảnh'),
-                            'resource_type_id' => $this->Code->setTable('resource_types')->getKey('image', 'id'),
-                            'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
-                            'drag_drop_area_id'  =>  'upload_donate_image',
-                            'callBackFunction'  => 'updateImageResourceAfterUpload',
-                        ]
-                    ]);
-                    ?> 
+                                    
+                <?=$this->cell('UploadResource',[
+                    $this, 
+                    [
+                        'button_text' => __('Thêm file hình ảnh'),
+                        'resource_type_id' => $this->Code->setTable('resource_types')->getKey('image', 'id'),
+                        'resource_feature_id' => $this->Code->setTable('resource_features')->getKey('donation_notification', 'id'),
+                        'drag_drop_area_id'  =>  'upload_donate_image',
+                        'callBackFunction'  => 'updateImageResourceAfterUpload',
+                    ]
+                ]);
+                ?> 
 
             </div>
             <div class="col-sm-6">

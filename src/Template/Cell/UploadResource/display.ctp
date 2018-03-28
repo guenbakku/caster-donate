@@ -17,28 +17,23 @@ $cell_id = rand();
             data:  formdatas,
             contentType: false,
             processData: false
-        }).done(function(response) {
-            //console.log(response);
-            if (response.result == true) {
+        }).done(function (response) {
+            if (response.errors.length == 0) {
                 swalSuccess('' + response.title, '' + response.message);
-                <?php
-                if($settings['callBackFunction'] != '')
-                {?>
+                <?php if($settings['callBackFunction'] != ''): ?>
                     var callback = $.Callbacks();
                     callback.add(<?=$settings['callBackFunction']?>);
                     callback.fire(response);
-                <?php
-                }
-                ?>
-            }else if (response.result == false) {
-                swalError('' + response.title, '' + response.message);
+                <?php endif ?>
+            } else {
+                swalError('' + response.title, '' + response.errors.join('<br>'));
             }
             //Xóa file trên DragDropArea
             var drEvent = $('#<?=$settings['drag_drop_area_id']?>').dropify();
             drEvent = drEvent.data('dropify');
             drEvent.resetPreview();
             drEvent.clearElement();
-        }).fail(function(jqXHR) { 
+        }).fail(function (jqXHR) { 
             swalError('' + jqXHR.status,'' +jqXHR.text);
         });
         
