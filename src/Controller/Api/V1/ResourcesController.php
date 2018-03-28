@@ -8,13 +8,13 @@ class ResourcesController extends ApiController
 {
     public function upload()
     {
+        $this->request->allowMethod(['post']);
+
         $user_id = $this->Auth->user('id');
         $Resources = new Resources();
 
-        if ($this->request->is('post')) {
-            $new_resource = $this->request->getData();
-            $resource = $Resources->addPrivateResource($user_id, $new_resource);
-        } 
+        $new_resource = $this->request->getData();
+        $resource = $Resources->addPrivateResource($user_id, $new_resource);
 
         $this->set(compact('resource'));
     }
