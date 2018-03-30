@@ -11,8 +11,17 @@
         <?= $this->cell('MultipleSelect', [
             $this,
             'tranport' => [
-                'read' => $this->Url->build('/api/v1/tags/get-by-name'),
-                'preSelected' => $this->Url->build('/api/v1/tags/get-by-user-id/'.$this->Auth->user('id')),
+                'read' => $this->Url->build([
+                    'prefix' => 'api/v1',
+                    'controller' => 'Tags',
+                    'action' => 'getByName'
+                ]),
+                'preSelected' => $this->Url->build([
+                    'prefix' => 'api/v1',
+                    'controller' => 'Tags',
+                    'action' => 'getByUserId',
+                    $this->Auth->user('id')
+                ]),
             ],
             'input' => [
                 // 'value' => $this->Auth->user('profile.caster_tags'),
