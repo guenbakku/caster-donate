@@ -7,7 +7,7 @@
     ])?>
         <?php $this->Form->unlockField('multiselectTagData') ?>
 
-        <p><?= __('Nhập thể loại live stream bạn muốn theo dõi') ?></p>
+        <p><?= __('Nhập thể loại live stream bạn quan tâm') ?></p>
         <?= $this->cell('MultipleSelect', [
             $this,
             'tranport' => [
