@@ -8,7 +8,7 @@ use App\Model\Logic\User\Profile;
 use App\Model\Logic\User\DonationNotificationSetting;
 use App\Model\Logic\User\Resources;
 
-class DonationSettingController extends AppController
+class DonationSettingsController extends AppController
 
 {
     public function beforeFilter(Event $event)
@@ -21,8 +21,8 @@ class DonationSettingController extends AppController
     {
         $user_id = $this->Auth->user('id');
 
-        $DonationNotificationSettingTb = new DonationNotificationSetting();
-        $donation_notification_setting = $DonationNotificationSettingTb->get($user_id);
+        $DonationNotificationSetting = new DonationNotificationSetting();
+        $donation_notification_setting = $DonationNotificationSetting->get($user_id);
         
         $resourceTb = new Resources();
         $image_resources = $resourceTb->getAllAvailableResources($user_id,'image');
