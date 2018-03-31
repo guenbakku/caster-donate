@@ -39,6 +39,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         appearEffect.find('option[value=<?=$donation_notification_setting->appear_effect?>]').prop('selected', true);
         disappearEffect.find('option[value=<?=$donation_notification_setting->disappear_effect?>]').prop('selected', true);
         time_input.val(<?=$donation_notification_setting->display_time?>);
+        
 
         $('#message1').html(notify_message_array.message1);
         $('#message2').html(notify_message_array.message2);
@@ -60,6 +61,10 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                 {value: 1, text: '「<?=__('Người ủng hộ')?>」'},
                 {value: 2, text: '「<?=__('Số tiền')?>」'},
             ]
+        });
+    
+        time_input.TouchSpin({
+            initval: 40
         });
 
         $(".colorpicker").asColorPicker();
@@ -104,10 +109,8 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             .css('color',textColor2.val())
             .html('Chúc bạn có buổi LiveStream vui vẻ.');
         //cập nhật hình ảnh
-        image_input.filter(':checked').each(function(){
-            var checked_input_id = $(this).attr("id");
-            notify_box_image.attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));
-        });
+        var checked_input_id = $('input[name=image_id]:checked').attr("id");
+        notify_box_image.attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));
         
         //cập nhật âm thanh
         audio.pause();
@@ -130,15 +133,12 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             }, time_input.val() * 1000
         );
     });
-    
-    time_input.TouchSpin({
-        initval: 40
-    });
 
     /********************
     ******FUNCTION*******
     *********************/
     function updateImageResourceAfterUpload(response){
+        console.log(response.data);
         $('div').find('[data-img-original=true]').remove();
         var img = $('<img>',{
             height  :   128,
@@ -153,14 +153,14 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             type    :    'radio',
             id      :    response.data.id,
             name    :    'image_id',
-            value   :    response.data.id
+            value   :    response.data.id,
+            checked  :   true,
         });
         var div =   $('<div>',{
             class : 'col-sm-6',
             'data-img-original': true,
         }).append(input).append(label);
         $('#image_resources').prepend(div);
-        $('div').find('[data-img-original=true]').find("img").click();
     }
     
     function updateAudioResourceAfterUpload(response){
