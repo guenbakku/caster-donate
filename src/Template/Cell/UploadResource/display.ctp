@@ -11,6 +11,8 @@ $cell_id = rand();
     function uploadFile<?=$cell_id?>(form){
         var formdatas  = new FormData(form);
         var callBackFunction = <?=$settings['callBackFunction']?>;
+        var drag_drop_area_id = <?=$settings['drag_drop_area_id']?>;
+        
         $.ajax({
             url: $(form).attr('action'),
             dataType: 'json',
@@ -30,7 +32,7 @@ $cell_id = rand();
                 swalError('' + response.title, '' + response.errors.join('<br>'));
             }
             //Xóa file trên DragDropArea
-            var drEvent = $('#<?=$settings['drag_drop_area_id']?>').dropify();
+            var drEvent = $('#' + drag_drop_area_id).dropify();
             drEvent = drEvent.data('dropify');
             drEvent.resetPreview();
             drEvent.clearElement();
