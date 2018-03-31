@@ -22,9 +22,9 @@ $this->Form->templates($FormTemplates['login']);
             ]) ?>
 
             <div class="form-group m-b-0 text-center">
-                <?= $this->Html->link(__('Quay lại trang cá nhân'), '/me', ['class' => 'm-l-5']) ?>
+                <a href="javascript:history.back();" class="m-l-5"><?= __('Quay lại') ?></a>
             </div>
             
         <?= $this->Form->end() ?>
     </div>
-</div>
+</div>"
