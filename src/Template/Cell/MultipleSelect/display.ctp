@@ -12,15 +12,13 @@ $rootView->append('script');
         var transport = <?= json_encode($transport) ?>;
         var select2Option= <?= json_encode($select2Option) ?>;
         var resultLayout= <?= json_encode($resultLayout) ?>;
-        
+        var is_jump =  <?=$transport['jump'] ?: '0'?>;
         var multipleSelect = $('#'+elemId);
-        <?php 
-        if($transport['jump'] != null)
-        {?>
+        
+        if(is_jump !== null){
             multipleSelect.on("select2:selecting", function(e) { 
-            });            
-        <?php
-        }?>
+            }); 
+        }
         var ajaxOption =    {
             ajax: {
                 url: transport['read'],
