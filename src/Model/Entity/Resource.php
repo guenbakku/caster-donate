@@ -29,9 +29,9 @@ class Resource extends Entity
      */
     protected function _getUrl()
     {
-        $Code = new Code;
+        $Code = new Code(['valueField' => 'selector']);
         $resource_type_id =& $this->_properties['resource_type_id'];
-        $resource_types = $Code->setTable('resource_types')->getList(['valueField' => 'selector']);
+        $resource_types = $Code->setTable('resource_types')->getList();
         $resource_type = $resource_types[$resource_type_id];
 
         $path = Configure::read('System.Urls.resource_dir.'.$resource_type);

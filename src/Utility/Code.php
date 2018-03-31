@@ -7,6 +7,7 @@ use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
 use Cake\Core\InstanceConfigTrait;
 use InvalidArgumentException;
+use App\Utility\CentralCacheTrait;
 
 /**
  * Manage code table.
@@ -15,8 +16,7 @@ use InvalidArgumentException;
 class Code
 {
     use InstanceConfigTrait;
-
-    protected static $cached = [];
+    use CentralCacheTrait;
 
     protected $_defaultConfig = [
         'keyField' => 'id',
@@ -51,24 +51,24 @@ class Code
      */
     public function getList(array $options = [])
     {
-        $group = 'list';
+        $options = array_merge($this->getConfig(), $options);
         $table = $this->getTable();
-        $result = [];
+        $results = [];
 
-        // We only cache result if filter was not provided
+        // We only cache results if filter was not provided
         if (is_callable($this->_filter)) {
-            $result = $this->readDBForList($table, $options);
+            $results = $this->readDBForList($table, $options);
             $this->clearFilter();
         } else {
-            $hash = static::hash($table, $options);
-            $result = static::readCache($group, $hash);
-            if (!$result) { 
-                $result = $this->readDBForList($table, $options);
-                static::writeCache($group, $hash, $result);
-            }
+            $prefix = 'list';
+            $hash = $this->hash($table, $options);
+            $key = $this->cacheKey($hash, $prefix);
+            $results = $this->rememberCache($key, function () use ($table, $options) {
+                return $this->readDBForList($table, $options);
+            });
         }
 
-        return $result;
+        return $results;
     }
 
     /**
@@ -80,24 +80,23 @@ class Code
      */
     public function getKey(string $selector, string $field = null)
     {
-        $group = 'key';
         $table = $this->getTable();
-        $result = null;
+        $results = null;
 
-        // We only cache result if filter was not provided
+        // We only cache results if filter was not provided
         if (is_callable($this->_filter)) {
-            $result = $this->readDBForKey($table, $selector);
+            $results = $this->readDBForKey($table, $selector);
             $this->clearFilter();
         } else {
-            $hash = static::hash($table, [$selector]);
-            $result = static::readCache($group, $hash);
-            if (!$result) {
-                $result = $this->readDBForKey($table, $selector);
-                static::writeCache($group, $hash, $result);
-            }
+            $prefix = 'key';
+            $hash = $this->hash($table, [$selector]);
+            $key = $this->cacheKey($hash, $prefix);
+            $results = $this->rememberCache($key, function () use ($table, $selector) {
+                return $this->readDBForKey($table, $selector);
+            });
         }
 
-        return $field === null? $result : $result->$field;
+        return $field === null? $results : $results->$field;
     }
 
     /**
@@ -126,15 +125,12 @@ class Code
     /**
      * Set filter callback
      *
-     * @param   closure: function that accepts query object as input and return query object as output
+     * @param   Callable: function that accepts query object as input and return query object as output
      * @return  object: this
      *
      * @throws \InvalidArgumentException if the $filter is not callable
      */
-    public function filter($filter) {
-        if (!is_callable($filter)) {
-            throw new InvalidArgumentException('Filter only accepts callable');
-        }
+    public function filter(Callable $filter) {
         $this->_filter = $filter;
         return $this;
     }
@@ -147,17 +143,6 @@ class Code
      */
     public function clearFilter() {
         return $this->_filter = null;
-    }
-
-    /**
-    * Clear cache (useful when write unit test case)
-    *
-    * @param   void
-    * @return  array: empty array
-    */
-    public function clearCache()
-    {
-        return static::$cached = [];
     }
 
     /**
@@ -214,34 +199,8 @@ class Code
     * @param   array: options
     * @return  string
     */
-    protected static function hash(string $table, array $options = [])
+    protected function hash(string $table, array $options = [])
     {
         return md5($table.' '.json_encode($options));
-    }
-
-    /**
-     * Cache result to memory to improve perfomance
-     * when same result is retrieved
-     *
-     * @param   string: key
-     * @param   mixed: result
-     * @return  void
-     */
-    protected static function writeCache(string $group, string $key, $result)
-    {
-        $path = $group.'.'.$key;
-        static::$cached = Hash::insert(static::$cached, $path, $result);
-    }
-
-    /**
-     * Return cached value
-     *
-     * @param   string: key
-     * @return  mixed
-     */
-    protected static function readCache(string $group, string $key)
-    {
-        $path = $group.'.'.$key;
-        return Hash::get(static::$cached, $path);
     }
 }
