@@ -56,7 +56,6 @@ $rootView->append('script');
                 },
             )
         );
-        console.log(ajaxOption);
         
         // Retrieve pre-selected values
         <?php if($transport['preSelected'] != null)

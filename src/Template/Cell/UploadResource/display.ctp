@@ -10,6 +10,7 @@ $cell_id = rand();
 <script type="text/javascript">
     function uploadFile<?=$cell_id?>(form){
         var formdatas  = new FormData(form);
+        var callBackFunction = <?=$settings['callBackFunction']?>;
         $.ajax({
             url: $(form).attr('action'),
             dataType: 'json',
@@ -20,11 +21,11 @@ $cell_id = rand();
         }).done(function (response) {
             if (response.errors.length == 0) {
                 swalSuccess('' + response.title, '' + response.message);
-                <?php if($settings['callBackFunction'] != ''): ?>
+                if(callBackFunction != ''){
                     var callback = $.Callbacks();
-                    callback.add(<?=$settings['callBackFunction']?>);
+                    callback.add(callBackFunction);
                     callback.fire(response);
-                <?php endif ?>
+                }
             } else {
                 swalError('' + response.title, '' + response.errors.join('<br>'));
             }
