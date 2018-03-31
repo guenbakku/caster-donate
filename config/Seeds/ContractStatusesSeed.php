@@ -29,8 +29,8 @@ class ContractStatusesSeed extends AbstractSeed
             ],
             [
                 'id' => 2,
-                'name' => 'Hoàn tất',
-                'selector' => 'proper',
+                'name' => 'Hợp lệ',
+                'selector' => 'valid',
                 'order_no' => 2,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),

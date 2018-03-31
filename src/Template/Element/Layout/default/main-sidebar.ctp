@@ -70,7 +70,7 @@ $groupActive = $groupActiveMatcher($groupActiveMap);
                     </span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li><a href="/me/contract/edit"><i class="mdi mdi-content-copy"></i> <span class="hide-menu"><?=__('Hợp đồng')?></span></a></li>
+                    <li><a href="/me/contract"><i class="mdi mdi-content-copy"></i> <span class="hide-menu"><?=__('Hợp đồng')?></span></a></li>
                     <li><a href="/me/withdraw/edit"><i class="mdi mdi-cash-100"></i> <span class="hide-menu"><?=__('Rút tiền')?></span></a></li>
                 </ul>
             </li>

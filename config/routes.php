@@ -65,11 +65,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('donate/perform/*', ['controller' => 'Donate', 'action' => 'perform']);
 
     $routes->prefix('me', function ($routes) {
-        $routes->redirect('/', [
-            'controller' => 'Statistics', 
-            'action' => 'index'
-        ]);
-    
+        $routes->redirect('/', ['controller' => 'Statistics', 'action' => 'index']);
+        $routes->connect('/contract', ['controller' => 'Contract', 'action' => 'view']);
         $routes->fallbacks(DashedRoute::class);
     });
     
