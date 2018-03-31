@@ -41,6 +41,7 @@ class AppView extends View
         $this->loadHelper('App.ContentHeader');
         $this->loadHelper('App.Code');
         $this->loadHelper('App.I18n');
+        $this->loadHelper('App.Me');
 
     }
 }

@@ -5,6 +5,7 @@
 /config/Migrations/schema-dump-default.lock
 /webroot/img/avatar
 /src/Controller/Test*
+/src/Template/Test/*
 /webroot/resources/img/*
 !/webroot/resources/img/public
 /webroot/resources/audio/*
