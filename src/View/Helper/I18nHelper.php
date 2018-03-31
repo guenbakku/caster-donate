@@ -6,7 +6,7 @@ use Cake\View\Helper;
 use Cake\I18n\I18n;
 
 /**
- * Access i18n data of Auth in session.
+ * I18n helper
  */
 class I18nHelper extends Helper
 {
@@ -31,7 +31,7 @@ class I18nHelper extends Helper
      */
     public function language()
     {
-        $locale = I18n::locale();
+        $locale = I18n::getLocale();
         return substr($locale, 0, 2);
     }
 }
