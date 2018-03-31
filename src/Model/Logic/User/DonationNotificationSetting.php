@@ -17,17 +17,10 @@ class DonationNotificationSetting
     public function get($user_id)
     {
         $donationNotificationSetting = $this->DonationNotificationSettingTb->findByUserId($user_id)
-        ->contain(['Resources'])
+        ->contain(['AudioResources'])
+        ->contain(['ImageResources'])
         ->first();
-
-        if ($donationNotificationSetting) {
-           
-        }
-        else {
-            $donationNotificationSetting = $this->DonationNotificationSettingTb->newEntity();
-            //debug($donationNotificationSetting);
-        }
-
+        
         return $donationNotificationSetting;
     }
 

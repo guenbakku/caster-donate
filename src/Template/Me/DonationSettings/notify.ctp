@@ -11,32 +11,133 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 ?>
 
 <?php $this->append("script"); ?>
+
 <script>
- $(function () {
-    //
-    $('.editable[data-type="text"]').editable({
-        type: 'text',
-        pk: 1, 
-        name: 'username', 
-    });
-    $('.editable[data-type="select"]').editable({
-        source: [
-              {value: 1, text: '[Người ủng hộ]'},
-              {value: 2, text: '[Người nhận]'},
-              {value: 3, text: '[Số tiền]'}
-        ]
+    var audio = new Audio();
+    var anime_handle;
+
+    var image_input = $('input[name=image_id]');
+    var audio_input = $('select[name=audio_id]');
+    var textColor1 = $('input[name=text_color_1]');
+    var textColor2 = $('input[name=text_color_2]');
+    var appearEffect = $('select#appearEffect');
+    var disappearEffect = $('select#disappearEffect');
+    var time_input = $("input[name='display_time']");
+    var notify_message_array = JSON.parse('<?=$donation_notification_setting->notify_message_array?>');
+    
+    var notify_box = $('#alert-donate-box');
+    var notify_box_image = $('#alert-donate-image');
+
+    /********************
+    ******INITILIAZIE****
+    *********************/
+    $(document).ready(function () {
+        $('#<?=$donation_notification_setting->image_id?>').prop('checked', true);
+        $('#<?=$donation_notification_setting->audio_id?>').prop('selected', true);
+        textColor1.val("<?=$donation_notification_setting->text_color_1?>");
+        textColor2.val("<?=$donation_notification_setting->text_color_2?>");
+        appearEffect.find('option[value=<?=$donation_notification_setting->appear_effect?>]').prop('selected', true);
+        disappearEffect.find('option[value=<?=$donation_notification_setting->disappear_effect?>]').prop('selected', true);
+        time_input.val(<?=$donation_notification_setting->display_time?>);
+
+        $('#message1').html(notify_message_array.message1);
+        $('#message2').html(notify_message_array.message2);
+        $('#message3').html(notify_message_array.message3);
+        $('#message4').html(notify_message_array.message4);
+        $('#target1').html(notify_message_array.target1);
+        $('#target2').html(notify_message_array.target2);
+        $('#target3').html(notify_message_array.target3);
+
+        $('.editable[data-type="text"]').editable({
+            type: 'text',
+            emptytext: '___',
+            pk: 1, 
+            name: 'username', 
+        });
+        $('.editable[data-type="select"]').editable({
+            prepend: "「___」",
+            source: [
+                {value: 1, text: '「<?=__('Người ủng hộ')?>」'},
+                {value: 2, text: '「<?=__('Số tiền')?>」'},
+            ]
+        });
+
+        $(".colorpicker").asColorPicker();
+        $(".complex-colorpicker").asColorPicker({
+            mode: 'complex'
+        });
+        $(".gradient-colorpicker").asColorPicker({
+            mode: 'gradient'
+        });
     });
 
-    $(".colorpicker").asColorPicker();
-    $(".complex-colorpicker").asColorPicker({
-        mode: 'complex'
+    
+    /********************
+    ******LISTENERS******
+    *********************/
+    $('.js--triggerAnimation').click(function (e) {
+        e.preventDefault();
+        var anim = $('#'+$(this).data('value')).val();
+        var target = $(this).data('target');
+        previewAnimation(anim,'#' + target);
     });
-    $(".gradient-colorpicker").asColorPicker({
-        mode: 'gradient'
+
+    $('.js--animations').change(function () {
+        var anim = $(this).val();
+        var target = $(this).data('target');
+        previewAnimation(anim,'#' + target);
     });
-});
-</script>
-<script>
+    $('#alert-donate-preview-button').click(function(e){
+        clearTimeout(anime_handle);
+        //cập nhật nội dung text
+        var m1 = $('#message1').html();
+        var m2 = $('#message2').html();
+        var m3 = $('#message3').html();
+        var m4 = $('#message4').html();
+        var t1 = $('#target1').html();
+        var t2 = $('#target2').html();
+        var t3 = $('#target3').html();
+        $('.alert-donate-thank-you')
+            .css('color',textColor1.val())
+            .html(replaceMessage(m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4));
+        $('.alert-donate-message')
+            .css('color',textColor2.val())
+            .html('Chúc bạn có buổi LiveStream vui vẻ.');
+        //cập nhật hình ảnh
+        image_input.filter(':checked').each(function(){
+            var checked_input_id = $(this).attr("id");
+            notify_box_image.attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));
+        });
+        
+        //cập nhật âm thanh
+        audio.pause();
+        audio.currentTime = 0;
+        audio.src = audio_input.find(":selected").data('url');
+        audio.play();
+        
+        //biểu diễn hiệu ứng
+        previewAnimation(appearEffect.val(), '#'+notify_box.attr('id'));
+        anime_handle = setTimeout(
+            function() 
+            {
+                notify_box.delay( 800 ).removeClass().addClass(disappearEffect.val() + ' animated').one(
+                    'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+                    function () {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }
+                );
+            }, time_input.val() * 1000
+        );
+    });
+    
+    time_input.TouchSpin({
+        initval: 40
+    });
+
+    /********************
+    ******FUNCTION*******
+    *********************/
     function updateImageResourceAfterUpload(response){
         $('div').find('[data-img-original=true]').remove();
         var img = $('<img>',{
@@ -70,7 +171,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                 value: response.data.id,
             }).text(response.data.name);//hàm text đã thực hiện escape xxs
         $('#audio_resources').prepend(dom);
-        $('div').find('[data-audio-original=true]').click();
+        $('option[data-audio-original=true]').prop('selected', true);
         console.log(response);
     }
 
@@ -81,85 +182,24 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         });
     };
 
-    $(document).ready(function () {
-        var audio = new Audio();
-        var anime_handle;
-        $('.js--triggerAnimation').click(function (e) {
-            e.preventDefault();
-            var anim = $('#'+$(this).data('value')).val();
-            var target = $(this).data('target');
-            previewAnimation(anim,'#' + target);
-        });
-
-        $('.js--animations').change(function () {
-            var anim = $(this).val();
-            var target = $(this).data('target');
-            previewAnimation(anim,'#' + target);
-        });
-        $('#alert-donate-preview-button').click(function(e){
-            clearTimeout(anime_handle);
-            //cập nhật nội dung text
-            var m1 = replaceMessage($('#message1').html());
-            var m2 = replaceMessage($('#message2').html());
-            var m3 = replaceMessage($('#message3').html());
-            var m4 = replaceMessage($('#message4').html());
-            var t1 = replaceMessage($('#target1').html());
-            var t2 = replaceMessage($('#target2').html());
-            var t3 = replaceMessage($('#target3').html());
-            $('.alert-donate-thank-you')
-                .css('color',$('input[name=A]').val())
-                .html(m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4);
-            $('.alert-donate-message')
-                .css('color',$('input[name=B]').val())
-                .html('Chúc bạn có buổi LiveStream vui vẻ.');
-            //cập nhật hình ảnh
-            $("input[name='image_id']:checked").each(function(){
-                var checked_input_id = $(this).attr("id");
-                $('#alert-donate-image').attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));
-            });
-            
-            //cập nhật âm thanh
-            audio.pause();
-            audio.currentTime = 0;
-            audio.src = $("select[name='audio_id']").find(":selected").data('url');
-            audio.play();
-            
-            //biểu diễn hiệu ứng
-            previewAnimation($('#animationValue1').val(), '#alert-donate-box');
-            anime_handle = setTimeout(
-                function() 
-                {
-                    $('#alert-donate-box').delay( 800 ).removeClass().addClass($('#animationValue2').val() + ' animated').one(
-                        'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
-                        function () {
-                            audio.pause();
-                            audio.currentTime = 0;
-                        }
-                    );
-                }, $("input[name='alert-donate-time']").val() * 1000
-            );
-        });
-    });
     function replaceMessage(text){
-        switch (text){
-            case '[Người ủng hộ]': text = '<strong>Nguyễn Văn A</strong>'; break;
-            case '[Người nhận]': text = '<strong><?=$this->Auth->user('profile.nickname')?></strong>'; break;
-            case '[Số tiền]': text = '<strong>10.000</strong>'; break;
-            case 'Empty': text = ''; break;
-            default: break;
-        }
+        var f = ['「Người ủng hộ」','「Số tiền」','「___」','___'];
+        var r = ['<strong>Nguyễn Văn A</strong>','<strong>10.000</strong>','',''];
+        $.each(f,function(i,v) {
+            var myregexp = new RegExp(v,'g');
+            text = text.replace(myregexp,r[i]);
+        });
         return text;
     }
-    //
-    $("input[name='alert-donate-time']").TouchSpin({
-        initval: 40
-    });
 
 </script>
 <?php $this->end(); ?> 
 
 <?php $this->append("css"); ?>
 <style type="text/css">
+.editable-cancel{
+    display:none;
+}
 </style>
 <?php $this->end(); ?>
 
@@ -212,9 +252,9 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                         <?php 
                                         foreach($image_resources as $resource)
                                         {
-                                            echo '<div class="col-sm-6" data-img-original="'.(($resource['user_id'] == null)?'false':'true').'">';
-                                            echo '<input type="radio" id="'.$resource['id'].'" name="image_id" value="'.$resource['id'].'">';
-                                            echo '<label for="'.$resource['id'].'"> '.$this->Html->image($resource->url, ['height' => 128,'data-type' => $resource['user_id']]) .'</label>';
+                                            echo '<div class="col-sm-6" data-img-original="'.(($resource->user_id == null)?'false':'true').'">';
+                                            echo '<input type="radio" id="'.$resource->id.'" name="image_id" value="'.$resource->id.'">';
+                                            echo '<label for="'.$resource->id.'"> '.$this->Html->image($resource->url, ['height' => 128,'data-type' => $resource->user_id]) .'</label>';
                                             echo '</div>';
                                         }
                                         ?>
@@ -229,13 +269,15 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                         <section id="section-iconbox-3">
                             <div class="white-box form-horizontal">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label"></label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label"><?=__('Lựa chọn âm báo')?></label><br>                                    
+                                    </div>
                                     <div class="col-sm-9">
                                         <select class="form-control my-designed-scrollbar" name="audio_id" id="audio_resources" size="9">
                                         <?php 
                                         foreach($audio_resources as $resource)
                                         {
-                                            echo '<option data-audio-original="'.(($resource['user_id'] == null)?'false':'true').'" value="'.$resource['id'].'" data-url="'.$this->Url->build($resource['url'],['fullBase' => true]).'" selected>'.$resource['name'].'</option>';
+                                            echo '<option id="'.$resource->id.'" data-audio-original="'.(($resource->user_id == null)?'false':'true').'" value="'.$resource->id.'" data-url="'.$this->Url->build($resource->url,['fullBase' => true]).'">'.$resource->name.'</option>';
                                         }
                                         ?>
                                         </select>
@@ -253,13 +295,13 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Màu chữ thông báo')?></label>
                                     <div class="col-sm-9">
-                                        <input name="A" type="text" class="colorpicker form-control" value="#ff7676" />
+                                        <input name="text_color_1" type="text" class="colorpicker form-control" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Màu chữ lời nhắn')?></label>
                                     <div class="col-sm-9">
-                                        <input name="B" type="text" class="colorpicker form-control" value="#ffffff" />
+                                        <input name="text_color_2" type="text" class="colorpicker form-control" value="" />
                                     </div>
                                 </div>                          
                                 <div class="form-group">
@@ -268,7 +310,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                         <div class="row">
                                             <div class="col-sm-8">
                                                 <div>
-                                                    <select id="animationValue1" class="form-control js--animations" data-target="animationSandbox1" size="15">
+                                                    <select id="appearEffect" class="form-control js--animations" data-target="animationSandbox1" size="15">
                                                         <optgroup label="Attention Seekers">
                                                             <option value="bounce" selected>bounce</option>
                                                             <option value="flash">flash</option>
@@ -339,7 +381,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                                 </span> 
 
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-info js--triggerAnimation" type="button" data-value="animationValue1" data-target="animationSandbox1"><?=__('Thử lại')?></button>
+                                                    <button class="btn btn-info js--triggerAnimation" type="button" data-value="appearEffect" data-target="animationSandbox1"><?=__('Thử lại')?></button>
                                                 </span> 
                                             </div>
                                         </div>
@@ -351,7 +393,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                         <div class="row">
                                             <div class="col-sm-8">
                                                 <div>
-                                                    <select id="animationValue2" class="form-control js--animations" data-target="animationSandbox2" size="15">
+                                                    <select id="disappearEffect" class="form-control js--animations" data-target="animationSandbox2" size="15">
                                                         <optgroup label="Bouncing Exits">
                                                             <option value="bounceOut" selected>bounceOut</option>
                                                             <option value="bounceOutDown">bounceOutDown</option>
@@ -409,7 +451,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                                     <img width="100" height="100" src="https://images.unsplash.com/photo-1473115209096-e0375dd6b3b3?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
                                                 </span> 
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-info js--triggerAnimation" type="button" data-value="animationValue2" data-target="animationSandbox2"><?=__('Thử lại')?></button>
+                                                    <button class="btn btn-info js--triggerAnimation" type="button" data-value="disappearEffect" data-target="animationSandbox2"><?=__('Thử lại')?></button>
                                                 </span> 
                                             </div>
                                         </div>
@@ -428,13 +470,13 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Thông điệp')?></label>
                                     <div class="col-sm-9">
-                                        <a href="#" id="message1" data-type="text" data-pk="1" class="editable" data-original-title="" title="">Cảm ơn bạn</a>
+                                        <a href="#" id="message1" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
                                         <a href="#" id="target1" data-type="select" data-value="1" class="editable"></a>
-                                        <a href="#" id="message2" data-type="text" data-pk="1" class="editable" data-original-title="" title="">đã ủng hộ</a>
+                                        <a href="#" id="message2" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
                                         <a href="#" id="target2" data-type="select" data-value="2" class="editable"></a>
-                                        <a href="#" id="message3" data-type="text" data-pk="1" class="editable" data-original-title="" title="">số tiền</a>
+                                        <a href="#" id="message3" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
                                         <a href="#" id="target3" data-type="select" data-value="3" class="editable"></a>
-                                        <a href="#" id="message4" data-type="text" data-pk="1" class="editable" data-original-title="" title="">đồng.</a>
+                                        <a href="#" id="message4" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
                                     </div>
                                 </div>
                             </div>
@@ -445,7 +487,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 <div class="form-group">
                                     <label class="col-sm-6 control-label"><?=__('Đơn vị:')?> <?=__('giây')?></label>
                                     <div class="col-sm-3">
-                                        <input type="text" value="5" name="alert-donate-time" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline">
+                                        <input type="text" value="5" name="display_time" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline">
                                     </div>
                                 </div>
                             </div>
