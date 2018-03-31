@@ -21,11 +21,17 @@ class DonationNotificationSettingsTable extends AppTable
             'bindingKey' => 'user_id', 
         ]);
         
-        //Resource
-        $this->belongsToMany('Resources',[
-            'through' => 'UsersResources',
-            'foreignKey' => 'user_id',
-            'bindingKey' => 'user_id',
+        $this->belongsTo('AudioResources',[
+            'className' =>  'Resources',
+            'foreignKey' => 'audio_id',
+            'propertyName' => 'audioResources',        
+        ]);
+
+        $this->belongsTo('ImageResources',[
+            'className' =>  'Resources',
+            'foreignKey' => 'image_id',
+            'propertyName' => 'imageResources'
+            
         ]);
     }
 
@@ -35,35 +41,7 @@ class DonationNotificationSettingsTable extends AppTable
             ->uuid('id', __('ID không hợp lệ'))
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->allowEmpty('message1')
-            ->add('message1', [
-                'maxLength' => [
-                    'rule' => ['maxLength', $this->columnLength('message1')],
-                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('message1')),
-                ],
-            ]
-        );
-        $validator
-            ->allowEmpty('message2')
-            ->add('messagemessage21', [
-                'maxLength' => [
-                    'rule' => ['maxLength', $this->columnLength('message2')],
-                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('message2')),
-                ],
-            ]
-        );
-        $validator
-            ->allowEmpty('message3')
-            ->add('message3', [
-                'maxLength' => [
-                    'rule' => ['maxLength', $this->columnLength('message3')],
-                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('message3')),
-                ],
-            ]
-        );
-        $validator->allowEmpty('target1');
-        $validator->allowEmpty('target2');
+        $validator->allowEmpty('notify_message');
 
         return $validator;
     }
