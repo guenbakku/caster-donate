@@ -10,8 +10,8 @@ $cell_id = rand();
 <script type="text/javascript">
     function uploadFile<?=$cell_id?>(form){
         var formdatas  = new FormData(form);
-        var callBackFunction = <?=$settings['callBackFunction']?>;
-        var drag_drop_area_id = <?=$settings['drag_drop_area_id']?>;
+        var callBackFunction = '<?=$settings['callBackFunction']?>';
+        var drag_drop_area_id = '<?=$settings['drag_drop_area_id']?>';
         
         $.ajax({
             url: $(form).attr('action'),
@@ -25,7 +25,7 @@ $cell_id = rand();
                 swalSuccess('' + response.title, '' + response.message);
                 if(callBackFunction != ''){
                     var callback = $.Callbacks();
-                    callback.add(callBackFunction);
+                    callback.add(window[callBackFunction]);
                     callback.fire(response);
                 }
             } else {
