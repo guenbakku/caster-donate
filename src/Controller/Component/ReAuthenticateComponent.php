@@ -32,7 +32,6 @@ class ReAuthenticateComponent extends Component
     public function initialize(array $config)
     {
         $this->setConfig(Configure::read('ReAuthenticate'));
-        parent::initialize($config);
     }
 
     /**
