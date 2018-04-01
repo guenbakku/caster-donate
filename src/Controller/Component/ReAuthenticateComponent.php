@@ -26,7 +26,14 @@ class ReAuthenticateComponent extends Component
             'redirect' => 'redirect',
             'sessionExpires' => 'expires',
         ],
+        'timeout' => 900 // seconds
     ];
+
+    public function initialize(array $config)
+    {
+        $this->setConfig(Configure::read('ReAuthenticate'));
+        parent::initialize($config);
+    }
 
     /**
      * Auto trigger after Controller::beforeFilter()
@@ -36,9 +43,6 @@ class ReAuthenticateComponent extends Component
      */
     public function startup(Event $event)
     {
-        $config = Configure::read('ReAuthenticate');
-        $this->setConfig($config);
-
         if (!$this->isBindingAction()) {
             return true;
         }
