@@ -19,8 +19,8 @@ class CreateDonationNotificationSettingsTable extends AbstractMigration
         $table->addColumn('user_id', 'uuid', [
             'null' => false,
         ]);
-        $table->addColumn('notify_message', 'string', [
-            'limit' => 128,
+        $table->addColumn('notify_message_array', 'string', [
+            'limit' => 512,
             'null' => true,
         ]);
         $table->addColumn('audio_id', 'uuid', [

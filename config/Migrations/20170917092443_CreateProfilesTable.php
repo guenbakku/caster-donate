@@ -51,10 +51,6 @@ class CreateProfilesTable extends AbstractMigration
                 'null' => true,
                 'limit' => 128,
             ])
-            ->addColumn('contracted', 'boolean', [
-                'null' => false,
-                'default' => false,
-            ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
             ])

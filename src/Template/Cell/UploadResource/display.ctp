@@ -10,6 +10,9 @@ $cell_id = rand();
 <script type="text/javascript">
     function uploadFile<?=$cell_id?>(form){
         var formdatas  = new FormData(form);
+        var callBackFunction = '<?=$settings['callBackFunction']?>';
+        var drag_drop_area_id = '<?=$settings['drag_drop_area_id']?>';
+        
         $.ajax({
             url: $(form).attr('action'),
             dataType: 'json',
@@ -20,16 +23,16 @@ $cell_id = rand();
         }).done(function (response) {
             if (response.errors.length == 0) {
                 swalSuccess('' + response.title, '' + response.message);
-                <?php if($settings['callBackFunction'] != ''): ?>
+                if(callBackFunction != ''){
                     var callback = $.Callbacks();
-                    callback.add(<?=$settings['callBackFunction']?>);
+                    callback.add(window[callBackFunction]);
                     callback.fire(response);
-                <?php endif ?>
+                }
             } else {
                 swalError('' + response.title, '' + response.errors.join('<br>'));
             }
             //Xóa file trên DragDropArea
-            var drEvent = $('#<?=$settings['drag_drop_area_id']?>').dropify();
+            var drEvent = $('#' + drag_drop_area_id).dropify();
             drEvent = drEvent.data('dropify');
             drEvent.resetPreview();
             drEvent.clearElement();

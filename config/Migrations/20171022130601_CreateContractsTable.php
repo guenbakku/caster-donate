@@ -44,11 +44,18 @@ class CreateContractsTable extends AbstractMigration
                 'null' => false,
                 'limit' => 128,
             ])
+            ->addColumn('birthday', 'date', [
+                'null' => false,
+            ])
             ->addColumn('sex_id', 'integer', [
                 'null' => false,
             ])
+            ->addColumn('address', 'string', [
+                'null' => false,
+                'limit' => 512,
+            ])
             ->addColumn('status_id', 'integer', [
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,

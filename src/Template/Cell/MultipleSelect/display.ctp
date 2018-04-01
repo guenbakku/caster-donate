@@ -12,15 +12,17 @@ $rootView->append('script');
         var transport = <?= json_encode($transport) ?>;
         var select2Option= <?= json_encode($select2Option) ?>;
         var resultLayout= <?= json_encode($resultLayout) ?>;
-        
+        $.each( resultLayout, function( key, value ) {
+            resultLayout[key] = window[value];
+        });
+
+        var is_jump =  <?=$transport['jump'] ?: '0'?>;
         var multipleSelect = $('#'+elemId);
-        <?php 
-        if($transport['jump'] != null)
-        {?>
+        
+        if(is_jump !== null){
             multipleSelect.on("select2:selecting", function(e) { 
-            });            
-        <?php
-        }?>
+            }); 
+        }
         var ajaxOption =    {
             ajax: {
                 url: transport['read'],
@@ -43,19 +45,18 @@ $rootView->append('script');
             },
         }
         multipleSelect.select2(
-            Object.assign(ajaxOption,{
-                escapeMarkup: function (markup) { return markup; }, // let custom formatter work
-                <?php
-                foreach($resultLayout as $key => $value)
+            Object.assign(
+                ajaxOption,
+                resultLayout,
+                select2Option,
                 {
-                    echo ($value != null) ? "{$key}:{$value}," : '';
-                }
-                ?>
+                    escapeMarkup: function (markup) { 
+                        return markup; 
+                    }, // let custom formatter work
                 },
-                select2Option
             )
         );
-
+        
         // Retrieve pre-selected values
         <?php if($transport['preSelected'] != null)
         {?>
@@ -82,7 +83,7 @@ $rootView->append('script');
     
 </script>
                 
-<?php $rootView->end() ?>
+<?php $rootView->end(); ?>
 
 <?= $rootView->Form->control($input['name'], [
     'type' => 'select',

@@ -17,7 +17,7 @@ class CreateBankAccountsTable extends AbstractMigration
             ->addColumn('id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('user_id', 'uuid', [
+            ->addColumn('contract_id', 'uuid', [
                 'null' => false,
             ])
             ->addColumn('name', 'string', [
@@ -43,7 +43,7 @@ class CreateBankAccountsTable extends AbstractMigration
             ->addColumn('modified', 'datetime', [
                 'null' => false,
             ])
-            ->addForeignKey('user_id', 'users', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
+            ->addForeignKey('contract_id', 'contracts', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
             ->create();
     }
 }

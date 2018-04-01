@@ -28,6 +28,14 @@ class ResourcesTable extends AppTable
             'foreignKey' => 'resource_type_id',
         ]);
 
+        $this->hasMany('DonationNotificationSettings',[
+            'bindingKey' => 'audio_id',
+        ]);
+
+        $this->hasMany('DonationNotificationSettings',[
+            'bindingKey' => 'image_id',
+        ]);
+
         // Setup upload file
         $this->addBehavior('Upload', [
             // Default setting. Các setting khác sẽ được set ở Logic
