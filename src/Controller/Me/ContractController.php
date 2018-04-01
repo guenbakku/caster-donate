@@ -29,7 +29,15 @@ class ContractController extends AppController
                     $errors = Hash::flatten($termAgree->errors());
                     $this->Flash->error(implode("\n", $errors));
                 }
+            } elseif ($this->request->is('get')) {
+                // Set kết quả từ session vào form khi quay lại từ những step sau
+                $data = $this->ChainAction->getCurrentStepData();
+                if ($data !== null) {
+                    $data = Hash::get($data, 'results');
+                    $this->RequestDataPatcher->patch($data);
+                }
             }
+            $this->set(compact('termAgree'));
         });
     }
 

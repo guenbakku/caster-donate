@@ -90,6 +90,11 @@ class ChainActionComponent extends Component
         return $this->session->read($path);
     }
 
+    public function getCurrentStepData()
+    {
+        return $this->getStepData($this->stepNo);
+    }
+
     public function getPreviousStepData()
     {
         return $this->getStepData($this->stepNo - 1);

@@ -22,12 +22,13 @@
 
     <?php 
         $this->Form->templates($FormTemplates['input-short']);
-        echo $this->Form->create(null, ['class' => 'form-horizontal new-lg-form'])
+        echo $this->Form->create($termAgree, ['class' => 'form-horizontal new-lg-form'])
     ?>
         <div class="form-group">
             <?= $this->Form->control('agree', [
                 'type' => 'checkbox',
                 'label' => __('Tôi đã đọc và đồng ý với các điều khoản trên.'),
+                'error' => false,
                 'hiddenField' => true,
             ]) ?>
         </div>
