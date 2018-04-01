@@ -15,7 +15,6 @@ class MeComponent extends Component
 
     public function initialize(array $config)
     {
-        parent::initialize($config);
         $this->Me = Me::getInstance($this->Auth);
     }
 
