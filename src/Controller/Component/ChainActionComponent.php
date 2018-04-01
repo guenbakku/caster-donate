@@ -26,6 +26,7 @@ class ChainActionComponent extends Component
             'process' => null,
             'firstStepNo' => 0,
             'timeout' => 3600, // seconds
+            'autoDestroy' => true, // auto delete all data of other processes
             'errorMessage' => __('Vui lòng thực hiện lại từ đầu'),
         ];
 
@@ -34,6 +35,21 @@ class ChainActionComponent extends Component
         
         $this->request = $this->getController()->request;
         $this->session = $this->request->session();
+    }
+
+    public function shutdown(Event $event)
+    {
+        if (!$this->getConfig('autoDestroy')) {
+            return;
+        }
+
+        $key = $this->getConfig('key');
+        $data = $this->session->read($key);
+        foreach ($data as $process => $val) {
+            if ($process !== $this->getConfig('process')) {
+                $this->session->delete($key.'.'.$process);
+            }
+        }
     }
 
     /**
@@ -84,20 +100,17 @@ class ChainActionComponent extends Component
         return $this->stepNo;
     }
 
-    public function getStepData(int $stepNo)
-    {
+    /**
+     * Return saved data of specific stepNo
+     *
+     * @param   int: step no
+     * @return  mixed
+     */
+    public function getStepData(int $stepNo = null)
+    {   
+        $stepNo = $stepNo ?? $this->stepNo;
         $path = $this->getSessionPath($stepNo);
         return $this->session->read($path);
-    }
-
-    public function getCurrentStepData()
-    {
-        return $this->getStepData($this->stepNo);
-    }
-
-    public function getPreviousStepData()
-    {
-        return $this->getStepData($this->stepNo - 1);
     }
 
     public function getSessionPath(int $stepNo = null)

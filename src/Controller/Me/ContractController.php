@@ -31,7 +31,7 @@ class ContractController extends AppController
                 }
             } elseif ($this->request->is('get')) {
                 // Set kết quả từ session vào form khi quay lại từ những step sau
-                $data = $this->ChainAction->getCurrentStepData();
+                $data = $this->ChainAction->getStepData();
                 if ($data !== null) {
                     $data = Hash::get($data, 'results');
                     $this->RequestDataPatcher->patch($data);
