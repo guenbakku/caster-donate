@@ -20,8 +20,8 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
     var audio_input = $('select[name=audio_id]');
     var textColor1 = $('input[name=text_color_1]');
     var textColor2 = $('input[name=text_color_2]');
-    var appearEffect = $('select#appearEffect');
-    var disappearEffect = $('select#disappearEffect');
+    var appearEffect = $('select[name=appear_effect]');
+    var disappearEffect = $('select[name=disappear_effect]');
     var time_input = $("input[name='display_time']");
     var notify_message_array = JSON.parse('<?=$donation_notification_setting->notify_message_array?>');
     
@@ -32,14 +32,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
     ******INITILIAZIE****
     *********************/
     $(document).ready(function () {
-        $('#<?=$donation_notification_setting->image_id?>').prop('checked', true);
-        $('#<?=$donation_notification_setting->audio_id?>').prop('selected', true);
-        textColor1.val("<?=$donation_notification_setting->text_color_1?>");
-        textColor2.val("<?=$donation_notification_setting->text_color_2?>");
-        appearEffect.find('option[value=<?=$donation_notification_setting->appear_effect?>]').prop('selected', true);
-        disappearEffect.find('option[value=<?=$donation_notification_setting->disappear_effect?>]').prop('selected', true);
-        time_input.val(<?=$donation_notification_setting->display_time?>);
-        
+        $('#<?=$donation_notification_setting->image_id?>').prop('checked', true);        
 
         $('#message1').html(notify_message_array.message1);
         $('#message2').html(notify_message_array.message2);
@@ -64,7 +57,8 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         });
     
         time_input.TouchSpin({
-            initval: 40
+            min: 4,
+            max: 20,
         });
 
         $(".colorpicker").asColorPicker();
@@ -139,7 +133,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
     *********************/
     function updateImageResourceAfterUpload(response){
         console.log(response.data);
-        $('div').find('[data-img-original=true]').remove();
+        $('div.images').has('input[data-img-original=true]').remove();
         var img = $('<img>',{
             height  :   128,
             src     :   response.data.url
@@ -155,13 +149,12 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             name    :    'image_id',
             value   :    response.data.id,
             checked  :   true,
+            'data-img-original': true,
         });
         var div =   $('<div>',{
-            class : 'col-sm-6',
-            'data-img-original': true,
+            class : 'images radio radio-info col-sm-6',
         }).append(input).append(label);
         $('#image_resources').prepend(div);
-        // $('div').find('[data-img-original=true]').find("img").click();
     }
     
     function updateAudioResourceAfterUpload(response){
@@ -230,7 +223,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
     <div class="col-md-8 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading"><?=__('Thiết lập thông báo')?></div>
-            <?php $this->Form->setTemplates($FormTemplates['donate-notification-setting']);?>
+            <?php $this->Form->setTemplates($FormTemplates['vertical']);?>
             <?=$this->Form->create($donation_notification_setting, [
                 'type' => 'put',
                 'class' => 'form-horizontal',
@@ -256,16 +249,21 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                     </div>
                                     <div class="col-sm-9" id="image_resources">
                                         <?php
-                                        echo $this->Form->unlockField('image_id');
+                                        $this->Form->templates([
+                                            'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
+                                            'radioWrapper' => '<div class="images radio radio-info col-sm-6"{{attrs}}>{{label}}</div>',
+                                        ]);
                                         foreach($image_resources as $resource)
-                                        {
-                                            echo '<div class="col-sm-6" data-img-original="'.(($resource->user_id == null)?'false':'true').'">';
-                                            echo '<input type="radio" id="'.$resource->id.'" name="image_id" value="'.$resource->id.'">';
-                                            echo '<label for="'.$resource->id.'"> '.$this->Html->image($resource->url, ['height' => 128,'data-type' => $resource->user_id]) .'</label>';
-                                            echo '</div>';
+                                        {   
+                                            $image_options[] = [ 
+                                                'data-img-original' => (($resource->user_id == null)?'false':'true'),
+                                                'value' => $resource->id,
+                                                'text' => $this->Html->image($resource->url, ['height' => 128])
+                                            ];
                                         }
+                                        echo $this->Form->radio('image_id', $image_options, ['escape' => false]);
                                         ?>
-                                    </div>-
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -283,7 +281,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                         <?php
                                         foreach($audio_resources as $resource)
                                         {
-                                            $options[] = [ 
+                                            $audio_options[] = [ 
                                                 'id' => $resource->id, 
                                                 'data-audio-original' => (($resource->user_id == null)?'false':'true'), 
                                                 'value' => $resource->id, 
@@ -291,7 +289,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                                 'text' => $resource->name 
                                             ];
                                         }
-                                        echo $this->Form->select('audio_id',$options,[
+                                        echo $this->Form->select('audio_id',$audio_options,[
                                             'class' =>  'form-control my-designed-scrollbar',
                                             'name' =>  'audio_id',
                                             'id' =>  'audio_resources',
@@ -312,13 +310,17 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Màu chữ thông báo')?></label>
                                     <div class="col-sm-9">
-                                        <input name="text_color_1" type="text" class="colorpicker form-control" value="" />
+                                        <?=$this->Form->text('text_color_1',[
+                                            'class' => 'colorpicker form-control',
+                                        ]);?>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Màu chữ lời nhắn')?></label>
                                     <div class="col-sm-9">
-                                        <input name="text_color_2" type="text" class="colorpicker form-control" value="" />
+                                        <?=$this->Form->text('text_color_2',[
+                                            'class' => 'colorpicker form-control',
+                                        ]);?>
                                     </div>
                                 </div>                          
                                 <div class="form-group">
@@ -353,7 +355,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                                         'zoomIn'=>'zoomIn', 'zoomInDown'=>'zoomInDown', 'zoomInLeft'=>'zoomInLeft', 'zoomInRight'=>'zoomInRight', 'zoomInUp'=>'zoomInUp', 
                                                     ],
                                                 ];
-                                                echo $this->Form->select('appearEffect',$options,[
+                                                echo $this->Form->select('appear_effect',$options,[
                                                     'class' =>  'form-control js--animations',
                                                     'id' =>  'appearEffect',
                                                     'size' =>  '15',
@@ -404,9 +406,9 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                                         'hinge'=>'hinge', 'rollOut'=>'rollOut', 
                                                     ],
                                                 ];
-                                                echo $this->Form->select('disappearEffect',$options,[
+                                                echo $this->Form->select('disappear_effect',$options,[
                                                     'class' => 'form-control js--animations',
-                                                    'id' => 'appearEffect',
+                                                    'id' => 'disappearEffect',
                                                     'size' => '15',
                                                     'data-target' => 'animationSandbox2'
                                                 ]);?>
@@ -420,7 +422,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                                 </span> 
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -453,9 +454,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 <div class="form-group">
                                     <label class="col-sm-6 control-label"><?=__('Đơn vị:')?> <?=__('giây')?></label>
                                     <div class="col-sm-3">
-                                        <?=$this->Form->control('display_time',[
-                                            'data-bts-button-down-class' => 'btn btn-default btn-outline',
-                                            'data-bts-button-up-class' => 'btn btn-default btn-outline',
+                                        <?=$this->Form->text('display_time',[
                                             'label' => false,
                                         ]);?>
                                     </div>
