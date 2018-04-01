@@ -86,7 +86,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         var target = $(this).data('target');
         previewAnimation(anim,'#' + target);
     });
-
     $('.js--animations').change(function () {
         var anim = $(this).val();
         var target = $(this).data('target');
@@ -110,14 +109,12 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             .html('Chúc bạn có buổi LiveStream vui vẻ.');
         //cập nhật hình ảnh
         var checked_input_id = $('input[name=image_id]:checked').attr("id");
-        notify_box_image.attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));
-        
+        notify_box_image.attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));        
         //cập nhật âm thanh
         audio.pause();
         audio.currentTime = 0;
         audio.src = audio_input.find(":selected").data('url');
-        audio.play();
-        
+        audio.play();        
         //biểu diễn hiệu ứng
         previewAnimation(appearEffect.val(), '#'+notify_box.attr('id'));
         anime_handle = setTimeout(
@@ -132,6 +129,9 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                 );
             }, time_input.val() * 1000
         );
+    });
+    $('#save-setting-button').click(function(e){
+        $('form#form-donate-setting').submit();
     });
 
     /********************
@@ -161,6 +161,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             'data-img-original': true,
         }).append(input).append(label);
         $('#image_resources').prepend(div);
+        // $('div').find('[data-img-original=true]').find("img").click();
     }
     
     function updateAudioResourceAfterUpload(response){
@@ -219,7 +220,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                     <button id="alert-donate-preview-button" class="btn btn-block btn-info"><?=__('Xem trước')?></button>
                 </div>
                 <div class="col-sm-6">
-                    <button class="btn btn-block btn-success"><?=__('Lưu thiết lập')?></button>
+                    <button id="save-setting-button" class="btn btn-block btn-success"><?=__('Lưu thiết lập')?></button>
                 </div>
             </div>
         </div>
@@ -229,7 +230,12 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
     <div class="col-md-8 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading"><?=__('Thiết lập thông báo')?></div>
-            <?php $this->Form->setTemplates($FormTemplates['vertical']);?>
+            <?php $this->Form->setTemplates($FormTemplates['donate-notification-setting']);?>
+            <?=$this->Form->create($donation_notification_setting, [
+                'type' => 'put',
+                'class' => 'form-horizontal',
+                'id' => 'form-donate-setting'
+            ]);?>
             <section>
                 <div class="sttabs tabs-style-iconbox">
                     <nav>
@@ -249,7 +255,8 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                         <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>                                    
                                     </div>
                                     <div class="col-sm-9" id="image_resources">
-                                        <?php 
+                                        <?php
+                                        echo $this->Form->unlockField('image_id');
                                         foreach($image_resources as $resource)
                                         {
                                             echo '<div class="col-sm-6" data-img-original="'.(($resource->user_id == null)?'false':'true').'">';
@@ -258,7 +265,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                             echo '</div>';
                                         }
                                         ?>
-                                    </div>
+                                    </div>-
                                 </div>
                             </div>
                         </section>
@@ -273,14 +280,24 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                         <label class="control-label"><?=__('Lựa chọn âm báo')?></label><br>                                    
                                     </div>
                                     <div class="col-sm-9">
-                                        <select class="form-control my-designed-scrollbar" name="audio_id" id="audio_resources" size="9">
-                                        <?php 
+                                        <?php
                                         foreach($audio_resources as $resource)
                                         {
-                                            echo '<option id="'.$resource->id.'" data-audio-original="'.(($resource->user_id == null)?'false':'true').'" value="'.$resource->id.'" data-url="'.$this->Url->build($resource->url,['fullBase' => true]).'">'.$resource->name.'</option>';
+                                            $options[] = [ 
+                                                'id' => $resource->id, 
+                                                'data-audio-original' => (($resource->user_id == null)?'false':'true'), 
+                                                'value' => $resource->id, 
+                                                'data-url' => $this->Url->build($resource->url,['fullBase' => true]), 
+                                                'text' => $resource->name 
+                                            ];
                                         }
+                                        echo $this->Form->select('audio_id',$options,[
+                                            'class' =>  'form-control my-designed-scrollbar',
+                                            'name' =>  'audio_id',
+                                            'id' =>  'audio_resources',
+                                            'size' =>  '9',
+                                        ]);
                                         ?>
-                                        </select>
                                     </div>
                                 </div>
 
@@ -309,77 +326,45 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                     <div class="col-sm-9">
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <div>
-                                                    <select id="appearEffect" class="form-control js--animations" data-target="animationSandbox1" size="15">
-                                                        <optgroup label="Attention Seekers">
-                                                            <option value="bounce" selected>bounce</option>
-                                                            <option value="flash">flash</option>
-                                                            <option value="pulse">pulse</option>
-                                                            <option value="rubberBand">rubberBand</option>
-                                                            <option value="shake">shake</option>
-                                                            <option value="swing">swing</option>
-                                                            <option value="tada">tada</option>
-                                                            <option value="wobble">wobble</option>
-                                                            <option value="jello">jello</option>
-                                                        </optgroup>
-                                                        <optgroup label="Bouncing Entrances">
-                                                            <option value="bounceIn">bounceIn</option>
-                                                            <option value="bounceInDown">bounceInDown</option>
-                                                            <option value="bounceInLeft">bounceInLeft</option>
-                                                            <option value="bounceInRight">bounceInRight</option>
-                                                            <option value="bounceInUp">bounceInUp</option>
-                                                        </optgroup>
-                                                        <optgroup label="Fading Entrances">
-                                                            <option value="fadeIn">fadeIn</option>
-                                                            <option value="fadeInDown">fadeInDown</option>
-                                                            <option value="fadeInDownBig">fadeInDownBig</option>
-                                                            <option value="fadeInLeft">fadeInLeft</option>
-                                                            <option value="fadeInLeftBig">fadeInLeftBig</option>
-                                                            <option value="fadeInRight">fadeInRight</option>
-                                                            <option value="fadeInRightBig">fadeInRightBig</option>
-                                                            <option value="fadeInUp">fadeInUp</option>
-                                                            <option value="fadeInUpBig">fadeInUpBig</option>
-                                                        </optgroup>
-                                                        <optgroup label="Flippers">
-                                                            <option value="flip">flip</option>
-                                                            <option value="flipInX">flipInX</option>
-                                                            <option value="flipInY">flipInY</option>
-                                                        </optgroup>
-                                                        <optgroup label="Lightspeed">
-                                                            <option value="lightSpeedIn">lightSpeedIn</option>
-                                                        </optgroup>
-                                                        <optgroup label="Rotating Entrances">
-                                                            <option value="rotateIn">rotateIn</option>
-                                                            <option value="rotateInDownLeft">rotateInDownLeft </option>
-                                                            <option value="rotateInDownRight">rotateInDownRight </option>
-                                                            <option value="rotateInUpLeft">rotateInUpLeft</option>
-                                                            <option value="rotateInUpRight">rotateInUpRight </option>
-                                                        </optgroup>
-                                                        <optgroup label="Sliding Entrances">
-                                                            <option value="slideInUp">slideInUp</option>
-                                                            <option value="slideInDown">slideInDown</option>
-                                                            <option value="slideInLeft">slideInLeft</option>
-                                                            <option value="slideInRight">slideInRight</option>
-                                                        </optgroup>
-                                                        <optgroup label="Zoom Entrances">
-                                                            <option value="zoomIn">zoomIn</option>
-                                                            <option value="zoomInDown">zoomInDown</option>
-                                                            <option value="zoomInLeft">zoomInLeft</option>
-                                                            <option value="zoomInRight">zoomInRight</option>
-                                                            <option value="zoomInUp">zoomInUp</option>
-                                                        </optgroup>
-                                                        <optgroup label="Specials">
-                                                            <option value="rollIn">rollIn</option>
-                                                        </optgroup>
-                                                    </select> 
-                                                </div>
+                                            <?php
+                                                $options = [ 
+                                                    __('Gây sự chú ý')  =>  [
+                                                        'bounce'=>'bounce', 'flash'=>'flash', 'pulse'=>'pulse', 'rubberBand'=>'rubberBand', 'shake'=>'shake', 'swing'=>'swing', 'tada'=>'tada', 'wobble'=>'wobble', 'jello'=>'jello', 'rollIn'=>'rollIn', 
+                                                    ],
+                                                    __('Nẩy') => [
+                                                        'bounceIn'=>'bounceIn', 'bounceInDown'=>'bounceInDown', 'bounceInLeft'=>'bounceInLeft', 'bounceInRight'=>'bounceInRight', 'bounceInUp'=>'bounceInUp', 
+                                                    ],
+                                                    __('Rõ dần') => [
+                                                        'fadeIn'=>'fadeIn', 'fadeInDown'=>'fadeInDown', 'fadeInDownBig'=>'fadeInDownBig', 'fadeInLeft'=>'fadeInLeft', 'fadeInLeftBig'=>'fadeInLeftBig', 'fadeInRight'=>'fadeInRight', 'fadeInRightBig'=>'fadeInRightBig', 'fadeInUp'=>'fadeInUp', 'fadeInUpBig'=>'fadeInUpBig', 
+                                                    ],
+                                                    __('Lật') => [
+                                                        'flip'=>'flip', 'flipInX'=>'flipInX', 'flipInY'=>'flipInY', 
+                                                    ],
+                                                    __('Trượt nhanh')  =>  [
+                                                        'lightSpeedIn'=>'lightSpeedIn', 
+                                                    ],
+                                                    __('Xoay')  =>  [
+                                                        'rotateIn'=>'rotateIn', 'rotateInDownLeft'=>'rotateInDownLeft', 'rotateInDownRight'=>'rotateInDownRight', 'rotateInUpLeft'=>'rotateInUpLeft', 'rotateInUpRight'=>'rotateInUpRight', 
+                                                    ],
+                                                    __('Trượt')  =>  [
+                                                        'slideInUp'=>'slideInUp', 'slideInDown'=>'slideInDown', 'zoomInLeft'=>'zoomInLeft', 'zoomInRight'=>'zoomInRight', 'zoomInUp'=>'zoomInUp', 
+                                                    ],
+                                                    __('Phóng to')  =>  [
+                                                        'zoomIn'=>'zoomIn', 'zoomInDown'=>'zoomInDown', 'zoomInLeft'=>'zoomInLeft', 'zoomInRight'=>'zoomInRight', 'zoomInUp'=>'zoomInUp', 
+                                                    ],
+                                                ];
+                                                echo $this->Form->select('appearEffect',$options,[
+                                                    'class' =>  'form-control js--animations',
+                                                    'id' =>  'appearEffect',
+                                                    'size' =>  '15',
+                                                    'data-target'  =>  'animationSandbox1'
+                                                ]);?>
                                             </div>
 
                                             <div class="col-sm-4 text-center"> 
                                                 <span id="animationSandbox1" style="display: block;" class="">
-                                                    <img width="100" height="100" src="https://images.unsplash.com/photo-1473115209096-e0375dd6b3b3?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
-                                                </span> 
-
+                                                    <?=$this->Html->image('coconut-juice.jpg', ['width' => 128])?>
+                                                </span>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-info js--triggerAnimation" type="button" data-value="appearEffect" data-target="animationSandbox1"><?=__('Thử lại')?></button>
                                                 </span> 
@@ -392,63 +377,43 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                     <div class="col-sm-9">
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <div>
-                                                    <select id="disappearEffect" class="form-control js--animations" data-target="animationSandbox2" size="15">
-                                                        <optgroup label="Bouncing Exits">
-                                                            <option value="bounceOut" selected>bounceOut</option>
-                                                            <option value="bounceOutDown">bounceOutDown</option>
-                                                            <option value="bounceOutLeft">bounceOutLeft</option>
-                                                            <option value="bounceOutRight">bounceOutRight</option>
-                                                            <option value="bounceOutUp">bounceOutUp</option>
-                                                        </optgroup>
-                                                        <optgroup label="Fading Exits">
-                                                            <option value="fadeOut">fadeOut</option>
-                                                            <option value="fadeOutDown">fadeOutDown</option>
-                                                            <option value="fadeOutDownBig">fadeOutDownBig</option>
-                                                            <option value="fadeOutLeft">fadeOutLeft</option>
-                                                            <option value="fadeOutLeftBig">fadeOutLeftBig</option>
-                                                            <option value="fadeOutRight">fadeOutRight</option>
-                                                            <option value="fadeOutRightBig">fadeOutRightBig </option>
-                                                            <option value="fadeOutUp">fadeOutUp</option>
-                                                            <option value="fadeOutUpBig">fadeOutUpBig</option>
-                                                        </optgroup>
-                                                        <optgroup label="Flippers">
-                                                            <option value="flipOutX">flipOutX</option>
-                                                            <option value="flipOutY">flipOutY</option>
-                                                        </optgroup>
-                                                        <optgroup label="Lightspeed">
-                                                            <option value="lightSpeedOut">lightSpeedOut</option>
-                                                        </optgroup>
-                                                        <optgroup label="Rotating Exits">
-                                                            <option value="rotateOut">rotateOut</option>
-                                                            <option value="rotateOutDownLeft">rotateOutDownLeft </option>
-                                                            <option value="rotateOutDownRight"> rotateOutDownRight </option>
-                                                            <option value="rotateOutUpLeft">rotateOutUpLeft </option>
-                                                            <option value="rotateOutUpRight">rotateOutUpRight </option>
-                                                        </optgroup>
-                                                        <optgroup label="Sliding Exits">
-                                                            <option value="slideOutUp">slideOutUp</option>
-                                                            <option value="slideOutDown">slideOutDown</option>
-                                                            <option value="slideOutLeft">slideOutLeft</option>
-                                                            <option value="slideOutRight">slideOutRight</option>
-                                                        </optgroup>
-                                                        <optgroup label="Zoom Exits">
-                                                            <option value="zoomOut">zoomOut</option>
-                                                            <option value="zoomOutDown">zoomOutDown</option>
-                                                            <option value="zoomOutLeft">zoomOutLeft</option>
-                                                            <option value="zoomOutRight">zoomOutRight</option>
-                                                            <option value="zoomOutUp">zoomOutUp</option>
-                                                        </optgroup>
-                                                        <optgroup label="Specials">
-                                                            <option value="hinge">hinge</option>
-                                                            <option value="rollOut">rollOut</option>
-                                                        </optgroup>
-                                                    </select> 
-                                                </div>
+                                                <?php
+                                                $options = [ 
+                                                    __('Nẩy biến mất') => [
+                                                        'bounceOut'=>'bounceOut', 'bounceOutDown'=>'bounceOutDown', 'bounceOutLeft'=>'bounceOutLeft', 'bounceOutRight'=>'bounceOutRight', 'bounceOutUp'=>'bounceOutUp', 
+                                                    ],
+                                                    __('Mờ dần') => [
+                                                        'fadeOut'=>'fadeOut', 'fadeOutDown'=>'fadeOutDown', 'fadeOutDownBig'=>'fadeOutDownBig', 'fadeOutLeft'=>'fadeOutLeft', 'fadeOutLeftBig'=>'fadeOutLeftBig', 'fadeOutRight'=>'fadeOutRight', 'fadeOutRightBig'=>'fadeOutRightBig', 'fadeOutUp'=>'fadeOutUp', 'fadeOutUpBig'=>'fadeOutUpBig', 
+                                                    ],
+                                                    __('Lật') => [
+                                                        'flipOutX'=>'flipOutX', 'flipOutY'=>'flipOutY',
+                                                    ],
+                                                    __('Trượt nhanh')  =>  [
+                                                        'lightSpeedOut'=>'lightSpeedOut', 
+                                                    ],
+                                                    __('Xoay')  =>  [
+                                                        'rotateOut'=>'rotateOut', 'rotateOutDownLeft'=>'rotateOutDownLeft', 'rotateOutDownRight'=>'rotateOutDownRight', 'rotateOutUpLeft'=>'rotateOutUpLeft', 'rotateOutUpRight'=>'rotateOutUpRight', 
+                                                    ],
+                                                    __('Trượt')  =>  [
+                                                        'slideOutUp'=>'slideOutUp', 'slideOutDown'=>'slideOutDown', 'slideOutLeft'=>'slideOutLeft', 'slideOutRight'=>'slideOutRight', 'zoomInUp'=>'zoomInUp', 
+                                                    ],
+                                                    __('Phóng to')  =>  [
+                                                        'zoomOut'=>'zoomOut', 'zoomOutDown'=>'zoomOutDown', 'zoomOutLeft'=>'zoomOutLeft', 'zoomOutRight'=>'zoomOutRight', 'zoomOutUp'=>'zoomOutUp', 
+                                                    ],
+                                                    __('Khác')  =>  [
+                                                        'hinge'=>'hinge', 'rollOut'=>'rollOut', 
+                                                    ],
+                                                ];
+                                                echo $this->Form->select('disappearEffect',$options,[
+                                                    'class' => 'form-control js--animations',
+                                                    'id' => 'appearEffect',
+                                                    'size' => '15',
+                                                    'data-target' => 'animationSandbox2'
+                                                ]);?>
                                             </div>
                                             <div class="col-sm-4 text-center"> 
                                                 <span id="animationSandbox2" style="display: block;" class="">
-                                                    <img width="100" height="100" src="https://images.unsplash.com/photo-1473115209096-e0375dd6b3b3?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
+                                                    <?=$this->Html->image('coconut-juice.jpg', ['width' => 128])?>
                                                 </span> 
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-info js--triggerAnimation" type="button" data-value="disappearEffect" data-target="animationSandbox2"><?=__('Thử lại')?></button>
@@ -469,6 +434,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                             <div class="white-box form-horizontal">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Thông điệp')?></label>
+                                    <?php echo $this->Form->unlockField('notify_message_array');?>
                                     <div class="col-sm-9">
                                         <a href="#" id="message1" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
                                         <a href="#" id="target1" data-type="select" data-value="1" class="editable"></a>
@@ -487,7 +453,11 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 <div class="form-group">
                                     <label class="col-sm-6 control-label"><?=__('Đơn vị:')?> <?=__('giây')?></label>
                                     <div class="col-sm-3">
-                                        <input type="text" value="5" name="display_time" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline">
+                                        <?=$this->Form->control('display_time',[
+                                            'data-bts-button-down-class' => 'btn btn-default btn-outline',
+                                            'data-bts-button-up-class' => 'btn btn-default btn-outline',
+                                            'label' => false,
+                                        ]);?>
                                     </div>
                                 </div>
                             </div>
@@ -497,22 +467,19 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                 </div>
                 <!-- /tabs -->
             </section>
-
-
+            <?= $this->Form->end() ?>
         </div>
     </div>
-
-    
 </div>
-
 
 <div class="row">
 <div class="col-md-offset-4 col-md-4 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading"><?=__('Sử dụng hình ảnh riêng của bạn')?></div>
             <div class="panel-wrapper collapse in">
-                                    
-                <?=$this->cell('UploadResource',[
+                <?php 
+                $this->Form->setTemplates($FormTemplates['vertical']);
+                echo $this->cell('UploadResource',[
                     $this, 
                     [
                         'button_text' => __('Thêm file hình ảnh'),
@@ -535,7 +502,8 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         <div class="panel panel-default">
             <div class="panel-heading"><?=__('Sử dụng âm thanh riêng của bạn')?></div>
             <div class="panel-wrapper collapse in">
-                <?php
+                <?php 
+                $this->Form->setTemplates($FormTemplates['vertical']);
                 echo $this->cell('UploadResource',[
                     $this, 
                     [
