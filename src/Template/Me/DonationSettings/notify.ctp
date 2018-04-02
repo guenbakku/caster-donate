@@ -32,8 +32,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
     ******INITILIAZIE****
     *********************/
     $(document).ready(function () {
-        $('#<?=$donation_notification_setting->image_id?>').prop('checked', true);        
-
         $('#message1').html(notify_message_array.message1);
         $('#message2').html(notify_message_array.message2);
         $('#message3').html(notify_message_array.message3);
@@ -41,7 +39,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         $('#target1').html(notify_message_array.target1);
         $('#target2').html(notify_message_array.target2);
         $('#target3').html(notify_message_array.target3);
-
         $('.editable[data-type="text"]').editable({
             type: 'text',
             emptytext: '___',
@@ -55,12 +52,10 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                 {value: 2, text: '「<?=__('Số tiền')?>」'},
             ]
         });
-    
         time_input.TouchSpin({
             min: 4,
             max: 20,
         });
-
         $(".colorpicker").asColorPicker();
         $(".complex-colorpicker").asColorPicker({
             mode: 'complex'
@@ -87,17 +82,11 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
     });
     $('#alert-donate-preview-button').click(function(e){
         clearTimeout(anime_handle);
-        //cập nhật nội dung text
-        var m1 = $('#message1').html();
-        var m2 = $('#message2').html();
-        var m3 = $('#message3').html();
-        var m4 = $('#message4').html();
-        var t1 = $('#target1').html();
-        var t2 = $('#target2').html();
-        var t3 = $('#target3').html();
+        //cập nhật text
+        var notify_message = getNotifyMsg('string');
         $('.alert-donate-thank-you')
             .css('color',textColor1.val())
-            .html(replaceMessage(m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4));
+            .html(replaceMessage(notify_message));
         $('.alert-donate-message')
             .css('color',textColor2.val())
             .html('Chúc bạn có buổi LiveStream vui vẻ.');
@@ -121,63 +110,83 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                         audio.currentTime = 0;
                     }
                 );
-            }, time_input.val() * 1000
+            }, 
+            time_input.val() * 1000
         );
     });
     $('#save-setting-button').click(function(e){
-        $('form#form-donate-setting').submit();
+        $('<input />').attr('type', 'hidden')
+                .attr('name', "notify_message_array")
+                .attr('value', JSON.stringify(getNotifyMsg('array')))
+                .appendTo("#form-donate-setting");
+        $("#form-donate-setting").submit();
     });
+    
 
     /********************
     ******FUNCTION*******
     *********************/
     function updateImageResourceAfterUpload(response){
-        console.log(response.data);
-        $('div.images').has('input[data-img-original=true]').remove();
         var img = $('<img>',{
             height  :   128,
             src     :   response.data.url
         });
-
-        var label = $('<label>',{
-            for :   response.data.id
-        }).append(img);
-
-        var input = $('<input>',{
-            type    :    'radio',
-            id      :    response.data.id,
-            name    :    'image_id',
-            value   :    response.data.id,
-            checked  :   true,
-            'data-img-original': true,
-        });
-        var div =   $('<div>',{
-            class : 'images radio radio-info col-sm-6',
-        }).append(input).append(label);
-        $('#image_resources').prepend(div);
-    }
-    
+        var PrivateImage = $('input[data-img-private=true]');
+        var oldPrivateImageId = PrivateImage.attr('id');
+        var PrivateImageLabel = $('label[for='+oldPrivateImageId+']');
+        PrivateImage.attr('id',response.data.id);
+        PrivateImage.attr('value',response.data.id);
+        PrivateImageLabel.attr('for',response.data.id);
+        PrivateImageLabel.html(img);
+        PrivateImageLabel.click();
+    }    
     function updateAudioResourceAfterUpload(response){
-        $('div').find('[data-audio-original=true]').remove();
+        $('div').find('[data-audio-private=true]').remove();
         var dom = $('<option>',{
-                'data-audio-original': true,
+                'data-audio-private': true,
                 'data-url': response.data.url,
                 value: response.data.id,
             }).text(response.data.name);//hàm text đã thực hiện escape xxs
         $('#audio_resources').prepend(dom);
-        $('option[data-audio-original=true]').prop('selected', true);
-        console.log(response);
+        $('option[data-audio-private=true]').prop('selected', true);
     }
-
     function previewAnimation(effect,target) {
         $(target).finish();
         $(target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
         });
     };
-
+    /*
+    *   @param {string} returnType : trả về chuỗi string ('string') hay array('array')
+    */
+    function getNotifyMsg(returnType)
+    {
+        var m1 = $('#message1').html();
+        var m2 = $('#message2').html();
+        var m3 = $('#message3').html();
+        var m4 = $('#message4').html();
+        var t1 = $('#target1').html();
+        var t2 = $('#target2').html();
+        var t3 = $('#target3').html();
+        if(returnType == 'string'){
+            text = m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4;
+            return text;
+        }else if(returnType == 'array'){
+            var array = {
+                'message1'  : $('#message1').html(),
+                'message2'  : $('#message2').html(),
+                'message3'  : $('#message3').html(),
+                'message4'  : $('#message4').html(),
+                'target1'  : $('#target1').html(),
+                'target2'  : $('#target2').html(),
+                'target3'  : $('#target3').html(),
+            };
+            return array;
+        }
+        return '';
+    }
     function replaceMessage(text){
-        var f = ['「Người ủng hộ」','「Số tiền」','「___」','___'];
+        var f = ['「Người ủng hộ」','「Số tiền」','「___」','_'];
         var r = ['<strong>Nguyễn Văn A</strong>','<strong>10.000</strong>','',''];
         $.each(f,function(i,v) {
             var myregexp = new RegExp(v,'g');
@@ -185,7 +194,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
         });
         return text;
     }
-
 </script>
 <?php $this->end(); ?> 
 
@@ -223,14 +231,10 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
     <div class="col-md-8 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading"><?=__('Thiết lập thông báo')?></div>
-            <?php $this->Form->setTemplates($FormTemplates['vertical']);?>
-            <?=$this->Form->create($donation_notification_setting, [
-                'type' => 'put',
-                'class' => 'form-horizontal',
-                'id' => 'form-donate-setting'
-            ]);?>
+            
             <section>
                 <div class="sttabs tabs-style-iconbox">
+
                     <nav>
                         <ul>
                             <li class=""><a href="#section-iconbox-2" class="sticon mdi mdi-image-area"><span><?=__('Chọn hình ảnh')?></span></a></li>
@@ -240,6 +244,15 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                             <li class=""><a href="#section-iconbox-5" class="sticon mdi mdi-clock"><span><?=__('Thời gian hiển thị')?></span></a></li>
                         </ul>
                     </nav>
+
+                    <?php 
+                    $this->Form->setTemplates($FormTemplates['vertical']);
+                    $this->Form->templates([
+                        'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
+                        'radioWrapper' => '<div class="images radio radio-info col-sm-6"{{attrs}}>{{label}}</div>',
+                    ]);
+                    echo $this->Form->create($donation_notification_setting, ['type' => 'put','class' => 'form-horizontal','id' => 'form-donate-setting']);
+                    ?>
                     <div class="content-wrap">
                         <section id="section-iconbox-2">
                             <div class="white-box form-horizontal">
@@ -249,14 +262,10 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                     </div>
                                     <div class="col-sm-9" id="image_resources">
                                         <?php
-                                        $this->Form->templates([
-                                            'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
-                                            'radioWrapper' => '<div class="images radio radio-info col-sm-6"{{attrs}}>{{label}}</div>',
-                                        ]);
                                         foreach($image_resources as $resource)
                                         {   
                                             $image_options[] = [ 
-                                                'data-img-original' => (($resource->user_id == null)?'false':'true'),
+                                                'data-img-private' => (($resource->user_id == null)?'false':'true'),
                                                 'value' => $resource->id,
                                                 'text' => $this->Html->image($resource->url, ['height' => 128])
                                             ];
@@ -267,10 +276,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 </div>
                             </div>
                         </section>
-
-
-
-
                         <section id="section-iconbox-3">
                             <div class="white-box form-horizontal">
                                 <div class="form-group">
@@ -283,7 +288,7 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                         {
                                             $audio_options[] = [ 
                                                 'id' => $resource->id, 
-                                                'data-audio-original' => (($resource->user_id == null)?'false':'true'), 
+                                                'data-audio-private' => (($resource->user_id == null)?'false':'true'), 
                                                 'value' => $resource->id, 
                                                 'data-url' => $this->Url->build($resource->url,['fullBase' => true]), 
                                                 'text' => $resource->name 
@@ -301,10 +306,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
 
                             </div>
                         </section>
-
-
-
-
                         <section id="section-iconbox-4">
                             <div class="white-box form-horizontal">  
                                 <div class="form-group">
@@ -426,24 +427,19 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 </div>
                             </div>
                         </section>
-
-
-
-
-
                         <section id="section-iconbox-1">
                             <div class="white-box form-horizontal">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"><?=__('Thông điệp')?></label>
                                     <?php echo $this->Form->unlockField('notify_message_array');?>
                                     <div class="col-sm-9">
-                                        <a href="#" id="message1" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
+                                        <a href="#" id="message1" data-type="text" data-pk="1" class="editable"></a>
                                         <a href="#" id="target1" data-type="select" data-value="1" class="editable"></a>
-                                        <a href="#" id="message2" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
+                                        <a href="#" id="message2" data-type="text" data-pk="1" class="editable"></a>
                                         <a href="#" id="target2" data-type="select" data-value="2" class="editable"></a>
-                                        <a href="#" id="message3" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
+                                        <a href="#" id="message3" data-type="text" data-pk="1" class="editable"></a>
                                         <a href="#" id="target3" data-type="select" data-value="3" class="editable"></a>
-                                        <a href="#" id="message4" data-type="text" data-pk="1" class="editable" data-original-title=""></a>
+                                        <a href="#" id="message4" data-type="text" data-pk="1" class="editable"></a>
                                     </div>
                                 </div>
                             </div>
@@ -461,12 +457,11 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                                 </div>
                             </div>
                         </section>
-                    </div>
-                    <!-- /content -->
-                </div>
-                <!-- /tabs -->
+                    </div><!-- end div.content-wrap -->
+                    <?= $this->Form->end() ?>
+
+                </div><!--end div.sttabs.tabs-style-iconbox -->
             </section>
-            <?= $this->Form->end() ?>
         </div>
     </div>
 </div>
@@ -489,7 +484,6 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                     ]
                 ]);
                 ?> 
-
             </div>
             <div class="col-sm-6">
                 <br>

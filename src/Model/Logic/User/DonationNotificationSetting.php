@@ -16,6 +16,9 @@ class DonationNotificationSetting
 
     public function get($user_id)
     {
+        /*  1 record của DonateNotificationSetting với giá trị mặc định đã được tạo khi user đăng ký
+        *       ,nên không xét trường hợp để trả về newEntỉty() ở đây
+        */
         $donationNotificationSetting = $this->DonationNotificationSettingTb->findByUserId($user_id)
         ->contain(['AudioResources'])
         ->contain(['ImageResources'])
@@ -24,40 +27,17 @@ class DonationNotificationSetting
         return $donationNotificationSetting;
     }
 
-    /**
-     * Phân loại tag được truyền lên từ form
-     * Nếu là tag mới, thêm vào table caster_tags trước rồi 
-     * thêm id tag vào danh sách.
-     *  [
-     *      'new' => ['tag_names'],
-     *      'old' => ['tag_ids'],
-     *  ]
-     */
-    public function classify(array $tags)
-    {   
-        $classified = [
-            'new' => [],
-            'old' => [],
-        ];
-        foreach ($tags as $tag) {
-            if (Validation::uuid($tag)) {
-                $exists = $this->CasterTagsTb->exists(['id' => $tag]);
-                if ($exists) {
-                    $classified['old'][] = ['caster_tag_id' => $tag];
-                }
-                continue;
-            }
+    public function edit($user_id, array $new_donate_setting)
+    {
+        $donate_setting = $this->get($user_id);
 
-            $exists = $this->CasterTagsTb->findByName($tag)->first();
-            if ($exists) {
-                $classified['old'][] = ['caster_tag_id' => $exists->id];
-                continue;
-            }
+        $this->DonationNotificationSettingTb->patchEntity($donate_setting, $new_donate_setting);
 
-            $classified['new'][] = ['name' => $tag];
+        if(!$donate_setting->errors()) {
+            $this->DonationNotificationSettingTb->save($donate_setting);
         }
-        
-        return $classified;
+
+        return $donate_setting;
     }
 }
 ?>
