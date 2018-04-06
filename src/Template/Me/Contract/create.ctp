@@ -1,6 +1,7 @@
 <div class="white-box">
     <?php $this->Form->setTemplates($FormTemplates['input-short']);?>
     <?=$this->Form->create($contract, [
+        'type' => 'file',
         'class' => 'form-horizontal',
     ]);?>
         <h4 class="m-t-0"><?= __('Thông tin cá nhân') ?></h4>
