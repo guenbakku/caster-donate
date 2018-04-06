@@ -1,30 +1,28 @@
-<?php
-use Cake\Core\Configure;
+<?php use Cake\Core\Configure; ?>
 
-
-$rootView->append('script');
-echo $rootView->Html->script('/packages/dropify/dist/js/dropify.min.js');
-?>
-<script type="text/javascript">
-     $(function () {
-        // Drop & drag upload file
-        $('.dropify').dropify({
-            messages: {
-                default: '<?= __('Click chuột hoặc kéo thả file vào đây') ?>'
-                , replace: '<?= __('Click chuột hoặc kéo thả file vào đây để thay đổi') ?>'
-                , remove: '<?= __('Xóa') ?>'
-                , error: '<?= __('Có lỗi xảy ra') ?>'
-            },
-            error: {
-                'fileSize': '<?= __('Dung lượng file quá lớn (tối đa {{ value }}).') ?>',
-            }
+<?php if ($firstCall === true): ?>
+    <?php $rootView->append('script') ?>
+    <?php echo $rootView->Html->script('/packages/dropify/dist/js/dropify.min.js'); ?>
+    <script type="text/javascript">
+         $(function () {
+            // Drop & drag upload file
+            $('.dropify').dropify({
+                messages: {
+                    default: '<?= __('Click chuột hoặc kéo thả file vào đây') ?>'
+                    , replace: '<?= __('Click chuột hoặc kéo thả file vào đây để thay đổi') ?>'
+                    , remove: '<?= __('Xóa') ?>'
+                    , error: '<?= __('Có lỗi xảy ra') ?>'
+                },
+                error: {
+                    'fileSize': '<?= __('Dung lượng file quá lớn (tối đa {{ value }}).') ?>',
+                }
+            });
         });
-    });
-</script>
-<?php
-$rootView->end();
+    </script>
+    <?php $rootView->end(); ?>
+<?php endif ?>
 
-echo $rootView->Form->control($fieldname, array_merge([
+<?= $rootView->Form->control($fieldname, array_merge([
     'class' => 'dropify',
     'data-max-file-size' => Configure::read('vcv.uploadFileSize'),
     'templateVars' => [
@@ -32,5 +30,4 @@ echo $rootView->Form->control($fieldname, array_merge([
     ],
     'type' => 'file',
     'label' => false,
-], $options))
-?>
+], $options)) ?>
