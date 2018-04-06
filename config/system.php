@@ -18,7 +18,8 @@ return [
             'resource_dir' => [
                 'image' => 'webroot'.DS.'resources'.DS.'img'.DS,
                 'audio' => 'webroot'.DS.'resources'.DS.'audio'.DS,
-            ]
+            ],
+            'identify_card' => 'storage'.DS.'identify_card'.DS,
         ],
 
         /*
@@ -37,7 +38,7 @@ return [
 
         'Dimensions' => [
             'avatar' => [300, 300],
-            'identifyCard' => [600, 400],
+            'identify_card' => [600, 400],
         ]
     ],
 ];
