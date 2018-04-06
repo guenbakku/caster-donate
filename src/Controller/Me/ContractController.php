@@ -57,6 +57,12 @@ class ContractController extends AppController
                 $Contract = new Contract();
                 $data = $this->request->getData();
                 $contract = $Contract->validate($data);
+                if (empty($contract->errors())) {
+                    $this->ChainAction->complete($data);
+                    return $this->redirect(['action' => 'confirm']);
+                } else {
+                    $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập'));
+                }
             }
             $this->set(compact('contract'));
         });

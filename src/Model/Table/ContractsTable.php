@@ -28,16 +28,16 @@ class ContractsTable extends AppTable
         // Setup upload file
         $this->addBehavior('Upload', [
             'identify_card_front' => [
-                'path' => Configure::read('System.Paths.avatar_dir'),
+                'path' => Configure::read('System.Paths.identify_card'),
                 'keepFilesOnEdit' => false,
                 'keepFilesOnDelete' => false,
-                'resizeTo' => Configure::read('System.Dimensions.identifyCard'),
+                'resizeTo' => Configure::read('System.Dimensions.identify_card'),
             ],
             'identify_card_back' => [
-                'path' => Configure::read('System.Paths.avatar_dir'),
+                'path' => Configure::read('System.Paths.identify_card'),
                 'keepFilesOnEdit' => false,
                 'keepFilesOnDelete' => false,
-                'resizeTo' => Configure::read('System.Dimensions.identifyCard'),
+                'resizeTo' => Configure::read('System.Dimensions.identify_card'),
             ]
         ]);
     }
@@ -78,13 +78,7 @@ class ContractsTable extends AppTable
             ]);
 
         $validator
-            ->notEmpty('birthday', __('Phải nhập ngày sinh.'))
-            ->add('birthday', [
-                'date' => [
-                    'rule' => ['date'],
-                    'message' => __('Dữ liệu không hợp lệ.'),
-                ]
-            ]);
+            ->notEmpty('birthday', __('Phải nhập ngày sinh.'));
 
         $validator
             ->notEmpty('address', __('Phải nhập Địa chỉ.'))
@@ -99,8 +93,9 @@ class ContractsTable extends AppTable
             ->notEmpty('identify_card_front', __('Phải chọn ảnh tải lên.'))
             ->add('identify_card_front', [
                 'uploadError' => [
-                    'rule' => ['uploadError', true],
+                    'rule' => ['uploadError', false],
                     'message' => 'Có lỗi xảy ra trong quá trình tải file.',
+                    'last' => true,
                 ],
                 'mimeType' => [
                     'rule' => ['mimeType', Configure::read('vcv.AllowFileTypes.image')],
@@ -116,14 +111,14 @@ class ContractsTable extends AppTable
                     'last' => true,
                 ],
                 'minWidth' => [
-                    'rule' => ['imageWidth', '>=', Configure::read('System.Dimensions.identifyCard')[0]],
+                    'rule' => ['imageWidth', '>=', Configure::read('System.Dimensions.identify_card')[0]],
                     'message' => __(
                         'Chiều rộng ảnh tải lên không được nhỏ hơn {0}.',
                         Configure::read('System.Dimensions.avatar')[0]
                     ),
                 ],
                 'minHeight' => [
-                    'rule' => ['imageHeight', '>=', Configure::read('System.Dimensions.identifyCard')[1]],
+                    'rule' => ['imageHeight', '>=', Configure::read('System.Dimensions.identify_card')[1]],
                     'message' => __(
                         'Chiều cao ảnh tải lên không được nhỏ hơn {0}.',
                         Configure::read('System.Dimensions.avatar')[1]
@@ -135,8 +130,9 @@ class ContractsTable extends AppTable
             ->notEmpty('identify_card_back', __('Phải chọn ảnh tải lên.'))
             ->add('identify_card_back', [
                 'uploadError' => [
-                    'rule' => ['uploadError', true],
+                    'rule' => ['uploadError', false],
                     'message' => 'Có lỗi xảy ra trong quá trình tải file.',
+                    'last' => true,
                 ],
                 'mimeType' => [
                     'rule' => ['mimeType', Configure::read('vcv.AllowFileTypes.image')],
