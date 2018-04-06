@@ -38,7 +38,7 @@ class DonationNotificationSettingsTable extends AppTable
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->uuid('id', __('ID không hợp lệ'))
+            ->uuid('id')
             ->allowEmpty('id', 'create');
 
         $validator->allowEmpty('notify_message');

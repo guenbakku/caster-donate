@@ -6,9 +6,16 @@ use Cake\Event\Event;
 use Cake\Utility\Hash;
 use App\Controller\AppController;
 use App\Form\Me\Contract\TermAgreeForm;
+use App\Model\Logic\User\Contract;
 
 class ContractController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('ChainAction');
+    }
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -45,7 +52,13 @@ class ContractController extends AppController
     {
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
         $this->ChainAction->beginStep(1, function () {
-
+            $contract = null;
+            if ($this->request->is('post')) {
+                $Contract = new Contract();
+                $data = $this->request->getData();
+                $contract = $Contract->validate($data);
+            }
+            $this->set(compact('contract'));
         });
     }
 

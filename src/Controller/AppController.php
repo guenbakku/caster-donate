@@ -63,7 +63,6 @@ class AppController extends Controller
         $this->loadComponent('RequestDataPatcher');
         $this->loadComponent('ContentHeader');
         $this->loadComponent('Me');
-        $this->loadComponent('ChainAction');
         $this->loadComponent('AutoLog', [
             'mask_rules' => [
                 [

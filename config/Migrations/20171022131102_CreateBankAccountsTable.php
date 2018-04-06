@@ -20,7 +20,7 @@ class CreateBankAccountsTable extends AbstractMigration
             ->addColumn('contract_id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('name', 'string', [
+            ->addColumn('bank', 'string', [
                 'null' => false,
                 'limit' => 256,
             ])

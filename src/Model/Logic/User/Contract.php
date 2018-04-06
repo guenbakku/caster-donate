@@ -6,6 +6,25 @@ use Cake\Core\Configure;
 
 class Contract
 {
-    
+    public function __construct()
+    {
+        $this->contractsTb = TableRegistry::get('Contracts');
+    }
+
+    public function validate($contract)
+    {
+        $entity = $this->contractsTb->newEntity($contract, [
+            'associated' => [
+                'BankAccounts',
+            ]
+        ]);
+
+        return $entity;
+    }
+
+    public function create($contract)
+    {
+
+    }
 }
 ?>

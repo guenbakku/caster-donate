@@ -69,7 +69,7 @@ class ProfilesTable extends AppTable
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->uuid('id', __('ID không hợp lệ'))
+            ->uuid('id')
             ->allowEmpty('id', 'create');
 
         $validator
@@ -125,7 +125,7 @@ class ProfilesTable extends AppTable
             ]);
 
         $validator
-            ->notEmpty('avatar', __('Phải chọn ảnh tải lên'))
+            ->notEmpty('avatar', __('Phải chọn ảnh tải lên.'))
             ->add('avatar', [
                 'uploadError' => [
                     'rule' => ['uploadError', true],

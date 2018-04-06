@@ -45,6 +45,10 @@ class ChainActionComponent extends Component
 
         $key = $this->getConfig('key');
         $data = $this->session->read($key);
+        if (empty($data)) {
+            return;
+        }
+        
         foreach ($data as $process => $val) {
             if ($process !== $this->getConfig('process')) {
                 $this->session->delete($key.'.'.$process);

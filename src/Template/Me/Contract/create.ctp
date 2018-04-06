@@ -1,30 +1,34 @@
 <div class="white-box">
     <?php $this->Form->setTemplates($FormTemplates['input-short']);?>
-    <?=$this->Form->create(null, [
-        'type' => 'put',
+    <?=$this->Form->create($contract, [
         'class' => 'form-horizontal',
     ]);?>
-        <h4 class="m-t-0"><?= __('Thông tin cơ bản') ?></h4>
-        <?= $this->Form->control('nickname', [
-            'class' => 'form-control',
-            'label' => __('Nickname'),
-        ]) ?>
+        <h4 class="m-t-0"><?= __('Thông tin cá nhân') ?></h4>
 
         <?= $this->Form->control('firstname', [
             'class' => 'form-control',
-            'label' => __('Họ và tên đệm'),
+            'label' => [
+                'text' => __('Họ và tên đệm'),
+                'class' => 'required',
+            ],
         ]) ?>
 
         <?= $this->Form->control('lastname', [
             'class' => 'form-control',
-            'label' => __('Tên'),
+            'label' => [
+                'text' => __('Tên'),
+                'class' => 'required',
+            ],
         ]) ?>
 
         <?= $this->Form->control('sex_id', [
             'class' => 'form-control',
             'empty' => true,
             'options' => $this->Code->setTable('sexes')->getList(),
-            'label' => __('Giới tính'),
+            'label' => [
+                'text' => __('Giới tính'),
+                'class' => 'required',
+            ],
         ]) ?>
 
         <?= $this->Form->control('birthday', [
@@ -32,20 +36,54 @@
             'type'  => 'text',
             'data-mask' => "99/99/9999",
             'placeholder' => 'dd/mm/yyyy',
-            'label' => __('Ngày sinh'),
+            'label' => [
+                'text' => __('Ngày sinh'),
+                'class' => 'required',
+            ],
         ]) ?>
 
-        <?= $this->Form->control('location', [
+        <?= $this->Form->control('address', [
             'class' => 'form-control',
             'type'  => 'text',
-            'label' => __('Nơi ở'),
+            'label' => [
+                'text' => __('Địa chỉ'),
+                'class' => 'required',
+            ],
         ]) ?>
 
-        <?= $this->Form->control('introduction', [
+        <hr>
+        <h4 class="m-t-0"><?= __('Tài khoản ngân hàng') ?></h4>
+        
+        <?= $this->Form->control('bank_account.bank', [
             'class' => 'form-control',
-            'type'  => 'textarea',
-            'rows'  => 3,
-            'label' => __('Lời giới thiệu'),
+            'label' => [
+                'text' => __('Tên ngân hàng'),
+                'class' => 'required',
+            ],
+        ]) ?>
+
+        <?= $this->Form->control('bank_account.branch', [
+            'class' => 'form-control',
+            'label' => [
+                'text' => __('Tên chi nhánh'),
+                'class' => 'required',
+            ],
+        ]) ?>
+
+        <?= $this->Form->control('bank_account.holder', [
+            'class' => 'form-control',
+            'label' => [
+                'text' => __('Tên chủ tài khoản'),
+                'class' => 'required',
+            ],
+        ]) ?>
+
+        <?= $this->Form->control('bank_account.number', [
+            'class' => 'form-control',
+            'label' => [
+                'text' => __('Số tài khoản'),
+                'class' => 'required',
+            ],
         ]) ?>
 
         <div class="row">

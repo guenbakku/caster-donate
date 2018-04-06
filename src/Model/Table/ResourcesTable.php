@@ -59,7 +59,7 @@ class ResourcesTable extends AppTable
             ->allowEmpty('id', 'name','user_id');
 
         $validator
-            ->notEmpty('filename', __('Phải chọn ảnh tải lên'))
+            ->notEmpty('filename', __('Phải chọn ảnh tải lên.'))
             ->add('filename', [
                 'uploadError' => [
                     'rule' => ['uploadError', true],
