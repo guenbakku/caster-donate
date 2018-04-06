@@ -44,6 +44,27 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
+Entity1=sexes
+Entity2=contracts
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=sex_id
+Cardinarity1=
+Cardinarity2=
+Position="THANH VIEN",0,5715,3663,4068,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20180406212658
+LineMode=0
+Bar1=572
+Bar2=366
+Bar3=407
+TermPos1=R
+TermPos2=R
+
+[Relation]
 Entity1=contracts
 Entity2=bank_accounts
 RelationType1=2
@@ -841,14 +862,14 @@ Fields1=id
 Fields2=user_id
 Cardinarity1=
 Cardinarity2=
-Position="THANH VIEN",0,2801,4320,7577,R,R
+Position="THANH VIEN",0,5070,3065,7577,R,R
 Dependence=0
 Caption=
 PName=
 ModifiedDateTime=20171022221331
 LineMode=0
-Bar1=280
-Bar2=432
+Bar1=507
+Bar2=306
 Bar3=758
 TermPos1=R
 TermPos2=R
@@ -925,7 +946,7 @@ EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180401191310
+ModifiedDateTime=20180406233449
 Position="THANH VIEN",2800,2600,1037,607
 
 [Comment]
@@ -954,7 +975,7 @@ Left=4500
 Top=2200
 Field="Khóa chính","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id hợp đồng","contract_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Tên ngân hàng","name","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên ngân hàng","bank","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Chi nhánh","branch","VARCHAR(256)",,,"","",$FFFFFFFF,""
 Field="Tên chủ tài khoản","holder","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Số tài khoản","number","VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
@@ -964,7 +985,7 @@ EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180401190915
+ModifiedDateTime=20180406221647
 Position="THANH VIEN",4500,2200,732,360
 
 [Entity]
@@ -1067,37 +1088,14 @@ Top=3003
 Width=0
 Height=0
 
-[Relation]
-Entity1=sexes
-Entity2=profiles
-RelationType1=2
-RelationType2=3
-Fields1=id
-Fields2=sex_id
-Cardinarity1=
-Cardinarity2=
-Position="THANH VIEN",0,6811,3962,943,R,R
-Position="THONG BAO DONATE",0,6123,3877,6126,R,L
-Position="LICH LIVESTREAM",0,7654,2346,6939,R,R
-Dependence=0
-Caption=
-PName=
-ModifiedDateTime=20171002005040
-LineMode=0
-Bar1=681
-Bar2=396
-Bar3=94
-TermPos1=R
-TermPos2=R
-
 [Entity]
 PName=sexes
 LName=Giới tính
 Comment=
 TableOption=
 Page=THANH VIEN
-Left=1400
-Top=1800
+Left=4500
+Top=3050
 Field="Khóa chính của bảng","id","INT(11)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Tên","name","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","dùng để gọi khi code",$FFFFFFFF,""
@@ -1109,7 +1107,7 @@ Tag=list
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20171028142208
-Position="THANH VIEN",1400,1800,849,278
+Position="THANH VIEN",4500,3050,849,278
 
 [Relation]
 Entity1=users
@@ -1258,7 +1256,7 @@ Comment=
 TableOption=
 Page=THANH VIEN
 Left=4500
-Top=3050
+Top=3400
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Phần trăm phí thu","percentage","INT(11)","NOT NULL",,"","phần trăm",$FFFFFFFF,""
@@ -1271,7 +1269,7 @@ Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180304182616
-Position="THANH VIEN",4500,3050,794,310
+Position="THANH VIEN",4500,3400,794,310
 
 [Entity]
 PName=users_caster_tags
