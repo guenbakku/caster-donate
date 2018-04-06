@@ -37,6 +37,7 @@ return [
 
         'Dimensions' => [
             'avatar' => [300, 300],
+            'identifyCard' => [600, 400],
         ]
     ],
 ];
