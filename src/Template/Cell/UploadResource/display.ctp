@@ -57,7 +57,11 @@ echo $rootView->Form->create($resource,[
     'id' => 'upload_image_form',
     'type' => 'file'
 ]);
-echo $rootView->cell('DragDropArea', [$rootView, 'filename', $settings['drag_drop_area_id']]); 
+echo $rootView->cell('DragDropArea', [
+    $rootView, 
+    'filename', 
+    ['id' => $settings['drag_drop_area_id']],
+]); 
 echo $rootView->Form->hidden('resource_type_id', [
     'value' => $settings['resource_type_id'],
 ]) ;

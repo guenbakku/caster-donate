@@ -39,7 +39,15 @@ class DonationNotificationSettingsTable extends AppTable
     {
         $validator
             ->uuid('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmpty('id', 'created');
+
+        $validator
+            ->add('display_time', [
+                'maxLength' => [
+                    'rule' => 'numeric',
+                    'message' => __('Chỉ được nhập chữ số.'),
+                ],
+            ]);
 
         $validator->allowEmpty('notify_message');
 

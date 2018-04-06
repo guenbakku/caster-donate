@@ -24,14 +24,13 @@ echo $rootView->Html->script('/packages/dropify/dist/js/dropify.min.js');
 <?php
 $rootView->end();
 
-echo $rootView->Form->control($fieldname, [
+echo $rootView->Form->control($fieldname, array_merge([
     'class' => 'dropify',
-    'id'    =>  $id,
     'data-max-file-size' => Configure::read('vcv.uploadFileSize'),
     'templateVars' => [
         'type' => 'file',
     ],
     'type' => 'file',
     'label' => false,
-])
+], $options))
 ?>
