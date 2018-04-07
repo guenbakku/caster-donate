@@ -933,7 +933,7 @@ Field="Id thành viên","user_id","CHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên file ảnh thẻ ngân hàng","bank_card","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên file ảnh CMND mặt trước","identify_card_front","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên file ảnh CMND mặt sau","identify_card_back","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
-Field="Tên file hợp đồng","filename","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Tên file hợp đồng","filename","VARCHAR(128)",,,"","",$FFFFFFFF,""
 Field="Số điện thoại","phone","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Họ và tên đệm","firstname","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Tên","lastname","VARCHAR(128)","NOT NULL",,"","",$FFFFFFFF,""
@@ -947,7 +947,7 @@ EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180407221243
+ModifiedDateTime=20180407231702
 Position="THANH VIEN",2800,2600,1037,607
 
 [Comment]
