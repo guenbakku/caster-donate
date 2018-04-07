@@ -33,7 +33,7 @@ class CreateContractsTable extends AbstractMigration
                 'limit' => 128,
             ])
             ->addColumn('filename', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 128,
             ])
             ->addColumn('phone', 'string', [
