@@ -10,12 +10,6 @@ use App\Model\Logic\User\Contract;
 
 class ContractController extends AppController
 {
-    public function initialize()
-    {
-        parent::initialize();
-        $this->loadComponent('ChainAction');
-    }
-
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -40,7 +34,6 @@ class ContractController extends AppController
                 // Set kết quả từ session vào form khi quay lại từ những step sau
                 $data = $this->ChainAction->getStepData();
                 if ($data !== null) {
-                    $data = Hash::get($data, 'results');
                     $this->RequestDataPatcher->patch($data);
                 }
             }
@@ -64,6 +57,12 @@ class ContractController extends AppController
                 } else {
                     $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập'));
                 }
+            } elseif ($this->request->is('get')) {
+                // Set kết quả từ session vào form khi quay lại từ những step sau
+                $data = $this->ChainAction->getStepData();
+                if ($data !== null) {
+                    $this->RequestDataPatcher->patch($data);
+                }
             }
             $this->set(compact('contract'));
         });
@@ -73,7 +72,8 @@ class ContractController extends AppController
     {
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
         $this->ChainAction->beginStep(2, function () {
-            
+            $data = $this->ChainAction->getStepData(1);
+            $this->set(compact('data'));
         });
     }
 

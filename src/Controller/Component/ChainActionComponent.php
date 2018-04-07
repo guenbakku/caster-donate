@@ -26,7 +26,7 @@ class ChainActionComponent extends Component
             'process' => null,
             'firstStepNo' => 0,
             'timeout' => 1800, // seconds
-            'autoDestroy' => true, // auto delete all data of other processes
+            'autoDestroy' => false, // auto delete all data of other processes
             'errorMessage' => __('Vui lòng thực hiện lại từ đầu'),
         ];
 
@@ -114,7 +114,7 @@ class ChainActionComponent extends Component
     {   
         $stepNo = $stepNo ?? $this->stepNo;
         $path = $this->getSessionPath($stepNo);
-        return $this->session->read($path);
+        return $this->session->read($path.'.results');
     }
 
     public function getSessionPath(int $stepNo = null)

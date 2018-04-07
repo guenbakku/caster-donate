@@ -60,6 +60,7 @@ class AppController extends Controller
         /*
          * System's original components
          */
+        $this->loadComponent('ChainAction');
         $this->loadComponent('RequestDataPatcher');
         $this->loadComponent('ContentHeader');
         $this->loadComponent('Me');
