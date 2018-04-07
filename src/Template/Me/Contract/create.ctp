@@ -51,6 +51,15 @@
             ],
         ]) ?>
 
+        <?= $this->Form->control('phone', [
+            'class' => 'form-control',
+            'type'  => 'text',
+            'label' => [
+                'text' => __('Số điện thoại'),
+                'class' => 'required',
+            ],
+        ]) ?>
+
         <hr>
         <h4 class="m-t-0"><?= __('Tài khoản ngân hàng') ?></h4>
         <?= $this->Form->control('bank_account.bank', [

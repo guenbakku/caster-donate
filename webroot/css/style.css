@@ -192,3 +192,10 @@ input.k-textbox {
     display: inline-block;
     margin-bottom: 5px;
 }
+
+.wide-row .row {
+    margin-bottom: 15px;
+}
+.identify-card-preview {
+    max-width: 100%;
+}

@@ -2,7 +2,7 @@
 use Cake\Utility\Hash;
 ?>
 
-<div class="white-box">
+<div class="white-box wide-row">
     <h4 class="m-t-0"><?= __('Thông tin cá nhân') ?></h4>
     <div class="row">
         <div class="col-md-2">
@@ -34,6 +34,14 @@ use Cake\Utility\Hash;
         </div>
         <div class="col-md-8">
             <?= h(Hash::get($contract, 'address')) ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <strong><?= __('Số điện thoại') ?></strong>
+        </div>
+        <div class="col-md-8">
+            <?= h(Hash::get($contract, 'phone')) ?>
         </div>
     </div>
 
@@ -71,20 +79,48 @@ use Cake\Utility\Hash;
             <?= h(Hash::get($contract, 'bank_account.number')) ?>
         </div>
     </div>
-    
+
     <hr>
+    <h4 class="m-t-0"><?= __('Chứng minh nhân dân') ?></h4>
     <div class="row">
-        <div class="col-md-offset-2 col-md-10">
-            <?= $this->Html->link( __('Quay lại'), [
-                'action' => 'create',
-            ], [
-                'class' => 'btn btn-default miw-100',
-            ]) ?>
-            <?= $this->Form->button( __('Gửi'), [
-                'class' => 'btn btn-success miw-100',
-                'label' => false,
-                'type' => 'submit'
+        <div class="col-md-2">
+            <strong><?= __('Mặt trước') ?></strong>
+        </div>
+        <div class="col-md-3 col-sm-4">
+            <?= $this->EmbedAsset->image(Hash::get($contract, 'identify_card_front.tmp_name'), [
+                'class' => 'identify-card-preview',
             ]) ?>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-2">
+            <strong><?= __('Mặt sau') ?></strong>
+        </div>
+        <div class="col-md-3 col-sm-4">
+            <?= $this->EmbedAsset->image(Hash::get($contract, 'identify_card_back.tmp_name'), [
+                'class' => 'identify-card-preview',
+            ]) ?>
+        </div>
+    </div>
+    
+    <hr>
+    <?php $this->Form->setTemplates($FormTemplates['input-short']);?>
+    <?=$this->Form->create(null, [
+        'class' => 'form-horizontal',
+    ]);?>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-10">
+                <?= $this->Html->link( __('Quay lại'), [
+                    'action' => 'create',
+                ], [
+                    'class' => 'btn btn-default miw-100',
+                ]) ?>
+                <?= $this->Form->button( __('Gửi'), [
+                    'class' => 'btn btn-success miw-100',
+                    'label' => false,
+                    'type' => 'submit'
+                ]) ?>
+            </div>
+        </div>
+    <?= $this->Form->end() ?>
 </div>

@@ -56,6 +56,7 @@ class CreateContractsTable extends AbstractMigration
             ])
             ->addColumn('status_id', 'integer', [
                 'null' => false,
+                'default' => 1,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,

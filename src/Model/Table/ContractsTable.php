@@ -31,13 +31,13 @@ class ContractsTable extends AppTable
                 'path' => Configure::read('System.Paths.identify_card'),
                 'keepFilesOnEdit' => false,
                 'keepFilesOnDelete' => false,
-                'resizeTo' => Configure::read('System.Dimensions.identify_card'),
+                'transformer' => null,
             ],
             'identify_card_back' => [
                 'path' => Configure::read('System.Paths.identify_card'),
                 'keepFilesOnEdit' => false,
                 'keepFilesOnDelete' => false,
-                'resizeTo' => Configure::read('System.Dimensions.identify_card'),
+                'transformer' => null,
             ]
         ]);
     }
@@ -45,6 +45,8 @@ class ContractsTable extends AppTable
     public function validationDefault(Validator $validator)
     {
         $Code = new Code(['valueField' => 'id']);
+
+        $validator->provider('Contact', 'App\Model\Validation\ContactValidation');
 
         $validator
             ->uuid('id')
@@ -86,6 +88,20 @@ class ContractsTable extends AppTable
                 'maxLength' => [
                     'rule' => ['maxLength', $this->columnLength('address')],
                     'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('address')),
+                ]
+            ]);
+
+        $validator
+            ->notEmpty('phone', __('Phải nhập Số điện thoại.'))
+            ->add('phone', [
+                'maxLength' => [
+                    'rule' => ['maxLength', $this->columnLength('phone')],
+                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('phone')),
+                ],
+                'format' => [
+                    'rule' => ['phone'],
+                    'provider' => 'Contact',
+                    'message' => __('Chỉ được nhập số, khoảng trắng và dấu -'),
                 ]
             ]);
 

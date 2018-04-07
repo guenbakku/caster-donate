@@ -14,6 +14,21 @@ class Contract
     }
 
     /**
+     * Trả về thông tin hợp đồng
+     *
+     * @param   string
+     * @return  Entity
+     */
+    public function get($contract_id)
+    {
+        $entity = $this->contractsTb->findById($contract_id)
+            ->contain(['BankAccounts', 'Sexes'])
+            ->first();
+
+        return $entity;
+    }
+
+    /**
      * Validate input từ form
      *
      * @param   array
@@ -22,16 +37,14 @@ class Contract
     public function validate(array $contract)
     {
         $entity = $this->contractsTb->newEntity($contract, [
-            'associated' => [
-                'BankAccounts',
-            ]
+            'associated' => ['BankAccounts'],
         ]);
 
         return $entity;
     }
 
     /**
-     * Lưu tạm thông tin contact (dùng cho màn hình confirm).
+     * Lưu tạm thông tin hợp đồng (dùng cho màn hình confirm).
      * NOTICE: Method này không validate input.
      *
      * @param   array
@@ -55,9 +68,24 @@ class Contract
         return $contract;
     }
 
-    public function create($contract)
-    {
+    /**
+     * Tạo mới hợp đồng
+     * NOTICE: Method này không validate input
+     *
+     * @param   string
+     * @param   array
+     * @return  Entity
+     */
+    public function create($user_id, $contract)
+    {   
+        $contract['user_id'] = $user_id;
+        $entity = $this->contractsTb->newEntity($contract, [
+            'validate' => false,
+            'associated' => ['BankAccounts'],
+        ]);
 
+        $this->contractsTb->save($entity);
+        return $entity;
     }
 }
 ?>

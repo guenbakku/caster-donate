@@ -82,7 +82,7 @@ class ChainActionComponent extends Component
      *
      * @param   mixed: data want to pass to next step
      */
-    public function complete($results = null)
+    public function completeStep($results = null)
     {
         $path = $this->getSessionPath($this->stepNo);
         $url = $this->request->here(false);

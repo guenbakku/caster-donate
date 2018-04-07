@@ -25,7 +25,7 @@ class ContractController extends AppController
             if ($this->request->is('post')) {
                 $data = $this->request->getData();
                 if ($termAgree->execute($data)) {
-                    $this->ChainAction->complete($data);
+                    $this->ChainAction->completeStep($data);
                     return $this->redirect(['action' => 'create']);
                 } else {
                     $errors = Hash::flatten($termAgree->errors());
@@ -54,7 +54,7 @@ class ContractController extends AppController
                 $contract = $Contract->validate($data);
                 if (empty($contract->errors())) {
                     $drafted = $Contract->draft($data);
-                    $this->ChainAction->complete($drafted);
+                    $this->ChainAction->completeStep($drafted);
                     return $this->redirect(['action' => 'confirm']);
                 } else {
                     $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập'));
@@ -76,6 +76,13 @@ class ContractController extends AppController
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
         $this->ChainAction->beginStep(2, function () {
             $contract = $this->ChainAction->getStepData(1);
+            if ($this->request->is('post')) {
+                $user_id = $this->Me->get('id');
+                $Contract = new Contract();
+                $Contract->create($user_id, $contract);
+                $this->ChainAction->clear();
+                return $this->redirect(['action' => 'view']);
+            }
             $this->set(compact('contract'));
         });
     }
