@@ -114,9 +114,23 @@ class ChainActionComponent extends Component
     {   
         $stepNo = $stepNo ?? $this->stepNo;
         $path = $this->getSessionPath($stepNo);
-        return $this->session->read($path.'.results');
+        $data = $this->session->read($path);
+        if ($data === null) {
+            return null;
+        }
+        if (Hash::get($data, 'expires') < Time::now()) {
+            return null;
+        }
+        return Hash::get($data, 'results');
     }
 
+    /**
+     * Return path to the data of provided step no in session storage
+     * 
+     * @param   int: step no
+     *      if null provided, the path to current process will be returned.
+     * @return  string
+     */
     public function getSessionPath(int $stepNo = null)
     {
         $process = $this->getConfig('process') ?? $this->getController()->name;
