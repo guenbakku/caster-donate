@@ -33,7 +33,7 @@ class InitProfileListener implements EventListenerInterface
             $socialAccountsTb = TableRegistry::get('SocialAccounts');
             $socialAccount = $socialAccountsTb->findByUserId($user_id)->first();
             if (!empty($socialAccount->avatar)) {
-                $profile['avatar'] = $this->_copyAvatarFromUrlToWebroot($socialAccount->avatar);
+                $profile['avatar'] = $this->copyAvatarFromUrlToWebroot($socialAccount->avatar);
             }
 
             // Insert one record to `profiles` table
@@ -54,7 +54,7 @@ class InitProfileListener implements EventListenerInterface
      * @param   string: url to avatar in social account
      * @return  string|null: filename of copied avatar
      */
-    protected function _copyAvatarFromUrlToWebroot(string $url)
+    protected function copyAvatarFromUrlToWebroot(string $url)
     {
         $avatar = file_get_contents($url);
 
