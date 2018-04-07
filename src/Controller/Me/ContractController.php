@@ -18,6 +18,7 @@ class ContractController extends AppController
 
     public function term()
     {
+        $this->ContentHeader->title(__('Hợp đồng .:. Điều khoản'));
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
         $this->ChainAction->beginStep(0, function () {
             $termAgree = new TermAgreeForm;
@@ -43,6 +44,7 @@ class ContractController extends AppController
 
     public function create()
     {
+        $this->ContentHeader->title(__('Hợp đồng .:. Nhập thông tin'));
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
         $this->ChainAction->beginStep(1, function () {
             $contract = null;
@@ -70,10 +72,11 @@ class ContractController extends AppController
 
     public function confirm()
     {
+        $this->ContentHeader->title(__('Hợp đồng .:. Kiểm tra'));
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
         $this->ChainAction->beginStep(2, function () {
-            $data = $this->ChainAction->getStepData(1);
-            $this->set(compact('data'));
+            $contract = $this->ChainAction->getStepData(1);
+            $this->set(compact('contract'));
         });
     }
 

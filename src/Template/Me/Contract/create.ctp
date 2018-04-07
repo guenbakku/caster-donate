@@ -115,7 +115,7 @@
                 ], [
                     'class' => 'btn btn-default miw-100',
                 ]) ?>
-                <?= $this->Form->button( __('Gửi'), [
+                <?= $this->Form->button( __('Kiểm tra'), [
                     'class' => 'btn btn-success miw-100',
                     'label' => false,
                     'type' => 'submit'
