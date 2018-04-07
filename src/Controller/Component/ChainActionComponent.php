@@ -25,7 +25,7 @@ class ChainActionComponent extends Component
             'key' => 'ChainAction',
             'process' => null,
             'firstStepNo' => 0,
-            'timeout' => 3600, // seconds
+            'timeout' => 1800, // seconds
             'autoDestroy' => true, // auto delete all data of other processes
             'errorMessage' => __('Vui lòng thực hiện lại từ đầu'),
         ];

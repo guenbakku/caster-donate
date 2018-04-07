@@ -52,29 +52,6 @@
         ]) ?>
 
         <hr>
-        <h4 class="m-t-0"><?= __('Chứng minh nhân dân') ?></h4>
-        <?= $this->cell('DragDropArea', [
-            $this, 
-            'identify_card_front',
-            [
-                'label' => [
-                    'text' => __('Mặt trước'),
-                    'class' => 'required',
-                ]
-            ],
-        ]) ?>
-        <?= $this->cell('DragDropArea', [
-            $this, 
-            'identify_card_back',
-            [
-                'label' => [
-                    'text' => __('Mặt sau'),
-                    'class' => 'required',
-                ]
-            ],
-        ]) ?> 
-
-        <hr>
         <h4 class="m-t-0"><?= __('Tài khoản ngân hàng') ?></h4>
         <?= $this->Form->control('bank_account.bank', [
             'class' => 'form-control',
@@ -107,6 +84,29 @@
                 'class' => 'required',
             ],
         ]) ?>
+
+        <hr>
+        <h4 class="m-t-0"><?= __('Chứng minh nhân dân') ?></h4>
+        <?= $this->cell('DragDropArea', [
+            $this, 
+            'identify_card_front',
+            [
+                'label' => [
+                    'text' => __('Mặt trước'),
+                    'class' => 'required',
+                ]
+            ],
+        ]) ?>
+        <?= $this->cell('DragDropArea', [
+            $this, 
+            'identify_card_back',
+            [
+                'label' => [
+                    'text' => __('Mặt sau'),
+                    'class' => 'required',
+                ]
+            ],
+        ]) ?> 
 
         <div class="row">
             <div class="col-md-offset-2 col-md-10">

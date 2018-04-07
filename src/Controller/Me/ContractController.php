@@ -58,7 +58,8 @@ class ContractController extends AppController
                 $data = $this->request->getData();
                 $contract = $Contract->validate($data);
                 if (empty($contract->errors())) {
-                    $this->ChainAction->complete($data);
+                    $drafted = $Contract->draft($data);
+                    $this->ChainAction->complete($drafted);
                     return $this->redirect(['action' => 'confirm']);
                 } else {
                     $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập'));

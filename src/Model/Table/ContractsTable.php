@@ -114,14 +114,14 @@ class ContractsTable extends AppTable
                     'rule' => ['imageWidth', '>=', Configure::read('System.Dimensions.identify_card')[0]],
                     'message' => __(
                         'Chiều rộng ảnh tải lên không được nhỏ hơn {0}.',
-                        Configure::read('System.Dimensions.avatar')[0]
+                        Configure::read('System.Dimensions.identify_card')[0]
                     ),
                 ],
                 'minHeight' => [
                     'rule' => ['imageHeight', '>=', Configure::read('System.Dimensions.identify_card')[1]],
                     'message' => __(
                         'Chiều cao ảnh tải lên không được nhỏ hơn {0}.',
-                        Configure::read('System.Dimensions.avatar')[1]
+                        Configure::read('System.Dimensions.identify_card')[1]
                     ),
                 ],
             ]);
