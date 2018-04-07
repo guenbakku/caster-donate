@@ -20,6 +20,7 @@ return [
                 'audio' => 'webroot'.DS.'resources'.DS.'audio'.DS,
             ],
             'identify_card' => 'storage'.DS.'dynamic'.DS.'contract'.DS,
+            'bank_card' => 'storage'.DS.'dynamic'.DS.'contract'.DS,
         ],
 
         /*
