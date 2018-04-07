@@ -19,7 +19,7 @@ return [
                 'image' => 'webroot'.DS.'resources'.DS.'img'.DS,
                 'audio' => 'webroot'.DS.'resources'.DS.'audio'.DS,
             ],
-            'identify_card' => 'storage'.DS.'identify_card'.DS,
+            'identify_card' => 'storage'.DS.'dynamic'.DS.'contract'.DS,
         ],
 
         /*
@@ -38,7 +38,8 @@ return [
 
         'Dimensions' => [
             'avatar' => [300, 300],
-            'identify_card' => [600, 400],
+            'identify_card' => [500, 500],
+            'bank_card' => [500, 500]
         ]
     ],
 ];
