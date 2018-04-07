@@ -79,7 +79,13 @@ class ContractController extends AppController
             if ($this->request->is('post')) {
                 $user_id = $this->Me->get('id');
                 $Contract = new Contract();
-                $Contract->create($user_id, $contract);
+                $contract = $Contract->create($user_id, $contract);
+
+                $this->dispatchEvent(
+                    Configure::read('Events.App_AfterCreateContract'), 
+                    ['contract' => $contract]
+                );
+
                 $this->ChainAction->clear();
                 return $this->redirect(['action' => 'view']);
             }
