@@ -52,18 +52,18 @@ class Contract
      */
     public function draft(array $contract)
     {
-        $tmp_front = TMP.Text::uuid();
-        $tmp_back = TMP.Text::uuid();
-
-        $moved_front = move_uploaded_file($contract['identify_card_front']['tmp_name'], $tmp_front);
-        $moved_back = move_uploaded_file($contract['identify_card_back']['tmp_name'], $tmp_back);
-
-        if ($moved_front === false || $moved_back === false) {
-            throw new \RuntimeException('Could not move uploaded file');
+        $list = ['bank_card', 'identify_card_front', 'identify_card_back'];
+        foreach ($list as $item) {
+            $dest = TMP.Text::uuid();
+            $src =& $contract[$item]['tmp_name'];
+            $result = move_uploaded_file($src, $dest);
+            if ($result === false) {
+                throw new \RuntimeException(
+                    sprintf('Could not move uploaded file from %s to %s', $src, $dest)
+                );
+            }
+            $src = $dest;
         }
-
-        $contract['identify_card_front']['tmp_name'] = $tmp_front;
-        $contract['identify_card_back']['tmp_name'] = $tmp_back;
 
         return $contract;
     }

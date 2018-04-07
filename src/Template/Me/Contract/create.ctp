@@ -12,7 +12,6 @@
                 'class' => 'required',
             ],
         ]) ?>
-
         <?= $this->Form->control('lastname', [
             'class' => 'form-control',
             'label' => [
@@ -20,7 +19,6 @@
                 'class' => 'required',
             ],
         ]) ?>
-
         <?= $this->Form->control('sex_id', [
             'class' => 'form-control',
             'empty' => true,
@@ -30,7 +28,6 @@
                 'class' => 'required',
             ],
         ]) ?>
-
         <?= $this->Form->control('birthday', [
             'class' => 'form-control',
             'type'  => 'text',
@@ -41,7 +38,6 @@
                 'class' => 'required',
             ],
         ]) ?>
-
         <?= $this->Form->control('address', [
             'class' => 'form-control',
             'type'  => 'text',
@@ -50,7 +46,6 @@
                 'class' => 'required',
             ],
         ]) ?>
-
         <?= $this->Form->control('phone', [
             'class' => 'form-control',
             'type'  => 'text',
@@ -69,7 +64,6 @@
                 'class' => 'required',
             ],
         ]) ?>
-
         <?= $this->Form->control('bank_account.branch', [
             'class' => 'form-control',
             'label' => [
@@ -77,7 +71,6 @@
                 'class' => 'required',
             ],
         ]) ?>
-
         <?= $this->Form->control('bank_account.holder', [
             'class' => 'form-control',
             'label' => [
@@ -85,12 +78,21 @@
                 'class' => 'required',
             ],
         ]) ?>
-
         <?= $this->Form->control('bank_account.number', [
             'class' => 'form-control',
             'label' => [
                 'text' => __('Số tài khoản'),
                 'class' => 'required',
+            ],
+        ]) ?>
+        <?= $this->cell('DragDropArea', [
+            $this, 
+            'bank_card',
+            [
+                'label' => [
+                    'text' => __('Ảnh thẻ ngân hàng'),
+                    'class' => 'required',
+                ]
             ],
         ]) ?>
 

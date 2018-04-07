@@ -20,6 +20,10 @@ class CreateContractsTable extends AbstractMigration
             ->addColumn('user_id', 'uuid', [
                 'null' => false,
             ])
+            ->addColumn('bank_card', 'string', [
+                'null' => false,
+                'limit' => 128,
+            ])
             ->addColumn('identify_card_front', 'string', [
                 'null' => false,
                 'limit' => 128,

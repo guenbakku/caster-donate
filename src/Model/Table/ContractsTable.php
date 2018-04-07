@@ -27,6 +27,12 @@ class ContractsTable extends AppTable
 
         // Setup upload file
         $this->addBehavior('Upload', [
+            'bank_card' => [
+                'path' => Configure::read('System.Paths.bank_card'),
+                'keepFilesOnEdit' => false,
+                'keepFilesOnDelete' => false,
+                'transformer' => null,
+            ],
             'identify_card_front' => [
                 'path' => Configure::read('System.Paths.identify_card'),
                 'keepFilesOnEdit' => false,
@@ -103,6 +109,43 @@ class ContractsTable extends AppTable
                     'provider' => 'Contact',
                     'message' => __('Chỉ được nhập số, khoảng trắng và dấu -'),
                 ]
+            ]);
+        
+        $validator
+            ->notEmpty('bank_card', __('Phải chọn ảnh tải lên.'))
+            ->add('bank_card', [
+                'uploadError' => [
+                    'rule' => ['uploadError', false],
+                    'message' => 'Có lỗi xảy ra trong quá trình tải file.',
+                    'last' => true,
+                ],
+                'mimeType' => [
+                    'rule' => ['mimeType', Configure::read('vcv.AllowFileTypes.image')],
+                    'message' => __('File tải lên có định dạng không hợp lệ.'),
+                    'last' => true,
+                ],
+                'fileSize' => [
+                    'rule' => ['fileSize', '<=', Configure::read('vcv.uploadFileSize')],
+                    'message' => __(
+                        'File tải lên phải có dung lượng nhỏ hơn {0}.', 
+                        Configure::read('vcv.uploadFileSize')
+                    ),
+                    'last' => true,
+                ],
+                'minWidth' => [
+                    'rule' => ['imageWidth', '>=', Configure::read('System.Dimensions.bank_card')[0]],
+                    'message' => __(
+                        'Chiều rộng ảnh tải lên không được nhỏ hơn {0}.',
+                        Configure::read('System.Dimensions.bank_card')[0]
+                    ),
+                ],
+                'minHeight' => [
+                    'rule' => ['imageHeight', '>=', Configure::read('System.Dimensions.bank_card')[1]],
+                    'message' => __(
+                        'Chiều cao ảnh tải lên không được nhỏ hơn {0}.',
+                        Configure::read('System.Dimensions.bank_card')[1]
+                    ),
+                ],
             ]);
 
         $validator

@@ -79,6 +79,16 @@ use Cake\Utility\Hash;
             <?= h(Hash::get($contract, 'bank_account.number')) ?>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-2">
+            <strong><?= __('Ảnh thẻ ngân hàng') ?></strong>
+        </div>
+        <div class="col-md-3 col-sm-4">
+            <?= $this->EmbedAsset->image(Hash::get($contract, 'bank_card.tmp_name'), [
+                'class' => 'upload-thumbnail',
+            ]) ?>
+        </div>
+    </div>
 
     <hr>
     <h4 class="m-t-0"><?= __('Chứng minh nhân dân') ?></h4>
@@ -88,7 +98,7 @@ use Cake\Utility\Hash;
         </div>
         <div class="col-md-3 col-sm-4">
             <?= $this->EmbedAsset->image(Hash::get($contract, 'identify_card_front.tmp_name'), [
-                'class' => 'identify-card-preview',
+                'class' => 'upload-thumbnail',
             ]) ?>
         </div>
     </div>
@@ -98,7 +108,7 @@ use Cake\Utility\Hash;
         </div>
         <div class="col-md-3 col-sm-4">
             <?= $this->EmbedAsset->image(Hash::get($contract, 'identify_card_back.tmp_name'), [
-                'class' => 'identify-card-preview',
+                'class' => 'upload-thumbnail',
             ]) ?>
         </div>
     </div>
