@@ -23,13 +23,13 @@ class DonationNotificationSetting extends Entity
 
     public function setDefaultValue()
     {
-        $this->_properties['notify_message_array']    = $this->_properties['notify_message_array'] ?: '{"message1":"___","target1":"\u300cNg\u01b0\u1eddi \u1ee7ng h\u1ed9\u300d","message2":"\u0111\u00e3 \u1ee7ng h\u1ed9","target2":"\u300cS\u1ed1 ti\u1ec1n\u300d","message3":"\u0111\u1ed3ng.","target3":"\u300c___\u300d","message4":"___"}';
-        $this->_properties['audio_id']          = $this->_properties['audio_id'] ?: 'resource-0000-000a-udio-public000001';
-        $this->_properties['image_id']          = $this->_properties['image_id'] ?: 'resource-0000-0000-0img-public000001';
-        $this->_properties['text_color_1']      = $this->_properties['text_color_1'] ?: '#ff7676';
-        $this->_properties['text_color_2']      = $this->_properties['text_color_2'] ?: '#ffffff';
-        $this->_properties['appear_effect']     = $this->_properties['appear_effect'] ?: 'bounce';
-        $this->_properties['disappear_effect']  = $this->_properties['disappear_effect'] ?: 'bounceOut';
-        $this->_properties['display_time']      = $this->_properties['display_time'] ?: '6';
+        $this->notify_message_array = '{"message1":"___","target1":"\u300cNg\u01b0\u1eddi \u1ee7ng h\u1ed9\u300d","message2":"\u0111\u00e3 \u1ee7ng h\u1ed9","target2":"\u300cS\u1ed1 ti\u1ec1n\u300d","message3":"\u0111\u1ed3ng.","target3":"\u300c___\u300d","message4":"___"}';
+        $this->audio_id = 'resource-0000-000a-udio-public000001';
+        $this->image_id = 'resource-0000-0000-0img-public000001';
+        $this->text_color_1 = '#ff7676';
+        $this->text_color_2 = '#ffffff';
+        $this->appear_effect = 'bounce';
+        $this->disappear_effect = 'bounceOut';
+        $this->display_time = '6';
     }
 }
