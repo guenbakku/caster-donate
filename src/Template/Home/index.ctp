@@ -134,54 +134,54 @@
     </div>
     
     <div class="white-box bg-invisible">
-        <h3 class="nk-decorated-h-2 my-red"><span>Bài Viết Hướng dẫn</span></h3>
+        <h3 class="nk-decorated-h-2">HƯỚNG DẪN CHO <span class="my-red">STREAMER</span></h3>
         <section class="regular slider">
             <div class="col-md-4">
                 <img style="width: 100%;height:150px;object-fit: cover;" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-5-mid.jpg">
                 <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                <p class="my-red"><span class="fa fa-calendar"></span> 08/04/2018</p>
+                <p><span class="fa fa-calendar"></span> 08/04/2018</p>
                 <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
                 <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
             </div>
             <div class="col-md-4">
                 <img style="width: 100%;height:150px;object-fit: cover;" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-6-mid.jpg">
                 <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                <p class="my-red"><span class="fa fa-calendar"></span> 08/04/2018</p>
+                <p><span class="fa fa-calendar"></span> 08/04/2018</p>
                 <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
                 <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
             </div>
             <div class="col-md-4">
                 <img style="width: 100%;height:150px;object-fit: cover;" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-7-mid.jpg">
                 <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                <p class="my-red"><span class="fa fa-calendar"></span> 08/04/2018</p>
+                <p><span class="fa fa-calendar"></span> 08/04/2018</p>
                 <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
                 <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
             </div>
             <div class="col-md-4">
                 <img style="width: 100%;height:150px;object-fit: cover;" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-8-mid.jpg">
                 <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                <p class="my-red"><span class="fa fa-calendar"></span> 08/04/2018</p>
+                <p><span class="fa fa-calendar"></span> 08/04/2018</p>
                 <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
                 <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
             </div>
             <div class="col-md-4">
                 <img style="width: 100%;height:150px;object-fit: cover;" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-3-sm.jpg">
                 <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                <p class="my-red"><span class="fa fa-calendar"></span> 08/04/2018</p>
+                <p><span class="fa fa-calendar"></span> 08/04/2018</p>
                 <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
                 <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
             </div>
             <div class="col-md-4">
                 <img style="width: 100%;height:150px;object-fit: cover;" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-4-sm.jpg">
                 <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                <p class="my-red"><span class="fa fa-calendar"></span> 08/04/2018</p>
+                <p><span class="fa fa-calendar"></span> 08/04/2018</p>
                 <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
                 <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
             </div>
             <div class="col-md-4">
                 <img style="width: 100%;height:150px;object-fit: cover;" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-1-sm.jpg">
                 <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                <p class="my-red"><span class="fa fa-calendar"></span> 08/04/2018</p>
+                <p><span class="fa fa-calendar"></span> 08/04/2018</p>
                 <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
                 <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
             </div>
@@ -191,8 +191,8 @@
 
 <div class="col-md-3">
     <div class="white-box">
-        <h3 class="box-title">Streamer mới tham gia</h3>
-        <p class="text-muted m-b-30">Chào mừng những streamer mới gia nhập cùng<code>Tôi Lên Sóng</code></p>
+        <h3 class="box-title"><span class="my-red">Streamer</span> mới tham gia</h3>
+        <p class="text-muted m-b-30">Chào mừng những streamer mới gia nhập cùng <span class="my-red">Tôi Lên Sóng</span></p>
         <!-- Nav tabs -->
         <ul class="nav customtab nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home1" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Dota</span></a></li>
