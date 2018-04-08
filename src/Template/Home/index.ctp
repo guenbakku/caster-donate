@@ -93,8 +93,8 @@
     });
 </script>
 <?php $this->end(); ?> 
-<?=$this->Html->image('demoHomePage/bg-top.png',['class' => 'page-background-top']);?>
-<?=$this->Html->image('demoHomePage/bg-bottom.png',['class' => 'page-background-bottom']);?>
+<!--<?=$this->Html->image('demoHomePage/bg-top.png',['class' => 'page-background-top']);?>
+<?=$this->Html->image('demoHomePage/bg-bottom.png',['class' => 'page-background-bottom']);?>-->
 
 <div class="col-md-9">
     <div class="white-box bg-invisible" style="min-height:380px">
