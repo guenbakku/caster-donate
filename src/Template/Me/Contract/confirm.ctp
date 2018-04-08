@@ -124,11 +124,11 @@ $this->EmbedAsset->setConfig('filesystem.adapter', Flysystem::getAdapter('local'
         <div class="row">
             <div class="col-md-offset-2 col-md-10">
                 <?= $this->Html->link( __('Quay lại'), [
-                    'action' => 'create',
+                    'action' => 'register',
                 ], [
                     'class' => 'btn btn-default miw-100',
                 ]) ?>
-                <?= $this->Form->button( __('Gửi'), [
+                <?= $this->Form->button( __('Hoàn tất'), [
                     'class' => 'btn btn-success miw-100',
                     'label' => false,
                     'type' => 'submit'

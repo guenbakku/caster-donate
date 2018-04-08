@@ -26,7 +26,7 @@ class ContractController extends AppController
                 $data = $this->request->getData();
                 if ($termAgree->execute($data)) {
                     $this->ChainAction->completeStep($data);
-                    return $this->redirect(['action' => 'create']);
+                    return $this->redirect(['action' => 'register']);
                 } else {
                     $errors = Hash::flatten($termAgree->errors());
                     $this->Flash->error(implode("\n", $errors));
@@ -42,7 +42,7 @@ class ContractController extends AppController
         });
     }
 
-    public function create()
+    public function register()
     {
         $this->ContentHeader->title(__('Hợp đồng .:. Nhập thông tin'));
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
@@ -95,7 +95,7 @@ class ContractController extends AppController
 
     public function view() 
     {
-        if (!$this->Me->get('isCaster')) {
+        if (!$this->Me->get('contract')->is('registered')) {
             return $this->redirect(['action' => 'term']); 
         }
     }

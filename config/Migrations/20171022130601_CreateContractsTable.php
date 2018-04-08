@@ -68,6 +68,7 @@ class CreateContractsTable extends AbstractMigration
             ->addColumn('modified', 'datetime', [
                 'null' => false,
             ])
+            ->addIndex(['user_id'], ['unique' => true])
             ->addForeignKey('user_id', 'users', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
             ->create();
     }

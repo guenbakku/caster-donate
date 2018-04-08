@@ -68,4 +68,28 @@ class Me
 
         return $isCaster;
     }
+
+    /**
+     * Return contract entity of current loging in user
+     *
+     * @param   void
+     * @return  Entity|null
+     */
+    protected function contract()
+    {
+        $contract = $this->rememberCache('contract', function () {
+            $userId = $this->Auth->user('id');
+            $contractsTb = TableRegistry::get('contracts');
+            $contract = $contractsTb->findByUserId($userId)
+                ->contain(['ContractStatuses', 'Sexes'])
+                ->first();
+            if (empty($contract)) {
+                $contract = $contractsTb->newEntity();
+            }
+    
+            return $contract;
+        });
+        
+        return $contract;
+    }
 }
