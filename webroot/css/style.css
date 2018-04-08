@@ -28,15 +28,16 @@
 .my-red{
     color: #dd163b;
 }
+
+.bg-invisible{
+    background-color: #00000000;
+}
 /* -------------------------------*/
 
 /* Để debug của cakephp không bị che bởi navbar và sidebar */
 .cake-debug-output {
     margin-top: 70px;
     padding-left: 70px;
-}
-.bg-invisible{
-    background-color: #00000000;
 }
 
 /* Xóa border trắng khi màn hình nhỏ của boostrap*/
