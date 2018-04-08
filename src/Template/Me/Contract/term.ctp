@@ -1,3 +1,5 @@
+<?= $this->element('/Me/Contracts/create_contract_header') ?>
+
 <div class="white-box">
     <h3 class="box-title"><?=__('Điều khoản hợp đồng')?></h3>
     
@@ -32,7 +34,7 @@
                 'hiddenField' => true,
             ]) ?>
         </div>
-        <?= $this->Form->button(__('Làm hợp đồng'), [
+        <?= $this->Form->button(__('Tiếp'), [
             'class' => 'btn btn-success miw-100',
             'type' => 'submit',
         ]) ?>

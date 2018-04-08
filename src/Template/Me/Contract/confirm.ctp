@@ -3,6 +3,7 @@ use Cake\Utility\Hash;
 use App\Utility\Flysystem;
 
 $this->EmbedAsset->setConfig('filesystem.adapter', Flysystem::getAdapter('local'));
+echo $this->element('/Me/Contracts/create_contract_header');
 ?>
 
 <div class="white-box wide-row">

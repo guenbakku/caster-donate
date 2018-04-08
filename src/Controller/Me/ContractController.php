@@ -41,7 +41,8 @@ class ContractController extends AppController
                     $this->RequestDataPatcher->patch($data);
                 }
             }
-            $this->set(compact('termAgree'));
+            $stepNo = $this->ChainAction->getStepNo();
+            $this->set(compact('termAgree', 'stepNo'));
         });
     }
 
@@ -69,7 +70,8 @@ class ContractController extends AppController
                     $this->RequestDataPatcher->patch($data);
                 }
             }
-            $this->set(compact('contract'));
+            $stepNo = $this->ChainAction->getStepNo();
+            $this->set(compact('contract', 'stepNo'));
         });
     }
 
@@ -90,9 +92,11 @@ class ContractController extends AppController
                 );
 
                 $this->ChainAction->clear();
+                $this->Flash->success(__('Đăng ký hợp đồng thành công'));
                 return $this->redirect(['action' => 'view']);
             }
-            $this->set(compact('contract'));
+            $stepNo = $this->ChainAction->getStepNo();
+            $this->set(compact('contract', 'stepNo'));
         });
     }
 

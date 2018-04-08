@@ -22,6 +22,7 @@
     <?= $this->Html->css('/packages/AmpleAdmin/css/style.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/colors/blue-dark.css', ['id' => 'theme']) ?>
     <?= $this->Html->css('style.css')?>
+    <?= $this->Html->css('chain-action.css')?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

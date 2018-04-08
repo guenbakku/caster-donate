@@ -1,3 +1,5 @@
+<?= $this->element('/Me/Contracts/create_contract_header') ?>
+
 <div class="white-box">
     <?php $this->Form->setTemplates($FormTemplates['input-short']);?>
     <?=$this->Form->create($contract, [
@@ -126,7 +128,7 @@
                 ], [
                     'class' => 'btn btn-default miw-100',
                 ]) ?>
-                <?= $this->Form->button( __('Kiểm tra'), [
+                <?= $this->Form->button( __('Tiếp'), [
                     'class' => 'btn btn-success miw-100',
                     'label' => false,
                     'type' => 'submit'
