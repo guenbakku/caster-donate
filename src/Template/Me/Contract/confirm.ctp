@@ -1,5 +1,8 @@
 <?php
 use Cake\Utility\Hash;
+use App\Utility\Flysystem;
+
+$this->EmbedAsset->setConfig('filesystem.adapter', Flysystem::getAdapter('local'));
 ?>
 
 <div class="white-box wide-row">
