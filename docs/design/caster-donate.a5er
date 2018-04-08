@@ -943,11 +943,12 @@ Field="Địa chỉ","address","VARCHAR(512)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id tình trạng hợp đồng","status_id","INT(11)","NOT NULL",,"","Đợi duyệt, Hợp lệ, Không hợp lệ",$FFFFFFFF,""
 Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Index=user_id=1,user_id
 EffectMode=None
 Tag=transaction
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180407231702
+ModifiedDateTime=20180408191624
 Position="THANH VIEN",2800,2600,1037,607
 
 [Comment]
