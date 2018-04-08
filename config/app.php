@@ -374,6 +374,10 @@ return [
             'adapter' => 'Local',
             'root' => ROOT.DS.'webroot'.DS,
         ],
+        'local' => [
+            'adapter' => 'Local',
+            'root' => '/',
+        ],
         'uses' => 'root',
     ],
 
