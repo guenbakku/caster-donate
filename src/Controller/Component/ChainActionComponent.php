@@ -8,6 +8,7 @@ use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Utility\Hash;
 use Cake\I18n\Time;
+use Cake\Routing\Router;
 use Cake\Network\Exception\ForbiddenException;
 
 /**
@@ -17,6 +18,7 @@ class ChainActionComponent extends Component
 {
     public $components = ['Flash'];
 
+    protected $step;
     protected $stepNo;
 
     public function initialize(array $config)
@@ -24,7 +26,7 @@ class ChainActionComponent extends Component
         $defaultConfig = [
             'key' => 'ChainAction',
             'process' => null,
-            'firstStepNo' => 0,
+            'steps' => [],
             'timeout' => 1800, // seconds
             'autoDestroy' => false, // auto delete all data of other processes
             'errorMessage' => __('Vui lòng thực hiện lại từ đầu'),
@@ -61,20 +63,23 @@ class ChainActionComponent extends Component
      *
      * @param   int: step number
      */
-    public function beginStep(int $stepNo, Callable $callable)
+    public function beginStep(Callable $callable)
     {
-        $this->stepNo = $stepNo;
+        if ($this->step === null) {
+            $action = $this->getController()->request->action;
+            $this->setStep($action);
+        }
 
         $previousPath = $this->getSessionPath($this->stepNo - 1);
         $expires = $this->session->read($previousPath.'.expires');
         $isPreviousStepValid = !empty($expires) && $expires > Time::now();
-        $isFirstStep = $stepNo === $this->getConfig('firstStepNo');
+        $isFirstStep = $this->stepNo === 0;
         
         if (!$isFirstStep && !$isPreviousStepValid) {
             return $this->handleError();
         }
 
-        return \call_user_func($callable);
+        return call_user_func($callable);
     }
 
     /**
@@ -92,11 +97,29 @@ class ChainActionComponent extends Component
 
         $this->session->delete($path);
         $this->session->write($path, [
+            'step' => $this->step,
             'stepNo' => $this->stepNo,
             'url' => $url,
             'results' => $results,
             'expires' => $expires,
         ]);
+    }
+
+    /**
+     * Set step name
+     *
+     * @param   string
+     * @return  void
+     */
+    public function setStep(string $step)
+    {
+        $this->step = $step;
+        $this->stepNo = $this->determineStepNo($this->step);
+    }
+
+    public function getStep()
+    {
+        return $this->step;
     }
 
     public function getStepNo()
@@ -107,12 +130,21 @@ class ChainActionComponent extends Component
     /**
      * Return saved data of specific stepNo
      *
-     * @param   int: step no
+     * @param   int|string: step no or step name
      * @return  mixed
      */
-    public function getStepData(int $stepNo = null)
+    public function getStepData($step = null)
     {   
-        $stepNo = $stepNo ?? $this->stepNo;
+        if ($step === null) {
+            $stepNo = $this->stepNo;
+        } elseif (is_string($step)) {
+            $stepNo = $this->determineStepNo($step);
+        } elseif (is_int($step)) {
+            $stepNo = $step;
+        } else {
+            throw new \InvalidArgumentException('step is invalid.');
+        }
+
         $path = $this->getSessionPath($stepNo);
         $data = $this->session->read($path);
         if ($data === null) {
@@ -142,7 +174,7 @@ class ChainActionComponent extends Component
      * Clear session data of current process
      *
      * @param   int: step no of current process
-     *      if null provided, all steps will be cleared.
+     *      if null provided, all steps of process will be cleared.
      * @return  void
      */
     public function clear(int $stepNo = null)
@@ -152,15 +184,41 @@ class ChainActionComponent extends Component
     }
 
     /**
-     * Clear session data of all processes.
+     * Return list of steps of specific process
      *
-     * @param   void
-     * @param   void
+     * @param   string|null
+     * @return  array
      */
-    public function clearAll()
+    protected function getProcessSteps(?string $process = null)
     {
-        $path = $this->getConfig('key');
-        $this->session->delete($path);
+        $steps = $this->getConfig('steps');
+        if ($process !== null) {
+            $steps = Hash::get($steps, $process);
+        }
+        if (empty($steps)) {
+            throw new \RuntimeException('Please specify list of steps.');
+        }
+        return $steps;
+    }
+
+    /**
+     * Determine step no from step name
+     *
+     * @param   string
+     * @param   int
+     */
+    protected function determineStepNo(string $step)
+    {
+        $process = $this->getConfig('process');
+        $steps = $this->getProcessSteps($process);
+        $stepNo = array_search($step, $steps);
+        if ($stepNo === false) {
+            throw new \RuntimeException(
+                sprintf('Could not find step name `%s` in step list.', $this->step)
+            );
+        }
+
+        return $stepNo;
     }
 
     /**
@@ -172,11 +230,11 @@ class ChainActionComponent extends Component
     protected function handleError()
     {
         $this->Flash->error($this->getConfig('errorMessage'));
-        $firstStepNo = $this->getConfig('firstStepNo');
-        $firstStepData = $this->getStepData($firstStepNo);
-        if (empty($firstStepData)) {
-            throw new ForbiddenException("Could not get data of first step `$firstStepNo`");
-        }
-        return $this->getController()->redirect(Hash::get($firstStepData, 'url'));
+        $process = $this->getConfig('process');
+        $steps = $this->getProcessSteps($process);
+        $firstStepUrl = Router::parseRequest($this->request);
+        $firstStepUrl['action'] = $steps[0];
+        $firstStepUrl = Router::reverse($firstStepUrl);
+        return $this->getController()->redirect($firstStepUrl);
     }
 }

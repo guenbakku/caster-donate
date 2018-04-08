@@ -14,13 +14,16 @@ class ContractController extends AppController
     {
         parent::beforeFilter($event);
         $this->ContentHeader->title(__('Hợp đồng'));
+        $this->ChainAction->setConfig('steps', [
+            'CreateContract' => ['term', 'register', 'confirm']
+        ]);
     }
 
     public function term()
     {
         $this->ContentHeader->title(__('Hợp đồng .:. Điều khoản'));
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
-        $this->ChainAction->beginStep(0, function () {
+        $this->ChainAction->beginStep(function () {
             $termAgree = new TermAgreeForm;
             if ($this->request->is('post')) {
                 $data = $this->request->getData();
@@ -46,7 +49,7 @@ class ContractController extends AppController
     {
         $this->ContentHeader->title(__('Hợp đồng .:. Nhập thông tin'));
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
-        $this->ChainAction->beginStep(1, function () {
+        $this->ChainAction->beginStep(function () {
             $contract = null;
             if ($this->request->is('post')) {
                 $Contract = new Contract();
@@ -74,8 +77,8 @@ class ContractController extends AppController
     {
         $this->ContentHeader->title(__('Hợp đồng .:. Kiểm tra'));
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
-        $this->ChainAction->beginStep(2, function () {
-            $contract = $this->ChainAction->getStepData(1);
+        $this->ChainAction->beginStep(function () {
+            $contract = $this->ChainAction->getStepData('register');
             if ($this->request->is('post')) {
                 $user_id = $this->Me->get('id');
                 $Contract = new Contract();
