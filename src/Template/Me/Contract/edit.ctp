@@ -124,12 +124,12 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-10">
                 <?= $this->Html->link( __('Quay lại'), [
-                    'action' => 'term',
+                    'action' => 'view',
                 ], [
-                    'class' => 'btn btn-default miw-100',
+                    'class' => 'fcbtn btn btn-outline btn-default miw-100',
                 ]) ?>
                 <?= $this->Form->button( __('Tiếp'), [
-                    'class' => 'btn btn-success miw-100',
+                    'class' => 'fcbtn btn btn-outline btn-success miw-100',
                     'label' => false,
                     'type' => 'submit'
                 ]) ?>

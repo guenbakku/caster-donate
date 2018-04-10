@@ -7,7 +7,7 @@ $this->EmbedAsset->setConfig('filesystem.adapter', Flysystem::getAdapter('local'
 $statuses = [
     'checking' => [
         'class' => 'info',
-        'message' => __('Hợp đồng của bạn đang được kiểm tra. Bạn sẽ nhận được email thông báo ngay sau khi hợp đồng được kiểm tra xong.'),
+        'message' => __('Hợp đồng đang được kiểm tra. Bạn sẽ nhận được email thông báo ngay sau khi hợp đồng được kiểm tra xong.'),
     ], 
     'valid' => [
         'class' => 'success',
@@ -28,7 +28,7 @@ $statuses = [
     <div class="row">
         <div class="col-md-12">
             <?php $selector = Hash::get($contract, 'contract_status.selector'); ?>
-            <span class="label label-<?= $statuses[$selector]['class'] ?>" style="font-size:14px">
+            <span class="label label-<?= $statuses[$selector]['class'] ?>">
                 <?= Hash::get($contract, 'contract_status.name') ?>
             </span>
         </div>
@@ -48,7 +48,7 @@ $statuses = [
         <div class="row">
             <div class="col-md-12">
                 <?= $this->Html->link(__('Chỉnh sửa'), ['action' => 'edit'], [
-                    'class' => 'btn btn-success',
+                    'class' => 'fcbtn btn btn-outline btn-success',
                 ]) ?>
             </div>
         </div>
@@ -65,7 +65,7 @@ $statuses = [
                 ?>
                 <?= $this->Html->link($icon.__('Tải về'), 
                     ['action' => 'download'], [
-                    'class' => 'btn btn-success',
+                    'class' => 'fcbtn btn btn-outline btn-success',
                     'escape' => false,
                 ]) ?>
             </div>

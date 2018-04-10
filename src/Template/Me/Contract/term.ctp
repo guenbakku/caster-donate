@@ -35,7 +35,7 @@
             ]) ?>
         </div>
         <?= $this->Form->button(__('Tiếp'), [
-            'class' => 'btn btn-success miw-100',
+            'class' => 'fcbtn btn btn-outline btn-success miw-100',
             'type' => 'submit',
         ]) ?>
         

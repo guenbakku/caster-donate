@@ -4,6 +4,7 @@ namespace App\Controller\Me;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Utility\Hash;
+use Cake\Network\Exception\ForbiddenException;
 use App\Controller\AppController;
 use App\Form\Me\Contract\TermAgreeForm;
 use App\Model\Logic\User\Contract;
@@ -22,6 +23,10 @@ class ContractController extends AppController
 
     public function term()
     {
+        if ($this->Me->get('contract')->is('registered')) {
+            throw new ForbiddenException;
+        }
+
         $this->ContentHeader->title(__('Đăng ký hợp đồng .:. Điều khoản'));
         $this->ChainAction->setConfig(['process' => 'CreateContract']);
         $this->ChainAction->beginStep(function () {
@@ -97,13 +102,17 @@ class ContractController extends AppController
                 return $this->redirect(['action' => 'view']);
             }
             $stepNo = $this->ChainAction->getStepNo();
-            $backAction = 'create';
+            $backAction = 'register';
             $this->set(compact('contract', 'stepNo', 'backAction'));
         });
     }
 
     public function edit()
     {
+        if (!$this->Me->get('contract')->is('inadequacy')) {
+            throw new ForbiddenException;
+        }
+
         $this->ContentHeader->title(__('Chỉnh sửa hợp đồng .:. Nhập thông tin'));
         $this->ChainAction->setConfig(['process' => 'EditContract']);
         $this->ChainAction->beginStep(function () {

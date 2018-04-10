@@ -11,7 +11,7 @@
 <div class="chain-action">
     <ul>
         <?php foreach ($navigation as $item): ?>
-            <li class="<?= $item['active'] ?>"></li>
+            <li style="width: 50%" class="<?= $item['active'] ?>"></li>
         <?php endforeach ?>
     </ul>
 </div>

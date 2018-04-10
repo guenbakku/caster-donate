@@ -126,10 +126,10 @@ $this->EmbedAsset->setConfig('filesystem.adapter', Flysystem::getAdapter('local'
                 <?= $this->Html->link( __('Quay lại'), [
                     'action' => $backAction,
                 ], [
-                    'class' => 'btn btn-default miw-100',
+                    'class' => 'fcbtn btn btn-outline btn-default miw-100',
                 ]) ?>
                 <?= $this->Form->button( __('Hoàn tất'), [
-                    'class' => 'btn btn-success miw-100',
+                    'class' => 'fcbtn btn btn-outline btn-success miw-100',
                     'label' => false,
                     'type' => 'submit'
                 ]) ?>

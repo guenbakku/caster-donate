@@ -126,10 +126,10 @@
                 <?= $this->Html->link( __('Quay lại'), [
                     'action' => 'term',
                 ], [
-                    'class' => 'btn btn-default miw-100',
+                    'class' => 'fcbtn btn btn-outline btn-default miw-100',
                 ]) ?>
                 <?= $this->Form->button( __('Tiếp'), [
-                    'class' => 'btn btn-success miw-100',
+                    'class' => 'fcbtn btn btn-outline btn-success miw-100',
                     'label' => false,
                     'type' => 'submit'
                 ]) ?>

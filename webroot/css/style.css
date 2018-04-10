@@ -1,3 +1,6 @@
+/* Import các css khác */
+@import url("./chain-action.css");
+
 /* Để debug của cakephp không bị che bởi navbar và sidebar */
 .cake-debug-output {
     margin-top: 70px;
