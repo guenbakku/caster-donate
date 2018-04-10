@@ -194,7 +194,8 @@ input.k-textbox {
 }
 
 .wide-row .row {
-    margin-bottom: 15px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 .upload-thumbnail {
     max-width: 100%;

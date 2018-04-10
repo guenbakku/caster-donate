@@ -3,7 +3,6 @@ use Cake\Utility\Hash;
 use App\Utility\Flysystem;
 
 $this->EmbedAsset->setConfig('filesystem.adapter', Flysystem::getAdapter('local'));
-echo $this->element('/Me/Contracts/create_contract_header');
 ?>
 
 <div class="white-box wide-row">
@@ -125,7 +124,7 @@ echo $this->element('/Me/Contracts/create_contract_header');
         <div class="row">
             <div class="col-md-offset-2 col-md-10">
                 <?= $this->Html->link( __('Quay lại'), [
-                    'action' => 'register',
+                    'action' => $backAction,
                 ], [
                     'class' => 'btn btn-default miw-100',
                 ]) ?>

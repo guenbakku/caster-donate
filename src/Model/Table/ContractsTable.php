@@ -224,4 +224,20 @@ class ContractsTable extends AppTable
 
         return $validator;
     }
+
+    public function validationVerify(Validator $validator)
+    {
+        $validator = $this->validationDefault($validator);
+
+        $validator
+            ->notEmpty('identify_no', __('Phải nhập Số CMND.'))
+            ->add('lastname', [
+                'maxLength' => [
+                    'rule' => ['maxLength', $this->columnLength('identify_no')],
+                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('identify_no')),
+                ]
+            ]);
+        
+        return $validator;
+    }
 }

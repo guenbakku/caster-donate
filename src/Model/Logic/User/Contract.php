@@ -5,6 +5,7 @@ use Cake\ORM\TableRegistry;
 use Cake\ORM\Entity;
 use Cake\Core\Configure;
 use Cake\Utility\Text;
+use App\Utility\Code;
 
 class Contract
 {
@@ -54,6 +55,9 @@ class Contract
     {
         $list = ['bank_card', 'identify_card_front', 'identify_card_back'];
         foreach ($list as $item) {
+            if (!isset($contract[$item])) {
+                continue;
+            }
             $dest = TMP.Text::uuid();
             $src =& $contract[$item]['tmp_name'];
             $result = move_uploaded_file($src, $dest);
@@ -80,6 +84,33 @@ class Contract
     {   
         $contract['user_id'] = $user_id;
         $entity = $this->contractsTb->newEntity($contract, [
+            'validate' => false,
+            'associated' => ['BankAccounts'],
+        ]);
+
+        $this->contractsTb->save($entity);
+        return $entity;
+    }
+
+    /**
+     * Chỉnh sửa hợp đồng
+     * NOTICE: Method này không validate input
+     *
+     * @param   string
+     * @param   array
+     * @return  Entity
+     */
+    public function edit($user_id, $contract)
+    {   
+        $Code = new Code();
+        $contract['user_id'] = $user_id;
+        $contract['status_id'] = $Code->setTable('contract_statuses')->getKey('checking', 'id');
+
+        $entity = $this->contractsTb->findByUserId($user_id)
+            ->contain(['BankAccounts'])
+            ->first();
+        
+        $this->contractsTb->patchEntity($entity, $contract, [
             'validate' => false,
             'associated' => ['BankAccounts'],
         ]);

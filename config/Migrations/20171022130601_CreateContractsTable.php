@@ -24,6 +24,10 @@ class CreateContractsTable extends AbstractMigration
                 'null' => false,
                 'limit' => 128,
             ])
+            ->addColumn('identify_no', 'string', [
+                'null' => true,
+                'limit' => 32,
+            ])
             ->addColumn('identify_card_front', 'string', [
                 'null' => false,
                 'limit' => 128,

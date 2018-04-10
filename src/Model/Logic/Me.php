@@ -81,7 +81,7 @@ class Me
             $userId = $this->Auth->user('id');
             $contractsTb = TableRegistry::get('contracts');
             $contract = $contractsTb->findByUserId($userId)
-                ->contain(['ContractStatuses', 'Sexes'])
+                ->contain(['ContractStatuses', 'Sexes', 'BankAccounts'])
                 ->first();
             if (empty($contract)) {
                 $contract = $contractsTb->newEntity();
