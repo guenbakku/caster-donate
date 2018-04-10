@@ -38,8 +38,8 @@ class DonationNotificationSettingsTable extends AppTable
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->uuid('id', __('ID không hợp lệ'))
-            ->allowEmpty('id', 'created','image_id');
+            ->uuid('id')
+            ->allowEmpty('id', 'created');
 
         $validator
             ->add('display_time', [

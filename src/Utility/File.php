@@ -42,7 +42,7 @@ class File extends CakeFile
         bool $keepRatio = false
     ) {
         $extension = pathinfo(File::uuidName($path), PATHINFO_EXTENSION);
-        $tmp = tempnam(sys_get_temp_dir(), 'upload');
+        $tmp = tempnam(TMP, 'upload');
         unlink($tmp);
         $tmp = $tmp.'.'.$extension;
 

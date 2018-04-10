@@ -39,8 +39,10 @@ class AppView extends View
         $this->loadHelper('Cake.Text');
         $this->loadHelper('App.Auth');
         $this->loadHelper('App.ContentHeader');
+        $this->loadHelper('App.EmbedAsset');
         $this->loadHelper('App.Code');
         $this->loadHelper('App.I18n');
+        $this->loadHelper('App.Me');
 
     }
 }

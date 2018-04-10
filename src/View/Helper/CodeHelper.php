@@ -14,7 +14,7 @@ class CodeHelper extends Helper
     public function initialize(array $config)
     {
         parent::initialize($config);
-        $this->Code = new Code();
+        $this->Code = new Code($config);
     }
     
     /**

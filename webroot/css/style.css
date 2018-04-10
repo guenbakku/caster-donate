@@ -1,3 +1,6 @@
+/* Import các css khác */
+@import url("./chain-action.css");
+
 /* Để debug của cakephp không bị che bởi navbar và sidebar */
 .cake-debug-output {
     margin-top: 70px;
@@ -191,4 +194,12 @@ input.k-textbox {
 .social-login a {
     display: inline-block;
     margin-bottom: 5px;
+}
+
+.wide-row .row {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.upload-thumbnail {
+    max-width: 100%;
 }

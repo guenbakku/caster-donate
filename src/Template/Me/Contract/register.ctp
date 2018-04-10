@@ -1,4 +1,4 @@
-<?= $this->element('/Me/Contracts/edit_contract_header') ?>
+<?= $this->element('/Me/Contracts/create_contract_header') ?>
 
 <div class="white-box">
     <?php $this->Form->setTemplates($FormTemplates['input-short']);?>
@@ -124,7 +124,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-10">
                 <?= $this->Html->link( __('Quay lại'), [
-                    'action' => 'view',
+                    'action' => 'term',
                 ], [
                     'class' => 'fcbtn btn btn-outline btn-default miw-100',
                 ]) ?>

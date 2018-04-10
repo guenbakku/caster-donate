@@ -20,6 +20,14 @@ class CreateContractsTable extends AbstractMigration
             ->addColumn('user_id', 'uuid', [
                 'null' => false,
             ])
+            ->addColumn('bank_card', 'string', [
+                'null' => false,
+                'limit' => 128,
+            ])
+            ->addColumn('identify_no', 'string', [
+                'null' => true,
+                'limit' => 32,
+            ])
             ->addColumn('identify_card_front', 'string', [
                 'null' => false,
                 'limit' => 128,
@@ -29,7 +37,7 @@ class CreateContractsTable extends AbstractMigration
                 'limit' => 128,
             ])
             ->addColumn('filename', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 128,
             ])
             ->addColumn('phone', 'string', [
@@ -56,6 +64,7 @@ class CreateContractsTable extends AbstractMigration
             ])
             ->addColumn('status_id', 'integer', [
                 'null' => false,
+                'default' => 1,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
@@ -63,6 +72,7 @@ class CreateContractsTable extends AbstractMigration
             ->addColumn('modified', 'datetime', [
                 'null' => false,
             ])
+            ->addIndex(['user_id'], ['unique' => true])
             ->addForeignKey('user_id', 'users', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
             ->create();
     }

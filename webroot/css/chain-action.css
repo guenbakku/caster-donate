@@ -1,0 +1,58 @@
+/* chain action style*/
+.chain-action {
+    max-width: 100%;
+    margin: 20px auto;
+    text-align: center;
+    position: relative;
+}
+/*eliteregister*/
+.chain-action ul {
+    margin-bottom: 30px;
+    overflow: hidden;
+    padding-left: 0px;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+.chain-action li {
+    list-style-type: none;
+    color: #686868;
+    font-size: 13px;
+    width: 33.33%;
+    float: left;
+    position: relative;
+}
+.chain-action li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 40px;
+    line-height: 40px;
+    display: block;
+    font-size: 10px;
+    color: #fff;
+    background: #686868;
+    border-radius: 100%;
+    position: relative;
+    z-index: 10;
+    margin: 0 auto 5px auto;
+}
+/*connectors*/
+.chain-action li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background:#dadada;
+    position: absolute;
+    left: -50%;
+    top: 19px;
+    z-index:1; /*put it behind the numbers*/
+}
+.chain-action li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+.chain-action li.active:before, #eliteregister li.active:after {
+    background: #53e69d;
+    color: #fff;
+}
