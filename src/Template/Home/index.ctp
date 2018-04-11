@@ -43,9 +43,7 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-    }
-    
-    
+    }    
     .decorate-h::after, .decorate-h::before{
         content: "";
         display: block;
@@ -57,23 +55,23 @@
         -ms-transform: translateY(-10px);
         transform: translateY(-10px);
     }
-    .decorate-h::before, .decorate-h::before {
+    /* .decorate-h::before, .decorate-h::before {
         -webkit-box-flex: 20px;
         -ms-flex: 20px;
         flex: 20px;
         width: 20px;
         min-width: 20px;
-    }
+    } */
     .decorate-h::after, .decorate-h::before {
         border-bottom-color: #293139 !important;
     }
     .decorate-h span{
         padding: 0 10px;
     }
-    #test{
+    .flex-space-around{
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         flex-direction: row;
         flex-wrap: wrap;
         /* tweak where items line
@@ -93,159 +91,63 @@
     });
 </script>
 <?php $this->end(); ?> 
-<!--<?=$this->Html->image('demoHomePage/bg-top.png',['class' => 'page-background-top']);?>
-<?=$this->Html->image('demoHomePage/bg-bottom.png',['class' => 'page-background-bottom']);?>-->
+<!-- <?=$this->Html->image('demoHomePage/bg-top.png',['class' => 'page-background-top']);?> -->
+<?=$this->Html->image('demoHomePage/bg-bottom.png',['class' => 'page-background-bottom']);?>
 
-<div class="col-md-9">
-    <div class="white-box bg-invisible" style="min-height:380px">
-        <section class="slider" data-sizes="50vw">
-            <div>
-            <img class="cover" height=380 src="/img/demoHomePage/slide-1.jpg">
+<div class="col-md-12">
+    <div class="banners demo-2 text-center m-t-40 m-b-40">
+        <div class="fix-width">
+            <div class="l-logo">
+                <img src="/img/admin-logo.png">
             </div>
-            <div>
-            <img class="cover" height=380 src="/img/demoHomePage/slide-2.jpg">
+            <h1 class="m-t-0 p-b-10 my-red">Tôi Lên Sóng</h1>
+            <p class="p-b-20">
+                Công cụ hỗ trợ LiveStream một cách chuyên nghiệp
+            </p>
+            <div class="col-md-2 col-sm-2 col-md-offset-4 col-sm-offset-4">
+                <button class="fcbtn btn-block btn btn-outline btn-success">Đăng ký</button>
             </div>
-            <div>
-            <img class="cover" height=380 src="/img/demoHomePage/slide-3.jpg">
-            </div>
-            <div>
-            <img class="cover" height=380 src="/img/demoHomePage/slide-4.jpg">
-            </div>
-        </section>
-    </div>
-    
-    <div class="white-box bg-invisible">
-        <h3 class="decorate-h"><span>HƯỚNG DẪN CHO<span class="my-red">STREAMER</span></span></h3>
-        <section id="test">
-                <div class="col-md-4 m-b-20">
-                    <img class="cover" style="height:150px" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-5-mid.jpg">
-                    <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                    <p><span class="fa fa-calendar"></span> 08/04/2018</p>
-                    <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ adsa asd sad asd asda sas dsadasdas asd ...</p>
-                    <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
-                </div>
-                <div class="col-md-4 m-b-20">
-                    <img class="cover" style="height:150px" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-6-mid.jpg">
-                    <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                    <p><span class="fa fa-calendar"></span> 08/04/2018</p>
-                    <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
-                    <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
-                </div>
-                <div class="col-md-4 m-b-20">
-                    <img class="cover" style="height:150px" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-7-mid.jpg">
-                    <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                    <p><span class="fa fa-calendar"></span> 08/04/2018</p>
-                    <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
-                    <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
-                </div>
-                <div class="col-md-4 m-b-20">
-                    <img class="cover" style="height:150px" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-8-mid.jpg">
-                    <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                    <p><span class="fa fa-calendar"></span> 08/04/2018</p>
-                    <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
-                    <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
-                </div>
-                <div class="col-md-4 m-b-20">
-                    <img class="cover" style="height:150px" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-3-sm.jpg">
-                    <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                    <p><span class="fa fa-calendar"></span> 08/04/2018</p>
-                    <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
-                    <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
-                </div>
-                <div class="col-md-4 m-b-20">
-                    <img class="cover" style="height:150px" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-4-sm.jpg">
-                    <h4>Hướng dẫn thủ tục đăng ký dịch vụ của TôiLênSóng</h4>
-                    <p><span class="fa fa-calendar"></span> 08/04/2018</p>
-                    <p>Thủ tục đơn giản, kích hoạt nhanh chóng. Bạn sẽ có thể bắt đầu sử dụng các tính năng của TôiLênSóng ngay lập tức. Chỉ cần có tài khoản ngân hàng, CMND, và điền đầy đủ ...</p>
-                    <button class="btn btn-default my-white"><b>Đọc tiếp</b></button>
-                </div>
-        </section>
-    </div>
-</div>
-
-<div class="col-md-3 m-t-50">
-    <div class="white-box  bg-invisible">
-        <h3 class="box-title decorate-h"><span><span class="my-red">Streamer</span> mới tham gia</span></h3>
-        <p class="text-muted m-b-30">Chào mừng những streamer mới gia nhập cùng <span class="my-red">Tôi Lên Sóng</span></p>
-        <!-- Nav tabs -->
-        <ul class="nav customtab nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home1" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Dota</span></a></li>
-            <li role="presentation" class=""><a href="#profile1" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">LOL</span></a></li>
-            <li role="presentation" class=""><a href="#messages1" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">PUPG</span></a></li>
-            <li role="presentation" class=""><a href="#settings1" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-settings"></i></span> <span class="hidden-xs">More</span></a></li>
-        </ul>
-        
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="home1">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 text-center">
-                            <a href="contact-detail.html"><img src="/img/default_avatar.jpg" alt="user" class="img-circle img-responsive"></a>
-                        </div>
-                        <div class="col-md-8 col-sm-8">
-                            <h3 class="box-title m-b-0">Mimosa</h3> 
-                            <small>[Giới thiệu bản thân]</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 text-center">
-                            <a href="contact-detail.html"><img src="/img/default_avatar.jpg" alt="user" class="img-circle img-responsive"></a>
-                        </div>
-                        <div class="col-md-8 col-sm-8">
-                            <h3 class="box-title m-b-0">Mimosa</h3> 
-                            <small>[Giới thiệu bản thân]</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 text-center">
-                            <a href="contact-detail.html"><img src="/img/default_avatar.jpg" alt="user" class="img-circle img-responsive"></a>
-                        </div>
-                        <div class="col-md-8 col-sm-8">
-                            <h3 class="box-title m-b-0">Mimosa</h3> 
-                            <small>[Giới thiệu bản thân]</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 text-center">
-                            <a href="contact-detail.html"><img src="/img/default_avatar.jpg" alt="user" class="img-circle img-responsive"></a>
-                        </div>
-                        <div class="col-md-8 col-sm-8">
-                            <h3 class="box-title m-b-0">Mimosa</h3> 
-                            <small>[Giới thiệu bản thân]</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 text-center">
-                            <a href="contact-detail.html"><img src="/img/default_avatar.jpg" alt="user" class="img-circle img-responsive"></a>
-                        </div>
-                        <div class="col-md-8 col-sm-8">
-                            <h3 class="box-title m-b-0">Mimosa</h3> 
-                            <small>[Giới thiệu bản thân]</small>
-                        </div>
-                    </div>
-                </div>
-                
-                
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="profile1">
-                
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="messages1">
-                
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="settings1">
-                
+            <div class="col-md-2 col-sm-2">
+                <button class="fcbtn btn-block btn btn-outline btn-default my-red">Hướng dẫn</button>
             </div>
         </div>
     </div>
 </div>
 
-
+<div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0 p-t-30">    
+    <div class="white-box bg-invisible p-t-30">
+        <h4 class="decorate-h p-b-20"><span class="my-red">Tính năng</span>của chúng tôi</h4>
+        <section class="flex-space-around" style="text-align:center">
+                <div class="col-md-3">
+                    <img class="cover" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-5-mid.jpg">
+                    <h4>Nhanh chóng</h4>
+                    <p>Thủ tục đơn giản, kích hoạt ngay lập tức. </p>
+                </div>
+                <div class="col-md-3">
+                    <img class="cover" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-6-mid.jpg">
+                    <h4>Dễ dàng</h4>
+                    <p>Giao diện thân thiện, có đầy đủ các bài viết hướng dẫn cách sử dụng website.</p>
+                </div>
+                <div class="col-md-3">
+                    <img class="cover" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-7-mid.jpg">
+                    <h4>Chuyên nghiệp</h4>
+                    <p>Hỗ trợ các bảng thống kê thu nhập theo biểu đồ một cách trực quan, sinh động.</p>
+                </div>
+        </section>
+    </div>
+    <div class="white-box bg-invisible p-t-30">
+        <h4 class="decorate-h p-b-20"><span>Hệ thống<span class="my-red">thanh toán</span></span></h4>
+        <section class="flex-space-around" style="text-align:center">
+                <div class="col-md-3">
+                    <img class="cover" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-6-mid.jpg">
+                    <h4>Đa dạng, phong phú</h4>
+                    <p>Với nhiều phương thức từ thẻ điện thoại, Internet-Banking, Visa, MasterCard và nhiều ví điện tử khác ...</p>
+                </div>
+                <div class="col-md-3">
+                    <img class="cover" src="https://cdn-html.nkdev.info/goodgames/assets/images/post-7-mid.jpg">
+                    <h4>Nhận tiền dễ dàng</h4>
+                    <p>Bạn không cần phải đăng ký gì thêm, thu nhập của bạn sẽ được tự động chuyển vào mỗi tháng.</p>
+                </div>
+        </section>
+    </div>
+</div>

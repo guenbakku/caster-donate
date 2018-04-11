@@ -1,1 +1,3 @@
-<footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by themedesigner.in <b>Version</b> <?= Cake\Core\Configure::read('System.version') ?></footer>
+<footer class="footer text-center"> 
+    <p>Website thuộc sở hữu công ty TNHH UMEHANA <b>Version</b> <?= Cake\Core\Configure::read('System.version') ?></p>    
+</footer>
