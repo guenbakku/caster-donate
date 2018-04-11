@@ -176,14 +176,8 @@ input.k-textbox {
 }
 
 /* Custom myadmin-alert of Ample Admin theme */
-.myadmin-alert-top,
-.myadmin-alert-bottom,
-.myadmin-alert-top-left,
-.myadmin-alert-top-right,
-.myadmin-alert-bottom-left,
-.myadmin-alert-bottom-right,
-.myadmin-alert-fullscreen {
-  z-index: 1002;
+.myadmin-alert {
+    margin-top: 15px;
 }
 
 .miw-100 {min-width: 100px} .miw-150 {min-width:150px}

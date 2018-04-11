@@ -41,6 +41,7 @@
         <?= ($hasSideBar) ? $this->element('Layout/default/main-sidebar') :''?>
         <div id="page-wrapper" class="<?=($hasSideBar)?'':'without-sidebar'?>">
             <div class="container-fluid">
+                <?= $this->Flash->render() ?>
                 <?= $this->element('Layout/default/content-header') ?>
                 <div style="margin-top:25px">
                     <?= $this->fetch('content') ?>
@@ -48,7 +49,6 @@
             </div>
             <?= $this->element('Layout/default/footer') ?>
         </div>
-        <?= $this->Flash->render() ?>
     </div>
 
     <?= $this->Html->script('/packages/jquery/jquery-2.2.4.min.js') ?>
