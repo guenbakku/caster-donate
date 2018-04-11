@@ -30,20 +30,6 @@ class Profile extends Entity
         }
     }
 
-    protected function _getFullname()
-    {
-        $firstname = $this->_properties['firstname'];
-        $lastname = $this->_properties['lastname'];
-        $fullname = '';
-        if(!empty($firstname)) {
-            $fullname .= $firstname. ' ';
-        }
-        if(!empty($lastname)) {
-            $fullname .= $lastname;
-        }
-        return $fullname;
-    }
-
     protected function _getFacebook()
     {
         $social_providers = $this->_properties['social_providers'];

@@ -1,20 +1,18 @@
 'use strict';
+
 function Select2MyResultFormat (repo) {
     if (repo.loading) {
         return repo.text;
     }
     var typing_text = $(".select2-search__field").val();
 
-    if($.trim(repo.fullname).length > 0)
-    {
-        repo.fullname = " - " + repo.fullname;
-    }
     var markup = "<a href='"+ repo.jumplink +"'><div class='clearfix' style='padding: 10px;width: 100%;'>" +
         "<div class='select2-result-avatar'>"+ repo.avatar +"</div>" +
         "<div class='select2-result-meta'>" +
         "<div class='select2-result-nickname'><u>" + 
+            boldingKeyword(typing_text, repo.username) + 
+            ' - ' +
             boldingKeyword(typing_text, repo.nickname) + 
-            boldingKeyword(typing_text, repo.fullname) + 
         "</u></div>";
 
     var div_facebook = '';

@@ -25,24 +25,6 @@ class CreateProfilesTable extends AbstractMigration
                 'null' => true,
                 'limit' => 64,
             ])
-            ->addColumn('firstname', 'string', [
-                'null' => true,
-                'limit' => 128,
-            ])
-            ->addColumn('lastname', 'string', [
-                'null' => true,
-                'limit' => 128,
-            ])
-            ->addColumn('sex_id', 'integer', [
-                'null' => true,
-            ])
-            ->addColumn('birthday', 'date', [
-                'null' => true,
-            ])
-            ->addColumn('location', 'string', [
-                'null' => true,
-                'limit' => 128,
-            ])
             ->addColumn('introduction', 'string', [
                 'null' => true,
                 'limit' => 512,

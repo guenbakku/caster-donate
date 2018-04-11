@@ -86,36 +86,6 @@ class ProfilesTable extends AppTable
             ]);
 
         $validator
-            ->allowEmpty('firstname')
-            ->add('firstname', [
-                'maxLength' => [
-                    'rule' => ['maxLength', $this->columnLength('firstname')],
-                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('firstname')),
-                ],
-            ]);
-
-        $validator
-            ->allowEmpty('lastname')
-            ->add('lastname', [
-                'maxLength' => [
-                    'rule' => ['maxLength', $this->columnLength('lastname')],
-                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('lastname')),
-                ],
-            ]);
-
-        $validator
-            ->allowEmpty('birthday');
-
-        $validator
-            ->allowEmpty('location')
-            ->add('location', [
-                'maxLength' => [
-                    'rule' => ['maxLength', $this->columnLength('location')],
-                    'message' => __('Không được dài quá {0} ký tự.', $this->columnLength('location')),
-                ],
-            ]);
-
-        $validator
             ->allowEmpty('introduction')
             ->add('introduction', [
                 'maxLength' => [
