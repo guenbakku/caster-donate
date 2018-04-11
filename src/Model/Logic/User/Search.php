@@ -14,20 +14,13 @@ class Search
 
     public function searchAll(string $keyword)
     {
-        $users = $this->profilesTb->find()
+        $profiles = $this->profilesTb->find()
             ->where(['Profiles.nickname LIKE' => '%'.$keyword.'%'])
-            ->orwhere(['Profiles.firstname LIKE' => '%'.$keyword.'%'])
-            ->orwhere(['Profiles.lastname LIKE' => '%'.$keyword.'%'])
+            ->orwhere(['Users.username LIKE' => '%'.$keyword.'%'])
             ->group('Profiles.nickname')
-            ->contain(['SocialProviders', 'CasterTags'])
+            ->contain(['SocialProviders', 'CasterTags', 'Users'])
             ->all();
 
-        foreach($users as $user){
-            $user['avatar'] = $user->get('avatar_url');
-            $user['facebook'] = $user->get('facebook');
-            $user['fullname'] = $user->get('fullname');
-        }
-
-        return $users;    
+        return $profiles;    
     }
 }

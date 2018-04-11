@@ -14,7 +14,7 @@
             <div class="col-md-offset-2 col-md-10">
                 <?= $this->Html->link(__('Sửa'), 
                     ['action' => 'edit'],
-                    ['class' => 'btn btn-success miw-100']
+                    ['class' => 'fcbtn btn btn-outline btn-success miw-100']
                 ); ?>
             </div>
         </div>
