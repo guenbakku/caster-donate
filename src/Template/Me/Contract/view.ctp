@@ -19,7 +19,7 @@ $statuses = [
     ],
     'suspended' => [
         'class' => 'danger',
-        'message' => __('Hợp đồng đã bị hủy. Vui lòng liên hệ với bộ phận hỗ trợ để biết thêm chi tiết.'),
+        'message' => __('Hợp đồng bị tạm ngưng. Vui lòng liên hệ với bộ phận hỗ trợ để biết thêm chi tiết.'),
     ],
 ];
 ?>

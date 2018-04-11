@@ -18,6 +18,14 @@ class DonationSettingsController extends AppController
     
     public function notify()
     {
+        if (!$this->Me->get('contract')->is('registered')) {
+            return $this->render('/Me/Contract/show_require');
+        }
+        
+        if ($this->Me->get('contract')->is('suspended')) {
+            return $this->render('/Me/Contract/show_suspended');
+        }
+
         $user_id = $this->Auth->user('id');
         $DonationNotificationSetting = new DonationNotificationSetting();
         $resourceTb = new Resources();
