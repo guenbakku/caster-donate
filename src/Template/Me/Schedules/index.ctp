@@ -18,10 +18,10 @@
                 'class' => 'hidden',
                 'value' => 'null'
             ]);?>
-            <?=$this->Form->button('Cập nhật lịch', [
+            <?=$this->Form->button('<i class="fa fa-check"></i> Cập nhật lịch', [
                 'type'  => 'submit',
                 'id' => false,
-                'class' => 'btn btn-lg btn-info btn-block waves-effect waves-light',
+                'class' => 'fcbtn btn btn-lg btn-block btn-outline btn-success',
             ]);?>
             <?= $this->Form->end()?>
         </div>
@@ -49,7 +49,7 @@
                         ?>
                         </table>
                     </div>
-                    <a href="#" data-toggle="modal" data-target="#add-new-event" class="btn btn-lg m-t-40 btn-success btn-block waves-effect waves-light">
+                    <a href="#" data-toggle="modal" data-target="#add-new-event" class="btn btn-lg m-t-40 fcbtn btn-block btn-outline btn-info">
                         <i class="ti-plus"></i> <?=__('Thêm nhãn sự kiện')?>
                     </a>
                 </div>
@@ -78,9 +78,9 @@
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white waves-effect" data-dismiss="modal"><?=__('Đóng')?></button>
-                <button type="button" class="btn btn-success save-event waves-effect waves-light"><?=__('Tạo')?></button>
-                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal"><?=__('Xóa')?></button>
+                <button type="button" class="fcbtn btn btn-outline" data-dismiss="modal"><?=__('Đóng')?></button>
+                <button type="button" class="fcbtn btn btn-outline btn-info save-event"><?=__('Tạo')?></button>
+                <button type="button" class="fcbtn btn btn-outline btn-danger delete-event" data-dismiss="modal"><i class="ti-trash"></i> <?=__('Xóa')?></button>
             </div>
         </div>
     </div>
@@ -115,8 +115,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white waves-effect" data-dismiss="modal"><?=__('Đóng')?></button>
-                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal"><?=__('Lưu')?></button>
+                <button type="button" class="fcbtn btn btn-outline" data-dismiss="modal"><?=__('Đóng')?></button>
+                <button type="button" class="fcbtn btn btn-outline btn-success save-category" data-dismiss="modal"><?=__('Thêm')?></button>
             </div>
         </div>
     </div>

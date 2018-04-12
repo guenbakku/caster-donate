@@ -26,8 +26,8 @@
 
         <div class="row">
             <div class="col-md-offset-2 col-md-10">
-                <?= $this->Form->button(__('Submit'), [
-                    'class' => 'btn btn-success miw-100',
+                <?= $this->Form->button(__('Lưu'), [
+                    'class' => 'fcbtn btn btn-outline btn-success miw-100',
                 ]); ?>
             </div>
         </div>

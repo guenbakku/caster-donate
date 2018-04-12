@@ -218,10 +218,10 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             <div class="panel-footer clearfix">
                 
                 <div class="col-sm-6">
-                    <button id="alert-donate-preview-button" class="btn btn-block btn-info"><?=__('Xem trước')?></button>
+                    <button id="alert-donate-preview-button" class="fcbtn btn btn-outline btn-info"><i class="fa fa-eye"></i> <?=__('Xem trước')?></button>
                 </div>
                 <div class="col-sm-6">
-                    <button id="save-setting-button" class="btn btn-block btn-success"><?=__('Lưu thiết lập')?></button>
+                    <button id="save-setting-button" class="fcbtn btn btn-outline btn-success"><i class="fa fa-check"></i> <?=__('Lưu thiết lập')?></button>
                 </div>
             </div>
         </div>

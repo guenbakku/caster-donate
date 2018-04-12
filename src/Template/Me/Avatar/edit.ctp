@@ -18,8 +18,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <?= $this->Form->button( __('Gửi'),[
-                        'class' => 'btn btn-success miw-150',
+                    <?= $this->Form->button( __('Lưu'),[
+                        'class' => 'fcbtn btn btn-outline btn-success miw-150',
                         'label' => false,
                         'type' => 'submit'
                     ]) ?>
@@ -27,7 +27,7 @@
                         __('Xóa ảnh hiện tại'),
                         ['action' => 'delete'],
                         [
-                            'class' => 'btn btn-danger m-l-10 miw-150',
+                            'class' => 'fcbtn btn btn-outline btn-danger m-l-10 miw-150',
                             'confirm' => __('Bạn có chắc chắn?'),
                         ]) 
                     ?>
