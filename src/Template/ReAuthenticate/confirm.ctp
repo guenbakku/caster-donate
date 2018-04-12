@@ -18,7 +18,7 @@ $this->Form->templates($FormTemplates['login']);
             ]) ?>
         
             <?= $this->Form->button(__('Tiếp tục'), [
-                'class' => 'btn btn-info btn-block btn-rounded text-uppercase waves-effect waves-light',
+                'class' => 'fcbtn btn btn-block btn-outline btn-info text-uppercase',
             ]) ?>
 
             <div class="form-group m-b-0 text-center">

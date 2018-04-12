@@ -37,7 +37,7 @@
             ],
         ]) ?> 
 
-        <?= $this->Form->button( __('Gửi'),[
+        <?= $this->Form->button( __('Lưu'),[
             'class' => 'fcbtn btn btn-outline btn-success miw-100',
             'label' => false,
             'type' => 'submit'

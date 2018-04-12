@@ -3,16 +3,11 @@
             <div class="top-left-part">
                 <!-- Logo -->
                 <a class="logo" href="/">
-                    <?= $this->Html->image('admin-logo.png', [
+                    <?= $this->Html->image('logo.png', [
                             'class' => 'dark-logo', 
                             'alt' => __('home')
                         ]) ?>
-                    <?= $this->Html->image('admin-logo-dark.png', [
-                            'class' => 'light-logo', 
-                            'alt' => __('home')
-                        ]) ?>
-                    </b>
-                    <span class="hidden-xs">
+                    <span class="hidden-xs my-red">
                         <span class="dark-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
                     </span> 
                 </a>

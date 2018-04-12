@@ -18,7 +18,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <?= $this->Form->button( __('Gửi'),[
+                    <?= $this->Form->button( __('Lưu'),[
                         'class' => 'fcbtn btn btn-outline btn-success miw-150',
                         'label' => false,
                         'type' => 'submit'

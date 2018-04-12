@@ -1,5 +1,41 @@
 /* Import các css khác */
 @import url("./chain-action.css");
+/* 08/04/2018   HomePage-designing*/
+.sidebar {
+    background: #232930;
+}
+.navbar-header {
+    background: #232930;
+}
+.white-box, .list-group-item, .form-control, .footer, .dropzone, .panel-white .panel-heading, .panel-default .panel-heading, .panel-white .panel-body, .panel-default .panel-body, .panel-white .panel-footer, .panel-default .panel-footer, .panel, .well, pre, .customtab li.active a, .customtab li.active a:hover, .customtab li.active a:focus, .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .modal-content, .myadmin-dd-empty .dd-list .dd3-content, .myadmin-dd-empty .dd-list .dd3-handle, .thumbnail, .myadmin-dd .dd-list .dd-item .dd-handle, .pagination > li > a, .pagination > li > span, .pager li > a, .pager li > span, .radio label::before, .select2-container-multi .select2-choices, .bootstrap-tagsinput, .dropify-wrapper, .dropify-wrapper .dropify-preview, .daterangepicker .input-mini, .css-bar:after, table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd, input, select, .jsgrid-header-row > th, .jsgrid-row > td, .jsgrid-alt-row > td, .content-wrap, .manage-table, .table tbody tr.advance-table-row td, .panel .panel-footer, .calendar-widget, .panel-footer textarea, .list-group-item.disabled, .list-group-item.disabled:focus, .list-group-item.disabled:hover, .chat-main-box {
+    background: #232930;
+}
+#page-wrapper {
+    padding: 0px;
+    min-height: 568px;
+    background: #2d323a;
+    padding-bottom: 60px;
+}
+.customtab li.active a, .customtab li.active a:hover, .customtab li.active a:focus {
+    border-bottom: 2px solid #dd163b;
+    color: #dd163b;
+}
+.bg-title {
+    background: #2d323a;
+    border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+}
+.my-white{
+    color: white;
+}
+.my-red{
+    color: #dd163b;
+}
+
+.bg-invisible{
+    background-color: #00000000;
+    padding: 10px 0px;
+}
+/* -------------------------------*/
 
 /* Để debug của cakephp không bị che bởi navbar và sidebar */
 .cake-debug-output {
