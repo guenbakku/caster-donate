@@ -1,6 +1,7 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Front;
 
+use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;

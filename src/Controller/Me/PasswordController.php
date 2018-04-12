@@ -6,7 +6,7 @@ use Cake\Event\Event;
 use Cake\Validation\Validator;
 use CakeDC\Users\Controller\Traits\CustomUsersTableTrait;
 use CakeDC\Users\Exception\UserNotActiveException;
-use CakeDC\Users\Exception\UserNotFoundException;
+use Cake\Network\Exception\UserNotFoundException;
 use CakeDC\Users\Exception\WrongPasswordException;
 use App\Controller\AppController;
 

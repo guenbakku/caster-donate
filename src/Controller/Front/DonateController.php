@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
+use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
 use Cake\Network\Exception\ForbiddenException;
@@ -33,9 +34,8 @@ class DonateController extends AppController
         $caster_profile = $Profile->get($user_id);        
         if ($caster_profile->isNew())
         {
-            throw new NotFoundException();
+            // throw new NotFoundException(); => Code Lỗi
         }
-        // debug($this->Auth->user());
         $this->set(compact('caster_profile'));
     }
 
