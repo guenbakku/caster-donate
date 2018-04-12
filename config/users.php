@@ -74,13 +74,13 @@ return [
         ],
         'loginRedirect' => [
             'plugin' => false,
-            'prefix' => false,
+            'prefix' => 'Front',
             'controller' => 'Home',
             'action' => 'index',
         ],
         'logoutRedirect' => [
             'plugin' => false,
-            'prefix' => false,
+            'prefix' => 'Front',
             'controller' => 'Home',
             'action' => 'index',
         ]
