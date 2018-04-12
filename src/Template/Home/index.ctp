@@ -98,7 +98,7 @@
     <div class="banners demo-2 text-center m-t-40 m-b-40">
         <div class="fix-width">
             <div class="l-logo">
-                <img src="/img/admin-logo.png">
+                <img width=100 src="/img/logo-lg.png">
             </div>
             <h1 class="m-t-0 p-b-10 my-red">Tôi Lên Sóng</h1>
             <p class="p-b-20">
@@ -108,7 +108,7 @@
                 <button class="fcbtn btn-block btn btn-outline btn-success">Đăng ký</button>
             </div>
             <div class="col-md-2 col-sm-2">
-                <button class="fcbtn btn-block btn btn-outline btn-default my-red">Hướng dẫn</button>
+                <button class="fcbtn btn btn-block btn-outline btn-danger">Hướng dẫn</button>
             </div>
         </div>
     </div>
