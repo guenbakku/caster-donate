@@ -49,7 +49,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['prefix' => 'Front', 'controller' => 'Home', 'action' => 'index']);
+    $routes->connect('/', ['prefix' => 'front', 'controller' => 'Home', 'action' => 'index']);
 
     /**
      * Connect all paths that are not relative with CakeDC/Users to 
@@ -61,8 +61,8 @@ Router::scope('/', function (RouteBuilder $routes) {
         ['action' => '((?!users).)*']
     );
 
-    $routes->connect('donate/*', ['prefix' => 'Front', 'controller' => 'Donate', 'action' => 'index']);
-    $routes->connect('donate/perform/*', ['prefix' => 'Front', 'controller' => 'Donate', 'action' => 'perform']);
+    $routes->connect('donate/*', ['prefix' => 'front', 'controller' => 'Donate', 'action' => 'index']);
+    $routes->connect('donate/perform/*', ['prefix' => 'front', 'controller' => 'Donate', 'action' => 'perform']);
 
     $routes->prefix('me', function ($routes) {
         $routes->redirect('/', ['controller' => 'Statistics', 'action' => 'index']);

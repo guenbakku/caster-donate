@@ -1,89 +1,3 @@
-<?php
-    echo $this->Html->css('/packages/slick-slider/css/slick.css', ['block' => 'css']);
-    echo $this->Html->css('/packages/slick-slider/css/slick-theme.css', ['block' => 'css']);
-
-    echo $this->Html->script('/packages/slick-slider/js/slick.js', ['block' => 'script']);
-?>
-<?php $this->append("css"); ?>
-<style type="text/css">
-
-    .slider {
-        width: 100%;
-        margin: 0px auto;
-    }
-</style>
-
-<style type="text/css">
-    #page-wrapper{
-        background-color: #171e22 !important;
-    }
-    .page-background-bottom, .page-background-fixed, .page-background-top {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: auto;
-        pointer-events: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        z-index: 0;
-    }
-    .page-background-bottom {
-        top: auto;
-        bottom: 0;
-    }
-    img.cover{
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .decorate-h{
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-    }    
-    .decorate-h::after, .decorate-h::before{
-        content: "";
-        display: block;
-        -webkit-box-flex: 100;
-        -ms-flex: 100;
-        flex: 100;
-        border-bottom: 4px solid;
-        -webkit-transform: translateY(-10px);
-        -ms-transform: translateY(-10px);
-        transform: translateY(-10px);
-    }
-    /* .decorate-h::before, .decorate-h::before {
-        -webkit-box-flex: 20px;
-        -ms-flex: 20px;
-        flex: 20px;
-        width: 20px;
-        min-width: 20px;
-    } */
-    .decorate-h::after, .decorate-h::before {
-        border-bottom-color: #293139 !important;
-    }
-    .decorate-h span{
-        padding: 0 10px;
-    }
-    .flex-space-around{
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-direction: row;
-        flex-wrap: wrap;
-        /* tweak where items line
-            up on the row
-            valid values are: flex-start,
-            flex-end, space-between,
-            space-around, stretch */
-        align-content: flex-end;
-    }
-</style>
-<?php $this->end(); ?> 
-
 <?php $this->append("script"); ?>
 <script type="text/javascript">
     $(document).on('ready', function() {
@@ -105,7 +19,19 @@
                 Công cụ hỗ trợ LiveStream một cách chuyên nghiệp
             </p>
             <div class="col-md-2 col-sm-2 col-md-offset-4 col-sm-offset-4">
-                <button class="fcbtn btn-block btn btn-outline btn-success">Đăng ký</button>
+                <?=$this->Html->link(
+                    __d('CakeDC/Users', 'Register'),
+                    [
+                        'plugin' => 'CakeDC/Users',
+                        'prefix' => false,
+                        'controller' => 'Users',
+                        'action' => 'register',
+                    ],
+                    [
+                        'class' => 'fcbtn btn-block btn btn-outline btn-success', 
+                        'role' => 'button'
+                    ]
+                );?>
             </div>
             <div class="col-md-2 col-sm-2">
                 <button class="fcbtn btn btn-block btn-outline btn-danger">Hướng dẫn</button>

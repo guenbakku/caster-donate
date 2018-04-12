@@ -39,7 +39,7 @@
     <div id="wrapper">
         <?= $this->element('Layout/default/main-header',['hasSideBar' => $hasSideBar]) ?>
         <?= ($hasSideBar) ? $this->element('Layout/default/main-sidebar') :''?>
-        <div id="page-wrapper" class="<?=($hasSideBar)?'':'without-sidebar'?>">
+        <div id="page-wrapper" class="<?=($hasSideBar)?'':'without-sidebar'?> <?=($this->request->prefix == "front")?'wraper-bg-black':''?>">
             <div class="container-fluid">
                 <?= $this->Flash->render() ?>
                 <?= $this->element('Layout/default/content-header') ?>
