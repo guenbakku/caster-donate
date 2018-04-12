@@ -55,7 +55,9 @@ class CreateDonationNotificationSettingsTable extends AbstractMigration
         ]);
         $table->addColumn('modified', 'datetime', [
             'null' => false,
-        ]);
-        $table->create();
+        ])
+        ->addIndex(['user_id'], ['unique' => true])
+        ->addForeignKey('user_id', 'users', 'id', array('delete' => 'CASCADE', 'update' => 'CASCADE'))
+        ->create();
     }
 }
