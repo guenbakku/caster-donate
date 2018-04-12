@@ -51,7 +51,7 @@ class Contract extends Entity
             case 'registered': 
                 return !empty(Hash::get($this->_properties, 'id'));
             default:
-                return $this->is('registered') && $statusId === $statuses[$status];
+                return $statusId === $statuses[$status];
         }
     }
 }

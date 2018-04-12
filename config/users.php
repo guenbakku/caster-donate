@@ -3,7 +3,7 @@
 return [
     'Users' => [
         // Table used to manage users
-        'table' => 'Users',
+        'table' => 'App.Users',
         // Controller used to manage users plugin features & actions
         'controller' => 'CakeDC/Users.Users',
         // configure Auth component

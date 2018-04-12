@@ -5,6 +5,7 @@
     <?=$this->Form->create($contract, [
         'type' => 'file',
         'class' => 'form-horizontal',
+        'autocomplete' => 'off',
     ]);?>
         <h4 class="m-t-0"><?= __('Thông tin cá nhân') ?></h4>
         <?= $this->Form->control('firstname', [
