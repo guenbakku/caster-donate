@@ -1,10 +1,3 @@
-<?php $this->append("script"); ?>
-<script type="text/javascript">
-    $(document).on('ready', function() {
-      $(".slider").slick();
-    });
-</script>
-<?php $this->end(); ?> 
 <!-- <?=$this->Html->image('demoHomePage/bg-top.png',['class' => 'page-background-top']);?> -->
 <?=$this->Html->image('demoHomePage/bg-bottom.png',['class' => 'page-background-bottom']);?>
 
