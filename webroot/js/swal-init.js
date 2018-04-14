@@ -1,3 +1,5 @@
+//= require "packages/sweetalert/sweetalert.min.js"
+
 'use strict';
 
 function swalAutoClose(title, timer = 1500 ,text = '')
