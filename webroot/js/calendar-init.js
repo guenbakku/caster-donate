@@ -1,6 +1,10 @@
-"use strict";
+//= require "packages/moment/moment.js"
+//= require "packages/calendar/dist/fullcalendar.min.js"
+//= require "packages/calendar/dist/locale/vi.js"
 
 !function($) {
+    "use strict";
+
     var CalendarApp = function() {
         this.$body = $("body")
         this.$calendar = $('#calendar'),
@@ -169,6 +173,8 @@
 }(window.jQuery);
 
 $(function() {
+    "use strict";
+    
     //initializing CalendarApp
     $.CalendarApp.init();
     
