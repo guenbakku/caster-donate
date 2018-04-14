@@ -8,7 +8,7 @@ echo $this->AssetCompress->script('Me.DonationSettings.notify.js', ['block' => '
 
 <?php $this->append("script"); ?>
 <script>
-    DonationNotificationSettings.setConfig({
+    DonationNotificationSettings.run({
         audio: new Audio(),
         anime_handle: null,
         image_input: $('input[name=image_id]'),
@@ -22,7 +22,6 @@ echo $this->AssetCompress->script('Me.DonationSettings.notify.js', ['block' => '
         notify_box: $('#alert-donate-box'),
         notify_box_image: $('#alert-donate-image'),
     });
-    DonationNotificationSettings.run();
 </script>
 <?php $this->end(); ?> 
 
