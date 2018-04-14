@@ -37,7 +37,7 @@ use Cake\I18n\FrozenTime;
         array_merge(
             [$this->Html->div('drop-title text-center my-white', __('Thông báo'))], 
             $options,
-            [$this->Html->link(__('Xem tất cả'),'#',['class' => 'text-center'])]
+            [$this->Html->link(__('Xem tất cả'),'/me/notification',['class' => 'text-center'])]
         ),
         ['class'=>'dropdown-menu dropdown-notifs animated bounceInDown','tag'=>'ul']
     ); 
