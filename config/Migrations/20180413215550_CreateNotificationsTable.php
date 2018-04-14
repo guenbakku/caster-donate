@@ -1,11 +1,11 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateUserNotificationsTable extends AbstractMigration
+class CreateNotificationsTable extends AbstractMigration
 {
     public function change()
     {
-        $table = $this->table('user_notifications', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('notifications', ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id', 'uuid', [
                 'null' => false,
@@ -19,6 +19,10 @@ class CreateUserNotificationsTable extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('content', 'text', [
+                'null' => false,
+            ])
+            ->addColumn('type_id', 'integer', [
+                'limit' => 11,
                 'null' => false,
             ])
             ->addColumn('seen', 'boolean', [

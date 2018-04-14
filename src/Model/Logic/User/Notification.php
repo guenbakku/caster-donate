@@ -10,7 +10,7 @@ class Notification
 {
     public function __construct ()
     {
-        $this->UserNotificationTb = TableRegistry::get('UserNotifications');
+        $this->NotificationTb = TableRegistry::get('Notifications');
     }
 
     /**
@@ -29,31 +29,31 @@ class Notification
             'seen' => false
         ]);
 
-        $userNotification = $this->UserNotificationTb->newEntity();
-        $this->UserNotificationTb->patchEntity($userNotification, $new_notification);
+        $notification = $this->NotificationTb->newEntity();
+        $this->NotificationTb->patchEntity($notification, $new_notification);
 
-        if (!$userNotification->errors()) {
-            $this->UserNotificationTb->save($userNotification);
+        if (!$notification->errors()) {
+            $this->NotificationTb->save($notification);
         }
 
-        return $userNotification;
+        return $notification;
     }
 
-    public function getNotify($user_id)
+    public function getNotify($user_id, $limit = '')
     {
-        $notifications = $this->UserNotificationTb->find()
+        $query = $this->NotificationTb->find()
         ->where([
             "OR" => [
                 "user_id is" => null,
                 "user_id" => $user_id
             ]
         ])
-        ->order(['created'])
-        ->limit(10)
-        ->all();
+        ->order(['created']);
+        if(is_numeric($limit)) $query->limit($limit);
+        $notifications = $query->all();
 
         if (empty($notifications)) {
-            $notifications = $this->UserNotificationTb->newEntity();
+            $notifications = $this->NotificationTb->newEntity();
         }
 
         return $notifications;
