@@ -3,6 +3,7 @@ use Cake\Core\Configure;
 use Cake\Utility\Hash;
 use Cake\Collection\Collection;
 
+$rootView->AssetCompress->script('Cell.UploadResource.display.js', ['block' => 'script']);
 $rootView->append('script');
 $cell_id = rand();
 ?>
