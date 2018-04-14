@@ -24,6 +24,7 @@ use Cake\I18n\FrozenTime;
         ]
     );
     //hiển thị các thông báo gần nhất
+    $options = [];
     foreach($userNotifications as $notification)
     {
         $time = new FrozenTime($notification['created']);

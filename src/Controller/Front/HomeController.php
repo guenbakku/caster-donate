@@ -30,7 +30,7 @@ class HomeController extends AppController
             'title' => 'test title',
             'content' => 'test content'
         );
-        $Notification->getNotify($this->Auth->user('id'));
+        // $Notification->getNotify($this->Auth->user('id'),10);
         
     }
 }

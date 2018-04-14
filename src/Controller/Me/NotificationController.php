@@ -14,8 +14,9 @@ class NotificationController extends AppController
         $this->ContentHeader->title(__('Thông báo của thành viên'));
     }
 
-    public function index()
+    public function index($notification_id = '')
     {   
-       
+       $Notification = new Notification();
+       $notifications = $Notification->getNotify($this->Auth->user('id'));
     }
 }
