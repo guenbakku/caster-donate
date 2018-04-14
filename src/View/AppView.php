@@ -37,6 +37,7 @@ class AppView extends View
     public function initialize()
     {
         $this->loadHelper('Cake.Text');
+        $this->loadHelper('AssetCompress.AssetCompress');
         $this->loadHelper('App.Auth');
         $this->loadHelper('App.ContentHeader');
         $this->loadHelper('App.EmbedAsset');
