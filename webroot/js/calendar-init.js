@@ -1,4 +1,3 @@
-
 !function($) {
     "use strict";
 
@@ -168,8 +167,6 @@
     $.CalendarApp = new CalendarApp, $.CalendarApp.Constructor = CalendarApp
     
 }(window.jQuery),
-
-
 
 $(function() {
     "use strict";

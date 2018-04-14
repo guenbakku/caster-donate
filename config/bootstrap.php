@@ -234,6 +234,7 @@ if (Configure::read('debug')) {
  */
 Configure::write('Users.config', ['users']);
 Plugin::load('CakeDC/Users', ['routes' => true, 'bootstrap' => true]);
+Plugin::load('AssetCompress', ['bootstrap' => true]);
 Plugin::load('Josegonzalez/Upload');
 Plugin::load('Migrations');
 

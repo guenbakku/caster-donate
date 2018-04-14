@@ -18,7 +18,8 @@
         "google/recaptcha": "@stable",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/oauth2-facebook": "@stable",
-        "league/oauth2-google": "@stable"
+        "league/oauth2-google": "@stable",
+        "markstory/asset_compress": "^3.2"
     },
     "require-dev": {
         "psy/psysh": "@stable",
