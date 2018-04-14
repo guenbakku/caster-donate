@@ -1,43 +1,45 @@
+<?php 
+use Cake\I18n\FrozenTime;
+?>
 <li class="dropdown">
-    <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false"> <i class="mdi mdi-bell"></i>
-        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-    </a>
-    <ul class="dropdown-menu dropdown-notifs animated bounceInDown">
-        <li>
-            <div class="drop-title text-center">
-                <b class="my-white">Thông báo</b>
-            </div>
-        </li>
-
-        <li>
-            <a href="#">
-                <div class="col-xs-11 text-success">Thông báo từ Ban Quản Lý</div>
-                <div class="col-xs-1 text-success">20/10</div>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <div class="col-xs-11 text-success">Thông báo từ Ban Quản Lý</div>
-                <div class="col-xs-1">20/10</div>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <div class="col-xs-11">Thông báo từ Ban Quản Lý</div>
-                <div class="col-xs-1">20/10</div>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <div class="col-xs-11">Thông báo từ Ban Quản Lý</div>
-                <div class="col-xs-1">20/10</div>
-            </a>
-        </li>
-
-        <li>
-            <a href="#" class="text-center">
-                Xem tất cả
-            </a>
-        </li>
-    </ul>
+    <?php
+    //hiển thị nút nhấp nháy nếu có thông báo
+    $notify_point = $this->Html->div('notify', '');
+    foreach($userNotifications as $notification)
+    {
+        if($notification['seen'] == false)
+        {
+            $notify_point = $this->Html->div('notify', '<span class="heartbit"></span><span class="point"></span>');
+            break;
+        } 
+    }
+    echo $this->Html->link(
+        '<i class="mdi mdi-bell"></i>'.$notify_point,
+        '#',
+        [
+            'class' => 'dropdown-toggle waves-effect waves-light',
+            'data-toggle' => 'dropdown',
+            'aria-expanded' => 'false',
+            'escape' => false
+        ]
+    );
+    //hiển thị các thông báo gần nhất
+    foreach($userNotifications as $notification)
+    {
+        $time = new FrozenTime($notification['created']);
+        $options[] = $this->Html->link(
+            $this->Html->div('col-xs-11 text-success', $notification['title']) . $this->Html->div('col-xs-1 text-success', $time->format('d/m')),
+            '#',
+            ['escape' => false]
+        );
+    }
+    echo $this->Html->nestedList(
+        array_merge(
+            [$this->Html->div('drop-title text-center my-white', __('Thông báo'))], 
+            $options,
+            [$this->Html->link(__('Xem tất cả'),'#',['class' => 'text-center'])]
+        ),
+        ['class'=>'dropdown-menu dropdown-notifs animated bounceInDown','tag'=>'ul']
+    ); 
+    ?>    
 </li>

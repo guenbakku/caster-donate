@@ -48,13 +48,13 @@ class Notification
                 "user_id" => $user_id
             ]
         ])
-        ->order(['seen' => 'DESC'])
+        ->order(['created'])
+        ->limit(10)
         ->all();
 
         if (empty($notifications)) {
             $notifications = $this->UserNotificationTb->newEntity();
         }
-        debug($notifications);
 
         return $notifications;
     }
