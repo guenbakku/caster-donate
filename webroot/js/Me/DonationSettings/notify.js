@@ -25,17 +25,10 @@ var CONFIG = {
     notify_box_image: null
 };
 
-function setConfig (config)
+function run (config)
 {
-    for (var key in CONFIG) {
-        if (config.hasOwnProperty(key)) {
-            CONFIG[key] = config[key];
-        }
-    }
-}
+    $.extend(CONFIG, config);
 
-function run ()
-{
     $(document).ready(function () {
         $('#message1').html(CONFIG.notify_message_array.message1);
         $('#message2').html(CONFIG.notify_message_array.message2);
@@ -126,85 +119,84 @@ function run ()
                 .appendTo("#form-donate-setting");
         $("#form-donate-setting").submit();
     });
-    
-    
-    /********************
-    ******FUNCTION*******
-    *********************/
-    function updateImageResourceAfterUpload(response){
-        var img = $('<img>',{
-            height  :   128,
-            src     :   response.data.url
-        });
-        var PrivateImage = $('input[data-img-private=true]');
-        var oldPrivateImageId = PrivateImage.attr('id');
-        var PrivateImageLabel = $('label[for='+oldPrivateImageId+']');
-        PrivateImage.attr('id',response.data.id);
-        PrivateImage.attr('value',response.data.id);
-        PrivateImageLabel.attr('for',response.data.id);
-        PrivateImageLabel.html(img);
-        PrivateImageLabel.click();
-    }    
-    function updateAudioResourceAfterUpload(response){
-        $('div').find('[data-audio-private=true]').remove();
-        var dom = $('<option>',{
-                'data-audio-private': true,
-                'data-url': response.data.url,
-                value: response.data.id,
-            }).text(response.data.name);//hàm text đã thực hiện escape xxs
-        $('#audio_resources').prepend(dom);
-        $('option[data-audio-private=true]').prop('selected', true);
-    }
-    function previewAnimation(effect,target) {
-        $(target).finish();
-        $(target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-            $(this).removeClass();
-        });
-    };
-    /*
-    *   @param {string} returnType : trả về chuỗi string ('string') hay array('array')
-    */
-    function getNotifyMsg(returnType)
-    {
-        var m1 = $('#message1').html();
-        var m2 = $('#message2').html();
-        var m3 = $('#message3').html();
-        var m4 = $('#message4').html();
-        var t1 = $('#target1').html();
-        var t2 = $('#target2').html();
-        var t3 = $('#target3').html();
-        var text = '';
-        if(returnType == 'string'){
-            text = m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4;
-            return text;
-        }else if(returnType == 'array'){
-            var array = {
-                'message1'  : $('#message1').html(),
-                'message2'  : $('#message2').html(),
-                'message3'  : $('#message3').html(),
-                'message4'  : $('#message4').html(),
-                'target1'  : $('#target1').html(),
-                'target2'  : $('#target2').html(),
-                'target3'  : $('#target3').html(),
-            };
-            return array;
-        }
-        return '';
-    }
-    function replaceMessage(text){
-        var f = ['「Người ủng hộ」','「Số tiền」','「___」','_'];
-        var r = ['<strong>Nguyễn Văn A</strong>','<strong>10.000</strong>','',''];
-        $.each(f,function(i,v) {
-            var myregexp = new RegExp(v,'g');
-            text = text.replace(myregexp,r[i]);
-        });
+}
+
+function updateImageResourceAfterUpload(response){
+    var img = $('<img>',{
+        height  :   128,
+        src     :   response.data.url
+    });
+    var PrivateImage = $('input[data-img-private=true]');
+    var oldPrivateImageId = PrivateImage.attr('id');
+    var PrivateImageLabel = $('label[for='+oldPrivateImageId+']');
+    PrivateImage.attr('id',response.data.id);
+    PrivateImage.attr('value',response.data.id);
+    PrivateImageLabel.attr('for',response.data.id);
+    PrivateImageLabel.html(img);
+    PrivateImageLabel.click();
+}
+ 
+function updateAudioResourceAfterUpload(response){
+    $('div').find('[data-audio-private=true]').remove();
+    var dom = $('<option>',{
+            'data-audio-private': true,
+            'data-url': response.data.url,
+            value: response.data.id,
+        }).text(response.data.name);//hàm text đã thực hiện escape xxs
+    $('#audio_resources').prepend(dom);
+    $('option[data-audio-private=true]').prop('selected', true);
+}
+
+function previewAnimation(effect,target) {
+    $(target).finish();
+    $(target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+        $(this).removeClass();
+    });
+};
+
+/*
+ *   @param {string} returnType : trả về chuỗi string ('string') hay array('array')
+ */
+function getNotifyMsg(returnType)
+{
+    var m1 = $('#message1').html();
+    var m2 = $('#message2').html();
+    var m3 = $('#message3').html();
+    var m4 = $('#message4').html();
+    var t1 = $('#target1').html();
+    var t2 = $('#target2').html();
+    var t3 = $('#target3').html();
+    var text = '';
+    if(returnType == 'string'){
+        text = m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4;
         return text;
+    }else if(returnType == 'array'){
+        var array = {
+            'message1'  : $('#message1').html(),
+            'message2'  : $('#message2').html(),
+            'message3'  : $('#message3').html(),
+            'message4'  : $('#message4').html(),
+            'target1'  : $('#target1').html(),
+            'target2'  : $('#target2').html(),
+            'target3'  : $('#target3').html(),
+        };
+        return array;
     }
+    return '';
+}
+
+function replaceMessage(text){
+    var f = ['「Người ủng hộ」','「Số tiền」','「___」','_'];
+    var r = ['<strong>Nguyễn Văn A</strong>','<strong>10.000</strong>','',''];
+    $.each(f,function(i,v) {
+        var myregexp = new RegExp(v,'g');
+        text = text.replace(myregexp,r[i]);
+    });
+    return text;
 }
 
 // Mock all into one
 var hooks = {};
-hooks.setConfig = setConfig;
 hooks.run = run;
 
 return hooks;
