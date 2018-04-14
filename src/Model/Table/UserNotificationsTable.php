@@ -6,7 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
 
-class UserNotificationTable extends AppTable
+class UserNotificationsTable extends AppTable
 {
     public function initialize(array $config)
     {
@@ -28,6 +28,7 @@ class UserNotificationTable extends AppTable
             ->uuid('id')
             ->allowEmpty('id', 'create');
 
+        $validator->allowEmpty('user_id');
         return $validator;
     }
 }

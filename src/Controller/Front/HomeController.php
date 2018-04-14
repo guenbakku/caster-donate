@@ -7,6 +7,8 @@ use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
+//gọi để test >>>
+use App\Model\Logic\User\Notification;
 
 class HomeController extends AppController
 {
@@ -21,5 +23,14 @@ class HomeController extends AppController
         // $this->Flash->error('Nội dung flash');
         // $this->Flash->warning('Nội dung flash');
         // $this->Flash->info('Nội dung flash');
+
+        // TEST >>>>>>>>>>>>
+        $Notification = new Notification();
+        $notification = array (
+            'title' => 'test title',
+            'content' => 'test content'
+        );
+        $Notification->getNotify($this->Auth->user('id'));
+        
     }
 }
