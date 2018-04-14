@@ -1,4 +1,8 @@
-<?= $this->Html->css('/packages/calendar/dist/fullcalendar.css', ['block'=>true]) ?>
+<?php
+echo $this->Html->css('/packages/calendar/dist/fullcalendar.css', ['block'=>true]);
+echo $this->AssetCompress->script('Me.Schedules.calendar.js', ['block' => 'script']);
+?>
+
 <div class="row">
     <div class="col-md-3">
         <div id="eventResources" style="display:none"><?=$eventDatas?></div>
@@ -118,5 +122,3 @@
     </div>
 </div>
 <!-- END MODAL -->
-
-<?= $this->AssetCompress->script('calendar', ['block' => 'script']); ?>
