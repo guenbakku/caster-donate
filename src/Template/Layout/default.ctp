@@ -18,8 +18,8 @@
     <?= $this->Html->css('/packages/dropify/dist/css/dropify.min.css') ?>
     <?= $this->Html->css('/packages/sweetalert/sweetalert.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/animate.css') ?>
-    <?= $this->Html->css('/packages/AmpleAdmin/css/Ver1_style.css') ?>
-    <?= $this->Html->css('/packages/AmpleAdmin/css/colors/Ver1_red-dark.css', ['id' => 'theme']) ?>
+    <?= $this->Html->css('/packages/AmpleAdmin/css/toilensong.css') ?>
+    <?= $this->Html->css('/packages/AmpleAdmin/css/colors/toilensong.css', ['id' => 'theme']) ?>
     <?= $this->AssetCompress->css('all'); ?>
     <?= $this->fetch('css') ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

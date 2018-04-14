@@ -11,3 +11,7 @@
 /webroot/resources/audio/*
 !/webroot/resources/audio/public
 /storage/dynamic/*
+/webroot/minify/js/*
+!/webroot/minify/js/empty
+/webroot/minify/css/*
+!/webroot/minify/css/empty

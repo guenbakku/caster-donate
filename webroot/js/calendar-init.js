@@ -1,6 +1,6 @@
-!function($) {
-    "use strict";
+"use strict";
 
+!function($) {
     var CalendarApp = function() {
         this.$body = $("body")
         this.$calendar = $('#calendar'),
@@ -166,10 +166,9 @@
    //init CalendarApp
     $.CalendarApp = new CalendarApp, $.CalendarApp.Constructor = CalendarApp
     
-}(window.jQuery),
+}(window.jQuery);
 
 $(function() {
-    "use strict";
     //initializing CalendarApp
     $.CalendarApp.init();
     
