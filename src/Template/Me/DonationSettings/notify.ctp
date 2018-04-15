@@ -14,7 +14,7 @@ echo $this->AssetCompress->script('Me.DonationSettings.notify.js', ['block' => '
     DNS.run({
         audio: new Audio(),
         anime_handle: null,
-        image_input: $('input[name=image_id]'),
+        image_input: $('select[name=image_id]'),
         audio_input: $('select[name=audio_id]'),
         textColor1: $('input[name=text_color_1]'),
         textColor2: $('input[name=text_color_2]'),
@@ -89,19 +89,27 @@ echo $this->AssetCompress->script('Me.DonationSettings.notify.js', ['block' => '
                             <div class="white-box form-horizontal">
                                 <div class="form-group">
                                     <div class="col-sm-3">
-                                        <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>                                    
+                                        <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>
+                                        <img id="image_resources_preview" width='100%'></img>                                 
                                     </div>
-                                    <div class="col-sm-9" id="image_resources">
+                                    <div class="col-sm-9">
                                         <?php
                                         foreach($image_resources as $resource)
-                                        {   
+                                        {
                                             $image_options[] = [ 
-                                                'data-img-private' => (($resource->user_id == null)?'false':'true'),
-                                                'value' => $resource->id,
-                                                'text' => $this->Html->image($resource->url, ['height' => 128])
+                                                'id' => $resource->id, 
+                                                'data-image-private' => (($resource->user_id == null)?'false':'true'), 
+                                                'value' => $resource->id, 
+                                                'data-url' => $this->Url->build($resource->url,['fullBase' => true]), 
+                                                'text' => $resource->name 
                                             ];
                                         }
-                                        echo $this->Form->radio('image_id', $image_options, ['escape' => false]);
+                                        echo $this->Form->select('image_id',$image_options,[
+                                            'class' =>  'form-control my-designed-scrollbar',
+                                            'name' =>  'image_id',
+                                            'id' =>  'image_resources',
+                                            'size' =>  '9',
+                                        ]);
                                         ?>
                                     </div>
                                 </div>

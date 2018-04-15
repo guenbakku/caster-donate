@@ -30,6 +30,7 @@ function run (config)
     $.extend(CONFIG, config);
 
     $(document).ready(function () {
+        $('#image_resources_preview').attr('src',CONFIG.image_input.find(":selected").data('url'));
         $('#message1').html(CONFIG.notify_message_array.message1);
         $('#message2').html(CONFIG.notify_message_array.message2);
         $('#message3').html(CONFIG.notify_message_array.message3);
@@ -78,6 +79,9 @@ function run (config)
         var target = $(this).data('target');
         previewAnimation(anim,'#' + target);
     });
+    $(CONFIG.image_input).change(function() {
+        $('#image_resources_preview').attr('src',CONFIG.image_input.find(":selected").data('url'));
+    });
     $('#alert-donate-preview-button').click(function(e){
         clearTimeout(CONFIG.anime_handle);
         //cập nhật text
@@ -89,8 +93,7 @@ function run (config)
             .css('color', CONFIG.textColor2.val())
             .html('Chúc bạn có buổi LiveStream vui vẻ.');
         //cập nhật hình ảnh
-        var checked_input_id = $('input[name=image_id]:checked').attr("id");
-        CONFIG.notify_box_image.attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));        
+        CONFIG.notify_box_image.attr('src',CONFIG.image_input.find(":selected").data('url'));        
         //cập nhật âm thanh
         CONFIG.audio.pause();
         CONFIG.audio.currentTime = 0;
@@ -122,27 +125,15 @@ function run (config)
 }
 
 function updateImageResourceAfterUpload(response){
-    var PrivateInput = $('input[data-img-private=true]');
-    PrivateInput.closest('div').remove();
-
-    var img = $('<img>',{
-        height  :   128,
-        src     :   response.data.url
-    });
-    var label = $('<label/>',{
-        for: response.data.id
-    }).prepend(img);
-    var div = $('<div/>', {
-        class: 'images radio radio-info col-sm-6',
-    }).prepend($('<input/>', {
-        type: 'radio',
-        name: 'image_id',
-        value: response.data.id,
-        'data-img-private': true,
-        id: response.data.id,
-    })).append(label);
-    $('#image_resources').prepend(div);
-    $('input[data-img-private=true]').click();
+    $('div').find('[data-image-private=true]').remove();
+    var dom = $('<option>',{
+            'data-image-private': true,
+            'data-url': response.data.url,
+            value: response.data.id,
+        }).text(response.data.name);//hàm text đã thực hiện escape xxs
+    $('#image_resources').prepend(dom);
+    $('option[data-image-private=true]').prop('selected', true);
+    $('#image_resources_preview').attr('src',CONFIG.image_input.find(":selected").data('url'));
 }
  
 function updateAudioResourceAfterUpload(response){
