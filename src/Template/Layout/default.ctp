@@ -54,7 +54,7 @@
     <?= $this->AssetCompress->script('libs'); ?>
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js') ?>
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/i18n/vi.js') ?>
-    <?= $this->AssetCompress->script('app'); ?>
     <?= $this->fetch('script') ?>   
+    <?= $this->AssetCompress->script('app'); ?>
 </body>
 </html>
