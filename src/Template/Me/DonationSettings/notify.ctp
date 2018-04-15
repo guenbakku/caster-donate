@@ -8,7 +8,10 @@ echo $this->AssetCompress->script('Me.DonationSettings.notify.js', ['block' => '
 
 <?php $this->append("script"); ?>
 <script>
-    DonationNotificationSettings.run({
+    var DNS = DonationNotificationSettings;
+    var updateImageResourceAfterUpload = DNS.updateImageResourceAfterUpload;
+    var updateAudioResourceAfterUpload = DNS.updateAudioResourceAfterUpload;
+    DNS.run({
         audio: new Audio(),
         anime_handle: null,
         image_input: $('input[name=image_id]'),

@@ -198,6 +198,8 @@ function replaceMessage(text){
 // Mock all into one
 var hooks = {};
 hooks.run = run;
+hooks.updateImageResourceAfterUpload = updateImageResourceAfterUpload;
+hooks.updateAudioResourceAfterUpload = updateAudioResourceAfterUpload;
 
 return hooks;
     
