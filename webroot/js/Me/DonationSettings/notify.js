@@ -122,18 +122,27 @@ function run (config)
 }
 
 function updateImageResourceAfterUpload(response){
+    var PrivateInput = $('input[data-img-private=true]');
+    PrivateInput.closest('div').remove();
+
     var img = $('<img>',{
         height  :   128,
         src     :   response.data.url
     });
-    var PrivateImage = $('input[data-img-private=true]');
-    var oldPrivateImageId = PrivateImage.attr('id');
-    var PrivateImageLabel = $('label[for='+oldPrivateImageId+']');
-    PrivateImage.attr('id',response.data.id);
-    PrivateImage.attr('value',response.data.id);
-    PrivateImageLabel.attr('for',response.data.id);
-    PrivateImageLabel.html(img);
-    PrivateImageLabel.click();
+    var label = $('<label/>',{
+        for: response.data.id
+    }).prepend(img);
+    var div = $('<div/>', {
+        class: 'images radio radio-info col-sm-6',
+    }).prepend($('<input/>', {
+        type: 'radio',
+        name: 'image_id',
+        value: response.data.id,
+        'data-img-private': true,
+        id: response.data.id,
+    })).append(label);
+    $('#image_resources').prepend(div);
+    $('input[data-img-private=true]').click();
 }
  
 function updateAudioResourceAfterUpload(response){
