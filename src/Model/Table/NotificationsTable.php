@@ -6,7 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
 
-class UserNotificationsTable extends AppTable
+class NotificationsTable extends AppTable
 {
     public function initialize(array $config)
     {

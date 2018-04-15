@@ -48,5 +48,13 @@
                 </tr>
             </tbody>
         </table>
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
+            <button type="button" class="btn btn-default waves-effect">1</button>
+            <button type="button" class="btn btn-default waves-effect">2</button>
+            <button type="button" class="btn btn-default waves-effect">3</button>
+            <button type="button" class="btn btn-default waves-effect">4</button>
+            <button type="button" class="btn btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
+        </div>
     </div>
 </div>

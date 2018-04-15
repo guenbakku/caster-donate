@@ -9,6 +9,7 @@ use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
 //gọi để test >>>
 use App\Model\Logic\User\Notification;
+use App\View\Helper\CodeHelper;
 
 class HomeController extends AppController
 {
@@ -25,11 +26,16 @@ class HomeController extends AppController
         // $this->Flash->info('Nội dung flash');
 
         // TEST >>>>>>>>>>>>
-        $Notification = new Notification();
+        $codeHelper = new CodeHelper(new \Cake\View\View());
+        $type_id = $codeHelper->setTable('notification_types')->getKey('admin','id');        
         $notification = array (
             'title' => 'test title',
-            'content' => 'test content'
+            'content' => 'test content',
+            'type_id' => $type_id
         );
+        debug($notification);
+        $Notification = new Notification();
+        $Notification->notify($this->Auth->user('id'),$notification);
         // $Notification->getNotify($this->Auth->user('id'),10);
         
     }
