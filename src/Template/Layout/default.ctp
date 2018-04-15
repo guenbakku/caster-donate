@@ -18,10 +18,10 @@
     <?= $this->Html->css('/packages/dropify/dist/css/dropify.min.css') ?>
     <?= $this->Html->css('/packages/sweetalert/sweetalert.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/animate.css') ?>
+    <?= $this->fetch('css') //theme AmpleAdmin có chỉnh sửa lại các packages nên để tài nguyên packages lên trước?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/toilensong.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/colors/toilensong.css', ['id' => 'theme']) ?>
     <?= $this->AssetCompress->css('all'); ?>
-    <?= $this->fetch('css') ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
