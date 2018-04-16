@@ -1,30 +1,28 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateNotificationsTable extends AbstractMigration
+class CreateNotificationTemplatesTable extends AbstractMigration
 {
     public function change()
     {
-        $table = $this->table('notifications', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('notification_templates', ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('user_id', 'uuid', [
-                'null' => true,
-                'default' => null
+            ->addColumn('title', 'string', [
+                'null' => false,
+                'limit' => 512
             ])
-            ->addColumn('template_id', 'uuid', [
-                'null' => true,
-                'default' => null
-            ])
-            ->addColumn('vars', 'string', [
+            ->addColumn('content_template', 'string', [
                 'limit' => 512,
-                'null' => false,
+                'null' => true,
             ])
-            ->addColumn('seen', 'boolean', [
+            ->addColumn('content_extend_id', 'uuid', [
+                'null' => true,
+            ])
+            ->addColumn('type_id', 'integer', [
                 'null' => false,
-                'default' => 0,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
