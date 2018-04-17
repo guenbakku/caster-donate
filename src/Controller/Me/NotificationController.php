@@ -18,5 +18,7 @@ class NotificationController extends AppController
     {   
        $Notification = new Notification();
        $notifications = $Notification->getNotify($this->Auth->user('id'));
+
+       $this->set(compact('notifications'));
     }
 }

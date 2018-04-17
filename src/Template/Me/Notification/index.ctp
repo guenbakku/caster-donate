@@ -1,51 +1,36 @@
+<?php
+use Cake\Utility\Hash;
+?>
 <div class="white-box">
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Tiêu đề</th>
-                    <th>Ngày tạo</th>
-                    <th>Thể loại</th>
-                    <th>Tình trạng</th>
-                </tr>
+                <?=$this->Html->tableHeaders(
+                    ['Tiêu đề','Ngày tạo','Thể loại','Tình trạng']
+                );?>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Tiêu đề thông báo</td>
-                    <td>14/04/2018</td>
-                    <td><span class="label label-warning">admin</span> </td>
-                    <td>Đã đọc</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Tiêu đề thông báo</td>
-                    <td>14/04/2018</td>
-                    <td><span class="label label-danger">admin</span> </td>
-                    <td>Đã đọc</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Tiêu đề thông báo</td>
-                    <td>14/04/2018</td>
-                    <td><span class="label label-danger">admin</span> </td>
-                    <td>Đã đọc</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Tiêu đề thông báo</td>
-                    <td>14/04/2018</td>
-                    <td><span class="label label-danger">admin</span> </td>
-                    <td>Đã đọc</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Tiêu đề thông báo</td>
-                    <td>14/04/2018</td>
-                    <td><span class="label label-danger">admin</span> </td>
-                    <td>Đã đọc</td>
-                </tr>
+                <?php
+                $tableList = $this->Code->setTable('notification_types');
+                foreach($notifications as $notification)
+                {
+                    $notification['seen'] ? $attr= [] : $attr = ['class' => 'text-success'];
+                    echo $this->Html->tableCells(
+                        [
+                            $notification['title'],
+                            $notification['modified'],
+                            sprintf(
+                                '<span class="label label-%s">%s</span>',
+                                Hash::get($tableList->getList(['valueField' => 'color_class']), $notification['type_id']),
+                                Hash::get($tableList->getList(), $notification['type_id'])
+                            ),
+                            $notification['seen']?'Đã đọc':'',
+                        ],
+                        $attr,//lẻ
+                        $attr//chẵn
+                    );
+                }
+                ?>
             </tbody>
         </table>
         <div class="btn-group pull-right">
