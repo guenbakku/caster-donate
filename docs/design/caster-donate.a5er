@@ -135,6 +135,7 @@ Page=THONG BAO CA NHAN
 Left=1000
 Top=1300
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Mẫu nội dung","template","VARCHAR(512)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id thể loại","type_id","INT(11)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
@@ -142,8 +143,8 @@ Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,"
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180417140638
-Position="THONG BAO CA NHAN",1000,1300,870,229
+ModifiedDateTime=20180417160949
+Position="THONG BAO CA NHAN",1000,1300,870,273
 
 [Entity]
 PName=notification_types
