@@ -56,7 +56,11 @@ class ResourcesTable extends AppTable
     {
         $validator
             ->uuid('id')
-            ->allowEmpty('id', 'name','user_id');
+            ->allowEmpty('id', 'create');
+        $validator
+            ->allowEmpty('name');
+        $validator
+            ->allowEmpty('user_id');
 
         $validator
             ->notEmpty('filename', __('Phải chọn ảnh tải lên.'))

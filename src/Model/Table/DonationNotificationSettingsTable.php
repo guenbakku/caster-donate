@@ -39,7 +39,7 @@ class DonationNotificationSettingsTable extends AppTable
     {
         $validator
             ->uuid('id')
-            ->allowEmpty('id', 'created');
+            ->allowEmpty('id', 'create');
 
         $validator
             ->add('display_time', [

@@ -17,95 +17,105 @@
     /* on drop */
     CalendarApp.prototype.onDrop = function (eventObj, date) { 
         var $this = this;
-        // retrieve the dropped element's stored Event Object
-        var originalEventObject = eventObj.data('eventObject');
-        var $categoryClass = eventObj.attr('data-class');
-        // we need to copy it, so that multiple events don't have a reference to the same object
-        var copiedEventObject = $.extend({}, originalEventObject);
-        // assign it the date that was reported
-        copiedEventObject.start = date;
-        if ($categoryClass) copiedEventObject['className'] = [$categoryClass];
-        copiedEventObject['isNew'] = true;
-        // render the event on the calendar
-        $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
+            // retrieve the dropped element's stored Event Object
+            var originalEventObject = eventObj.data('eventObject');
+            var $categoryClass = eventObj.attr('data-class');
+            // we need to copy it, so that multiple events don't have a reference to the same object
+            var copiedEventObject = $.extend({}, originalEventObject);
+            // assign it the date that was reported
+            copiedEventObject.start = date;
+            if ($categoryClass)
+                copiedEventObject['className'] = [$categoryClass];
+            // render the event on the calendar
+            $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
+            // is the "remove after drop" checkbox checked?
+            if ($('#drop-remove').is(':checked')) {
+                // if so, remove the element from the "Draggable Events" list
+                eventObj.remove();
+            }
     },
     /* on click on event */
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
         var $this = this;
-        var form = $("<form></form>");
-        form.append("<label>Đổi tên Event</label>");
-        form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='fcbtn btn btn-outline btn-info'><i class='fa fa-check'></i> Đổi tên</button></span></div>");
-        $this.$modal.modal({
-            backdrop: 'static'
-        });
-        $this.$modal.find('.delete-event').show().end().find('.save-event').hide().end().find('.modal-body').empty().prepend(form).end().find('.delete-event').unbind('click').click(function () {
-            $this.$calendarObj.fullCalendar('removeEvents', function (ev) {
-                return (ev._id == calEvent._id);
+            var form = $("<form></form>");
+            form.append("<label>Change event name</label>");
+            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button></span></div>");
+            $this.$modal.modal({
+                backdrop: 'static'
             });
-            $this.$modal.modal('hide');
-        });
-        $this.$modal.find('form').on('submit', function () {
-            calEvent.title = form.find("input[type=text]").val();
-            $this.$calendarObj.fullCalendar('updateEvent', calEvent);
-            $this.$modal.modal('hide');
-            return false;
-        });
+            $this.$modal.find('.delete-event').show().end().find('.save-event').hide().end().find('.modal-body').empty().prepend(form).end().find('.delete-event').unbind('click').click(function () {
+                $this.$calendarObj.fullCalendar('removeEvents', function (ev) {
+                    return (ev._id == calEvent._id);
+                });
+                $this.$modal.modal('hide');
+            });
+            $this.$modal.find('form').on('submit', function () {
+                calEvent.title = form.find("input[type=text]").val();
+                $this.$calendarObj.fullCalendar('updateEvent', calEvent);
+                $this.$modal.modal('hide');
+                return false;
+            });
     },
     /* on select */
-    CalendarApp.prototype.onSelect = function (start, end, resource) {
+    CalendarApp.prototype.onSelect = function (start, end, allDay) {
         var $this = this;
-        $this.$modal.modal({
-            backdrop: 'static'
-        });
-        var form = $("<form></form>");
-        form.append("<div class='row'></div>");
-        form.find(".row")
-            .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Tên Sự Kiện</label><input class='form-control' placeholder='Nhập tên' type='text' name='title'/></div></div>")
-            .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Nhóm màu</label><select class='form-control' name='category'></select></div></div>")
-            .find("select[name='category']")
-            .append("<option value='bg-danger'>Đỏ</option>")
-            .append("<option value='bg-success'>Xanh lá</option>")
-            .append("<option value='bg-purple'>Tím</option>")
-            .append("<option value='bg-info'>Xanh nước biển</option>")
-            .append("<option value='bg-warning'>Vàng</option></div></div>")
-            .append("<option value='bg-inverse'>Xám</option>");
-        $this.$modal.find('.delete-event').hide().end().find('.save-event').show().end().find('.modal-body').empty().prepend(form).end().find('.save-event').unbind('click').click(function () {
-            form.submit();
-        });
-        $this.$modal.find('form').on('submit', function () {
-            var title = form.find("input[name='title']").val();
-            var categoryClass = form.find("select[name='category'] option:checked").val();
-            if (title !== null && title.length != 0) {
-                $this.$calendarObj.fullCalendar('renderEvent', {
-                    title: title,
-                    start: start,
-                    end: end,
-                    isNew: true,
-                    className: categoryClass
-                }, true);
-                $this.$modal.modal('hide');
-
+            $this.$modal.modal({
+                backdrop: 'static'
+            });
+            var form = $("<form></form>");
+            form.append("<div class='row'></div>");
+            form.find(".row")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title'/></div></div>")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' name='category'></select></div></div>")
+                .find("select[name='category']")
+                .append("<option value='bg-danger'>Danger</option>")
+                .append("<option value='bg-success'>Success</option>")
+                .append("<option value='bg-purple'>Purple</option>")
+                .append("<option value='bg-primary'>Primary</option>")
+                .append("<option value='bg-pink'>Pink</option>")
+                .append("<option value='bg-info'>Info</option>")
+                .append("<option value='bg-warning'>Warning</option></div></div>");
+            $this.$modal.find('.delete-event').hide().end().find('.save-event').show().end().find('.modal-body').empty().prepend(form).end().find('.save-event').unbind('click').click(function () {
+                form.submit();
+            });
+            $this.$modal.find('form').on('submit', function () {
+                var title = form.find("input[name='title']").val();
+                var beginning = form.find("input[name='beginning']").val();
+                var ending = form.find("input[name='ending']").val();
+                var categoryClass = form.find("select[name='category'] option:checked").val();
+                if (title !== null && title.length != 0) {
+                    $this.$calendarObj.fullCalendar('renderEvent', {
+                        title: title,
+                        start:start,
+                        end: end,
+                        allDay: false,
+                        className: categoryClass
+                    }, true);  
+                    $this.$modal.modal('hide');
+                }
+                else{
+                    alert('You have to give a title to your event');
+                }
+                return false;
                 
-            }
-            else{
-                alert('Bạn phải nhập tiêu đề cho sự kiện của bạn');
-            }
-            return false;
-        });
-        $this.$calendarObj.fullCalendar('unselect');
+            });
+            $this.$calendarObj.fullCalendar('unselect');
     },
     CalendarApp.prototype.enableDrag = function() {
         //init events
         $(this.$event).each(function () {
+            // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+            // it doesn't need to have a start or end
             var eventObject = {
                 title: $.trim($(this).text()) // use the element's text as the event title
             };
+            // store the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject);
             // make the event draggable using jQuery UI
             $(this).draggable({
                 zIndex: 999,
                 revert: true,      // will cause the event to go back to its
-                revertDuration: 0,  //  original position after the drag
+                revertDuration: 0  //  original position after the drag
             });
         });
     }
@@ -120,34 +130,67 @@
         var form = '';
         var today = new Date($.now());
 
-        var defaultEvents =  $.parseJSON($('#eventResources').html());
-        //convert string thành time
-        $.each(defaultEvents, function (index, value) {
-            value.end = new Date(value.end);
-            value.start = new Date(value.start);
-        });
+        var defaultEvents =  [{
+                title: 'Released Ample Admin!',
+                start: new Date($.now() + 506800000),
+                className: 'bg-info'
+            }, {
+                title: 'This is today check date',
+                start: today,
+                end: today,
+                className: 'bg-danger'
+            }, {
+                title: 'This is your birthday',
+                start: new Date($.now() + 848000000),
+                className: 'bg-info'
+            },{
+                title: 'your meeting with john',
+                start: new Date($.now() - 1099000000),
+                end:  new Date($.now() - 919000000),
+                className: 'bg-warning'
+            },{
+                title: 'your meeting with john',
+                start: new Date($.now() - 1199000000),
+                end: new Date($.now() - 1199000000),
+                className: 'bg-purple'
+            },{
+                title: 'your meeting with john',
+                start: new Date($.now() - 399000000),
+                end: new Date($.now() - 219000000),
+                className: 'bg-info'
+            },  
+              {
+                title: 'Hanns birthday',
+                start: new Date($.now() + 868000000),
+                className: 'bg-danger'
+            },{
+                title: 'Like it?',
+                start: new Date($.now() + 348000000),
+                className: 'bg-success'
+            }];
+
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({
-            slotDuration: '00:30:00',
-            minTime: '00:00:00',
-            maxTime: '24:00:00',  
+            slotDuration: '00:15:00', /* If we want to split day time each 15minutes */
+            minTime: '08:00:00',
+            maxTime: '19:00:00',  
             defaultView: 'month',  
-            handleWindowResize: true,             
+            handleWindowResize: true,   
+             
             header: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
             events: defaultEvents,
-            timeFormat: 'HH:mm',
             editable: true,
-            droppable: true,
-            eventLimit: true,
+            droppable: true, // this allows things to be dropped onto the calendar !!!
+            eventLimit: true, // allow "more" link when too many events
             selectable: true,
-            defaultTimedEventDuration: '02:00:00',
             drop: function(date) { $this.onDrop($(this), date); },
-            select: function (start, end, resource) {  $this.onSelect(start, end, resource);},
+            select: function (start, end, allDay) { $this.onSelect(start, end, allDay); },
             eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }
+
         });
 
         //on new event
@@ -155,12 +198,10 @@
             var categoryName = $this.$categoryForm.find("input[name='category-name']").val();
             var categoryColor = $this.$categoryForm.find("select[name='category-color']").val();
             if (categoryName !== null && categoryName.length != 0) {
-                var $extEventTable = $this.$extEvents.find("table");
-                $extEventTable.append('<tr class="label-rows"></tr>');
-                $extEventTable.find("tr:last").append('<td><div class="calendar-events ui-draggable ui-draggable-handle" data-class="bg-' + categoryColor + '" data-id="" data-color="' + categoryColor + '" style="position: relative;"><i class="fa fa-circle text-' + categoryColor + '"></i> <span class="label-title">' + categoryName + '</span></td>');
-                $extEventTable.find("tr:last").append('<td class="w20p"><button type="button" class="btn btn-circle btn-info btn-outline"><i class="ti-trash"></i></button></td>');
+                $this.$extEvents.append('<div class="calendar-events bg-' + categoryColor + '" data-class="bg-' + categoryColor + '" style="position: relative;"><i class="fa fa-move"></i>' + categoryName + '</div>')
                 $this.enableDrag();
             }
+
         });
     },
 
@@ -169,48 +210,8 @@
     
 }(window.jQuery),
 
-
-
-$(function() {
+//initializing CalendarApp
+function($) {
     "use strict";
-    //initializing CalendarApp
-    $.CalendarApp.init();
-    
-    //kích hoạt button xóa nhãn sự kiện
-    $(document).on("click", ".label-rows button", function() {
-        $(this).parents("tr").fadeOut("fast").remove();
-    });
-
-    //tạo array dữ liệu cho event và label trước khi POST
-    $("#form-update-schedule").submit( function(eventObj){
-        // eventObj.preventDefault();
-        //event
-        var data = $('#calendar').fullCalendar('clientEvents');
-        var event_datas = new Array();
-        data.forEach(function(element, index, array){
-            var a = new Array();
-            a['title'] = element.title;
-            event_datas[index] = {
-                title: element.title, 
-                id: element._id,
-                isNew: element.isNew,
-                allDay: element.allDay,
-                start: $.fullCalendar.formatDate(element.start, "YYYY-MM-DD HH:mm:ss"), 
-                end: (element.end == null) ? null : $.fullCalendar.formatDate(element.end, "YYYY-MM-DD HH:mm:ss"), 
-                className: JSON.stringify(element.className)
-            };
-        });
-        $('input[name="event-datas"]').val(JSON.stringify(event_datas));
-        //event-label
-        var event_labels = new Array();
-        $('.calendar-events').each(function(){
-            event_labels.unshift({
-                id : $(this).data('id'),
-                title : $(this).find('.label-title').html(),
-                color : $(this).data('color'),
-                classes : $(this).data('class'),
-            });
-        });
-        $('input[name="event-labels"]').val(JSON.stringify(event_labels));
-    });
-});
+    $.CalendarApp.init()
+}(window.jQuery);
