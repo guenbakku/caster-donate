@@ -1,44 +1,42 @@
 <?php
 use Migrations\AbstractSeed;
 
-class NotificationTypesSeed extends AbstractSeed
+class NotificationTemplatesSeed extends AbstractSeed
 {    
     public function run()
     {
         /*
-        * color_class: có thể là danger, success, info, warning, primary, default
+        * type_id: xem trong seed NotificationTypesSeed
+        *        có: 1: Admin, 2: Hệ Thống, 3: Dòng tiền
         */
         $data = [
             [
                 'id' => 1,
-                'name' => 'Admin',
-                'selector' => 'admin',
-                'color_class' => 'default',
-                'order_no' => 1,
+                'selector' => 'adminEmpty',
+                'template' => '',
+                'type_id' => '1',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => 2,
-                'name' => 'Hệ thống',
-                'selector' => 'system',
-                'color_class' => 'danger',
-                'order_no' => 2,
+                'selector' => 'systemEmpty',
+                'template' => '',
+                'type_id' => '2',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => 3,
-                'name' => 'Dòng tiền',
-                'selector' => 'money',
-                'color_class' => 'success',
-                'order_no' => 3,
+                'selector' => 'moneyEmpty',
+                'template' => '',
+                'type_id' => '3',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
         ];
 
-        $table = $this->table('notification_types');
+        $table = $this->table('notification_templates');
         $table->truncate();
         $table->insert($data)->save();
     }
