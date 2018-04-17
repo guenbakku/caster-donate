@@ -137,14 +137,15 @@ Top=1300
 Field="Khóa chính của bảng","id","CHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="Khóa gọi","selector","VARCHAR(64)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Mẫu nội dung","template","VARCHAR(512)","NOT NULL",,"","",$FFFFFFFF,""
+Field="Đường dẫn chuyển tiếp","path","VARCHAR(218)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Id thể loại","type_id","INT(11)","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm tạo","created","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="Thời điểm sửa","modified","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20180417160949
-Position="THONG BAO CA NHAN",1000,1300,870,273
+ModifiedDateTime=20180417163830
+Position="THONG BAO CA NHAN",1000,1300,870,299
 
 [Entity]
 PName=notification_types
