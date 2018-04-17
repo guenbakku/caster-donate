@@ -11,16 +11,19 @@ class CreateNotificationsTable extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('user_id', 'uuid', [
-                'null' => true,
+                'null' => false,
                 'default' => null
             ])
             ->addColumn('template_id', 'uuid', [
+                'null' => false,
+            ])
+            ->addColumn('extend_id', 'uuid', [
                 'null' => true,
                 'default' => null
             ])
             ->addColumn('vars', 'string', [
-                'limit' => 512,
                 'null' => false,
+                'limit' => 512,
             ])
             ->addColumn('seen', 'boolean', [
                 'null' => false,

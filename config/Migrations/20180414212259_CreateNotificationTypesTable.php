@@ -20,7 +20,7 @@ class CreateNotificationTypesTable extends AbstractMigration
                 'limit' => 64,
             ])
             ->addColumn('order_no', 'integer', [
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,

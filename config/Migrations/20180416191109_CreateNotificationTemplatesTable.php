@@ -10,19 +10,16 @@ class CreateNotificationTemplatesTable extends AbstractMigration
             ->addColumn('id', 'uuid', [
                 'null' => false,
             ])
-            ->addColumn('title', 'string', [
+            ->addColumn('selector', 'string', [
+                'limit' => 64,
                 'null' => false,
-                'limit' => 512
             ])
-            ->addColumn('content_template', 'string', [
+            ->addColumn('template', 'string', [
                 'limit' => 512,
-                'null' => true,
-            ])
-            ->addColumn('content_extend_id', 'uuid', [
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('type_id', 'integer', [
-                'null' => false,
+                'null' => false
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,

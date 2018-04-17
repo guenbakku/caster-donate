@@ -20,8 +20,13 @@ class NotificationsTable extends AppTable
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id', 
         ]);
+
         $this->belongsTo('NotificationTemplates', [
             'foreignKey' => 'template_id',
+        ]);
+        $this->belongsTo('NotificationExtends',[
+            'foreignKey' => 'extend_id',
+            'bindingKey' => 'id',
         ]);
         $this->belongsTo('NotificationTypes',[
             'through' => 'NotificationTemplates',

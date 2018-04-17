@@ -12,7 +12,7 @@ class NotificationTypesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->belongsTo('Notifications', [
+        $this->hasMany('Notifications', [
             'through' => 'NotificationTemplates',
             'bindingKey' => 'template_id'
         ]);
