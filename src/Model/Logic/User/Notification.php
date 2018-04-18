@@ -16,19 +16,11 @@ class Notification
     /**
      * Gửi thông báo đến User
      *
-     * @param string $user_id 
-     *    user_id có thể là null => gửi thông báo đến toàn bộ user
-     *    (cố ý tách riêng user_id ra khỏi array để lúc gọi hàm tránh trường hợp quên set dẫn đến thông báo toàn bộ)
-     * @param array $notification ['title','content'] 
+     * @param array $notification
      * @return  Entity|null
      */
-    public function notify($user_id, array $new_notification)
+    public function notify($new_notification)
     {
-        $new_notification   =   array_merge($new_notification, [
-            'user_id' => $user_id,
-            'seen' => false
-        ]);
-
         $notification = $this->NotificationTb->newEntity();
         $this->NotificationTb->patchEntity($notification, $new_notification);
 
@@ -39,23 +31,27 @@ class Notification
         return $notification;
     }
 
+    public function notifyAll($new_notification)
+    {
+    }
+
     public function getNotify($user_id, $limit = '')
     {
-        $query = $this->NotificationTb->find()
-        ->where([
-            "OR" => [
-                "user_id is" => null,
-                "user_id" => $user_id
-            ]
-        ])
-        ->order(['created']);
+        $query = $this->NotificationTb->findByUserId($user_id)    
+        ->contain(['NotificationTemplates.NotificationTypes'])
+        ->order(['Notifications.created']);
         if(is_numeric($limit)) $query->limit($limit);
         $notifications = $query->all();
 
-        if (empty($notifications)) {
+        if (empty($notifications)) 
+        {
             $notifications = $this->NotificationTb->newEntity();
+        }else{
+            foreach ($notifications as $notification)
+            {
+                $notification['notification_template']['content'] = $notification['notification_template']['template'];
+            }
         }
-
         return $notifications;
     }
     
