@@ -74,8 +74,8 @@ return [
         ],
         'loginRedirect' => [
             'plugin' => false,
-            'prefix' => 'front',
-            'controller' => 'Home',
+            'prefix' => 'me',
+            'controller' => 'Statistics',
             'action' => 'index',
         ],
         'logoutRedirect' => [

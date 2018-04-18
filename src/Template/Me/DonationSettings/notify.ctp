@@ -3,197 +3,28 @@ echo $this->Html->css('/packages/x-editable/css/bootstrap-editable.css', ['block
 echo $this->Html->css('/packages/Touchspin/css/jquery.bootstrap-touchspin.min.css', ['block' => 'css']);
 echo $this->Html->css('/packages/jquery-asColorPicker-master/css/asColorPicker.css', ['block' => 'css']);
 
-echo $this->Html->script('/packages/x-editable/js/bootstrap-editable.min.js', ['block' => 'script']);
-echo $this->Html->script('/packages/Touchspin/js/jquery.bootstrap-touchspin.min.js', ['block' => 'script']);
-echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColor.js', ['block' => 'script']);
-echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asGradient.js', ['block' => 'script']);
-echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColorPicker.min.js', ['block' => 'script']); 
+echo $this->AssetCompress->script('Me.DonationSettings.notify.js', ['block' => 'script']);
 ?>
 
 <?php $this->append("script"); ?>
-
 <script>
-    var audio = new Audio();
-    var anime_handle;
-
-    var image_input = $('input[name=image_id]');
-    var audio_input = $('select[name=audio_id]');
-    var textColor1 = $('input[name=text_color_1]');
-    var textColor2 = $('input[name=text_color_2]');
-    var appearEffect = $('select[name=appear_effect]');
-    var disappearEffect = $('select[name=disappear_effect]');
-    var time_input = $("input[name='display_time']");
-    var notify_message_array = JSON.parse('<?=$donation_notification_setting->notify_message_array?>');
-    
-    var notify_box = $('#alert-donate-box');
-    var notify_box_image = $('#alert-donate-image');
-
-    /********************
-    ******INITILIAZIE****
-    *********************/
-    $(document).ready(function () {
-        $('#message1').html(notify_message_array.message1);
-        $('#message2').html(notify_message_array.message2);
-        $('#message3').html(notify_message_array.message3);
-        $('#message4').html(notify_message_array.message4);
-        $('#target1').html(notify_message_array.target1);
-        $('#target2').html(notify_message_array.target2);
-        $('#target3').html(notify_message_array.target3);
-        $('.editable[data-type="text"]').editable({
-            type: 'text',
-            emptytext: '___',
-            pk: 1, 
-            name: 'username', 
-        });
-        $('.editable[data-type="select"]').editable({
-            prepend: "「___」",
-            source: [
-                {value: 1, text: '「<?=__('Người ủng hộ')?>」'},
-                {value: 2, text: '「<?=__('Số tiền')?>」'},
-            ]
-        });
-        time_input.TouchSpin({
-            min: 4,
-            max: 20,
-        });
-        $(".colorpicker").asColorPicker();
-        $(".complex-colorpicker").asColorPicker({
-            mode: 'complex'
-        });
-        $(".gradient-colorpicker").asColorPicker({
-            mode: 'gradient'
-        });
+    var DNS = DonationNotificationSettings;
+    var updateImageResourceAfterUpload = DNS.updateImageResourceAfterUpload;
+    var updateAudioResourceAfterUpload = DNS.updateAudioResourceAfterUpload;
+    DNS.run({
+        audio: new Audio(),
+        anime_handle: null,
+        image_input: $('select[name=image_id]'),
+        audio_input: $('select[name=audio_id]'),
+        textColor1: $('input[name=text_color_1]'),
+        textColor2: $('input[name=text_color_2]'),
+        appearEffect: $('select[name=appear_effect]'),
+        disappearEffect: $('select[name=disappear_effect]'),
+        time_input: $("input[name='display_time']"),
+        notify_message_array: JSON.parse('<?=$donation_notification_setting->notify_message_array?>'),
+        notify_box: $('#alert-donate-box'),
+        notify_box_image: $('#alert-donate-image'),
     });
-
-    
-    /********************
-    ******LISTENERS******
-    *********************/
-    $('.js--triggerAnimation').click(function (e) {
-        e.preventDefault();
-        var anim = $('#'+$(this).data('value')).val();
-        var target = $(this).data('target');
-        previewAnimation(anim,'#' + target);
-    });
-    $('.js--animations').change(function () {
-        var anim = $(this).val();
-        var target = $(this).data('target');
-        previewAnimation(anim,'#' + target);
-    });
-    $('#alert-donate-preview-button').click(function(e){
-        clearTimeout(anime_handle);
-        //cập nhật text
-        var notify_message = getNotifyMsg('string');
-        $('.alert-donate-thank-you')
-            .css('color',textColor1.val())
-            .html(replaceMessage(notify_message));
-        $('.alert-donate-message')
-            .css('color',textColor2.val())
-            .html('Chúc bạn có buổi LiveStream vui vẻ.');
-        //cập nhật hình ảnh
-        var checked_input_id = $('input[name=image_id]:checked').attr("id");
-        notify_box_image.attr('src',$("label[for='"+checked_input_id+"'] img").attr('src'));        
-        //cập nhật âm thanh
-        audio.pause();
-        audio.currentTime = 0;
-        audio.src = audio_input.find(":selected").data('url');
-        audio.play();        
-        //biểu diễn hiệu ứng
-        previewAnimation(appearEffect.val(), '#'+notify_box.attr('id'));
-        anime_handle = setTimeout(
-            function() 
-            {
-                notify_box.delay( 800 ).removeClass().addClass(disappearEffect.val() + ' animated').one(
-                    'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
-                    function () {
-                        audio.pause();
-                        audio.currentTime = 0;
-                    }
-                );
-            }, 
-            time_input.val() * 1000
-        );
-    });
-    $('#save-setting-button').click(function(e){
-        $('<input />').attr('type', 'hidden')
-                .attr('name', "notify_message_array")
-                .attr('value', JSON.stringify(getNotifyMsg('array')))
-                .appendTo("#form-donate-setting");
-        $("#form-donate-setting").submit();
-    });
-    
-
-    /********************
-    ******FUNCTION*******
-    *********************/
-    function updateImageResourceAfterUpload(response){
-        var img = $('<img>',{
-            height  :   128,
-            src     :   response.data.url
-        });
-        var PrivateImage = $('input[data-img-private=true]');
-        var oldPrivateImageId = PrivateImage.attr('id');
-        var PrivateImageLabel = $('label[for='+oldPrivateImageId+']');
-        PrivateImage.attr('id',response.data.id);
-        PrivateImage.attr('value',response.data.id);
-        PrivateImageLabel.attr('for',response.data.id);
-        PrivateImageLabel.html(img);
-        PrivateImageLabel.click();
-    }    
-    function updateAudioResourceAfterUpload(response){
-        $('div').find('[data-audio-private=true]').remove();
-        var dom = $('<option>',{
-                'data-audio-private': true,
-                'data-url': response.data.url,
-                value: response.data.id,
-            }).text(response.data.name);//hàm text đã thực hiện escape xxs
-        $('#audio_resources').prepend(dom);
-        $('option[data-audio-private=true]').prop('selected', true);
-    }
-    function previewAnimation(effect,target) {
-        $(target).finish();
-        $(target).removeClass().addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-            $(this).removeClass();
-        });
-    };
-    /*
-    *   @param {string} returnType : trả về chuỗi string ('string') hay array('array')
-    */
-    function getNotifyMsg(returnType)
-    {
-        var m1 = $('#message1').html();
-        var m2 = $('#message2').html();
-        var m3 = $('#message3').html();
-        var m4 = $('#message4').html();
-        var t1 = $('#target1').html();
-        var t2 = $('#target2').html();
-        var t3 = $('#target3').html();
-        if(returnType == 'string'){
-            text = m1 + ' ' + t1 + ' ' + m2 + ' ' + t2 + ' ' + m3 + ' ' + t3 + ' ' + m4;
-            return text;
-        }else if(returnType == 'array'){
-            var array = {
-                'message1'  : $('#message1').html(),
-                'message2'  : $('#message2').html(),
-                'message3'  : $('#message3').html(),
-                'message4'  : $('#message4').html(),
-                'target1'  : $('#target1').html(),
-                'target2'  : $('#target2').html(),
-                'target3'  : $('#target3').html(),
-            };
-            return array;
-        }
-        return '';
-    }
-    function replaceMessage(text){
-        var f = ['「Người ủng hộ」','「Số tiền」','「___」','_'];
-        var r = ['<strong>Nguyễn Văn A</strong>','<strong>10.000</strong>','',''];
-        $.each(f,function(i,v) {
-            var myregexp = new RegExp(v,'g');
-            text = text.replace(myregexp,r[i]);
-        });
-        return text;
-    }
 </script>
 <?php $this->end(); ?> 
 
@@ -218,10 +49,10 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
             <div class="panel-footer clearfix">
                 
                 <div class="col-sm-6">
-                    <button id="alert-donate-preview-button" class="fcbtn btn btn-outline btn-info"><i class="fa fa-eye"></i> <?=__('Xem trước')?></button>
+                    <button id="alert-donate-preview-button" class="fcbtn btn btn-outline btn-info miw-150"><i class="fa fa-eye"></i> <?=__('Xem trước')?></button>
                 </div>
                 <div class="col-sm-6">
-                    <button id="save-setting-button" class="fcbtn btn btn-outline btn-success"><i class="fa fa-check"></i> <?=__('Lưu thiết lập')?></button>
+                    <button id="save-setting-button" class="fcbtn btn btn-outline btn-success miw-150"><i class="fa fa-check"></i> <?=__('Lưu thiết lập')?></button>
                 </div>
             </div>
         </div>
@@ -258,19 +89,27 @@ echo $this->Html->script('/packages/jquery-asColorPicker-master/js/jquery-asColo
                             <div class="white-box form-horizontal">
                                 <div class="form-group">
                                     <div class="col-sm-3">
-                                        <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>                                    
+                                        <label class="control-label"><?=__('Lựa chọn hình ảnh')?></label><br>
+                                        <img id="image_resources_preview" width='100%'></img>                                 
                                     </div>
-                                    <div class="col-sm-9" id="image_resources">
+                                    <div class="col-sm-9">
                                         <?php
                                         foreach($image_resources as $resource)
-                                        {   
+                                        {
                                             $image_options[] = [ 
-                                                'data-img-private' => (($resource->user_id == null)?'false':'true'),
-                                                'value' => $resource->id,
-                                                'text' => $this->Html->image($resource->url, ['height' => 128])
+                                                'id' => $resource->id, 
+                                                'data-image-private' => (($resource->user_id == null)?'false':'true'), 
+                                                'value' => $resource->id, 
+                                                'data-url' => $this->Url->build($resource->url,['fullBase' => true]), 
+                                                'text' => $resource->name 
                                             ];
                                         }
-                                        echo $this->Form->radio('image_id', $image_options, ['escape' => false]);
+                                        echo $this->Form->select('image_id',$image_options,[
+                                            'class' =>  'form-control my-designed-scrollbar',
+                                            'name' =>  'image_id',
+                                            'id' =>  'image_resources',
+                                            'size' =>  '9',
+                                        ]);
                                         ?>
                                     </div>
                                 </div>

@@ -1,4 +1,8 @@
-<?= $this->Html->css('/packages/calendar/dist/fullcalendar.css',['block'=>true]) ?>
+<?php
+echo $this->Html->css('/packages/calendar/dist/fullcalendar.css', ['block'=>true]);
+echo $this->AssetCompress->script('Me.Schedules.calendar.js', ['block' => 'script']);
+?>
+
 <div class="row">
     <div class="col-md-3">
         <div id="eventResources" style="display:none"><?=$eventDatas?></div>
@@ -64,10 +68,6 @@
     </div>
 </div>
 
-
-
-
-
 <!-- BEGIN MODAL -->
 <div class="modal fade none-border" id="my-event">
     <div class="modal-dialog">
@@ -122,14 +122,3 @@
     </div>
 </div>
 <!-- END MODAL -->
-
-
-
-
-
-
-<?= $this->Html->script('/packages/calendar/jquery-ui.min.js',['block'=>true]) ?>
-<?= $this->Html->script('/packages/moment/moment.js',['block'=>true]) ?>
-<?= $this->Html->script('/packages/calendar/dist/fullcalendar.min.js',['block'=>true]) ?>
-<?= $this->Html->script('/packages/calendar/dist/locale/vi.js',['block'=>true]) ?>
-<?= $this->Html->script('/packages/calendar/dist/cal-init.js',['block'=>true]) ?>

@@ -17,11 +17,11 @@
     <?= $this->Html->css('/packages/toast-master/css/jquery.toast.css') ?>
     <?= $this->Html->css('/packages/dropify/dist/css/dropify.min.css') ?>
     <?= $this->Html->css('/packages/sweetalert/sweetalert.css') ?>
-    <?= $this->fetch('css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/animate.css') ?>
-    <?= $this->Html->css('/packages/AmpleAdmin/css/Ver1_style.css') ?>
-    <?= $this->Html->css('/packages/AmpleAdmin/css/colors/Ver1_red-dark.css', ['id' => 'theme']) ?>
-    <?= $this->Html->css('style.css')?>
+    <?= $this->fetch('css') //theme AmpleAdmin có chỉnh sửa lại các packages nên để tài nguyên packages lên trước?>
+    <?= $this->Html->css('/packages/AmpleAdmin/css/toilensong.css') ?>
+    <?= $this->Html->css('/packages/AmpleAdmin/css/colors/toilensong.css', ['id' => 'theme']) ?>
+    <?= $this->AssetCompress->css('all'); ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -50,22 +50,11 @@
             <?= $this->element('Layout/default/footer') ?>
         </div>
     </div>
-
-    <?= $this->Html->script('/packages/jquery/jquery-2.2.4.min.js') ?>
-    <?= $this->Html->script('/packages/bootstrap/js/bootstrap.min.js') ?>
-    <?= $this->Html->script('/packages/sidebar-nav/dist/sidebar-nav.min.js') ?>
-    <?= $this->Html->script('/packages/toast-master/js/jquery.toast.js') ?> 
-    <?= $this->Html->script('/packages/AmpleAdmin/js/jquery.slimscroll.js') ?>
-    <?= $this->Html->script('/packages/AmpleAdmin/js/waves.js') ?>
-    <?= $this->Html->script('/packages/AmpleAdmin/js/mask.js') ?>
-    <?= $this->Html->script('/packages/AmpleAdmin/js/jasny-bootstrap.js') ?>
-    <?= $this->Html->script('/packages/AmpleAdmin/js/cbpFWTabs.js') ?>
-    <?= $this->Html->script('/packages/AmpleAdmin/js/custom.min.js') ?>
-    <?= $this->Html->script('/packages/styleswitcher/jQuery.style.switcher.js') ?>    
-    <?= $this->Html->script('/packages/sweetalert/sweetalert.min.js') ?>    
+  
+    <?= $this->AssetCompress->script('libs'); ?>
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js') ?>
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/i18n/vi.js') ?>
-    <?= $this->Html->script('app.settings.js') ?>
     <?= $this->fetch('script') ?>   
+    <?= $this->AssetCompress->script('app'); ?>
 </body>
 </html>
