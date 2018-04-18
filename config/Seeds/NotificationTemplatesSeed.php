@@ -11,25 +11,25 @@ class NotificationTemplatesSeed extends AbstractSeed
         */
         $data = [
             [
-                'id' => 1,
+                'id' => '00000000-0000-0000-0000-000000000001',
                 'selector' => 'adminEmpty',
-                'template' => '',
+                'template' => 'Test chơi 1 phát thì sao {username}',
                 'path' => '',
                 'type_id' => '1',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
-                'id' => 2,
+                'id' => '00000000-0000-0000-0000-000000000002',
                 'selector' => 'systemEmpty',
-                'template' => '',
+                'template' => 'Test chơi 2 phát luôn',
                 'path' => '',
                 'type_id' => '2',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
-                'id' => 3,
+                'id' => '00000000-0000-0000-0000-000000000003',
                 'selector' => 'moneyEmpty',
                 'template' => '',
                 'path' => '',
