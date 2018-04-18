@@ -28,11 +28,6 @@ class NotificationsTable extends AppTable
             'foreignKey' => 'extend_id',
             'bindingKey' => 'id',
         ]);
-        $this->belongsTo('NotificationTypes',[
-            'through' => 'NotificationTemplates',
-            'foreignKey' => 'template_id',
-            'bindingKey' => 'id',
-        ]);
     }
 
     public function validationDefault(Validator $validator)

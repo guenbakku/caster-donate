@@ -12,10 +12,10 @@ class NotificationTypesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->hasMany('Notifications', [
-            'through' => 'NotificationTemplates',
-            'bindingKey' => 'template_id'
+        $this->hasMany('NotificationTemplates', [
+            'foreignKey' => 'type_id',
         ]);
+
     }
 
     public function validationDefault(Validator $validator)

@@ -12,9 +12,6 @@ class NotificationTemplatesTable extends AppTable
     {
         parent::initialize($config);
 
-        $this->hasMany('Notifications', [
-            'bindingKey' => 'template_id', 
-        ]);
         $this->belongsTo('NotificationTypes', [
             'foreignKey' => 'type_id',
         ]);
