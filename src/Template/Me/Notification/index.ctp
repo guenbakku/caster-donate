@@ -6,25 +6,28 @@ use Cake\Utility\Hash;
         <table class="table">
             <thead>
                 <?=$this->Html->tableHeaders(
-                    ['Tiêu đề','Ngày tạo','Thể loại','Tình trạng']
+                    [__('Tiêu đề'),__('Ngày tạo'),__('Thể loại'),__('Tình trạng')]
                 );?>
             </thead>
             <tbody>
                 <?php
-                $tableList = $this->Code->setTable('notification_types');
                 foreach($notifications as $notification)
                 {
-                    $notification['seen'] ? $attr= [] : $attr = ['class' => 'text-success'];
+                    $notification->seen ? $attr= [] : $attr = [
+                        'class' => 'text-success',
+                        'onclick' => 'document.location = "'.$notification->notification_template->path.'"', 
+                        'style' => 'cursor: pointer'
+                    ];
                     echo $this->Html->tableCells(
                         [
-                            $notification['title'],
-                            $notification['modified'],
+                            $notification->notification_template->content,
+                            $notification->modified,
                             sprintf(
                                 '<span class="label label-%s">%s</span>',
-                                Hash::get($tableList->getList(['valueField' => 'color_class']), $notification['type_id']),
-                                Hash::get($tableList->getList(), $notification['type_id'])
+                                $notification->notification_template->notification_type->color_class,
+                                $notification->notification_template->notification_type->name 
                             ),
-                            $notification['seen']?'Đã đọc':'',
+                            $notification->seen ? __('Đã đọc') : '',
                         ],
                         $attr,//lẻ
                         $attr//chẵn

@@ -5,9 +5,9 @@ use Cake\I18n\FrozenTime;
     <?php
     //hiển thị nút nhấp nháy nếu có thông báo
     $notify_point = $this->Html->div('notify', '');
-    foreach($userNotifications as $notification)
+    foreach($notifications as $notification)
     {
-        if($notification['seen'] == false)
+        if($notification->seen == false)
         {
             $notify_point = $this->Html->div('notify', '<span class="heartbit"></span><span class="point"></span>');
             break;
@@ -25,11 +25,11 @@ use Cake\I18n\FrozenTime;
     );
     //hiển thị các thông báo gần nhất
     $options = [];
-    foreach($userNotifications as $notification)
+    foreach($notifications as $notification)
     {
-        $time = new FrozenTime($notification['created']);
+        $time = new FrozenTime($notification->created);
         $options[] = $this->Html->link(
-            $this->Html->div('col-xs-11 text-success', $notification['title']) . $this->Html->div('col-xs-1 text-success', $time->format('d/m')),
+            $this->Html->div('col-xs-11 text-success', $notification->notification_template->content) . $this->Html->div('col-xs-1 text-success', $time->format('d/m')),
             '#',
             ['escape' => false]
         );
@@ -41,6 +41,6 @@ use Cake\I18n\FrozenTime;
             [$this->Html->link(__('Xem tất cả'),'/me/notification',['class' => 'text-center'])]
         ),
         ['class'=>'dropdown-menu dropdown-notifs animated bounceInDown','tag'=>'ul']
-    ); 
+    );
     ?>    
 </li>
