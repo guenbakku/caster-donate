@@ -21,13 +21,11 @@ class CreateNotificationsTable extends AbstractMigration
                 'null' => true,
                 'default' => null
             ])
-            ->addColumn('vars', 'string', [
+            ->addColumn('vars', 'text', [
                 'null' => false,
-                'limit' => 512,
             ])
-            ->addColumn('seen', 'boolean', [
-                'null' => false,
-                'default' => 0,
+            ->addColumn('seen', 'datetime', [
+                'null' => true,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,

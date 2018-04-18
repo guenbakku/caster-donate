@@ -18,7 +18,7 @@ class CreateNotificationTemplatesTable extends AbstractMigration
                 'limit' => 512,
                 'null' => false,
             ])
-            ->addColumn('path', 'string', [
+            ->addColumn('link', 'string', [
                 'limit' => 256,
                 'null' => false,
             ])

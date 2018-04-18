@@ -13,6 +13,9 @@ class CreateNotificationExtendsTable extends AbstractMigration
             ->addColumn('content', 'text', [
                 'null' => false,
             ])
+            ->addColumn('author_id', 'uuid', [
+                'null' => false,
+            ])
             ->addColumn('created', 'datetime', [
                 'null' => false,
             ])
