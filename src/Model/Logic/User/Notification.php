@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Logic\User;
 
+use Cake\Datasource\Paginator;
 use Cake\Datasource\ConnectionManager;
 use Cake\ORM\TableRegistry;
 use Cake\Collection\Collection;
@@ -8,9 +9,12 @@ use Cake\Validation\Validation;
 
 class Notification
 {
+    public $pageParams = []; 
+
     public function __construct ()
     {
         $this->NotificationTb = TableRegistry::get('Notifications');
+        $this->paginator = new Paginator();
     }
 
     /**
@@ -27,21 +31,32 @@ class Notification
         if (!$notification->errors()) {
             $this->NotificationTb->save($notification);
         }
-
         return $notification;
     }
 
     public function notifyAll($new_notification)
     {
     }
-
-    public function getNotify($user_id, $limit = '')
+    
+    /*
+    *   Gửi trả các thông báo theo mối liên kết notifications -> notification_templates -> notification_types
+    *   Tạo field notifications.content từ biến và mẫu của thông báo
+    *
+    *   @param uuid $user_id
+    *   @param array $paginator_config : 
+    */
+    public function getNewNotify($user_id, $paginator_config = [])
     {
-        $query = $this->NotificationTb->findByUserId($user_id)    
-        ->contain(['NotificationTemplates.NotificationTypes'])
-        ->order(['Notifications.created']);
-        if(is_numeric($limit)) $query->limit($limit);
-        $notifications = $query->all();
+        $paginator_config = array_merge($paginator_config,[
+            'limit' => 10,
+            'order' => [
+                'Notifications.created' => 'asc'
+            ]
+        ]);
+        $notifications = $this->paginator->paginate(
+            $this->NotificationTb->findByUserId($user_id)->contain(['NotificationTemplates.NotificationTypes']),
+            $paginator_config
+        );
 
         if (empty($notifications)) 
         {
@@ -49,10 +64,26 @@ class Notification
         }else{
             foreach ($notifications as $notification)
             {
-                $notification['notification_template']['content'] = $notification['notification_template']['template'];
+                $notification['content'] = $this->replateVar($notification->notification_template->template, $notification->vars);
             }
-        }
+        }        
+        $this->pageParams = $this->paginator->getPagingParams() ;
         return $notifications;
+    }
+
+    /*
+     *  @param string $template
+     *  @param array $jsonVars
+     *  return string
+     */
+    public function replateVar($template, $jsonVars)
+    {
+        $obj = json_decode($jsonVars);
+        $content = $template;
+        foreach ($obj as $key => $value) {
+            $content = str_replace('{'.$key.'}', $value, $content);
+        }
+        return $content;
     }
     
 }

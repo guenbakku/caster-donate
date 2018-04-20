@@ -20,7 +20,7 @@ use Cake\Utility\Hash;
                     ];
                     echo $this->Html->tableCells(
                         [
-                            $notification->notification_template->content,
+                            $notification->content,
                             $notification->modified,
                             sprintf(
                                 '<span class="label label-%s">%s</span>',
@@ -36,13 +36,9 @@ use Cake\Utility\Hash;
                 ?>
             </tbody>
         </table>
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
-            <button type="button" class="btn btn-default waves-effect">1</button>
-            <button type="button" class="btn btn-default waves-effect">2</button>
-            <button type="button" class="btn btn-default waves-effect">3</button>
-            <button type="button" class="btn btn-default waves-effect">4</button>
-            <button type="button" class="btn btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
-        </div>
+        <button class="btn btn-outline btn-default pull-left"><i class="fa fa-check"></i> <?=__('Đã đọc tất cả')?></button>
+        <ul class="pagination m-b-0 m-t-0 pull-right">
+            <?php echo $this->Paginator->numbers(['first' => 'First page']);?>
+        </ul>
     </div>
 </div>

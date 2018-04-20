@@ -29,7 +29,7 @@ use Cake\I18n\FrozenTime;
     {
         $time = new FrozenTime($notification->created);
         $options[] = $this->Html->link(
-            $this->Html->div('col-xs-11 text-success', $notification->notification_template->content) . $this->Html->div('col-xs-1 text-success', $time->format('d/m')),
+            $this->Html->div('col-xs-11 text-success', $notification->content) . $this->Html->div('col-xs-1 text-success', $time->format('d/m')),
             '#',
             ['escape' => false]
         );
