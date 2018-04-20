@@ -9,11 +9,10 @@ use App\Model\Logic\User\Notification;
 class NotificationController extends AppController
 {
     public $paginate = [
-        'limit' => 2,
+        'limit' => 8,
         'order' => [
             'Notifications.created' => 'asc'
         ],
-        'contain' => ['NotificationTemplates.NotificationTypes'],
         'page'=> 1
     ];
     public $helpers = [
@@ -29,6 +28,9 @@ class NotificationController extends AppController
 
     public function index($page = 1)
     {   
+        $this->paginate['contain'] = ['NotificationTemplates.NotificationTypes'];
+        $this->paginate['conditions'] = ['user_id' => $this->Auth->user('id')];
+
         $notifications = $this->paginate('Notifications');
         foreach ($notifications as $notification)
         {

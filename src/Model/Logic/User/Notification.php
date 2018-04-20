@@ -6,6 +6,7 @@ use Cake\Datasource\ConnectionManager;
 use Cake\ORM\TableRegistry;
 use Cake\Collection\Collection;
 use Cake\Validation\Validation;
+use Cake\I18n\Time;
 
 class Notification
 {
@@ -86,5 +87,21 @@ class Notification
         return $content;
     }
     
+    public function seenAll($user_id)
+    {
+        if ($this->NotificationTb->updateAll(
+            ['seen' => Time::now()],//set
+            [
+                'user_id' => $user_id,
+                'seen is' => null
+            ] //where
+        )){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 ?>

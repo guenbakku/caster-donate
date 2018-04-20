@@ -28,8 +28,9 @@ use Cake\I18n\FrozenTime;
     foreach($notifications as $notification)
     {
         $time = new FrozenTime($notification->created);
+        $text_color = ($notification->seen) ?  '' : ' text-success';
         $options[] = $this->Html->link(
-            $this->Html->div('col-xs-11 text-success', $notification->content) . $this->Html->div('col-xs-1 text-success', $time->format('d/m')),
+            $this->Html->div('col-xs-11'.$text_color, $notification->content) . $this->Html->div('col-xs-1'.$text_color, $time->format('d/m')),
             '#',
             ['escape' => false]
         );

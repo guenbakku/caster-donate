@@ -1,12 +1,14 @@
 <?php
-use Cake\Utility\Hash;
+echo $this->AssetCompress->script('Me.Notification.index.js', ['block' => 'script']);
 ?>
 <div class="white-box">
     <div class="table-responsive">
         <table class="table">
             <thead>
                 <?=$this->Html->tableHeaders(
-                    [__('Tiêu đề'),__('Ngày tạo'),__('Thể loại'),__('Tình trạng')]
+                    [__('Tiêu đề'),__('Ngày tạo'),__('Thể loại'),__('Tình trạng')],
+                    [],
+                    ['class' => 'my-white']
                 );?>
             </thead>
             <tbody>
@@ -27,7 +29,7 @@ use Cake\Utility\Hash;
                                 $notification->notification_template->notification_type->color_class,
                                 $notification->notification_template->notification_type->name 
                             ),
-                            $notification->seen ? __('Đã đọc') : '',
+                            $notification->seen ? __('Đã đọc') : __('Mới'),
                         ],
                         $attr,//lẻ
                         $attr//chẵn
@@ -36,7 +38,7 @@ use Cake\Utility\Hash;
                 ?>
             </tbody>
         </table>
-        <button class="btn btn-outline btn-default pull-left"><i class="fa fa-check"></i> <?=__('Đã đọc tất cả')?></button>
+        <button id="seen-button" class="btn btn-outline btn-success pull-left"><i class="fa fa-check"></i> <?=__('Đánh dấu đã đọc tất cả')?></button>
         <ul class="pagination m-b-0 m-t-0 pull-right">
             <?php echo $this->Paginator->numbers(['first' => 'First page']);?>
         </ul>
