@@ -16,8 +16,8 @@ class TagsController extends ApiController
         $q = $this->request->getQuery('q');
         $q = trim($q);
 
-        $Tag = new Tag();
-        $tags = $Tag->searchByName($q);
+        $TagLg = new Tag();
+        $tags = $TagLg->searchByName($q);
         $this->set(compact('tags'));
     }
 
@@ -28,8 +28,8 @@ class TagsController extends ApiController
     {
         $user_id = trim($user_id);
 
-        $Tag = new Tag();
-        $tags = $Tag->searchByUserId($user_id);
+        $TagLg = new Tag();
+        $tags = $TagLg->searchByUserId($user_id);
         $this->set(compact('tags'));
     }
 }

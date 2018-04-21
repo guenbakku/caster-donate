@@ -18,10 +18,10 @@ class TagsController extends AppController
     public function edit()
     {   
         if ($this->request->is('put')) {
-            $Tag = new Tag();
+            $TagLg = new Tag();
             $user_id = $this->Auth->user('id');
             $caster_tags = $this->request->data('caster_tags') ?: [];
-            $Tag->save($user_id, $caster_tags);
+            $TagLg->save($user_id, $caster_tags);
     
             $this->Flash->success(__('Thay đổi thể loại live stream thành công.'));
         }

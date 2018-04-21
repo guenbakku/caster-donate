@@ -11,10 +11,10 @@ class ResourcesController extends ApiController
         $this->request->allowMethod(['post']);
 
         $user_id = $this->Auth->user('id');
-        $Resources = new Resources();
+        $ResourcesLg = new Resources();
 
         $new_resource = $this->request->getData();
-        $resource = $Resources->addPrivateResource($user_id, $new_resource);
+        $resource = $ResourcesLg->addPrivateResource($user_id, $new_resource);
 
         $this->set(compact('resource'));
     }

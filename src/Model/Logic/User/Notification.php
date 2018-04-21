@@ -53,7 +53,7 @@ class Notification
      */
     public function getNewNotify($user_id, $limit = 10)
     {
-        $this->NotificationTb->findByUserId($user_id)
+        $notifications = $this->NotificationTb->findByUserId($user_id)
             ->limit($limit)
             ->contain(['NotificationTemplates.NotificationTypes']);
 

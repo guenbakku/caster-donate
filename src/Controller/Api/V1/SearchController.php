@@ -16,8 +16,8 @@ class SearchController extends ApiController
         $q = $this->request->getQuery('q');
         $q = trim($q);
 
-        $Search = new Search();
-        $SearchResult = $Search->searchAll($q);
+        $SearchLg = new Search();
+        $SearchResult = $SearchLg->searchAll($q);
         $this->set(compact('SearchResult'));
     }
 }

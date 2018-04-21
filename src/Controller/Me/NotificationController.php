@@ -23,7 +23,7 @@ class NotificationController extends AppController
     {
         parent::beforeFilter($event);
         $this->ContentHeader->title(__('Thông báo của thành viên'));
-        $this->Notification = new Notification();
+        $this->NotificationLg = new Notification();
     }
 
     public function index()
@@ -34,14 +34,14 @@ class NotificationController extends AppController
         $notifications = $this->paginate('Notifications');
         foreach ($notifications as $notification)
         {
-            $notification['content'] = $this->Notification->replateVar($notification->notification_template->template, $notification->vars);
+            $notification['content'] = $this->NotificationLg->replateVar($notification->notification_template->template, $notification->vars);
         }
         $this->set(compact('notifications'));
     }
 
     public function showNotification($notif_id)
     {
-        $notification = $this->Notification->seen($notif_id);
+        $notification = $this->NotificationLg->seen($notif_id);
         if(!empty($notification))
         {
             // $this->redirect($notification->notification_template->link);

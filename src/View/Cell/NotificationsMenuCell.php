@@ -9,8 +9,8 @@ class NotificationsMenuCell extends Cell
 {
     public function display($user_id)
     {
-        $Notification = new Notification();
-        $notifications = $Notification->getNewNotify($user_id);
+        $NotificationLg = new Notification();
+        $notifications = $NotificationLg->getNewNotify($user_id);
 
         $this->set(compact('notifications'));
     }

@@ -1,6 +1,6 @@
 $('#seen-button').click(function(){
     $.ajax({
-        url: '/api/v1/Notifications/seen',
+        url: '/api/v1/Notifications/seen-all',
     }).done(function (response) {
         if (response.result == 0) {
         } else {
