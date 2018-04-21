@@ -124,7 +124,7 @@ img.cover{
 }/*------------*/
 
 .navbar-top-links .dropdown-notifs {
-    right: 0;
+    /* right: 0; */
     left: auto;
 }
 
@@ -230,3 +230,10 @@ input.k-textbox {
 .upload-thumbnail {
     max-width: 100%;
 }/*------------*/
+
+.dropdown-notifs li a{
+    overflow: auto;
+}
+.dropdown-notifs li a div{
+    padding-left: 0px;
+}

@@ -1,55 +1,47 @@
+<?php 
+use Cake\I18n\FrozenTime;
+?>
 <li class="dropdown">
-    <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false"> <i class="mdi mdi-check-circle"></i>
-        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-    </a>
-    <ul class="dropdown-menu dropdown-notifs animated bounceInDown">
-        <li>
-            <div class="drop-title text-center">Thông báo</div>
-        </li>
-        <li>
-            <a href="#">
-                <span class="text-success">Thông báo từ Ban Quản Lý</span>
-                <span class="pull-right">20/10</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="text-success">Lệnh chuyển tiền đã được gửi đi</span>
-                <span class="pull-right">19/10</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="">Nhận được 27.000 VND Donate</span>
-                <span class="pull-right">18/10</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Hợp đồng đã được duyệt</span>
-                <span class="pull-right">15/10</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>..............................</span>
-                <span class="pull-right">15/10</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>..............................</span>
-                <span class="pull-right">15/10</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>..............................</span>
-                <span class="pull-right">15/10</span>
-            </a>
-        </li>
-        <li>
-            <a class="text-center" href="#"> <strong><?=__('Xem tất cả thông báo')?></strong> <i class="fa fa-angle-right"></i> </a>
-        </li>
-    </ul>
+    <?php
+    //hiển thị nút nhấp nháy nếu có thông báo
+    $notify_point = $this->Html->div('notify', '');
+    foreach($notifications as $notification)
+    {
+        if($notification->seen == false)
+        {
+            $notify_point = $this->Html->div('notify', '<span class="heartbit"></span><span class="point"></span>');
+            break;
+        } 
+    }
+    echo $this->Html->link(
+        '<i class="mdi mdi-bell"></i>'.$notify_point,
+        '#',
+        [
+            'class' => 'dropdown-toggle waves-effect waves-light',
+            'data-toggle' => 'dropdown',
+            'aria-expanded' => 'false',
+            'escape' => false
+        ]
+    );
+    //hiển thị các thông báo gần nhất
+    $options = [];
+    foreach($notifications as $notification)
+    {
+        $time = new FrozenTime($notification->created);
+        $text_color = ($notification->seen) ?  '' : ' text-success';
+        $options[] = $this->Html->link(
+            $this->Html->div('col-xs-11'.$text_color, $notification->content) . $this->Html->div('col-xs-1'.$text_color, $time->format('d/m')),
+            $this->Url->build(['prefix' => 'me','controller' => 'notification','action' => 'show-notification',$notification->id]),
+            ['escape' => false]
+        );
+    }
+    echo $this->Html->nestedList(
+        array_merge(
+            [$this->Html->div('drop-title text-center my-white', __('Thông báo'))], 
+            $options,
+            [$this->Html->link(__('Xem tất cả'),'/me/notification',['class' => 'text-center'])]
+        ),
+        ['class'=>'dropdown-menu dropdown-notifs animated bounceInDown','tag'=>'ul']
+    );
+    ?>    
 </li>

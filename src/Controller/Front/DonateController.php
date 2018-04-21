@@ -23,7 +23,7 @@ class DonateController extends AppController
 
     public function index($user_id = null) 
     {
-        $Profile = new Profile();
+        $ProfileLg = new Profile();
 
         $Donates = TableRegistry::get('Donates');
         $donate =  $Donates->newEntity();
@@ -31,7 +31,7 @@ class DonateController extends AppController
         $TransferMethods = TableRegistry::get('TransferMethods');
         $transferMethods = $TransferMethods->find();
         
-        $caster_profile = $Profile->get($user_id);        
+        $caster_profile = $ProfileLg->get($user_id);        
         if ($caster_profile->isNew())
         {
             // throw new NotFoundException(); => Code Lỗi

@@ -92,7 +92,7 @@
                     if (empty($this->Auth->user())) {
                         echo $this->cell('GuestMenu');
                     } else {
-                        echo $this->cell('NotificationsMenu');
+                        echo $this->cell('NotificationsMenu',[$this->Auth->user('id')]);
                         echo $this->cell('MemberMenu');
                     }
                 ?>

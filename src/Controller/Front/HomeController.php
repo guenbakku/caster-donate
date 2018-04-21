@@ -17,9 +17,6 @@ class HomeController extends AppController
     }
 
     public function index() {
-        // $this->Flash->success('Nội dung flash');
-        // $this->Flash->error('Nội dung flash');
-        // $this->Flash->warning('Nội dung flash');
-        // $this->Flash->info('Nội dung flash');
+
     }
 }

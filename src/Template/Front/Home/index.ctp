@@ -7,7 +7,7 @@
             <div class="l-logo">
                 <img width=100 src="/img/logo-lg.png">
             </div>
-            <h1 class="m-t-0 p-b-10 my-red">Tôi Lên Sóng</h1>
+            <h1 class="m-t-0 p-b-10 my-red"><?=Cake\Core\Configure::read('System.sitename')?></h1>
             <p class="p-b-20">
                 Công cụ hỗ trợ LiveStream một cách chuyên nghiệp
             </p>

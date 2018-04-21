@@ -17,11 +17,11 @@ class AvatarController extends AppController
     public function edit()
     {
         $user_id = $this->Auth->user('id');
-        $Profile = new Profile();
+        $ProfileLg = new Profile();
         
         if ($this->request->is('put')) {
             $new_user_info = $this->request->getData();
-            $profile = $Profile->edit($user_id, $new_user_info);
+            $profile = $ProfileLg->edit($user_id, $new_user_info);
             
             if (!$profile->errors()) {   
                 // Trigger event after edited profile
@@ -34,7 +34,7 @@ class AvatarController extends AppController
                 $this->Flash->error(__('Vui lòng kiểm tra thông tin đã nhập.'));
             }
         } else {
-            $profile = $Profile->get($user_id);
+            $profile = $ProfileLg->get($user_id);
         }
         
         $this->set(compact('profile'));
@@ -43,9 +43,9 @@ class AvatarController extends AppController
     public function delete()
     {
         $user_id = $this->Auth->user('id');
-        $Profile = new Profile();
+        $ProfileLg = new Profile();
 
-        $result = $Profile->deleteAvatar($user_id);
+        $result = $ProfileLg->deleteAvatar($user_id);
         if ($result) {
             // Trigger event after edited profile
             $this->dispatchEvent(

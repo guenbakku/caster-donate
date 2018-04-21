@@ -6,8 +6,6 @@ use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use CakeDC\Users\Controller\Traits\CustomUsersTableTrait;
 use App\Controller\AppController;
-use App\Model\Logic\User\Profile;
-use App\Model\Logic\User\Tag;
 use App\Exception\ValidateErrorException;
 
 class EmailController extends AppController
