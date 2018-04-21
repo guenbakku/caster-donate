@@ -16,8 +16,6 @@ class DashboardController extends BaseController
     }
 
     public function index() {
-        $this->Flash->error('Hello');
-        $this->Flash->info('Hello');
-        $this->Flash->success('Hello');
+
     }
 }

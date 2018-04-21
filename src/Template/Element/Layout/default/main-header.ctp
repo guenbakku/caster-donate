@@ -8,7 +8,7 @@
                             'alt' => __('home')
                         ]) ?>
                     <span class="hidden-xs my-red">
-                        <span class="dark-logo"><?= Cake\Core\Configure::read('System.sitename') ?></span>
+                        <span class="dark-logo"><?= \Cake\Core\Configure::read('System.sitename') ?></span>
                     </span> 
                 </a>
             </div>
@@ -102,4 +102,4 @@
         <!-- /.navbar-header -->
         <!-- /.navbar-top-links -->
         <!-- /.navbar-static-side -->
-    </nav>
+        </nav>

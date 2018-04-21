@@ -898,7 +898,7 @@ pre {
   text-transform: uppercase;
 }
 .top-left-part .light-logo {
-  display: none;
+  color: #333;
 }
 .navbar-header {
   width: 100%;
