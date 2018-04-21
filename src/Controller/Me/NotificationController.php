@@ -11,7 +11,7 @@ class NotificationController extends AppController
     public $paginate = [
         'limit' => 8,
         'order' => [
-            'Notifications.created' => 'asc'
+            'Notifications.created' => 'desc'
         ],
         'page'=> 1
     ];
@@ -26,7 +26,7 @@ class NotificationController extends AppController
         $this->Notification = new Notification();
     }
 
-    public function index($page = 1)
+    public function index()
     {   
         $this->paginate['contain'] = ['NotificationTemplates.NotificationTypes'];
         $this->paginate['conditions'] = ['user_id' => $this->Auth->user('id')];
@@ -37,5 +37,17 @@ class NotificationController extends AppController
             $notification['content'] = $this->Notification->replateVar($notification->notification_template->template, $notification->vars);
         }
         $this->set(compact('notifications'));
+    }
+
+    public function showNotification($notif_id)
+    {
+        $notification = $this->Notification->seen($notif_id);
+        if(!empty($notification))
+        {
+            $this->redirect($notification->notification_template->link);
+        }else
+        {
+            $this->redirect(['action' => 'index']);
+        }
     }
 }

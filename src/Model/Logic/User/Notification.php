@@ -51,7 +51,7 @@ class Notification
         $paginator_config = array_merge($paginator_config,[
             'limit' => 10,
             'order' => [
-                'Notifications.created' => 'asc'
+                'Notifications.created' => 'desc'
             ]
         ]);
         $notifications = $this->paginator->paginate(
@@ -102,6 +102,21 @@ class Notification
         {
             return false;
         }
+    }
+
+    public function seen($notif_id)
+    {
+        $notification = $this->NotificationTb->findById($notif_id)
+            ->contain(['NotificationTemplates'])
+            ->first();
+        
+        if (!empty($notification))
+        {
+            $notification->seen = Time::now();
+            $this->NotificationTb->save($notification);
+        }
+        return $notification;
+
     }
 }
 ?>

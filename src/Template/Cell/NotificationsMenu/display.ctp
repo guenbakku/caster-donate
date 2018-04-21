@@ -31,7 +31,7 @@ use Cake\I18n\FrozenTime;
         $text_color = ($notification->seen) ?  '' : ' text-success';
         $options[] = $this->Html->link(
             $this->Html->div('col-xs-11'.$text_color, $notification->content) . $this->Html->div('col-xs-1'.$text_color, $time->format('d/m')),
-            '#',
+            $this->Url->build(['prefix' => 'me','controller' => 'notification','action' => 'show-notification',$notification->id]),
             ['escape' => false]
         );
     }

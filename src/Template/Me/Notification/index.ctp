@@ -15,15 +15,15 @@ echo $this->AssetCompress->script('Me.Notification.index.js', ['block' => 'scrip
                 <?php
                 foreach($notifications as $notification)
                 {
-                    $notification->seen ? $attr= [] : $attr = [
-                        'class' => 'text-success',
-                        'onclick' => 'document.location = "'.$notification->notification_template->path.'"', 
+                    $attr = [
+                        'onclick' => 'document.location = "'.$this->Url->build(['action' => 'show-notification',$notification->id]).'"', 
                         'style' => 'cursor: pointer'
                     ];
+                    $attr['class'] = $notification->seen ?  '' : 'text-success';
                     echo $this->Html->tableCells(
                         [
                             $notification->content,
-                            $notification->modified,
+                            $notification->created,
                             sprintf(
                                 '<span class="label label-%s">%s</span>',
                                 $notification->notification_template->notification_type->color_class,

@@ -29,13 +29,14 @@ class HomeController extends AppController
         $codeHelper = new CodeHelper(new \Cake\View\View());
         $type_id = $codeHelper->setTable('notification_types')->getKey('admin','id');        
         $notification = array (
-            'title' => 'test title',
-            'content' => 'test content',
-            'type_id' => $type_id
+            'user_id' => 'fd72778c-294d-4239-89c4-5d64fc9946a5',
+            'template_id' => '00000000-0000-0000-0000-000000000002',
+            'extend_id' => '',
+            'vars' => '{}'
         );
-        debug($notification);
         $Notification = new Notification();
-        $Notification->notify($this->Auth->user('id'),$notification);
+        // $Notification->seenAll($this->Auth->user('id'));
+        // $Notification->notify($notification);
         // $Notification->getNotify($this->Auth->user('id'),10);
         
     }
