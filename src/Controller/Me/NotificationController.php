@@ -44,7 +44,8 @@ class NotificationController extends AppController
         $notification = $this->Notification->seen($notif_id);
         if(!empty($notification))
         {
-            $this->redirect($notification->notification_template->link);
+            // $this->redirect($notification->notification_template->link);
+            $this->redirect(['action' => 'index']);
         }else
         {
             $this->redirect(['action' => 'index']);
