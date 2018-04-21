@@ -21,7 +21,7 @@
     <?= $this->fetch('css') //theme AmpleAdmin có chỉnh sửa lại các packages nên để tài nguyên packages lên trước?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/toilensong.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/colors/toilensong.css', ['id' => 'theme']) ?>
-    <?= $this->AssetCompress->css('all'); ?>
+    <?= $this->AssetCompress->css('front'); ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,8 +41,8 @@
         <?= ($hasSideBar) ? $this->element('Layout/default/main-sidebar') :''?>
         <div id="page-wrapper" class="<?=($hasSideBar)?'':'without-sidebar'?> <?=($this->request->prefix == "front")?'wraper-bg-black':''?>">
             <div class="container-fluid">
-                <?= $this->Flash->render() ?>
                 <?= $this->element('Layout/default/content-header') ?>
+                <?= $this->Flash->render() ?>
                 <div style="margin-top:25px">
                     <?= $this->fetch('content') ?>
                 </div>
