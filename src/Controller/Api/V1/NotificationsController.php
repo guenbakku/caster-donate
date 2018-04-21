@@ -6,13 +6,13 @@ use App\Model\Logic\User\Notification;
 
 class NotificationsController extends ApiController
 {
-    public function seen()
+    public function seenAll()
     {
         $data['result'] = false;
 
         $user_id = $this->Auth->user('id');
-        $Notification = new Notification();
-        if ($Notification->seenAll($user_id)) $data['result'] = true;;
+        $NotificationLg = new Notification();
+        if ($NotificationLg->seenAll($user_id)) $data['result'] = true;;
 
         $this->set(compact('data'));
     }
