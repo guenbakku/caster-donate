@@ -35,11 +35,12 @@ use Cake\I18n\FrozenTime;
             ['escape' => false]
         );
     }
+    if(empty($options)) $options = [$this->Html->tag('p',__('Chưa có thông báo'),['class' => 'text-center'])];
     echo $this->Html->nestedList(
         array_merge(
             [$this->Html->div('drop-title text-center my-white', __('Thông báo'))], 
             $options,
-            [$this->Html->link(__('Xem tất cả'),'/me/notification',['class' => 'text-center'])]
+            [$this->Html->link(__('Xem tất cả'),'/me/notification',['class' => 'text-center my-white'])]
         ),
         ['class'=>'dropdown-menu dropdown-notifs animated bounceInDown','tag'=>'ul']
     );

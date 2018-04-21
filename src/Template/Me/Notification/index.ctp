@@ -13,27 +13,35 @@ echo $this->AssetCompress->script('Me.Notification.index.js', ['block' => 'scrip
             </thead>
             <tbody>
                 <?php
-                foreach($notifications as $notification)
+                if($notifications->isEmpty())
                 {
-                    $attr = [
-                        'onclick' => 'document.location = "'.$this->Url->build(['action' => 'show-notification',$notification->id]).'"', 
-                        'style' => 'cursor: pointer'
-                    ];
-                    $attr['class'] = $notification->seen ?  '' : 'text-success';
-                    echo $this->Html->tableCells(
-                        [
-                            $notification->content,
-                            $notification->created,
-                            sprintf(
-                                '<span class="label label-%s">%s</span>',
-                                $notification->notification_template->notification_type->color_class,
-                                $notification->notification_template->notification_type->name 
-                            ),
-                            $notification->seen ? __('Đã đọc') : __('Mới'),
-                        ],
-                        $attr,//lẻ
-                        $attr//chẵn
-                    );
+                    echo $this->Html->tableCells([
+                        [[__('Chưa có thông báo'), ['colspan' => 4, 'class' => 'text-center']]],
+                    ]);
+                }else
+                {
+                    foreach($notifications as $notification)
+                    {
+                        $attr = [
+                            'onclick' => 'document.location = "'.$this->Url->build(['action' => 'show-notification',$notification->id]).'"', 
+                            'style' => 'cursor: pointer'
+                        ];
+                        $attr['class'] = $notification->seen ?  '' : 'text-success';
+                        echo $this->Html->tableCells(
+                            [
+                                $notification->content,
+                                $notification->created,
+                                sprintf(
+                                    '<span class="label label-%s">%s</span>',
+                                    $notification->notification_template->notification_type->color_class,
+                                    $notification->notification_template->notification_type->name 
+                                ),
+                                $notification->seen ? __('Đã đọc') : __('Mới'),
+                            ],
+                            $attr,//lẻ
+                            $attr//chẵn
+                        );
+                    }
                 }
                 ?>
             </tbody>
