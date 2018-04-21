@@ -13,6 +13,8 @@
     <?= $this->Html->css('/packages/AmpleAdmin/css/animate.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/style-admin.css') ?>
     <?= $this->Html->css('/packages/AmpleAdmin/css/colors/megna-dark.css', ['id' => 'theme']) ?>
+    <?= $this->AssetCompress->css('admin'); ?>
+    <?= $this->fetch('css') ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
