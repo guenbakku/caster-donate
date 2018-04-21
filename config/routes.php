@@ -69,6 +69,11 @@ Router::scope('/', function (RouteBuilder $routes) {
         $routes->connect('/contract', ['controller' => 'Contract', 'action' => 'view']);
         $routes->fallbacks(DashedRoute::class);
     });
+
+    $routes->prefix('admin', function ($routes) {
+        $routes->redirect('/', ['controller' => 'Dashboard', 'action' => 'index']);
+        $routes->fallbacks(DashedRoute::class);
+    });
     
     $routes->prefix('api/v1', function ($routes) {
         $routes->extensions(['json']);
