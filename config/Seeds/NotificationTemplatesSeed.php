@@ -10,26 +10,27 @@ class NotificationTemplatesSeed extends AbstractSeed
         *        có: 1: Admin, 2: Hệ Thống, 3: Dòng tiền
         */
         $data = [
+            //Template rỗng cho các nội dung mở rộng
             [
-                'id' => '00000000-0000-0000-0000-000000000001',
+                'id' => 'notifica-tion-empt-y000-000000000001',
                 'selector' => 'adminEmpty',
-                'template' => 'Test chơi 1 phát thì sao {username}',
+                'template' => '',
                 'link' => '',
                 'type_id' => '1',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
-                'id' => '00000000-0000-0000-0000-000000000002',
+                'id' => 'notifica-tion-empt-y000-0000-000000000002',
                 'selector' => 'systemEmpty',
-                'template' => 'Test chơi 2 phát luôn',
+                'template' => '',
                 'link' => '',
                 'type_id' => '2',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
-                'id' => '00000000-0000-0000-0000-000000000003',
+                'id' => 'notifica-tion-empt-y000-0000-000000000003',
                 'selector' => 'moneyEmpty',
                 'template' => '',
                 'link' => '',
@@ -37,6 +38,15 @@ class NotificationTemplatesSeed extends AbstractSeed
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
+            [
+                'id' => 'notifica-tion-syst-em00-0000-000000000001',
+                'selector' => 'afterRegister',
+                'template' => 'Chào mừng bạn đến với '. Cake\Core\Configure::read('System.sitename'),
+                'link' => '',
+                'type_id' => '3',
+                'created' => date('Y-m-d H:i:s'),
+                'modified' => date('Y-m-d H:i:s'),
+            ]
         ];
 
         $table = $this->table('notification_templates');

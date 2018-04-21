@@ -1,7 +1,6 @@
 <?php
 namespace App\Model\Logic\User;
 
-use Cake\Datasource\Paginator;
 use Cake\Datasource\ConnectionManager;
 use Cake\ORM\TableRegistry;
 use Cake\Collection\Collection;
@@ -15,13 +14,18 @@ class Notification
     public function __construct ()
     {
         $this->NotificationTb = TableRegistry::get('Notifications');
-        $this->paginator = new Paginator();
     }
 
     /**
      * Gửi thông báo đến User
      *
      * @param array $notification
+     *      thông tin cần thiết :
+     *      [   'user_id' => '',        //bắt buộc
+     *          'template_id' => '',    //bắt buộc
+     *          'vars' => '{}',         //(nếu có)
+     *          'extend_id' => '',      //  
+     *      ]
      * @return  Entity|null
      */
     public function notify($new_notification)
@@ -39,25 +43,19 @@ class Notification
     {
     }
     
-    /*
-    *   Gửi trả các thông báo theo mối liên kết notifications -> notification_templates -> notification_types
-    *   Tạo field notifications.content từ biến và mẫu của thông báo
-    *
-    *   @param uuid $user_id
-    *   @param array $paginator_config : 
-    */
-    public function getNewNotify($user_id, $paginator_config = [])
+    /**
+     *   Gửi trả các thông báo theo mối liên kết notifications -> notification_templates -> notification_types
+     *   Tạo field notifications.content từ biến và mẫu của thông báo
+     *
+     *   @param uuid $user_id
+     *   @param array $paginator_config 
+     *   @return  Entity|null
+     */
+    public function getNewNotify($user_id, $limit = 10)
     {
-        $paginator_config = array_merge($paginator_config,[
-            'limit' => 10,
-            'order' => [
-                'Notifications.created' => 'desc'
-            ]
-        ]);
-        $notifications = $this->paginator->paginate(
-            $this->NotificationTb->findByUserId($user_id)->contain(['NotificationTemplates.NotificationTypes']),
-            $paginator_config
-        );
+        $this->NotificationTb->findByUserId($user_id)
+            ->limit($limit)
+            ->contain(['NotificationTemplates.NotificationTypes']);
 
         if (empty($notifications)) 
         {
@@ -68,14 +66,13 @@ class Notification
                 $notification['content'] = $this->replateVar($notification->notification_template->template, $notification->vars);
             }
         }        
-        $this->pageParams = $this->paginator->getPagingParams() ;
         return $notifications;
     }
 
-    /*
+    /**
      *  @param string $template
      *  @param array $jsonVars
-     *  return string
+     *  @return string
      */
     public function replateVar($template, $jsonVars)
     {
@@ -87,14 +84,16 @@ class Notification
         return $content;
     }
     
+    /**
+     * Đánh dấu đã đọc tất cả các thông báo
+     * 
+     * @param uuid $user_id
+     */
     public function seenAll($user_id)
     {
         if ($this->NotificationTb->updateAll(
             ['seen' => Time::now()],//set
-            [
-                'user_id' => $user_id,
-                'seen is' => null
-            ] //where
+            ['user_id' => $user_id, 'seen is' => null] //where
         )){
             return true;
         }
@@ -104,6 +103,12 @@ class Notification
         }
     }
 
+    /**
+     * Đánh dấu đã đọc cho một thông báo
+     * 
+     * @param uuid $notif_id
+     * @return  Entity|null
+     */
     public function seen($notif_id)
     {
         $notification = $this->NotificationTb->findById($notif_id)
@@ -116,7 +121,6 @@ class Notification
             $this->NotificationTb->save($notification);
         }
         return $notification;
-
     }
 }
 ?>
