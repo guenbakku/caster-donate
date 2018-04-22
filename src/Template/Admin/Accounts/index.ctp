@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-md-12">
-        <?php $this->Form->setTemplates($FormTemplates['admin-search-box']);?>
+        <?php $this->Form->setTemplates($FormTemplates['vertical']);?>
         <?= $this->Form->create(null, [
             'type' => 'get',
-            'class' => 'panel',
+            'class' => 'panel panel-info',
         ]) ?>
-            <div class="panel-heading panel-h"><?= __('Tìm kiếm') ?></div>
+            <div class="panel-heading"><?= __('Tìm kiếm') ?></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -36,7 +36,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel">
+        <div class="panel panel-info">
             <div class="panel-heading"><?= __('Kết quả') ?></div>
             <div class="table-responsive">
                 <table class="table table-hover manage-u-table">
