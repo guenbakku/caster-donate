@@ -93,6 +93,7 @@ return [
 
         'main-header-search' => [
             'inputContainer' => '{{content}}',
+            'formGroup' => '{{input}}',
         ],
     ],
 ];
