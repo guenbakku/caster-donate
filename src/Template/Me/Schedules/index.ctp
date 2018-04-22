@@ -9,7 +9,7 @@ echo $this->AssetCompress->script('Me.Schedules.calendar.js', ['block' => 'scrip
         <div class="white-box">
             <?=$this->Form->create(null, [
                 'type' => 'put',
-                'url' => '/me/schedules/edit',
+                'url' => $this->Url->build(['prefix'=>'me','controller'=>'schedules','action'=>'edit']),
                 'id' => 'form-update-schedule'
             ]);?>
             <?=$this->Form->control('event-datas', [
