@@ -52,7 +52,6 @@ require CORE_PATH . 'config' . DS . 'bootstrap.php';
 use Cake\Cache\Cache;
 use Cake\Console\ConsoleErrorHandler;
 use Cake\Core\App;
-use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Core\Plugin;
 use Cake\Database\Type;
@@ -63,6 +62,7 @@ use Cake\Mailer\Email;
 use Cake\Network\Request;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+use App\Core\Configure;
 
 /*
  * Read configuration file and inject configuration into various
@@ -208,8 +208,8 @@ Type::build('timestamp')
  */
 Configure::load('system', 'default');
 Configure::load('vcv', 'default');
-Configure::load('form_templates', 'default');
 Configure::load('events', 'default');
+Configure::loadDir('FormTemplates', 'default');
 
 /*
  * Plugins need to be loaded manually, you can either load them one by one or all of them in a single call

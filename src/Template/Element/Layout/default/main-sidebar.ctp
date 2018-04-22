@@ -111,7 +111,7 @@ $groupActive = $groupActiveMatcher($groupActiveMap);
                 </a>
                 <ul class="nav nav-second-level">
                     <li> 
-                        <a href="<?= $this->Url->build(['prefix' => 'me', 'controller' => 'DonationDettings', 'action' => 'notify']) ?>">
+                        <a href="<?= $this->Url->build(['prefix' => 'me', 'controller' => 'DonationSettings', 'action' => 'notify']) ?>">
                             <i class="mdi mdi-bell-ring fa-fw"></i> <span class="hide-menu"><?=__('Thông báo Donate')?></span>
                         </a> 
                     </li>
