@@ -4,7 +4,7 @@ namespace App\View\Cell;
 use Cake\View\Cell;
 use Cake\Core\Configure;
 
-class MultipleSelectCell extends Cell
+class SearchCell extends Cell
 {
     public function display($rootView, $transport, $input, $select2Option = [], $resultLayout = []) 
     {
