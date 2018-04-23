@@ -7,7 +7,7 @@ $rootView->append('script');
 ?>
 
 <script type="text/javascript">
-    (function ($) {
+    $( document ).ready(function() {
         var elemId = '<?= $input['id'] ?>';
         var transport = <?= json_encode($transport) ?>;
         var select2Option= <?= json_encode($select2Option) ?>;
@@ -79,7 +79,7 @@ $rootView->append('script');
                 });
             });
         <?php } ?>
-    })(jQuery);
+    });
     
 </script>
                 
