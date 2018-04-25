@@ -50,6 +50,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
     $routes->connect('/', ['prefix' => 'front', 'controller' => 'Home', 'action' => 'index']);
+    $routes->connect('/streamer-list', ['prefix' => 'front', 'controller' => 'StreamerList', 'action' => 'index']);
 
     /**
      * Connect all paths that are not relative with CakeDC/Users to 
