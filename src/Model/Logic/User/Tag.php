@@ -14,6 +14,14 @@ class Tag
         $this->CasterTagsTb = TableRegistry::get('CasterTags');
         $this->UsersCasterTagsTb = TableRegistry::get('UsersCasterTags');
     }
+    /**
+     * Lấy thông tin tất cả các tag hiện có
+     */
+    public function getAll()
+    {
+        $tags = $this->CasterTagsTb->find('all')->all();
+        return $tags;
+    }
 
     /**
      * Tìm kiếm tag theo tên tag

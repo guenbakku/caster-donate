@@ -48,7 +48,7 @@ echo $this->AssetCompress->script('Me.Notification.index.js', ['block' => 'scrip
         </table>
         <button id="seen-button" class="btn btn-outline btn-success pull-left"><i class="fa fa-check"></i> <?=__('Đánh dấu đã đọc tất cả')?></button>
         <ul class="pagination m-b-0 m-t-0 pull-right">
-            <?php echo $this->Paginator->numbers(['first' => 'First page']);?>
+            <?php echo $this->Paginator->numbers();?>
         </ul>
     </div>
 </div>
