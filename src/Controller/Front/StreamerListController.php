@@ -1,11 +1,11 @@
 <?php
 namespace App\Controller\Front;
 
+use Cake\ORM\TableRegistry;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\View\Exception\MissingTemplateException;
 use App\Controller\AppController;
-use App\Model\Logic\User\Tag;
 
 class StreamerListController extends AppController
 {
@@ -14,7 +14,7 @@ class StreamerListController extends AppController
         parent::beforeFilter($event);
         // $this->ContentHeader->title(__('Danh sách Streamer'));
         $this->Auth->allow();
-        $this->TagLg = new Tag();
+        $this->profilesTb = TableRegistry::get('Profiles');
     }
 
     public $paginate = [
@@ -28,13 +28,36 @@ class StreamerListController extends AppController
         'Paginator' => ['templates' => 'paginator_template']
     ];
 
+    /**
+     * Hiển thị danh sách Streamer theo trang,
+     *      - kết quả sẽ được lọc theo biến GET có tên 'tag' và 'nickname' với phương thức AND
+     */
     public function index() {
-        $tag_name = $this->request->getQuery('tag');
+        $tagName = $this->request->getQuery('tag');
+        $nickName = $this->request->getQuery('nickname');
 
         $this->paginate['contain'] = ['SocialProviders', 'CasterTags'];
-        // if ($tag_name != null) $this->paginate['conditions'] = ['CasterTags.tag_id' => $tag_name];
-        $profiles = $this->paginate('Profiles');
-        $allTags = $this->TagLg->getAll();
+        $query = $this->profilesTb->find()->order(['Profiles.created' => 'desc']);
+
+        //Tìm theo tag
+        if ($tagName != null) 
+        {
+            $query->matching('CasterTags', function($q) use ($tagName) {
+                return $q->where([
+                    'CasterTags.name' => $tagName
+                ]);
+            });
+        }
+
+        //Tìm theo tên
+        if ($nickName != null) 
+        {
+            $query->where(['Profiles.nickname LIKE' => '%'.$nickName.'%']);
+        }
+        
+        //phân trang
+        $profiles = $this->paginate($query);
+        $allTags = $this->profilesTb->CasterTags->find('all');
 
         $this->set(compact('profiles','allTags'));
     }

@@ -6,18 +6,20 @@
 </style>
 <div class="col-md-10 col-md-offset-1">
     <div class="row m-b-10">
-        <a class="btn btn-outline btn-default btn-xs" href="<?=$this->Url->build(['prefix'=>null,'controller'=>'StreamerList'])?>">Tất cả</a>
+        <a class="btn btn-outline btn-default btn-xs <?=($this->request->getQuery('tag')!=null)?:'btn-danger'?>" href="<?=$this->Url->build(['prefix'=>null,'controller'=>'StreamerList'])?>">Tất cả</a>
         <?php foreach($allTags as $tag):?>
-        <a class="btn btn-outline btn-default btn-xs" href="<?=$this->Url->build(['prefix'=>null,'controller'=>'StreamerList','?' => ['tag' => $tag->name],])?>"><?=$tag->name?></a>
+        <a class="btn btn-outline btn-default btn-xs <?=($tag->name!=$this->request->getQuery('tag'))?:'btn-danger'?>" href="<?=$this->Url->build(['prefix'=>null,'controller'=>'StreamerList','?' => ['tag' => $tag->name],])?>"><?=$tag->name?></a>
         <?php endforeach;?>
     </div>
     <div class="row m-b-20">
+        <?=$this->Form->create(null, ['type' => 'get']);?>
         <div class="input-group col-sm-4">
-            <input type="text" id="example-input1-group3" name="example-input1-group3" class="form-control" placeholder="Nhập tên cần tìm vào đây">         
+            <input type="text" name="nickname" class="form-control" placeholder="Nhập tên cần tìm vào đây">         
             <div class="input-group-btn">
-                <button type="button" class="btn waves-effect waves-light btn-info">Tìm</button>
+                <button type="submit" class="btn waves-effect waves-light btn-info">Tìm</button>
             </div>
         </div>
+        <?= $this->Form->end() ?>
     </div>
 
     <div class="row">
@@ -38,7 +40,7 @@
                     </p>
                     <p>
                         <?php foreach ($profile->caster_tags as $caster_tag):?>
-                        <a class="btn btn-outline btn-default btn-xs" href="#"><?=$caster_tag->name?></a>
+                        <a class="btn btn-outline btn-default btn-xs" href="<?=$this->Url->build(['prefix'=>null,'controller'=>'StreamerList','?' => ['tag' => $tag->name],])?>"><?=$caster_tag->name?></a>
                         <?php endforeach;?>
                     </p>
                 </div>
