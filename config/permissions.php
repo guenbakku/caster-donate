@@ -18,6 +18,7 @@ return [
             'controller' => 'Users',
             'action' => ['logout'],
         ],
+        // this is just an example
         [
             'role' => '*',
             'plugin' => 'CakeDC/Users',
@@ -39,9 +40,7 @@ return [
             'prefix' => false,
             'controller' => 'ReAuthenticate',
             'action' => '*',
-            'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
-                return !empty($user);
-            }
+            'allowed' => true,
         ],
         // authenticated user is allowed to access his/her own profile
         [
@@ -50,9 +49,7 @@ return [
             'prefix' => 'Me',
             'controller' => '*',
             'action' => '*',
-            'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
-                return !empty($user);
-            }
+            'allowed' => true,
         ],
         // authenticated user is allowed to access api
         [
@@ -61,9 +58,7 @@ return [
             'prefix' => 'api/v1',
             'controller' => '*',
             'action' => '*',
-            'allowed' => function (array $user, $role, \Cake\Http\ServerRequest $request) {
-                return !empty($user);
-            }
+            'allowed' => true,
         ],
     ]
 ];
