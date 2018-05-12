@@ -1,10 +1,8 @@
 /vendor/*
 /config/.env
-#/config/app.php
 /tmp/*
 /logs/*
 /config/Migrations/schema-dump-default.lock
-/webroot/img/avatar
 /src/Controller/Test*
 /src/Template/Test/*
 /webroot/resources/img/*
@@ -12,7 +10,10 @@
 /webroot/resources/audio/*
 !/webroot/resources/audio/public
 /storage/dynamic/*
+!/storage/dynamic/empty
 /webroot/minify/js/*
 !/webroot/minify/js/empty
 /webroot/minify/css/*
 !/webroot/minify/css/empty
+/webroot/img/avatar/*
+!/webroot/img/avatar/empty
