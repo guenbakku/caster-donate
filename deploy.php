@@ -1,39 +1,46 @@
 <?php
 namespace Deployer;
 
-require 'recipe/cakephp.php';
+require 'recipe/common.php';
+require './config.php';
 
-// Project name
-set('application', 'Caster Donate');
+/**
+ * Create plugins' symlinks
+ */
+task('deploy:init', function () {
+    run('{{release_path}}/bin/cake plugin assets symlink');
+    run('{{release_path}}/bin/cake asset_compress build');
+})->desc('Initialization');
 
-// Project repository
-set('repository', 'ssh://git@redmine.nvb-online.com/cast-donate/gl-caster-donate.git');
+/**
+ * Run migrations
+ */
+task('deploy:run_migrations', function () {
+    run('{{release_path}}/bin/cake migrations migrate');
+    run('{{release_path}}/bin/cake migrations seed');
+    run('{{release_path}}/bin/cake orm_cache clear');
+    run('{{release_path}}/bin/cake orm_cache build');
+})->desc('Run migrations');
 
-// [Optional] Allocate tty for git clone. Default value is false.
-set('git_tty', true); 
+/**
+ * Main task
+ */
+task('deploy', [
+    'deploy:info',
+    'deploy:prepare',
+    'deploy:lock',
+    'deploy:release',
+    'deploy:update_code',
+    'deploy:copy_dirs',
+    'deploy:shared',
+    'deploy:writable',
+    'deploy:vendors',
+    'deploy:init',
+    'deploy:run_migrations',
+    'deploy:symlink',
+    'deploy:unlock',
+    'cleanup',
+])->desc('Deploy your project');
 
-// Shared files/dirs between deploys 
-add('shared_files', []);
-add('shared_dirs', [
-    'logs',
-    
-]);
-
-// Writable dirs by web server 
-add('writable_dirs', []);
-set('allow_anonymous_stats', false);
-
-// Hosts
-
-host('project.com')
-    ->set('deploy_path', '~/{{application}}');    
-    
-// Tasks
-
-task('build', function () {
-    run('cd {{release_path}} && build');
-});
-
-// [Optional] if deploy fails automatically unlock.
+after('deploy', 'success');
 after('deploy:failed', 'deploy:unlock');
-
