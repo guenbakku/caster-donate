@@ -45,7 +45,7 @@ class Contract
     }
 
     /**
-     * Lưu tạm thông tin hợp đồng (dùng cho màn hình confirm).
+     * Di chuyển các file attach vào thư mục tạm (dùng cho màn hình confirm).
      * NOTICE: Method này không validate input.
      *
      * @param   array
@@ -82,14 +82,7 @@ class Contract
      */
     public function create($user_id, $contract)
     {   
-        $contract['user_id'] = $user_id;
-        $entity = $this->contractsTb->newEntity($contract, [
-            'validate' => false,
-            'associated' => ['BankAccounts'],
-        ]);
-
-        $this->contractsTb->save($entity);
-        return $entity;
+        return $this->edit($user_id, $contract);
     }
 
     /**
