@@ -12,6 +12,7 @@ $rootView->append('script');
         if (repo.loading) {
             return repo.text;
         }
+        console.log(repo);
         var typing_text = $(".select2-search__field").val();
 
         var markup = "<a href='"+ repo.jumplink +"'><div class='clearfix' style='padding: 10px;width: 100%;'>" +
@@ -40,7 +41,13 @@ $rootView->append('script');
         /* 'i' : không phân biệt chữ hoa chữ thường
         xem thêm tại https://www.w3schools.com/jsref/jsref_obj_regexp.asp
         */
-        return text.replace(new RegExp(key,'i'), '<strong>$&</strong>');
+        if(text == null || text== '')
+        {
+            return '';
+        }else
+        {
+            return text.replace(new RegExp(key,'i'), '<strong>$&</strong>');
+        }
     }
     $( document ).ready(function() {
         var elemId = '<?= $input['id'] ?>';
