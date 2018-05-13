@@ -19,6 +19,8 @@ set('shared_dirs', [
 
 // Writable dirs by web server 
 set('writable_dirs', [
+    'logs',
+    'tmp',
     'storage/dynamic',
     'webroot/img/avatar',
     'webroot/resources/audio/private',
