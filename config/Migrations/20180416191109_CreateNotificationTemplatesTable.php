@@ -5,11 +5,8 @@ class CreateNotificationTemplatesTable extends AbstractMigration
 {
     public function change()
     {
-        $table = $this->table('notification_templates', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('notification_templates');
         $table
-            ->addColumn('id', 'uuid', [
-                'null' => false,
-            ])
             ->addColumn('selector', 'string', [
                 'limit' => 64,
                 'null' => false,
@@ -24,6 +21,9 @@ class CreateNotificationTemplatesTable extends AbstractMigration
             ])
             ->addColumn('type_id', 'integer', [
                 'null' => false
+            ])
+            ->addColumn('order_no', 'integer', [
+                'null' => true,
             ])
             ->addColumn('created', 'datetime', [
                 'null' => false,

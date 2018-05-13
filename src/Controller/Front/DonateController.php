@@ -54,7 +54,7 @@ class DonateController extends AppController
                 if($Money->getCurrentBalance($donateDatas['sender_id']) < $donateDatas['amount'])
                 {
                     $this->Flash->error(__('Số dư trong tài khoản không đủ'));
-                    return $this->redirect('/donate/'.$user_id);
+                    return $this->redirect(['prefix'=>null,'controller'=>'donate',$user_id]);
                 }
             }
             //2)Thực hiện Donate
@@ -72,6 +72,6 @@ class DonateController extends AppController
         {
             $this->Flash->error("Có lỗi xảy ra trong quá trình donate");
         }
-        return $this->redirect('/donate/'.$user_id);
+        return $this->redirect(['prefix'=>null,'controller'=>'donate',$user_id]);
     }
 }

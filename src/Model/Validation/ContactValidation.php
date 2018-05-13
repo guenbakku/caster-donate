@@ -13,7 +13,10 @@ class ContactValidation extends Validation {
      */
     public static function phone($value)
     {
-        return (bool) preg_match('/^[0-9\-\s]+$/', $value);
+        if ((bool) preg_match('/^[0-9\-\s]+$/', $value) === false) {
+            return __('Chỉ được nhập số, khoảng trắng và dấu -');
+        }
+        return true;
     }
 
     /**
@@ -24,6 +27,9 @@ class ContactValidation extends Validation {
      */
     public static function username($value)
     {
-        return (bool) preg_match('/^[0-9a-zA-Z\-\_]+$/', $value);
+        if ((bool) preg_match('/^[0-9a-zA-Z\-\_\.]+$/', $value) === false) {
+            return __('Chỉ được nhập chữ không dấu, số, và các ký tự: ., -, _');
+        }
+        return true;
     }
 }

@@ -11,6 +11,27 @@ class Resources
     public function __construct()
     {
         $this->resourcesTb = TableRegistry::get('resources');
+        $this->uploadSettings = [
+            'image' => [
+                'filename' => [
+                    'path' => Configure::read('System.Paths.resource_dir.image'),
+                    'resizeTo' => [300, 300],
+                    'resizeKeepRatio' => true,
+                    'nameCallback' => function ($data, $settings) {
+                        return 'private'.DS.\App\Utility\File::uuidName($data['name']);
+                    },
+                ],
+            ],
+            'audio' => [
+                'filename' => [
+                    'path' => Configure::read('System.Paths.resource_dir.audio'),
+                    'transformer' => null,
+                    'nameCallback' => function ($data, $settings) {
+                        return 'private'.DS.\App\Utility\File::uuidName($data['name']);
+                    },
+                ],
+            ],
+        ];
     }
 
     public function getAllAvailableResources($user_id, $type = '')
@@ -52,29 +73,18 @@ class Resources
 
     public function addPrivateResource($user_id, array $new_resource)
     {
-        $new_resource   =   array_merge($new_resource, [
+        $new_resource = array_merge($new_resource, [
             'name' => $new_resource['filename']['name'],
             'user_id' => $user_id,
         ]);
         $codeHelper = new CodeHelper(new \Cake\View\View());
         $uploadSettings = [];
-
+        
         if ($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('image', 'id')) {
-            $uploadSettings = [
-                'filename' => [
-                    'path' => Configure::read('System.Paths.resource_dir.image'),
-                    'resizeTo' => [300, 300],
-                    'resizeKeepRatio' => true
-                ]
-            ];
+            $uploadSettings = $this->uploadSettings['image'];
             $validate = 'image';
         } elseif ($new_resource['resource_type_id'] == $codeHelper->setTable('resource_types')->getKey('audio', 'id')) {
-            $uploadSettings = [
-                'filename' => [
-                    'path' => Configure::read('System.Paths.resource_dir.audio'),
-                    'transformer' => null,
-                ]
-            ];
+            $uploadSettings = $this->uploadSettings['audio'];
             $validate = 'audio';
         }
         

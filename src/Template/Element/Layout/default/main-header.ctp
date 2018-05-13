@@ -65,7 +65,7 @@
                 <li>
                     <div class="app-search hidden-sm hidden-xs m-r-10">
                         <?php $this->Form->setTemplates($FormTemplates['main-header-search']); ?>
-                        <?= $this->cell('MultipleSelect', [
+                        <?= $this->cell('Search', [
                             $this,
                             'tranport' => [
                                 'read' => $this->Url->build('/api/v1/search/get-by-name'),
@@ -82,7 +82,7 @@
                                 'minimumInputLength' => 1,
                             ],
                             'resultLayout' => [
-                                'templateResult' => 'Select2MyResultFormat',
+                                'templateResult' => 'SearchResultFormat',
                             ],
                         ]) ?>
                         <a href=""><i class="fa fa-search"></i></a>

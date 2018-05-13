@@ -327,7 +327,7 @@
                             <div class="col-md-8">
                                 <?=$this->Form->create(null, [
                                     'type' => 'put',
-                                    'url' => '/donate/perform/'.h($caster_profile->user_id),
+                                    'url' => ['prefix'=>null,'controller'=>'donate','action'=>'perform',h($caster_profile->user_id)],
                                     'class' => 'form-material form-horizontal',
                                 ]);?>
                                 <?= $this->Form->control('donate_method_selector', [
