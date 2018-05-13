@@ -25,7 +25,7 @@ class UsersTable extends \CakeDC\Users\Model\Table\UsersTable
                 'format' => [
                     'rule' => ['username'],
                     'provider' => 'Contact',
-                    'message' => __('Chỉ được nhập ký tự không dấu, chữ số, dấu - và dấu _'),
+                    // Message lấy trực tiếp từ giá trị do rule trả về
                 ] 
             ]);
 

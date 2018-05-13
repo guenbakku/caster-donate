@@ -107,7 +107,7 @@ class ContractsTable extends AppTable
                 'format' => [
                     'rule' => ['phone'],
                     'provider' => 'Contact',
-                    'message' => __('Chỉ được nhập số, khoảng trắng và dấu -'),
+                    // Message lấy trực tiếp từ giá trị do rule trả về
                 ]
             ]);
         
