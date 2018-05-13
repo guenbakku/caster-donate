@@ -18,7 +18,7 @@ class DonationSettingsController extends AppController
     
     public function notify()
     {
-        if (!$this->Me->get('contract')->is('registered')) {
+        if ($this->Me->get('contract')->is('unregistered')) {
             return $this->render('/Me/Contract/show_require');
         }
         

@@ -21,7 +21,7 @@ class CreateContractsTable extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('bank_card', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 128,
             ])
             ->addColumn('identify_no', 'string', [
@@ -29,11 +29,11 @@ class CreateContractsTable extends AbstractMigration
                 'limit' => 32,
             ])
             ->addColumn('identify_card_front', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 128,
             ])
             ->addColumn('identify_card_back', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 128,
             ])
             ->addColumn('filename', 'string', [
@@ -41,25 +41,25 @@ class CreateContractsTable extends AbstractMigration
                 'limit' => 128,
             ])
             ->addColumn('phone', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 64,
             ])
             ->addColumn('firstname', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 128,
             ])
             ->addColumn('lastname', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 128,
             ])
             ->addColumn('birthday', 'date', [
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('sex_id', 'integer', [
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('address', 'string', [
-                'null' => false,
+                'null' => true,
                 'limit' => 512,
             ])
             ->addColumn('status_id', 'integer', [

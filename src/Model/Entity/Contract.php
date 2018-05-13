@@ -39,19 +39,13 @@ class Contract extends Entity
         $statuses = $Code->setTable('contract_statuses')->getList();
         $statusId = Hash::get($this->_properties, 'status_id');
         $status = strtolower($status);
-        $availables = array_merge(['registered'], array_keys($statuses)); 
 
-        if (!in_array($status, $availables)) {
+        if (!isset($statuses[$status])) {
             throw new \InvalidArgumentException(
-                sprintf('Only accept: %s.', implode(', ', $availables))
+                sprintf('Only accept: %s.', implode(', ', array_keys($statuses)))
             );
         }
 
-        switch ($status) {
-            case 'registered': 
-                return !empty(Hash::get($this->_properties, 'id'));
-            default:
-                return $statusId === $statuses[$status];
-        }
+        return $statusId === $statuses[$status];
     }
 }

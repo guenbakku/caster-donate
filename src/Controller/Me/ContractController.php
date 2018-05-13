@@ -23,7 +23,7 @@ class ContractController extends AppController
 
     public function term()
     {
-        if ($this->Me->get('contract')->is('registered')) {
+        if ($this->Me->get('contract')->is('unregistered') === false) {
             throw new ForbiddenException;
         }
 
@@ -163,7 +163,7 @@ class ContractController extends AppController
 
     public function view() 
     {
-        if (!$this->Me->get('contract')->is('registered')) {
+        if ($this->Me->get('contract')->is('unregistered')) {
             return $this->redirect(['action' => 'term']); 
         }
 
