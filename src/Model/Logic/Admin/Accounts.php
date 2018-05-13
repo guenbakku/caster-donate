@@ -23,7 +23,9 @@ class Accounts
         $query = $this->usersTb->find();
         $query->contain([
             'Profiles',
-            'Contracts',
+            'Contracts' => [
+                'ContractStatuses',
+            ],
         ]);
 
         return $query;

@@ -60,16 +60,18 @@
                             <th><?= __('Tên đăng nhập') ?></th>
                             <th><?= __('Địa chỉ email') ?></th>
                             <th><?= __('Tình trạng hợp đồng') ?></th>
+                            <th><?= __('Super user') ?></th>
                             <th width="150"><?= ('Quản lý') ?></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($accounts as $account): ?>
+                        <?php foreach ($accounts as $i => $account): ?>
                             <tr>
-                                <td class="text-center">1</td>
+                                <td class="text-center"><?= $i+1 ?></td>
                                 <td><?= $account->username ?></td>
                                 <td><?= $account->email ?></td>
-                                <td></td>
+                                <td><?= $account->contract->contract_status->name ?></td>
+                                <td><?= $account->is_superuser? '<i class="fa fa-check text-success"></i>' : '' ?></td>
                                 <td>
                                     <button type="button" class="btn btn-info btn-outline btn-circle m-r-5"><i class="ti-pencil-alt"></i></button>
                                 </td>
