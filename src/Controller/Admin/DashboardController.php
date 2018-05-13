@@ -1,11 +1,11 @@
 <?php
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\BaseController;
 use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\Event\Event;
+use App\Controller\Admin\BaseController;
 
 class DashboardController extends BaseController
 {

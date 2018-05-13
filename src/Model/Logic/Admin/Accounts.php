@@ -9,7 +9,7 @@ class Accounts
 {
     public function __construct()
     {
-        $this->profilesTb = TableRegistry::get('Profiles');
+        $this->usersTb = TableRegistry::get('Users');
     }
 
     /**
@@ -20,6 +20,12 @@ class Accounts
      */
     public function search(array $conditions)
     {
-        
+        $query = $this->usersTb->find();
+        $query->contain([
+            'Profiles',
+            'Contracts',
+        ]);
+
+        return $query;
     }
 }

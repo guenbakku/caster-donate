@@ -12,6 +12,7 @@ class UsersTable extends \CakeDC\Users\Model\Table\UsersTable
         parent::initialize($config);
 
         $this->hasOne('Profiles');
+        $this->hasOne('Contracts');
     }
 
     public function validationDefault(Validator $validator)

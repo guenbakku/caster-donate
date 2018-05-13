@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
 
+use Cake\Event\Event;
 use App\Controller\Admin\BaseController;
 
 /**
@@ -9,18 +10,18 @@ use App\Controller\Admin\BaseController;
  */
 class AccountsController extends BaseController
 {
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
-    public function index()
+    public function beforeFilter(Event $event)
     {
-        // $accounts = $this->paginate($this->Accounts);
-
-        // $this->set(compact('accounts'));
+        parent::beforeFilter($event);
+        $this->ContentHeader->title(__('Quản lý tài khoản'));
     }
 
-    
+    public function index()
+    {
+        $conditions = $this->request->getQuery();
+        $accountsLg = new \App\Model\Logic\Admin\Accounts;
+        $accounts = $this->paginate($accountsLg->search($conditions));
+
+        $this->set(compact('accounts'));
+    }
 }

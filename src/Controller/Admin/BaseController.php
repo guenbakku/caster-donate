@@ -1,8 +1,8 @@
 <?php
 namespace App\Controller\Admin;
 
-use App\Controller\AppController;
 use Cake\Event\Event;
+use App\Controller\AppController;
 
 /**
  * BaseController for Admin Module.
