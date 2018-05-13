@@ -12,7 +12,7 @@ $rootView->append('script');
         if (repo.loading) {
             return repo.text;
         }
-        console.log(repo);
+        
         var typing_text = $(".select2-search__field").val();
 
         var markup = "<a href='"+ repo.jumplink +"'><div class='clearfix' style='padding: 10px;width: 100%;'>" +
