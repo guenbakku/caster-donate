@@ -11,3 +11,10 @@
 .w10p{width: 10%} .w15p{width: 15%} .w20p{width: 20%}
 
 .required:after { content:" *"; color: red}
+
+.desc:after {
+    content: "\25BC";
+}
+.asc:after {
+    content: "\25B2";
+}

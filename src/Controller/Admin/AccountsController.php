@@ -20,7 +20,15 @@ class AccountsController extends BaseController
     {
         $conditions = $this->request->getQuery();
         $accountsLg = new \App\Model\Logic\Admin\Accounts;
-        $accounts = $this->paginate($accountsLg->search($conditions));
+        $query = $accountsLg->search($conditions);
+        $accounts = $this->paginate($query, [
+            'limit' => 20,
+            'sortWhitelist' => [
+                'Users.username', 'Users.email', 'ContractStatuses.name',
+                'Users.is_superuser', 'Users.activation_date'
+            ],
+            'order' => ['Users.activation_date' => 'desc'],
+        ]);
 
         $this->set(compact('accounts'));
     }
