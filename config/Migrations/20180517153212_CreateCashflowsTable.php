@@ -25,8 +25,7 @@ class CreateCashflowsTable extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ])
-        ->addColumn('result_data', 'string', [
-            'limit' => 512,
+        ->addColumn('transfer_data_id', 'uuid', [
             'null' => true,
         ])
         ->addColumn('created', 'datetime', [
