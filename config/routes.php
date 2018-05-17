@@ -63,7 +63,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     );
 
     $routes->connect('donate/*', ['prefix' => 'front', 'controller' => 'Donate', 'action' => 'index']);
-    $routes->connect('donate/perform/*', ['prefix' => 'front', 'controller' => 'Donate', 'action' => 'perform']);
+    $routes->connect('donate/direct-donate/*', ['prefix' => 'front', 'controller' => 'Donate', 'action' => 'direct-donate']);
 
     $routes->prefix('me', function ($routes) {
         $routes->redirect('/', ['controller' => 'Statistics', 'action' => 'index']);

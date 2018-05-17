@@ -5,9 +5,7 @@ namespace App\Controller\Front;
 use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
-use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
-use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
 use App\Model\Logic\User\Profile;
 use App\Model\Logic\User\Money;
@@ -17,7 +15,7 @@ class DonateController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->ContentHeader->title(__('Trang Donate của Caster'));
+        $this->ContentHeader->title(__('Trang thông tin của LiveStreamer'));
         $this->Auth->allow();
     }
 
@@ -25,8 +23,8 @@ class DonateController extends AppController
     {
         $ProfileLg = new Profile();
 
-        $Donates = TableRegistry::get('Donates');
-        $donate =  $Donates->newEntity();
+        // $Donates = TableRegistry::get('Donates');
+        // $donate =  $Donates->newEntity();
 
         $TransferMethods = TableRegistry::get('TransferMethods');
         $transferMethods = $TransferMethods->find();
@@ -34,12 +32,12 @@ class DonateController extends AppController
         $caster_profile = $ProfileLg->get($user_id);        
         if ($caster_profile->isNew())
         {
-            // throw new NotFoundException(); => Code Lỗi
+            throw new NotFoundException();
         }
         $this->set(compact('caster_profile'));
     }
 
-    public function perform($user_id = null)
+    public function directDonate($user_id = null)
     {
         if ($this->request->is('put')) 
         {
@@ -72,6 +70,6 @@ class DonateController extends AppController
         {
             $this->Flash->error("Có lỗi xảy ra trong quá trình donate");
         }
-        return $this->redirect(['prefix'=>null,'controller'=>'donate',$user_id]);
+        return $this->redirect(['prefix'=>'front','controller'=>'donate',$user_id]);
     }
 }

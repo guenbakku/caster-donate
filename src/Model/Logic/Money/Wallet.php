@@ -5,7 +5,7 @@ use Cake\ORM\TableRegistry;
 use Cake\Core\Configure;
 use App\Utility\Flysystem;
 
-class Money
+class Wallet
 {
     function __construct() {
         $this->$profilesTb = TableRegistry::get('Profiles');
@@ -62,6 +62,11 @@ class Money
             $this->$profilesTb->save($profile);
         }
         return;
+    }
+
+    public function transfer(Wallet $receiverWallet)
+    {
+
     }
 
     public function withdrawal($user_id, $amount, $bank_id)

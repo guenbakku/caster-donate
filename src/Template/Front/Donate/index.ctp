@@ -19,12 +19,16 @@
                                 <td><strong><?=h($caster_profile->nickname)?></strong></td>
                             </tr>
                             <?php
-                            foreach($caster_profile->social_providers as $social_provider){?>                        
-                            <tr style="border-top:none">
-                                <td><?=$social_provider->name?></td>
-                                <td><?=($social_provider->_joinData->public) ? h($social_provider->_joinData->reference) : ''?></td>
-                            </tr>
+                            if(isset($caster_profile->social_providers))
+                            {
+                                foreach($caster_profile->social_providers as $social_provider)
+                                {?>                        
+                                <tr style="border-top:none">
+                                    <td><?=$social_provider->name?></td>
+                                    <td><?=($social_provider->_joinData->public) ? h($social_provider->_joinData->reference) : ''?></td>
+                                </tr>
                             <?php
+                                }
                             }
                             ?>
                             <tr>
@@ -35,9 +39,14 @@
                                 <td>Tag Lên Sóng</td>
                                 <td></td>
                             </tr>
+                            <?php
+                            if($this->Auth->user())
+                            {?>
                             <tr>
                                 <td colspan="2"><button class="btn btn-block btn-info"><?=__('Theo dõi')?></button></td>
                             </tr>
+                            <?php
+                            }?>
                         </tbody>
                     </table>
                 </div>
@@ -55,145 +64,40 @@
             <p class="text-muted"><?=__('Đăng nhập để Caster biết đến bạn là ai và để có thể sử dụng nhiều tính năng hấp dẫn khác.')?></p>
             <button class="btn btn-facebook waves-effect waves-light" type="button"> <i class="fa fa-facebook"></i> Tài khoản Facebook</button>
             <button class="btn btn-googleplus waves-effect waves-light" type="button"> <i class="fa fa-google-plus"></i> Tài khoản Google</button>
-            <button class="btn btn-primary waves-effect waves-light" type="button"> Tài khoản ToiLenSong </button>
+            <button class="btn btn-primary waves-effect waves-light" type="button"> Tài khoản ToiLenSong</button>
         </div>
         <?php 
         }?>
         <div class="white-box">
-            <h3 class="box-title"><?=__('Lựa chọn phương thức thanh toán')?></h3>
+            <h3 class="box-title"><?=__('Tài Trợ')?></h3>
             <hr class="m-t-0 m-b-40">
             <section class="m-t-40">
-                <div class="sttabs tabs-style-iconbox">
+                <div class="col-lg-3 col-sm-3 col-xs-12">
+                    <button class="btn btn-block btn-info"><i class="sticon mdi mdi-bank"></i><span><?=__('Thông qua ngân hàng')?></span></button>
+                </div>
+                <div class="col-lg-3 col-sm-3 col-xs-12">
+                    <button class="btn btn-block btn-info"><i class="sticon mdi mdi-credit-card"></i><span><?=__('Thẻ tín dụng')?></span></button>
+                </div>
+                <div class="col-lg-3 col-sm-3 col-xs-12">
+                    <button class="btn btn-block btn-info"><i class="sticon mdi mdi-cards"></i><span><?=__('Thẻ điện thoại')?>(Bảo trì)</span></button>
+                </div>
+                <div class="col-lg-3 col-sm-3 col-xs-12">
+                    <button class="btn btn-block btn-info"><i class="sticon mdi mdi-coin"></i><span><?=__('Vỏ Sò')?> (todo:cần đăng nhập)</span></button>
+                </div>
+                <div class="clearfix"></div>
+
+
+                <!--<div class="sttabs tabs-style-iconbox">
                     <nav>
                         <ul>
-                            <li class=""><a href="#donate-the-dien-thoai" class=" sticon mdi mdi-cards"><span><?=__('Thẻ điện thoại')?></span></a></li>
                             <li class=""><a href="#donate-the-ngan-hang" class="sticon mdi mdi-bank"><span><?=__('Thông qua ngân hàng')?></span></a></li>
                             <li class=""><a href="#donate-the-tin-dung" class="sticon mdi mdi-credit-card"><span><?=__('Thẻ tín dụng')?></span></a></li>
+                            <li class=""><a class="sticon mdi mdi-cards"><span><?=__('Thẻ điện thoại')?></span></a></li>
                             <li class=""><a href="#donate-vo-so" class="sticon mdi mdi-coin"><span><?=__('Vỏ Sò')?></span></a></li>
                         </ul>
                     </nav>
                     <div class="content-wrap m-l-0">
-                        <section id="donate-the-dien-thoai" class="">
-                                <form action="" method="" class="form-material form-horizontal">
-                                    <div style="display:none__">
-                                        <input type="radio" id="radio-mobile-1" name="mobile-card" value="1" checked/>
-                                        <input type="radio" id="radio-mobile-2" name="mobile-card" value="2" />
-                                        <input type="radio" id="radio-mobile-3" name="mobile-card" value="3" />
-                                        <input type="radio" id="radio-mobile-4" name="mobile-card" value="4" />
-                                        <input type="radio" id="radio-mobile-5" name="mobile-card" value="5" />
-                                    </div>
-                                    <div class="vtabs col-md-12 col-xs-12">
-                                        <ul class="nav tabs-vertical">
-                                            <li class="tab active">
-                                                <a class="MY-tab-radio" data-for="radio-mobile-1" data-toggle="tab" href="#tab-form-mobile-card" aria-expanded="true">
-                                                    <span>
-                                                        <?= $this->Html->image('mobile/viettel.png', [
-                                                            'class' => '', 
-                                                            'height' => '15px',
-                                                            'alt' => __('Viettel'),
-                                                        ]) ?>
-                                                    </span> 
-                                                    <span class="hidden-xs pull-right">Viettel</span>
-                                                </a>
-                                            </li>
-                                            <li class="tab">
-                                                <a class="MY-tab-radio" data-for="radio-mobile-2" data-toggle="tab" href="#tab-form-mobile-card">
-                                                    <span>
-                                                        <?= $this->Html->image('mobile/mobifone.png', [
-                                                            'class' => '', 
-                                                            'height' => '15px',
-                                                            'alt' => __('Mobifone'),
-                                                        ]) ?>
-                                                    </span> 
-                                                    <span class="hidden-xs pull-right">Mobifone</span>
-                                                </a>
-                                            </li> 
-                                            <li class="tab">
-                                                <a class="MY-tab-radio" data-for="radio-mobile-3" data-toggle="tab" href="#tab-form-mobile-card">
-                                                    <span>
-                                                        <?= $this->Html->image('mobile/vinaphone.png', [
-                                                            'class' => '', 
-                                                            'height' => '15px',
-                                                            'alt' => __('Vinaphone'),
-                                                        ]) ?>
-                                                    </span> 
-                                                    <span class="hidden-xs pull-right">Vinaphone</span>
-                                                </a>
-                                            </li>
-                                            <li class="tab">
-                                                <a class="MY-tab-radio" data-for="radio-mobile-4" data-toggle="tab" href="#tab-form-mobile-card">
-                                                    <span>
-                                                        <?= $this->Html->image('mobile/gate.png', [
-                                                            'class' => '', 
-                                                            'height' => '15px',
-                                                            'alt' => __('Gate'),
-                                                        ]) ?>
-                                                    </span> 
-                                                    <span class="hidden-xs pull-right">Gate</span>
-                                                </a>
-                                            </li>
-                                            <li class="tab">
-                                                <a class="MY-tab-radio" data-for="radio-mobile-5" data-toggle="tab" href="#tab-form-mobile-card">
-                                                    <span>
-                                                        <?= $this->Html->image('mobile/vtc.png', [
-                                                            'class' => '', 
-                                                            'height' => '15px',
-                                                            'alt' => __('Vtc'),
-                                                        ]) ?>
-                                                    </span> 
-                                                    <span class="hidden-xs pull-right">Vtc</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div class="form-group">
-                                                <label class="col-md-12">Số seri thẻ </label>
-                                                <div class="col-md-12">
-                                                    <input type="text" class="form-control form-control-line"> 
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-12">Mã số nạp tiền </label>
-                                                <div class="col-md-12">
-                                                    <input type="text" class="form-control form-control-line"> 
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-12">Tên của bạn </label>
-                                                <div class="col-md-12">
-                                                    <?php
-                                                    if($this->Auth->user())
-                                                    {
-                                                        echo '<input type="text" class="form-control form-control-line" value="'.$this->Auth->user('username').'" readonly>';
-                                                    }
-                                                    else
-                                                    {
-                                                        echo '<input type="text" class="form-control form-control-line">';
-                                                    }
-                                                    ?>
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-12">Thông điệp </label>
-                                                <div class="col-md-12">
-                                                    <textarea type="text" class="form-control form-control-line" rows="4"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <button class="btn btn-success miw-100">Nạp thẻ</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                        </section>
-
-
-
-
-
+                        
                         <section id="donate-the-ngan-hang" class="">
                             <form action="" method="" class="form-material form-horizontal">
                                 <div style="display:none__">
@@ -316,6 +220,123 @@
                             </form>
                         </section>
 
+                        <section id="donate-the-dien-thoai" class="">
+                                <form action="" method="" class="form-material form-horizontal">
+                                    <div style="display:none__">
+                                        <input type="radio" id="radio-mobile-1" name="mobile-card" value="1" checked/>
+                                        <input type="radio" id="radio-mobile-2" name="mobile-card" value="2" />
+                                        <input type="radio" id="radio-mobile-3" name="mobile-card" value="3" />
+                                        <input type="radio" id="radio-mobile-4" name="mobile-card" value="4" />
+                                        <input type="radio" id="radio-mobile-5" name="mobile-card" value="5" />
+                                    </div>
+                                    <div class="vtabs col-md-12 col-xs-12">
+                                        <ul class="nav tabs-vertical">
+                                            <li class="tab active">
+                                                <a class="MY-tab-radio" data-for="radio-mobile-1" data-toggle="tab" href="#tab-form-mobile-card" aria-expanded="true">
+                                                    <span>
+                                                        <?= $this->Html->image('mobile/viettel.png', [
+                                                            'class' => '', 
+                                                            'height' => '15px',
+                                                            'alt' => __('Viettel'),
+                                                        ]) ?>
+                                                    </span> 
+                                                    <span class="hidden-xs pull-right">Viettel</span>
+                                                </a>
+                                            </li>
+                                            <li class="tab">
+                                                <a class="MY-tab-radio" data-for="radio-mobile-2" data-toggle="tab" href="#tab-form-mobile-card">
+                                                    <span>
+                                                        <?= $this->Html->image('mobile/mobifone.png', [
+                                                            'class' => '', 
+                                                            'height' => '15px',
+                                                            'alt' => __('Mobifone'),
+                                                        ]) ?>
+                                                    </span> 
+                                                    <span class="hidden-xs pull-right">Mobifone</span>
+                                                </a>
+                                            </li> 
+                                            <li class="tab">
+                                                <a class="MY-tab-radio" data-for="radio-mobile-3" data-toggle="tab" href="#tab-form-mobile-card">
+                                                    <span>
+                                                        <?= $this->Html->image('mobile/vinaphone.png', [
+                                                            'class' => '', 
+                                                            'height' => '15px',
+                                                            'alt' => __('Vinaphone'),
+                                                        ]) ?>
+                                                    </span> 
+                                                    <span class="hidden-xs pull-right">Vinaphone</span>
+                                                </a>
+                                            </li>
+                                            <li class="tab">
+                                                <a class="MY-tab-radio" data-for="radio-mobile-4" data-toggle="tab" href="#tab-form-mobile-card">
+                                                    <span>
+                                                        <?= $this->Html->image('mobile/gate.png', [
+                                                            'class' => '', 
+                                                            'height' => '15px',
+                                                            'alt' => __('Gate'),
+                                                        ]) ?>
+                                                    </span> 
+                                                    <span class="hidden-xs pull-right">Gate</span>
+                                                </a>
+                                            </li>
+                                            <li class="tab">
+                                                <a class="MY-tab-radio" data-for="radio-mobile-5" data-toggle="tab" href="#tab-form-mobile-card">
+                                                    <span>
+                                                        <?= $this->Html->image('mobile/vtc.png', [
+                                                            'class' => '', 
+                                                            'height' => '15px',
+                                                            'alt' => __('Vtc'),
+                                                        ]) ?>
+                                                    </span> 
+                                                    <span class="hidden-xs pull-right">Vtc</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="form-group">
+                                                <label class="col-md-12">Số seri thẻ </label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control form-control-line"> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Mã số nạp tiền </label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control form-control-line"> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Tên của bạn </label>
+                                                <div class="col-md-12">
+                                                    <?php
+                                                    if($this->Auth->user())
+                                                    {
+                                                        echo '<input type="text" class="form-control form-control-line" value="'.$this->Auth->user('username').'" readonly>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<input type="text" class="form-control form-control-line">';
+                                                    }
+                                                    ?>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Thông điệp </label>
+                                                <div class="col-md-12">
+                                                    <textarea type="text" class="form-control form-control-line" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-success miw-100">Nạp thẻ</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                        </section>
+
                         <section id="donate-vo-so" class="">
                             <?php
                             if($this->Auth->user())
@@ -327,7 +348,7 @@
                             <div class="col-md-8">
                                 <?=$this->Form->create(null, [
                                     'type' => 'put',
-                                    'url' => ['prefix'=>null,'controller'=>'donate','action'=>'perform',h($caster_profile->user_id)],
+                                    //'url' => ['prefix'=>null,'controller'=>'donate','action'=>'perform',h($caster_profile->user_id)],
                                     'class' => 'form-material form-horizontal',
                                 ]);?>
                                 <?= $this->Form->control('donate_method_selector', [
@@ -383,12 +404,31 @@
                             <?php
                             }?>
                         </section>
-
-
                     </div>
-                    <!-- /content -->
-                </div>
+                </div>-->
                 <!-- /tabs -->
+            </section>
+        </div>
+        <div class="white-box">
+            <h3 class="box-title"><?=__('Test Nạp tiền')?></h3>
+            <hr class="m-t-0 m-b-40">
+            <section class="m-t-40">
+                <form action="<?=$this->Url->build(['prefix'=>null,'controller'=>'donate','action'=>'direct-donate',h($caster_profile->user_id)])?>" method="POST">
+                <table>
+                    <tr>
+                        <td>Số tiền</td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Thông điệp</td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Tài trợ"></td>
+                    </tr>
+                </table>
+                </form>
             </section>
         </div>
     </div>
