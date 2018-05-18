@@ -8,7 +8,7 @@ use Cake\ORM\TableRegistry;
 use Cake\Network\Exception\NotFoundException;
 use Cake\Event\Event;
 use App\Model\Logic\User\Profile;
-use App\Model\Logic\User\Money;
+use App\Model\Logic\Money\Donate;
 
 class DonateController extends AppController
 {
@@ -41,34 +41,29 @@ class DonateController extends AppController
     {
         if ($this->request->is('put')) 
         {
-            $Money = new Money();
-            $donateDatas = $this->request->getData();
-            /*1')   - Xác nhận kết quả chuyển tiền từ bên 3 nếu không phải là Donate bằng Coin
-                    - Quy đổi số tiền thành Coin
-            */
-            //1'')Xác nhận số dư Coin của người Donate nếu Donate bằng Coin
-            if($donateDatas['donate_method_selector'] == 'coin')
-            {
-                if($Money->getCurrentBalance($donateDatas['sender_id']) < $donateDatas['amount'])
-                {
-                    $this->Flash->error(__('Số dư trong tài khoản không đủ'));
-                    return $this->redirect(['prefix'=>null,'controller'=>'donate',$user_id]);
-                }
-            }
-            //2)Thực hiện Donate
-            $result = $Money->donate($donateDatas);
-            if($result)
-            {
-                $this->Flash->success("Donate thành công");
-            }
-            else
-            {
-                $this->Flash->error("Donate thất bại");
-            }
+            $transferMethod =  'NL-AtmCard';
+            //Test
+            $Donate = new Donate(
+                $user_id, 
+                $this->request->data('amount'),
+                $this->request->data('message'),
+                $transferMethod,
+                $this->request->data('donater')
+            );
+            $Donate->do();
+            
+            // if($result)
+            // {
+            //     $this->Flash->success(__("Donate thành công"));
+            // }
+            // else
+            // {
+            //     $this->Flash->error(__("Donate thất bại"));
+            // }
         }
         else
         {
-            $this->Flash->error("Có lỗi xảy ra trong quá trình donate");
+            $this->Flash->error(__("Có lỗi xảy ra trong quá trình donate"));
         }
         return $this->redirect(['prefix'=>'front','controller'=>'donate',$user_id]);
     }

@@ -413,22 +413,29 @@
             <h3 class="box-title"><?=__('Test Nạp tiền')?></h3>
             <hr class="m-t-0 m-b-40">
             <section class="m-t-40">
-                <form action="<?=$this->Url->build(['prefix'=>null,'controller'=>'donate','action'=>'direct-donate',h($caster_profile->user_id)])?>" method="POST">
-                <table>
-                    <tr>
-                        <td>Số tiền</td>
-                        <td><input type="text"/></td>
-                    </tr>
-                    <tr>
-                        <td>Thông điệp</td>
-                        <td><input type="text"/></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="submit" value="Tài trợ"></td>
-                    </tr>
-                </table>
-                </form>
+                <?=$this->Form->create(null, [
+                    'type' => 'put',
+                    'url' => ['prefix'=>null,'controller'=>'donate','action'=>'direct-donate',h($caster_profile->user_id)],
+                ]);?>
+                    <?php
+                    if(!$this->Auth->user())
+                    {
+                        echo $this->Form->input('donater', [
+                                'type'  => 'text',
+                                'label' => 'Tên của bạn',
+                            ]);
+                    }
+                    echo $this->Form->input('amount', [
+                        'type'  => 'text',
+                        'label' => 'Số tiền',
+                    ]);
+                    echo $this->Form->input('message', [
+                        'type'  => 'text',
+                        'label' => 'Thông điệp',
+                    ]);
+                    ?>
+                    <input type="submit" value="Tài trợ">
+                <?= $this->Form->end() ?>
             </section>
         </div>
     </div>

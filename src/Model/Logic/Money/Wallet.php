@@ -7,61 +7,56 @@ use App\Utility\Flysystem;
 
 class Wallet
 {
-    function __construct() {
-        $this->$profilesTb = TableRegistry::get('Wallets');
-    }
-
-    public function getCurrentBalance($user_id)
-    {
-
-    }
-
-    // public function donate($donateDatas = [])
-    // {
-    //     //1)kiểm tra        
-    //     //2)thực hiện cộng trừ tiền
-    //     if($donateDatas['donate_method_selector'] == 'coin')// trường hợp Donate Coin
-    //     {
-    //         $this->decrease($donateDatas['sender_id'], $donateDatas['amount']);
-    //     }
-    //     $this->increase($donateDatas['receiver_id'], $donateDatas['amount']);
-        
-    //     //3)ghi lại log vào bảng donates           
-    //     //4)Gửi thông báo đến 2 bên
-    //     //5)trả kết quả
-    //     return true;
-    // }
-
-    public function increase($user_id, $amount)
-    {
-        $profile = $this->$profilesTb->findByUserId($user_id)->first();
-
-        if($profile)
+    public function __construct($user_id) {
+        $this->WalletsTb = TableRegistry::get('Wallets');
+        $this->wallet = $this->WalletsTb->findByUserId($user_id)->first();
+        if (!$this->wallet)
         {
-            if($amount > 0)
-            {
-                if($profile->balance == null) $profile->balance = 0;
-                debug($amount);
-                $profile->balance += $amount;
-            }
-            $this->$profilesTb->save($profile);
+            $entity = $this->WalletsTb->newEntity([
+                'user_id' => $user_id,
+                'balance' => 0
+            ]);
+            $this->wallet = $this->WalletsTb->save($entity);
         }
-        return $profile;
     }
 
-    public function decrease($user_id, $amount)
+    public function getBalance()
     {
-        $profile = $this->$profilesTb->findByUserId($user_id)->first();
-        if($profile)
+        return $this->wallet->balance;
+    }
+
+    public function getId()
+    {
+        return $this->wallet->id;
+    }
+
+    public function increase($amount)
+    {
+        if($amount > 0)
         {
-            if($amount > 0)
-            {
-                if($profile->balance == null) $profile->balance = 0;
-                $profile->balance -= $amount;
-            }
-            $this->$profilesTb->save($profile);
+            $this->wallet->balance += $amount;
         }
-        return;
+        $this->WalletsTb->save($this->wallet);
+    }
+
+    public function decrease($amount)
+    {
+        if($amount > 0)
+        {
+            if ($this->wallet->balance >= $amount) $this->wallet->balance -= $amount;
+            else
+            {
+                //
+                //
+                //
+                //
+                //  Xử lý lỗi
+                //
+                //
+                //
+            }
+        }
+        $this->$WalletsTb->save($this->wallet);
     }
 
 }
