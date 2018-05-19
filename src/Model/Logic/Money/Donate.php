@@ -6,21 +6,22 @@ use App\Model\Logic\Money\Cashflow;
 
 class Donate
 {
-    protected $DonateData = [
-        'from_id' => null,
-        'to_id' => null,
-        'donater' => null,
-        'message' => null,
-    ];
+
+    protected $from_id = null;
+    protected $to_id = null;
+    protected $donater = null;
+    protected $message = null;
+
     protected $amount = null;
     protected $transferMethodSelector = null;
 
     public function __construct ($receiver_id, $amount, $message, $transferMethodSelector, $donater = null)
     {
-        $this->DonateData['donater'] = $donater;
-        $this->DonateData['message'] = $message;
         $this->amount = $amount;
+        $this->message = $message;
         $this->transferMethodSelector = $transferMethodSelector;
+        $this->donater = $donater;
+
         $this->setReceiver($receiver_id);
     }
 
@@ -36,20 +37,44 @@ class Donate
 
     public function do()
     {
-        if(isset($this->sendCashflow))
-        {
-            $sendCashflowResults = $this->sendCashflow->do();
-            $this->DonateData['from_id'] = $sendCashflowResults->id;
-        }
-        $receiveCashflowResults = $this->receiveCashflow->do();
-        $this->DonateData['to_id'] = $receiveCashflowResults->id;
         $DonatesTb = TableRegistry::get('donates');
-        $donate = $DonatesTb->newEntity($this->DonateData);
-        if(!$donate->errors())
+
+        //Khai báo xử lý lưu Donate
+        $saveProcess = function() use($DonatesTb)
         {
-            $DonatesTb->save($donate);
-        }
-        return $donate;
+            //Lưu dòng tiền cho đi (nếu có)
+            if(isset($this->sendCashflow))
+            {
+                $sendCashflowResults = $this->sendCashflow->do();
+                $this->from_id = $sendCashflowResults->id;
+            }
+            //Lưu dòng tiền được nhận
+            $receiveCashflowResults = $this->receiveCashflow->do();
+            $this->to_id = $receiveCashflowResults->id;
+            //Lưu Log
+            $donate = $DonatesTb->newEntity([
+                'from_id' => $this->from_id,
+                // 'to_id' => $this->to_id,
+                'to_id' => null,
+                'donater' => $this->donater,
+                'message' => $this->message,
+            ]);
+            if(!$donate->errors())
+            {
+                $DonatesTb->save($donate);
+                return true;
+            }else
+            {
+                debug($donate->errors());
+                return false;
+            }
+        };
+        
+        //Thực hiện lưu Donate, rollback nếu lỗi xảy ra
+        $conn = $DonatesTb->getConnection();
+        return $conn->transactional($saveProcess);
+        
     }
+    
 }
 ?>

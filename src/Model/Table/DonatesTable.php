@@ -19,6 +19,8 @@ class DonatesTable extends AppTable
             ->uuid('id')
             ->allowEmpty('id', 'create');
 
+        $validator->notEmpty('to_id', __('Không rõ người nhận.'));
+        
         return $validator;
     }
 }

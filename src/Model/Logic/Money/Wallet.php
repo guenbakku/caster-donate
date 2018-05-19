@@ -32,7 +32,7 @@ class Wallet
 
     public function increase($amount)
     {
-        if($amount > 0)
+        if(is_numeric($amount) && $amount > 0)
         {
             $this->wallet->balance += $amount;
         }
@@ -41,7 +41,7 @@ class Wallet
 
     public function decrease($amount)
     {
-        if($amount > 0)
+        if(is_numeric($amount) && $amount > 0)
         {
             if ($this->wallet->balance >= $amount) $this->wallet->balance -= $amount;
             else
