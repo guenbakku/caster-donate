@@ -19,6 +19,14 @@ class WalletsTable extends AppTable
             ->uuid('id')
             ->allowEmpty('id', 'create');
 
+        $validator->notEmpty('user_id', __('Không xác định được người dùng.'));
+        $validator->notEmpty('balance', __('Không rõ số dư trong ví.'))
+            ->add('balance', [
+                'naturalNumber' => [
+                    'rule' => ['naturalNumber', true],
+                    'message' => __('Số dư trong ví không đủ'),
+                ],
+            ]);
         return $validator;
     }
 }

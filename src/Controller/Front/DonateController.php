@@ -51,15 +51,16 @@ class DonateController extends AppController
                 $this->request->data('donater')
             );
             $Donate->do();
-            
-            // if($result)
-            // {
-            //     $this->Flash->success(__("Donate thành công"));
-            // }
-            // else
-            // {
-            //     $this->Flash->error(__("Donate thất bại"));
-            // }
+            if($Donate->errors)
+            {
+                foreach($Donate->errors as $error)
+                {
+                    $this->Flash->error($error);
+                }
+            }else
+            {
+                $this->Flash->success(__("Donate thành công"));
+            }
         }
         else
         {

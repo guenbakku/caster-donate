@@ -20,6 +20,18 @@ class DonatesTable extends AppTable
             ->allowEmpty('id', 'create');
 
         $validator->notEmpty('to_id', __('Không rõ người nhận.'));
+        $validator->add('message', [
+            'maxLength' => [
+                'rule' => ['maxLength', $this->columnLength('message')],
+                'message' => __('Lời nhắn không được dài quá {0} ký tự.', $this->columnLength('message')),
+            ],
+        ]);
+        $validator->add('donater', [
+            'maxLength' => [
+                'rule' => ['maxLength', $this->columnLength('donater')],
+                'message' => __('Lời nhắn không được dài quá {0} ký tự.', $this->columnLength('donater')),
+            ],
+        ]);
         
         return $validator;
     }

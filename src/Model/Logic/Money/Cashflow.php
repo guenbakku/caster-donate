@@ -2,35 +2,39 @@
 namespace App\Model\Logic\Money;
 
 use Cake\ORM\TableRegistry;
-use App\Model\Logic\Money\Wallet;
 use App\View\Helper\CodeHelper;
+use App\Model\Logic\Money\Wallet;
 
-class Cashflow 
+
+/**
+   * Cashflow
+   * 
+   */
+class Cashflow extends Wallet
 {
-    protected $wallet_id = null;
-    protected $amount = null;
-    protected $cashflow_type_id = null;
-    protected $transfer_method_id = null;
+    public $cashflow_id;
+    public $amount;
+    public $cashflow_type_id;
+    public $transfer_method_id;
 
-    protected $cashflowTypeSelector = null;
-    protected $transferMethodSelector = null;
-    protected $wallet = null;
-
+    /**
+       * 
+       * Khởi tạo dòng tiền
+       *
+       * @param uuid $user_id   Đối tượng của dòng tiền
+       * @param int $amount     Số tiền
+       * @param int $cashflowTypeSelector     Id thể loại dòng tiền, dựa vào Id này để cộng hay trừ trong ví
+       * @param int $transferMethodSelector   Id của phương thức dòng tiền
+       */
     public function __construct($user_id, $amount, $cashflowTypeSelector, $transferMethodSelector) {
+        parent::__construct($user_id);
         $this->codeHelper = new CodeHelper(new \Cake\View\View());
-        $this->setWallet($user_id);
         $this->setAmount($amount);
         $this->setCashflowType($cashflowTypeSelector);
         $this->setTransferMethod($transferMethodSelector);
     }
 
-    public function setWallet($user_id)
-    {
-        $this->wallet = new Wallet($user_id);
-        $this->wallet_id = $this->wallet->getId();
-    }
-
-    public function setAmount(int $amount)
+    public function setAmount($amount)
     {
         $this->amount = $amount;
     }
@@ -57,16 +61,26 @@ class Cashflow
         ]);
         if(!$cashflow->errors())
         {
-            $CashflowsTb->save($cashflow);
+            $cashflow = $CashflowsTb->save($cashflow);
+            $this->cashflow_id = $cashflow->id;
             switch ($this->cashflowTypeSelector)
             {
                 case 'Withdraw': 
-                case 'SendDonate': $this->wallet->decrease($this->amount); break;
+                case 'SendDonate': $this->decrease($this->amount); break;
                 case 'Deposit':
-                case 'ReceiveDonate': $this->wallet->increase($this->amount); break;
+                case 'ReceiveDonate': $this->increase($this->amount); break;
+            }
+        }else
+        {
+            //Lưu thông điệp lỗi
+            foreach($cashflow->errors() as $error)
+            {
+                foreach($error as $reason => $message)
+                {
+                    $this->errors[] = $message;
+                }
             }
         }
-        return $cashflow;
     }
 }
 ?>
