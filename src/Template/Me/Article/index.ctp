@@ -13,6 +13,10 @@ echo $this->AssetCompress->script('Me.Article.index.js', ['block' => 'script']);
                 'type' => 'put',
                 'class' => 'form-horizontal',
             ]);?>
+                <?= $this->Form->control('id', [
+                    'class' => 'form-control',
+                    'type' => 'hidden',
+                ]) ?>
                 <?= $this->Form->control('title', [
                     'class' => 'form-control',
                     'label' => __('Tiêu đề'),
@@ -44,23 +48,36 @@ echo $this->AssetCompress->script('Me.Article.index.js', ['block' => 'script']);
                 <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable" data-page-size="10">
                     <thead>
                         <tr>
-                            <th class="footable-sortable"><?=__('Thứ tự')?><span class="footable-sort-indicator"></span></th>
-                            <th class="footable-sortable"><?=__('Tiêu đề')?><span class="footable-sort-indicator"></span></th>
                             <th class="footable-sortable footable-sorted"><?=__('Chỉnh sửa lần cuối')?><span class="footable-sort-indicator"></span></th>
+                            <th class="footable-sortable"><?=__('Tiêu đề')?><span class="footable-sort-indicator"></span></th>
                             <th class="footable-sortable"><?=__('Xóa')?><span class="footable-sort-indicator"></span></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="footable-even" style="display: table-row;">
-                                <td><span class="footable-toggle"></span>1</td>
-                                <td>
-                                    <a href="contact-detail.html">Arijit Singh</a>
-                                </td>
-                                <td>10-09-2014</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="<?=__('Xóa')?>"><i class="ti-close text-danger" aria-hidden="true"></i></button>
+                        <?php foreach($Articles as $article):?>
+                        <tr class="footable-even">
+                                <td style="width:133px"><?=$article->created?></td>
+                                <td><a href="<?=$this->Url->build(['prefix' => 'me', 'controller' => 'Article', 'action' => 'edit', $article->id])?>"><?=$article->title?></a></td>
+                                <td style="width:50px">
+                                    <?=$this->Html->link(
+                                        '<i class="ti-close text-danger" aria-hidden="true"></i>',
+                                        [
+                                            'prefix' => 'me',
+                                            'controller' => 'article',
+                                            'action' => 'delete',
+                                            $article->id
+                                        ],
+                                        [
+                                            'class' => 'btn btn-sm btn-icon btn-pure btn-outline delete-row-btn', 
+                                            'data-toggle' => 'tooltip',
+                                            'data-original-title' => __('Xóa'),
+                                            'role' => 'button',
+                                            'escape' => false
+                                        ]
+                                    );?>
                                 </td>
                         </tr>
+                        <?php endforeach;?>
                     </tbody>
                     <tfoot>
                         <tr>                            
