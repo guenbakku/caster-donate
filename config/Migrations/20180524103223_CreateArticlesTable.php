@@ -2,7 +2,7 @@
 use Migrations\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class ArticlesTable extends AbstractMigration
+class CreateArticlesTable extends AbstractMigration
 {
     public function change()
     {
