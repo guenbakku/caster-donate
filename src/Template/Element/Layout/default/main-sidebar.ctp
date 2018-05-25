@@ -83,6 +83,12 @@ $groupActive = $groupActiveMatcher($groupActiveMap);
                 </a>
             </li>
             <li> 
+                <a href="<?= $this->Url->build(['prefix' => 'me', 'controller' => 'Article', 'action' => 'index']) ?>" class="waves-effect <?= Hash::get($groupActive, 'article')?>">
+                    <i class="mdi mdi-book-open-page-variant fa-fw"></i> 
+                    <span class="hide-menu"> <?=__('Blog cá nhân')?> </span>
+                </a>
+            </li>
+            <li> 
                 <a href="javascript::void(0)" class="waves-effect <?= Hash::get($groupActive, 'contract')?>">
                     <i class="mdi mdi-content-paste fa-fw"></i> 
                     <span class="hide-menu"> <?=__('Hợp đồng & rút tiền')?>
