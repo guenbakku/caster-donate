@@ -51,4 +51,12 @@ class AccountsController extends BaseController
         $profile = $profileLg->get($userId);
         $this->set(compact('userId', 'profile'));
     }
+
+    protected function viewContract($userId)
+    {
+        $contractLg = new \App\Model\Logic\User\Contract;
+        $contract = $contractLg->getByUserId($userId);
+        $this->set(compact('userId', 'contract'));
+        debug($contract);
+    }
 }
