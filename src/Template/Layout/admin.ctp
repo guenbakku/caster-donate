@@ -27,11 +27,11 @@
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <div id="wrapper">
-        <?= $this->element('Layout/admin/main-header') ?>
-        <?= $this->element('Layout/admin/main-sidebar') ?>
+        <?= $this->element('Layout/admin/main_header') ?>
+        <?= $this->element('Layout/admin/main_sidebar') ?>
         <div id="page-wrapper">
             <div class="container-fluid">
-                <?= $this->element('Layout/admin/content-header') ?>
+                <?= $this->element('Layout/admin/content_header') ?>
                 <?= $this->Flash->render() ?>
                 <div style="margin-top:25px">
                     <?= $this->fetch('content') ?>
