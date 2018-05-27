@@ -22,9 +22,8 @@ class Profile extends Entity
 
     protected function _getAvatarUrl()
     {
-        $filename = $this->_properties['avatar'];
-        if (!empty($filename)) {
-            return Configure::read('System.Urls.avatar_dir').$filename;
+        if (!empty($this->_properties['avatar'])) {
+            return Configure::read('System.Urls.avatar_dir').$this->_properties['avatar'];
         } else {
             return Configure::read('System.Urls.default_avatar');
         }

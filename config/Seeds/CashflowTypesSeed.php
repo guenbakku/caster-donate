@@ -4,7 +4,7 @@ use Migrations\AbstractSeed;
 /**
  * SocialProvider seed.
  */
-class TransferMethodsSeed extends AbstractSeed
+class CashflowTypesSeed extends AbstractSeed
 {
     /**
      * Run Method.
@@ -21,42 +21,35 @@ class TransferMethodsSeed extends AbstractSeed
         $data = [
             [
                 'id' => 1,
-                'name' => 'Xu',
-                'selector' => 'Coin',
+                'name' => 'Nhận Donate',
+                'selector' => 'ReceiveDonate',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => 2,
-                'name' => 'Ngân Lượng - ATM',
-                'selector' => 'NL-AtmCard',
+                'name' => 'Gửi Donate',
+                'selector' => 'SendDonate',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => 3,
-                'name' => 'Ngân Lượng - Credit Card',
-                'selector' => 'NL-CreditCard',
+                'name' => 'Nạp Tiền',
+                'selector' => 'Deposit',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => 4,
-                'name' => 'Ngân Lượng - Thẻ Cào',
-                'selector' => 'NL-PhoneCard',
-                'created' => date('Y-m-d H:i:s'),
-                'modified' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 5,
-                'name' => 'Momo',
-                'selector' => 'Momo',
+                'name' => 'Rút Tiền',
+                'selector' => 'Withdraw',
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
         ];
 
-        $table = $this->table('transfer_methods');
+        $table = $this->table('cashflow_types');
         $table->truncate();
         $table->insert($data)->save();
     }
