@@ -3,32 +3,13 @@ use Cake\Utility\Hash;
 use App\Utility\Flysystem;
 
 $this->EmbedAsset->setConfig('filesystem.adapter', Flysystem::getAdapter('local'));
-
-$statuses = [
-    'checking' => [
-        'class' => 'info',
-        'message' => __('Hợp đồng đang được kiểm tra. Bạn sẽ nhận được email thông báo ngay sau khi hợp đồng được kiểm tra xong.'),
-    ], 
-    'valid' => [
-        'class' => 'success',
-        'message' => __('Hợp đồng đã hoàn tất. Bạn có thể sử dụng tất cả các chức năng của caster.'),
-    ],
-    'inadequacy' => [
-        'class' => 'warning',
-        'message' => __('Hợp đồng có thiếu sót. Vui lòng cập nhật lại thông tin hợp đồng.'),
-    ],
-    'suspended' => [
-        'class' => 'danger',
-        'message' => __('Hợp đồng bị tạm ngưng. Vui lòng liên hệ với bộ phận hỗ trợ để biết thêm chi tiết.'),
-    ],
-];
 ?>
 
 <div class="white-box wide-row">
     <div class="row">
         <div class="col-md-12">
             <?php $selector = Hash::get($contract, 'contract_status.selector'); ?>
-            <span class="label label-<?= $statuses[$selector]['class'] ?>">
+            <span class="label label-<?= Hash::get($contract, 'contract_status.bootstrap_class') ?>">
                 <?= Hash::get($contract, 'contract_status.name') ?>
             </span>
         </div>
@@ -36,7 +17,7 @@ $statuses = [
     <div class="row">
         <div class="col-md-12">
             <div>
-                <?= $statuses[$selector]['message'] ?>
+                <?= Hash::get($contract, 'contract_status.description') ?>
             </div>
         </div>
     </div>

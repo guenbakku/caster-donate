@@ -15,7 +15,7 @@ class Contract
     }
 
     /**
-     * Trả về thông tin hợp đồng
+     * Lấy thông tin hợp đồng bằng id hợp đồng
      *
      * @param   string
      * @return  Entity
@@ -23,7 +23,22 @@ class Contract
     public function get($contract_id)
     {
         $entity = $this->contractsTb->findById($contract_id)
-            ->contain(['BankAccounts', 'Sexes'])
+            ->contain(['ContractStatuses', 'BankAccounts', 'Sexes'])
+            ->first();
+
+        return $entity;
+    }
+
+    /**
+     * Lấy thông tin hợp đồng bằng id user
+     *
+     * @param   string
+     * @return  Entity
+     */
+    public function getByUserId($user_id)
+    {
+        $entity = $this->contractsTb->findByUserId($user_id)
+            ->contain(['ContractStatuses', 'BankAccounts', 'Sexes'])
             ->first();
 
         return $entity;

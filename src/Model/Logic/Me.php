@@ -50,6 +50,8 @@ class Me
 
     /**
      * Check if a user is a caster
+     * A caster is a person has registered contract 
+     * and that contract has status which is 'checking' or 'valid'.
      *
      * @param   void
      * @return  bool
@@ -61,7 +63,8 @@ class Me
             $contractsTb = TableRegistry::get('Contracts');
             $query = $contractsTb->find()
                 ->where(['Contracts.user_id' => $userId])
-                ->where(['ContractStatuses.selector' => 'valid'])
+                ->where(['ContractStatuses.selector' => 'checking'])
+                ->orWhere(['ContractStatuses.selector' => 'valid'])
                 ->contain(['ContractStatuses']);
             return !$query->isEmpty();
         });
@@ -79,14 +82,8 @@ class Me
     {
         $contract = $this->rememberCache('contract', function () {
             $userId = $this->Auth->user('id');
-            $contractsTb = TableRegistry::get('contracts');
-            $contract = $contractsTb->findByUserId($userId)
-                ->contain(['ContractStatuses', 'Sexes', 'BankAccounts'])
-                ->first();
-            if (empty($contract)) {
-                $contract = $contractsTb->newEntity();
-            }
-    
+            $contractLg = new \App\Model\Logic\User\Contract();
+            $contract = $contractLg->getByUserId($userId);
             return $contract;
         });
         

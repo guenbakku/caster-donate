@@ -101,6 +101,13 @@
 
         <hr>
         <h4 class="m-t-0"><?= __('Chứng minh nhân dân') ?></h4>
+        <?= $this->Form->control('identify_no', [
+            'class' => 'form-control',
+            'label' => [
+                'text' => __('Số CMND'),
+                'class' => 'required',
+            ],
+        ]) ?>
         <?= $this->cell('DragDropArea', [
             $this, 
             'identify_card_front',

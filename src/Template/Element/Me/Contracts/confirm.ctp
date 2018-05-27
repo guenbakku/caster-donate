@@ -97,6 +97,14 @@ $this->EmbedAsset->setConfig('filesystem.adapter', Flysystem::getAdapter('local'
     <h4 class="m-t-0"><?= __('Chứng minh nhân dân') ?></h4>
     <div class="row">
         <div class="col-md-2">
+            <strong><?= __('Số CMND') ?></strong>
+        </div>
+        <div class="col-md-8">
+            <?= h(Hash::get($contract, 'identify_no')) ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
             <strong><?= __('Mặt trước') ?></strong>
         </div>
         <div class="col-md-3 col-sm-4">
