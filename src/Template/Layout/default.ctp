@@ -37,11 +37,11 @@
     </div>
     
     <div id="wrapper">
-        <?= $this->element('Layout/default/main-header',['hasSideBar' => $hasSideBar]) ?>
-        <?= ($hasSideBar) ? $this->element('Layout/default/main-sidebar') :''?>
+        <?= $this->element('Layout/default/main_header', ['hasSideBar' => $hasSideBar]) ?>
+        <?= ($hasSideBar) ? $this->element('Layout/default/main_sidebar') :''?>
         <div id="page-wrapper" class="<?=($hasSideBar)?'':'without-sidebar'?> <?=($this->request->prefix == "front")?'wraper-bg-black':''?>">
             <div class="container-fluid">
-                <?= $this->element('Layout/default/content-header') ?>
+                <?= $this->element('Layout/default/content_header') ?>
                 <?= $this->Flash->render() ?>
                 <div style="margin-top:25px">
                     <?= $this->fetch('content') ?>
