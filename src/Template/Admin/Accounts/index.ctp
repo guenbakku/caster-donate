@@ -69,7 +69,7 @@ use Cake\Utility\Hash;
                             <tr>
                                 <th width="70" class="text-center">#</th>
                                 <th><?= $this->Paginator->sort('Users.username', h(__('Tên đăng nhập'))) ?></th>
-                                <th><?= $this->Paginator->sort('Users.email', h(__('Địa chỉ email'))) ?></th>
+                                <th><?= $this->Paginator->sort('Users.email', h(__('Email'))) ?></th>
                                 <th><?= $this->Paginator->sort('ContractStatuses.name', h(__('Tình trạng hợp đồng'))) ?></th>
                                 <th><?= $this->Paginator->sort('Users.is_superuser', h(__('Super user'))) ?></th>
                                 <th><?= $this->Paginator->sort('Users.activation_date', h(__('Thời điểm kích hoạt'))) ?></th>
@@ -88,6 +88,7 @@ use Cake\Utility\Hash;
                                     <td>
                                         <?= $this->Html->link('<i class="ti-pencil-alt"></i>', [
                                             'action' => 'view',
+                                            'profile',
                                             $account->id,
                                         ], [
                                             'class' => 'btn btn-info btn-outline btn-circle m-r-5',

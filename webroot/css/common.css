@@ -1,3 +1,5 @@
+/* Chứa các css dùng chung cho front và admin */
+
 .error input,
 .error select,
 .error textarea {
@@ -17,4 +19,9 @@
 }
 .asc:after {
     content: "\25B2";
+}
+
+.wide-row .row {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }

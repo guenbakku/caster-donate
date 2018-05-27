@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use Cake\Event\Event;
+use Cake\Utility\Inflector;
 use App\Controller\Admin\BaseController;
 
 /**
@@ -31,5 +32,23 @@ class AccountsController extends BaseController
         ]);
 
         $this->set(compact('accounts'));
+    }
+
+    /**
+     * Đóng vai trò proxy cho các method xem thông tin bên dưới
+     */
+    public function view($method, $userId)
+    {
+        $call = Inflector::variable('view-'.$method);
+        $template = Inflector::underscore($method);
+        call_user_func([$this, $call], $userId);
+        $this->render($template);
+    }
+
+    protected function viewProfile($userId)
+    {
+        $profileLg = new \App\Model\Logic\User\Profile;
+        $profile = $profileLg->get($userId);
+        $this->set(compact('userId', 'profile'));
     }
 }

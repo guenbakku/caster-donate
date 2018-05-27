@@ -15,7 +15,7 @@ class Profile
     public function get($user_id)
     {
         $profile = $this->profilesTb->findByUserId($user_id)
-            ->contain(['SocialProviders', 'CasterTags'])
+            ->contain(['SocialProviders', 'CasterTags', 'Users'])
             ->first();
 
         if ($profile) {

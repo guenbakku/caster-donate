@@ -1,7 +1,8 @@
 <nav class="navbar navbar-default navbar-static-top m-b-0">
     <div class="navbar-header">
         <div class="top-left-part">
-            <a class="logo" href="/">
+            <?php $url = $this->Url->build(['prefix' => 'admin']) ?>
+            <a class="logo" href="<?= $url ?>">
                 <?= $this->Html->image('logo.png', [
                     'class' => 'light-logo', 
                     'alt' => __('home')
